@@ -1,6 +1,7 @@
 #include "ViewGame.h"
 
 using namespace std;
+using namespace sf;
 
 ViewGame::ViewGame() : View()
 {
@@ -31,13 +32,12 @@ bool ViewGame::initSFML()
     _spritesList["player"].SetSubRect(sf::IntRect(0,0, PLAYER_WIDTH, PLAYER_HEIGHT));
 
     // zomby
-    if (!_imagesList["zomby"].LoadFromFile(VIEWGAME_IMAGE_PLAYER))
+    if (!_imagesList["zomby"].LoadFromFile(VIEWGAME_IMAGE_ZOMBY))
         return false;
 
     _spritesList.insert(make_pair("zomby", sf::Sprite()));
     _spritesList["zomby"].SetImage(_imagesList["zomby"]);
-    _spritesList["zomby"].SetSubRect(sf::IntRect(0,0, ZOMBY_WIDTH, ZOMBY_HEIGHT
-    ));
+    _spritesList["zomby"].SetSubRect(sf::IntRect(0,0, ZOMBY_WIDTH, ZOMBY_HEIGHT));
     return true;
 }
 
@@ -49,7 +49,51 @@ int ViewGame::treatEvent()
 
 int ViewGame::treatEventSFML()
 {
-    return 1;
+    int returnValue = 1;
+    Event event;
+        while (_window->GetEvent(event))
+        {
+            switch (event.Type)
+            {
+                case Event::KeyPressed :
+                    switch (event.Key.Code)
+                    {
+
+                        default :
+                            break;
+                    }
+                break;
+
+                case sf::Event::Closed :
+                    returnValue = 111;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        const Input & input = _window->GetInput(); // input : const reference
+
+        // MOVEMENT
+        // UP
+        if (input.IsKeyDown(Key::Up)){
+            cout << "up" << endl;
+            _modele->getPlayer()->Move("up");
+        }
+        // DOWN
+        if (input.IsKeyDown(Key::Down)){
+            _modele->getPlayer()->Move("down");
+        }
+        //LEFT
+        if (input.IsKeyDown(Key::Left)){
+            _modele->getPlayer()->Move("left");
+        }
+        //RIGHT
+        if (input.IsKeyDown(Key::Right)){
+            _modele->getPlayer()->Move("right");
+        }
+    return returnValue;
 }
 
 void ViewGame::showViewTerminal()
@@ -57,12 +101,19 @@ void ViewGame::showViewTerminal()
 }
 void ViewGame::showViewSFML()
 {
+    // clear windows
     _window->Clear();
+    // draw background
     _window->Draw(_spritesList["background"]);
+
+    // draw player
+    _spritesList["player"].SetPosition(_modele->getPlayer()->getX(), _modele->getPlayer()->getY());
+    _window->Draw(_spritesList["player"]);
+    //draw zombies
     for (Enemy* enemy : _modele->getEnemiesList())
     {
-        _spritesList["zomby"].SetPosition(enemy->getX(); enemy->getY());
-        _window.Draw(_spritesList["zomby"]);
+        _spritesList["zomby"].SetPosition(enemy->getX(), enemy->getY());
+        _window->Draw(_spritesList["zomby"]);
     }
     _window->Display();
 }

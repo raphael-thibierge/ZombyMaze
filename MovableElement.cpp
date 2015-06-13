@@ -12,7 +12,7 @@ using namespace std;
 
 MovableElement::MovableElement() : GraphicElement()
 {
-    
+
 }
 
 void MovableElement::Move()
@@ -25,4 +25,43 @@ void MovableElement::Move()
         _X -= _speed;
     if (_direction == "right")
         _X += _speed;
+}
+
+void MovableElement::Move(string direction)
+{
+    if ( direction == "up")
+        _Y -= _speed;
+    if (direction == "down")
+        _Y += _speed;
+    if (direction == "left")
+        _X -= _speed;
+    if (direction == "right")
+        _X += _speed;
+}
+
+// ACCESSORS
+
+void MovableElement::setDirection(const std::string direction)
+{
+    if (direction == "up"
+        || direction == "down"
+        || direction == "left"
+        || direction == "right")
+
+        _direction = direction;
+}
+
+void MovableElement::setSpeed(const unsigned int speed)
+{
+    _speed = speed;
+}
+
+string MovableElement::getDirection() const
+{
+    return _direction;
+}
+
+unsigned int MovableElement::getSpeed() const
+{
+    return _speed;
 }

@@ -13,19 +13,32 @@
 #include "GraphicsElement.h"
 
 
-class MovableElement : protected GraphicElement {
+class MovableElement : public GraphicElement {
 protected:
-    
+
     std::string _direction;
     unsigned int _speed;
-    
-    
+
+
 public:
-    
+
     MovableElement();
-    
+
     void Move();
-    
+
+    void Move(std::string direction);
+
+// ACCESSORS
+public:
+
+    void setDirection(const std::string direction);
+
+    void setSpeed(const unsigned int speed);
+
+    std::string getDirection() const;
+
+    unsigned int getSpeed() const;
+
 };
 
 #endif /* defined(__Console__MovableElement__) */

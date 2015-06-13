@@ -21,15 +21,26 @@ private:
     Maze _maze;
     Player _player;
     std::list<Enemy*> _enemiesList;
-    std::list<Trace*> _traceList;
+    std::list<Trace*> _tracesList;
 
 public:
     GameModel();
 
+    ~GameModel();
+
     void nextStep();
 
+private :
+    void init();
 
+// ACCESSORS
+public:
 
+    std::list<Enemy*> getEnemiesList() const;
+
+    std::list<Trace *> getTracesList() const;
+
+    Player* getPlayer();
 };
 
 #endif /* defined(__Console__GameModel__) */

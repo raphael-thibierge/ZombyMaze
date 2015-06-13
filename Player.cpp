@@ -11,5 +11,6 @@
 
 Player::Player() : MovableElement()
 {
-    
+    _direction = "down";
+    _speed = 5;
 }

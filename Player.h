@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "MovableElement.h"
 
-class Player : protected MovableElement
+class Player : public MovableElement
 {
 public:
     
