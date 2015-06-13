@@ -10,5 +10,10 @@
 
 GameModel::GameModel()
 {
-    
+
+}
+
+void GameModel::nextStep()
+{
+
 }

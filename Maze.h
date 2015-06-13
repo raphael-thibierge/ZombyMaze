@@ -16,30 +16,30 @@ class Maze : public GraphicElement
 {
 
 private:
-    std::vector<std::vector<MazeCase*>> _grid;
+    std::vector<std::vector<MazeCase*> > _grid;
     unsigned int _size ;
-    
+
 public:
-    
+
     Maze();
-    
+
 private:
-    
+
     void init();
-    
-    
+
+
     void addWall(unsigned int line, unsigned int column, const std::string orientation);
-  
+
 
 // STATICS
 public:
     static Maze MazeLevel1();
-    
-    
+
+
 // ACCESSORS
 public :
     MazeCase getCase(const int line, const int column) const;
-    
+
 };
 
 
