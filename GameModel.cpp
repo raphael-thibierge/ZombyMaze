@@ -82,10 +82,6 @@ void GameModel::playerMove(std::string direction)
 }
 
 
-
-
-
-
 void GameModel::init()
 {
     // init player position
@@ -99,6 +95,9 @@ void GameModel::init()
     }
     
     
+    // add walls
+    _wallsList.push_back(new Wall(rand()%WINDOW_WIDTH, rand()%WINDOW_HEIGHT));
+    _wallsList.push_back(new Wall(rand()%WINDOW_WIDTH, rand()%WINDOW_HEIGHT));
 
 }
 

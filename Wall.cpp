@@ -10,9 +10,11 @@
 
 using namespace std;
 
-Wall::Wall() : GraphicElement()
+Wall::Wall(const unsigned int positionX, const unsigned int positionY) : GraphicElement()
 {
     init();
+    _X = positionX;
+    _Y = positionY;
 }
 
 void Wall::init()
@@ -20,10 +22,6 @@ void Wall::init()
     // set size
     _width = WALL_WIDTH;
     _height = WALL_HEIGHT;
-
-    // position
-    _X = 0;
-    _Y = 0;
     
     _orientation = 'h';
 }

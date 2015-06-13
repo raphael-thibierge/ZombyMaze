@@ -17,7 +17,7 @@ private:
     char _orientation ;
     
 public:
-    Wall();
+    Wall(const unsigned int positionX, const unsigned int positionY);
     
     
 private:
