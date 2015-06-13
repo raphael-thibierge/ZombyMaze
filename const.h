@@ -34,4 +34,11 @@ const std::string VIEWGAME_MAZE_BACKGROUND = "images/background.png";
 const int VIEWGAME_MAZE_BACKGROUND_WIDTH = 878;
 const int VIEWGAME_MAZE_BACKGROUND_HEIGHT = 878;
 
+const std::string VIEWGAME_IMAGE_PLAYER = "images/heroface1.png";
+const unsigned unsigned int PLAYER_WIDTH = 30;
+const unsigned unsigned int PLAYER_HEIGHT = 30;
+const std::string VIEWGAME_IMAGE_ZOMBY = "images/zombieface.png";
+const unsigned unsigned int ZOMBY_WIDTH = 30;
+const unsigned unsigned int ZOMBY_HEIGHT = 30;
+
 #endif

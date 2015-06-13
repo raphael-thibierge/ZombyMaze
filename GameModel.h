@@ -25,11 +25,11 @@ private:
 
 public:
     GameModel();
-    
+
     void nextStep();
-    
-    
-    
+
+
+
 };
 
 #endif /* defined(__Console__GameModel__) */
