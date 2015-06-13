@@ -78,7 +78,6 @@ int ViewGame::treatEventSFML()
         // MOVEMENT
         // UP
         if (input.IsKeyDown(Key::Up)){
-            cout << "up" << endl;
             _modele->getPlayer()->Move("up");
         }
         // DOWN
@@ -110,7 +109,7 @@ void ViewGame::showViewSFML()
     _spritesList["player"].SetPosition(_modele->getPlayer()->getX(), _modele->getPlayer()->getY());
     _window->Draw(_spritesList["player"]);
     //draw zombies
-    for (Enemy* enemy : _modele->getEnemiesList())
+    for (Enemy* enemy : *_modele->getEnemiesList())
     {
         _spritesList["zomby"].SetPosition(enemy->getX(), enemy->getY());
         _window->Draw(_spritesList["zomby"]);
