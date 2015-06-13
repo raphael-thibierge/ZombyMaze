@@ -14,6 +14,7 @@
 #include "Enemy.h"
 #include "Maze.h"
 #include "Trace.h"
+#include "Wall.h"
 
 class GameModel
 {
@@ -22,23 +23,33 @@ private:
     Player _player;
     std::list<Enemy*> _enemiesList;
     std::list<Trace*> _tracesList;
+    std::list<Wall*> _wallsList;
 
 public:
     GameModel();
 
     ~GameModel();
+    
+// METHODS
 
     void nextStep();
 
+    bool wallsCollision(GraphicElement* element);
+    
+    void playerMove(std::string direction);
+    
+    
 private :
     void init();
 
 // ACCESSORS
 public:
 
-    std::list<Enemy*> getEnemiesList() const;
+    std::list<Enemy*> * getEnemiesList();
 
-    std::list<Trace *> getTracesList() const;
+    std::list<Trace *> * getTracesList();
+    
+    std::list<Wall *> * getWallsList();
 
     Player* getPlayer();
 };

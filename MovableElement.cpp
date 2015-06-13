@@ -17,14 +17,7 @@ MovableElement::MovableElement() : GraphicElement()
 
 void MovableElement::Move()
 {
-    if ( _direction == "up")
-        _Y -= _speed;
-    if (_direction == "down")
-        _Y += _speed;
-    if (_direction == "left")
-        _X -= _speed;
-    if (_direction == "right")
-        _X += _speed;
+    Move(_direction);
 }
 
 void MovableElement::Move(string direction)
@@ -37,6 +30,24 @@ void MovableElement::Move(string direction)
         _X -= _speed;
     if (direction == "right")
         _X += _speed;
+}
+
+void MovableElement::MoveOpposite()
+{
+    MoveOpposite(_direction);
+}
+
+void MovableElement::MoveOpposite(std::string direction)
+{
+    if ( _direction == "up")
+        _Y += _speed;
+    if (_direction == "down")
+        _Y -= _speed;
+    if (_direction == "left")
+        _X += _speed;
+    if (_direction == "right")
+        _X -= _speed;
+
 }
 
 // ACCESSORS

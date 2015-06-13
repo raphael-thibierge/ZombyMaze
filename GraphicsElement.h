@@ -13,14 +13,21 @@
 
 class GraphicElement {
 protected:
-    unsigned int _widht;
+    unsigned int _width;
     unsigned int _height;
     unsigned int _X;
     unsigned int _Y;
     
-    
+
+// CONSTRUCTOR
 public:
     GraphicElement();
+
+// METHODS
+public:
+    bool pointOnElement(const unsigned int positionX, const unsigned int positionY) const;
+    
+    bool ElementOnElement(GraphicElement* element) const;
     
 // ACCESSORS
     void setX(const unsigned int positionX);

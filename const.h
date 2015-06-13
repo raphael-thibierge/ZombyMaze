@@ -52,5 +52,8 @@ const unsigned int PLAYER_HEIGHT = 30;
 const std::string VIEWGAME_IMAGE_ZOMBY = "images/zombieface.png";
 const unsigned int ZOMBY_WIDTH = 30;
 const unsigned int ZOMBY_HEIGHT = 30;
+const std::string VIEWGAME_IMAGE_WALL = "images/zombieface.png";
+const unsigned int WALL_WIDTH = 10;
+const unsigned int WALL_HEIGHT = 10;
 
 #endif

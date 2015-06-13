@@ -27,6 +27,10 @@ public:
     void Move();
 
     void Move(std::string direction);
+    
+    void MoveOpposite();
+    
+    void MoveOpposite(std::string);
 
 // ACCESSORS
 public:

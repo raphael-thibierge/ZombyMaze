@@ -22,8 +22,10 @@ GameModel::~GameModel()
     for (Enemy * enemy : _enemiesList)
     {
         if (enemy != nullptr)
+        {
             delete enemy;
-        enemy = nullptr;
+            enemy = nullptr;
+        }
     }
     _enemiesList.clear();
 
@@ -31,8 +33,21 @@ GameModel::~GameModel()
     for (Trace* trace : _tracesList)
     {
         if  (trace != nullptr)
+        {
             delete trace;
-        trace = nullptr;
+            trace = nullptr;
+        }
+        
+    }
+    
+    // wall destruction
+    for (Wall* wall : _wallsList)
+    {
+        if (wall != nullptr)
+        {
+            delete wall;
+            wall = nullptr;
+        }
     }
 }
 
@@ -42,6 +57,34 @@ void GameModel::nextStep()
     //_player.Move();
 
 }
+
+bool GameModel::wallsCollision(GraphicElement* element)
+{
+    for (Wall* wall : _wallsList)
+    {
+        if ( wall->ElementOnElement(element))
+            return true;
+    }
+    return false;
+}
+
+
+void GameModel::playerMove(std::string direction)
+{
+    GraphicElement * element = &_player;
+    
+    _player.Move(direction);
+    if (wallsCollision(element))
+        _player.MoveOpposite(direction);
+    
+    delete element;
+    element = nullptr;
+}
+
+
+
+
+
 
 void GameModel::init()
 {
@@ -54,17 +97,24 @@ void GameModel::init()
     {
         enemy->setPosition(0,0);
     }
+    
+    
 
 }
 
-list<Enemy*> GameModel::getEnemiesList() const
+list<Enemy*> * GameModel::getEnemiesList()
 {
-    return _enemiesList;
+    return &_enemiesList;
 }
 
-list <Trace*> GameModel::getTracesList() const
+list <Trace*> * GameModel::getTracesList()
 {
-    return _tracesList;
+    return &_tracesList;
+}
+
+list<Wall *> * GameModel::getWallsList()
+{
+    return &_wallsList;
 }
 
 Player* GameModel::getPlayer()

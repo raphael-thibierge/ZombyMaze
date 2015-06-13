@@ -8,13 +8,46 @@
 
 #include "GraphicsElement.h"
 
-
+//
+// CONSTRUCTOR
+//
 GraphicElement::GraphicElement()
 {
     
 }
 
+//
+// METHODS
+//
 
+bool GraphicElement::pointOnElement(const unsigned int positionX, const unsigned int positionY) const
+{
+    return ( positionX >= _X && positionX <= _X + _width
+            && positionY >= _Y && positionY <= _Y + _height);
+}
+
+bool GraphicElement::ElementOnElement(GraphicElement *element) const
+{
+    unsigned int eX = element->getX();
+    unsigned int eY = element->getY();
+    unsigned int eWidth = element->getWidth();
+    unsigned int eHeight = element->getHeight();
+    
+    return ((element->pointOnElement(eX, eY) ||
+             element->pointOnElement(eX, eY + eHeight) ||
+             element->pointOnElement(eX + eWidth, eY) ||
+             element->pointOnElement(eX + eWidth, eY + eHeight))
+            
+        || (element->pointOnElement(_X, _Y) ||
+            element->pointOnElement(_X, _Y + _height) ||
+            element->pointOnElement(_X + _width, _Y) ||
+            element->pointOnElement(_X + _width, _Y + _height)));
+}
+
+
+//
+// ACCESSORS
+//
 void GraphicElement::setPosition(const unsigned int positionX, const unsigned int positionY)
 {
     _X = positionX;
@@ -43,7 +76,7 @@ unsigned int GraphicElement::getY() const
 
 unsigned int GraphicElement::getWidth() const
 {
-    return _widht;
+    return _width;
 }
 
 unsigned int GraphicElement::getHeight() const
