@@ -13,4 +13,6 @@ Player::Player() : MovableElement()
 {
     _direction = "down";
     _speed = 5;
+    _width = PLAYER_WIDTH;
+    _height = PLAYER_HEIGHT;
 }

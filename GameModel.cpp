@@ -37,9 +37,9 @@ GameModel::~GameModel()
             delete trace;
             trace = nullptr;
         }
-        
+
     }
-    
+
     // wall destruction
     for (Wall* wall : _wallsList)
     {
@@ -54,7 +54,7 @@ GameModel::~GameModel()
 
 void GameModel::nextStep()
 {
-    //_player.Move();
+    moveAllEnemies();
 
 }
 
@@ -71,16 +71,42 @@ bool GameModel::wallsCollision(GraphicElement* element)
 
 void GameModel::playerMove(std::string direction)
 {
-    GraphicElement * element = &_player;
-    
     _player.Move(direction);
-    if (wallsCollision(element))
+    if (wallsCollision(&_player) ||
+        _player.getX() <= 0 || (_player.getX() + _player.getWidth()) >= WINDOW_WIDTH ||
+        _player.getY() <= 0 || (_player.getY() + _player.getHeight()) >= WINDOW_HEIGHT
+        )
         _player.MoveOpposite(direction);
-    
-    delete element;
-    element = nullptr;
+
 }
 
+void GameModel::moveAllEnemies()
+{
+    for (Enemy* enemy : _enemiesList)
+    {
+
+        int random = rand()%4;
+        switch (random)
+        {
+            case 0 :
+                enemy->Move("up");
+                break;
+
+            case 1 :
+                enemy->Move("down");
+                break;
+            case 2 :
+                enemy->Move("left");
+                break;
+            case 3 :
+                enemy->Move("right");
+                break;
+
+            default:
+            break;
+        }
+    }
+}
 
 void GameModel::init()
 {
@@ -91,10 +117,9 @@ void GameModel::init()
     _enemiesList.push_back(new Enemy);
     for (Enemy* enemy : _enemiesList)
     {
-        enemy->setPosition(0,0);
+        enemy->setPosition(300,300);
     }
-    
-    
+
     // add walls
     _wallsList.push_back(new Wall(rand()%WINDOW_WIDTH, rand()%WINDOW_HEIGHT));
     _wallsList.push_back(new Wall(rand()%WINDOW_WIDTH, rand()%WINDOW_HEIGHT));

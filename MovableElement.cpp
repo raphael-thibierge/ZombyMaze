@@ -39,14 +39,16 @@ void MovableElement::MoveOpposite()
 
 void MovableElement::MoveOpposite(std::string direction)
 {
-    if ( _direction == "up")
+    if ( direction == "up")
         _Y += _speed;
-    if (_direction == "down")
+    else if (direction == "down")
         _Y -= _speed;
-    if (_direction == "left")
+    else if (direction == "left")
         _X += _speed;
-    if (_direction == "right")
+    else if (direction == "right")
         _X -= _speed;
+    else
+        cout << "mauvaise direction " << endl;
 
 }
 

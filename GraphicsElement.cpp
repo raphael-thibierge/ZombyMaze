@@ -8,12 +8,16 @@
 
 #include "GraphicsElement.h"
 
+using namespace std;
 //
 // CONSTRUCTOR
 //
 GraphicElement::GraphicElement()
 {
-    
+    _X = 0;
+    _Y = 0;
+    _width = 0;
+    _height = 0;
 }
 
 //
@@ -32,13 +36,13 @@ bool GraphicElement::ElementOnElement(GraphicElement *element) const
     unsigned int eY = element->getY();
     unsigned int eWidth = element->getWidth();
     unsigned int eHeight = element->getHeight();
-    
-    return ((element->pointOnElement(eX, eY) ||
-             element->pointOnElement(eX, eY + eHeight) ||
-             element->pointOnElement(eX + eWidth, eY) ||
-             element->pointOnElement(eX + eWidth, eY + eHeight))
-            
-        || (element->pointOnElement(_X, _Y) ||
+
+    return ((pointOnElement(eX, eY) ||
+             pointOnElement(eX, eY + eHeight) ||
+             pointOnElement(eX + eWidth, eY) ||
+             pointOnElement(eX + eWidth, eY + eHeight))
+
+        || (element->pointOnElement(this->_X, this->_Y) ||
             element->pointOnElement(_X, _Y + _height) ||
             element->pointOnElement(_X + _width, _Y) ||
             element->pointOnElement(_X + _width, _Y + _height)));

@@ -29,16 +29,18 @@ public:
     GameModel();
 
     ~GameModel();
-    
+
 // METHODS
 
     void nextStep();
 
     bool wallsCollision(GraphicElement* element);
-    
+
     void playerMove(std::string direction);
-    
-    
+
+    void moveAllEnemies();
+
+
 private :
     void init();
 
@@ -48,7 +50,7 @@ public:
     std::list<Enemy*> * getEnemiesList();
 
     std::list<Trace *> * getTracesList();
-    
+
     std::list<Wall *> * getWallsList();
 
     Player* getPlayer();

@@ -22,6 +22,11 @@ void Wall::init()
     // set size
     _width = WALL_WIDTH;
     _height = WALL_HEIGHT;
-    
-    _orientation = 'h';
+
+    _orientation = 'v';
+}
+
+char Wall::getOrientation() const
+{
+    return _orientation;
 }

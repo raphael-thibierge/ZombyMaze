@@ -9,7 +9,10 @@
 #include "Enemy.h"
 
 
-
+Enemy::Enemy()
+{
+    _speed = 2;
+}
 
 
 
@@ -18,13 +21,14 @@
 void Enemy::autoMove()
 {
     Move();
+
 }
 
 void Enemy::traceFound(std::string direction)
 {
     _traceFound = true;
     _direction = direction;
-    
+
 }
 
 void Enemy::init()

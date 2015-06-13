@@ -15,13 +15,18 @@
 class Wall : public GraphicElement {
 private:
     char _orientation ;
-    
+
 public:
     Wall(const unsigned int positionX, const unsigned int positionY);
-    
-    
+
+
 private:
     void init();
+
+// ACCESSORS
+public:
+    char getOrientation() const;
+
 };
 
 

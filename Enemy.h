@@ -17,14 +17,16 @@ class Enemy : public MovableElement
 private:
     unsigned int _life;
     bool _traceFound;
-    
 
-    
+
+
 public:
+    Enemy();
+
     void autoMove();
-    
+
     void traceFound(std::string _direction);
-    
+
 private:
     void init();
 
