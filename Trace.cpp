@@ -8,3 +8,14 @@
 
 #include "Trace.h"
 
+using namespace std;
+
+Trace::Trace(string direction) : GraphicElement(), _direction(direction)
+{
+    
+}
+
+string Trace::getDirection() const
+{
+    return _direction;
+}

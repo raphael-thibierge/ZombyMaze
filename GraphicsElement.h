@@ -22,6 +22,21 @@ protected:
 public:
     GraphicElement();
     
+// ACCESSORS
+    void setX(const unsigned int positionX);
+    
+    void setY(const unsigned int positionY);
+    
+    void setPosition(const unsigned int positionX, const unsigned int positionY);
+    
+    unsigned int getX() const;
+    
+    unsigned int getY() const;
+    
+    unsigned int getWidth() const;
+    
+    unsigned int getHeight() const;
+    
 };
 
 #endif /* defined(__Console__GraphicsElement__) */

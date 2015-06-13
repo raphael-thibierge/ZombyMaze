@@ -26,8 +26,19 @@ private:
 public:
     GameModel();
     
+    ~GameModel();
+    
     void nextStep();
     
+private :
+    void init();
+
+// ACCESSORS
+public:
+    
+    std::list<Enemy*> getEnemyList() const;
+    
+    std::list<Trace *> getTraceList() const;
     
     
 };

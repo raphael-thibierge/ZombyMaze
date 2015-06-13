@@ -14,15 +14,19 @@
 
 
 
-class Trace : protected GraphicElement
+class Trace : public GraphicElement
 {
 private:
-    
-    std::list<Trace> _tracesList;
+    std::string _direction;
 
+public:
+    Trace(std::string direction);
+    
+    
 // ACCESSORS
 public:
-    std::list<Trace> getTraceList() const {return _tracesList;};
+    std::string getDirection() const;
+    
 };
 
 

@@ -30,4 +30,5 @@ void Enemy::traceFound(std::string direction)
 void Enemy::init()
 {
     _traceFound = false;
+    _life = 2;
 }

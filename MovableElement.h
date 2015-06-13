@@ -13,7 +13,7 @@
 #include "GraphicsElement.h"
 
 
-class MovableElement : protected GraphicElement {
+class MovableElement : public GraphicElement {
 protected:
     
     std::string _direction;
@@ -25,6 +25,17 @@ public:
     MovableElement();
     
     void Move();
+    
+// ACCESSORS
+public:
+    
+    void setDirection(const std::string direction);
+    
+    void setSpeed(const unsigned int speed);
+    
+    std::string getDirection() const;
+    
+    unsigned int getSpeed() const;
     
 };
 

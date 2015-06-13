@@ -26,3 +26,30 @@ void MovableElement::Move()
     if (_direction == "right")
         _X += _speed;
 }
+
+// ACCESSORS
+
+void MovableElement::setDirection(const std::string direction)
+{
+    if (direction == "up"
+        || direction == "down"
+        || direction == "left"
+        || direction == "right")
+        
+        _direction = direction;
+}
+
+void MovableElement::setSpeed(const unsigned int speed)
+{
+    _speed = speed;
+}
+
+string MovableElement::getDirection() const
+{
+    return _direction;
+}
+
+unsigned int MovableElement::getSpeed() const
+{
+    return _speed;
+}
