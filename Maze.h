@@ -32,9 +32,9 @@ private:
     void init();
 
     void construct();
-    
-    
-    
+
+
+
     void addWall(unsigned int x, unsigned int y, const char orientation);
 
     //static std::vector<int> listType1 (const int size);
@@ -53,7 +53,7 @@ public :
 public :
     MazeCase getCase(const int line, const int column) const;
 
-    std::list<Wall*> getWallsList() const;
+    std::list<Wall*> * getWallsList();
 
 };
 

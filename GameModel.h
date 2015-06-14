@@ -23,7 +23,7 @@ private:
     Player _player;
     std::list<Enemy*> _enemiesList;
     std::list<Trace*> _tracesList;
-    std::list<Wall*> _wallsList;
+    std::list<Wall*> * _wallsList;
 // stats
     bool _playerLoose;
     bool _playerWin;
@@ -37,18 +37,21 @@ public:
 public:
     void nextStep();
 
-private:
-    
-    
-    bool enemiesCollision();
-    
+
     void playerMove(std::string direction);
 
+private:
+
+
+    bool enemiesCollision();
+
+
+
     void moveAllEnemies();
-    
+
     void enemiesCheckTraces();
-    
-    
+
+
 
 
 private :

@@ -16,16 +16,16 @@
 #define Console_const_h
 
 //WINDOWS
-const unsigned int WINDOW_WIDTH = 800;
-const unsigned int WINDOW_HEIGHT = 800;
+const unsigned int WINDOW_WIDTH = 820;
+const unsigned int WINDOW_HEIGHT = 820;
 
 // =====================    GAMEMODEL   ===================
 
 // MAZE
-const unsigned int MAZE_SIZE = 15;
+const unsigned int MAZE_SIZE = 14;
 const unsigned int MAZE_X = 0;
 const unsigned int MAZE_Y = 0 ;
-const std::string MAZE_MATRICE_FILE = "matrices/1.txt.";
+const std::string MAZE_MATRICE_FILE = "matrices/1.txt";
 
 
 // MAZECASE
@@ -37,16 +37,16 @@ const unsigned int PLAYER_INITIAL_Y = 20;
 const unsigned int PLAYER_SPEED = 5;
 
 // ENEMIES
-const unsigned int ZOMBY_SPEED = 4 ;
+const unsigned int ZOMBY_SPEED = 1 ;
 const unsigned int ZOMBY_ACCELERATION = 4;
 
 // =====================    GAMEVIEW   ===================
 
 
 //GAMEVIEW
-const std::string VIEWGAME_MAZE_BACKGROUND = "images/background.png";
-const int VIEWGAME_MAZE_BACKGROUND_WIDTH = 800;
-const int VIEWGAME_MAZE_BACKGROUND_HEIGHT = 800;
+const std::string VIEWGAME_MAZE_BACKGROUND = "images/fond.png";
+const int VIEWGAME_MAZE_BACKGROUND_WIDTH = WINDOW_WIDTH;
+const int VIEWGAME_MAZE_BACKGROUND_HEIGHT = WINDOW_HEIGHT;
 
 const std::string VIEWGAME_IMAGE_PLAYER = "images/perso.png";
 const unsigned int PLAYER_WIDTH = 31;

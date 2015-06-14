@@ -41,7 +41,7 @@ GameModel::~GameModel()
     }
 
     // wall destruction
-    for (Wall* wall : _wallsList)
+    for (Wall* wall : *_wallsList)
     {
         if (wall != nullptr)
         {
@@ -55,14 +55,14 @@ GameModel::~GameModel()
 void GameModel::nextStep()
 {
     enemiesCheckTraces();
-    
+
     moveAllEnemies();
-    
+
     if (enemiesCollision())
     {
         _playerLoose = true;
         cout << "You loose" << endl;
-        
+
     }
 
 }
@@ -71,7 +71,7 @@ void GameModel::nextStep()
 void GameModel::playerMove(std::string direction)
 {
     _player.Move(direction);
-    if (Wall::wallsCollision(&_player, &_wallsList) ||
+    if (Wall::wallsCollision(&_player, _wallsList) ||
         _player.getX() <= 0 || (_player.getX() + _player.getWidth()) >= WINDOW_WIDTH ||
         _player.getY() <= 0 || (_player.getY() + _player.getHeight()) >= WINDOW_HEIGHT
         )
@@ -84,7 +84,7 @@ void GameModel::moveAllEnemies()
 {
     for (Enemy* enemy : _enemiesList)
     {
-        enemy->autoMove(&_wallsList);
+        enemy->autoMove(_wallsList);
     }
 }
 
@@ -114,7 +114,7 @@ void GameModel::init()
     // init states
     _playerWin = false;
     _playerLoose = false;
-    
+
     // init player position
     _player.setPosition(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
 
@@ -122,7 +122,7 @@ void GameModel::init()
     _enemiesList.push_back(new Enemy);
     for (Enemy* enemy : _enemiesList)
     {
-        enemy->setPosition(300,300);
+        enemy->setPosition(220,220);
     }
 
     // add walls
@@ -142,7 +142,7 @@ list <Trace*> * GameModel::getTracesList()
 
 list<Wall *> * GameModel::getWallsList()
 {
-    return &_wallsList;
+    return _wallsList;
 }
 
 Player* GameModel::getPlayer()

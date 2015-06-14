@@ -12,7 +12,8 @@ using namespace std;
 
 MovableElement::MovableElement() : GraphicElement()
 {
-
+    _speed = 1;
+    _direction = "down";
 }
 
 void MovableElement::Move()
