@@ -37,8 +37,8 @@ const unsigned int PLAYER_INITIAL_Y = 20;
 const unsigned int PLAYER_SPEED = 5;
 
 // ENEMIES
-const unsigned int ZOMBY_SPEED = 1 ;
-const unsigned int ZOMBY_ACCELERATION = 4;
+const unsigned int ZOMBY_SPEED = 4 ;
+const unsigned int ZOMBY_ACCELERATION = 0;
 
 // =====================    GAMEVIEW   ===================
 

@@ -14,7 +14,6 @@ using namespace std;
 Enemy::Enemy()
 {
     _speed = ZOMBY_SPEED;
-    _direction = "up";
     changeDirection();
 }
 
@@ -24,13 +23,17 @@ Enemy::Enemy()
 
 void Enemy::autoMove(list<Wall*> * wallList)
 {
-    Move();
 
-    if (Wall::wallsCollision(this,wallList))
+    if (Wall::wallsCollision(this, wallList))
     {
-        cout << "mur" << endl;
-        this->MoveOpposite();
+        cout << "collision" << endl;
+        MoveOpposite();
         changeDirection();
+        Move();
+    }
+    else
+    {
+        Move();
     }
 
 }
@@ -60,9 +63,11 @@ void Enemy::changeDirection()
                 break;
 
             default:
+                cout << __FUNCTION__ << "mauvaise direction" << endl;
                 break;
         }
     } while (_direction == newDirection );
+    _direction = newDirection;
 }
 
 void Enemy::findTrace(std::list<Trace *> *tracesList)
