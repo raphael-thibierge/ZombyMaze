@@ -39,13 +39,6 @@ public :
 
 // METHODS
 //
-    // CONSOLE VERSION
-
-    virtual int treatEvent() =0;
-
-    virtual void showViewTerminal() =0 ;
-
-
     // SFML VERSION
 
     virtual int treatEventSFML() =0;

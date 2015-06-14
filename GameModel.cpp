@@ -122,7 +122,7 @@ void GameModel::init()
     _enemiesList.push_back(new Enemy);
     for (Enemy* enemy : _enemiesList)
     {
-        enemy->setPosition(220,220);
+        enemy->setPosition(220,200);
     }
 
     // add walls

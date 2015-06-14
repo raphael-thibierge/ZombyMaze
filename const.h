@@ -53,7 +53,10 @@ const unsigned int PLAYER_WIDTH = 31;
 const unsigned int PLAYER_HEIGHT = 41;
 const unsigned int PLAYER_NB_SPRITES = 3;
 
-const std::string VIEWGAME_IMAGE_ZOMBY = "images/zomby.png";
+const std::string VIEWGAME_IMAGE_ZOMBY_UP = "images/zombyUp.png";
+const std::string VIEWGAME_IMAGE_ZOMBY_DOWN = "images/zombyDown.png";
+const std::string VIEWGAME_IMAGE_ZOMBY_LEFT = "images/zombyLeft.png";
+const std::string VIEWGAME_IMAGE_ZOMBY_RIGHT = "images/zombyRight.png";
 const unsigned int ZOMBY_WIDTH = 31;
 const unsigned int ZOMBY_HEIGHT = 41;
 const unsigned int ZOMBY_NB_SPRITES = 3;

@@ -13,6 +13,8 @@ using namespace std;
 
 Enemy::Enemy()
 {
+    _width = ZOMBY_WIDTH;
+    _height = ZOMBY_HEIGHT;
     _speed = ZOMBY_SPEED;
     changeDirection();
 }

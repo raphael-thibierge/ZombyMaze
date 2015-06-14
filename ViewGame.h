@@ -15,14 +15,21 @@ public:
 
 // METHODS
 //
-    int treatEvent() override;
+
     int treatEventSFML() override;
 
-    void showViewTerminal() override;
+
     void showViewSFML() override;
+
+    void displayPlayer();
+
+    void displayEnnemies();
+
+    void displayTrace();
+
+    void displayMaze();
 
     bool initSFML();
 };
-
 
 #endif // VIEWGAME_H_INCLUDED

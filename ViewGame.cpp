@@ -21,7 +21,14 @@ bool ViewGame::initSFML()
     if (!initSprite("player", VIEWGAME_IMAGE_PLAYER, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
         return false;
 
-    if (!initSprite("zomby", VIEWGAME_IMAGE_ZOMBY, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
+    // ZOMBY
+    if (!initSprite("zombyleft", VIEWGAME_IMAGE_ZOMBY_LEFT, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
+        return false;
+    if (!initSprite("zombyright", VIEWGAME_IMAGE_ZOMBY_RIGHT, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
+        return false;
+    if (!initSprite("zombyup", VIEWGAME_IMAGE_ZOMBY_UP, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
+        return false;
+    if (!initSprite("zombydown", VIEWGAME_IMAGE_ZOMBY_DOWN, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
         return false;
 
     if (!initSprite("horizontalWall", VIEWGAME_IMAGE_WALL_H, 1, WALL_WIDTH_H, WALL_HEIGHT_H))
@@ -33,11 +40,6 @@ bool ViewGame::initSFML()
     return true;
 }
 
-
-int ViewGame::treatEvent()
-{
-    return 0;
-}
 
 int ViewGame::treatEventSFML()
 {
@@ -87,9 +89,6 @@ int ViewGame::treatEventSFML()
     return returnValue;
 }
 
-void ViewGame::showViewTerminal()
-{
-}
 void ViewGame::showViewSFML()
 {
     // clear windows
@@ -97,34 +96,37 @@ void ViewGame::showViewSFML()
     // draw background
     _window->Draw(_spritesList["background"]);
 
-    string name;
+    displayMaze();
 
-    // draw player
-    if (_modele->getPlayer() != nullptr)
-    {
-        name = "player" ;
-        if (PLAYER_NB_SPRITES > 1)
-        {
-            name += to_string(_cptSprites % PLAYER_NB_SPRITES);
-        }
-        _spritesList[name].SetPosition(_modele->getPlayer()->getX(), _modele->getPlayer()->getY());
-        _window->Draw(_spritesList[name]);
-    }
+    displayPlayer();
+
+    displayEnnemies();
 
 
-    //draw zombies
-    name = "zomby" ;
-    if (ZOMBY_NB_SPRITES > 1)
-    {
-        name += to_string(_cptSprites % ZOMBY_NB_SPRITES);
-    }
+
+    // draw
+    _cptSprites++;
+    _window->Display();
+}
+
+void ViewGame::displayEnnemies()
+{
+    string name = "zomby" ;
 
     for (Enemy* enemy : *_modele->getEnemiesList())
     {
+        name += enemy->getDirection();
+        if (ZOMBY_NB_SPRITES > 1)
+        {
+            name += to_string(_cptSprites % ZOMBY_NB_SPRITES);
+        }
         _spritesList[name].SetPosition(enemy->getX(), enemy->getY());
         _window->Draw(_spritesList[name]);
     }
+}
 
+void ViewGame::displayMaze()
+{
     for (Wall* wall : *_modele->getWallsList())
     {
 
@@ -141,14 +143,26 @@ void ViewGame::showViewSFML()
                 break;
 
             default:
-                cout << "mur inconnu" << endl;
                 break;
-
         }
     }
-
-    // draw
-    _cptSprites++;
-    _window->Display();
 }
 
+void ViewGame::displayPlayer()
+{
+    if (_modele->getPlayer() != nullptr)
+    {
+        string name = "player" ;
+        if (PLAYER_NB_SPRITES > 1)
+        {
+            name += to_string(_cptSprites % PLAYER_NB_SPRITES);
+        }
+        _spritesList[name].SetPosition(_modele->getPlayer()->getX(), _modele->getPlayer()->getY());
+        _window->Draw(_spritesList[name]);
+    }
+}
+
+
+void ViewGame::displayTrace()
+{
+}
