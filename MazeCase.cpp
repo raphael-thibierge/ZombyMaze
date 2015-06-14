@@ -26,10 +26,6 @@ void MazeCase::init()
     for (unsigned int i = 0; i < 4 ; i++)
         _walls.push_back(false);
     _walls.resize(4);
-    
-    
-    
-    
 }
 
 

@@ -37,19 +37,17 @@ public:
 public:
     void nextStep();
 
-
     void playerMove(std::string direction);
 
 private:
 
-
     bool enemiesCollision();
-
-
 
     void moveAllEnemies();
 
     void enemiesCheckTraces();
+    
+    
 
 
 

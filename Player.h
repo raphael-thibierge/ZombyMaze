@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "MovableElement.h"
+#include "Trace.h"
 
 class Player : public MovableElement
 {
@@ -19,7 +20,7 @@ private:
 
 public:
 
-    void Move(std::string direction);
+    void Move(std::string direction = "");
 
     Player();
 
@@ -27,6 +28,8 @@ public:
     void setMoving(const bool moving);
 
     bool getMoving() const;
+    
+    Trace * getTrace() ;
 
 };
 

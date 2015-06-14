@@ -64,7 +64,6 @@ void GameModel::nextStep()
     {
         _playerLoose = true;
         cout << "You loose" << endl;
-
     }
 
 }
@@ -73,13 +72,21 @@ void GameModel::nextStep()
 void GameModel::playerMove(std::string direction)
 {
     _player.setDirection(direction);
-    _player.Move(direction);
-    if (Wall::wallsCollision(&_player, _wallsList) ||
-        _player.getX() <= 0 || (_player.getX() + _player.getWidth()) >= WINDOW_WIDTH ||
-        _player.getY() <= 0 || (_player.getY() + _player.getHeight()) >= WINDOW_HEIGHT
+    
+    MovableElement element = _player;
+    element.Move();
+    
+    if (!Wall::wallsCollision(&element, _wallsList) ||
+        element.getX() <= 0 || (element.getX() + element.getWidth()) >= WINDOW_WIDTH ||
+        element.getY() <= 0 || (element.getY() + element.getHeight()) >= WINDOW_HEIGHT
         )
-        _player.MoveOpposite(direction);
-    _tracesList.push_back(new Trace(_player.getDirection(), _player.getX(), _player.getY()));
+    {
+        _player.Move();
+        _tracesList.push_back(_player.getTrace());
+        
+    }
+        
+    
 
 }
 
