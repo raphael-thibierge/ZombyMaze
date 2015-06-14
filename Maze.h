@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "MazeCase.h"
+#include "Wall.h"
 
 class Maze : public GraphicElement
 {
@@ -30,7 +31,12 @@ private:
 
     void addWall(unsigned int line, unsigned int column, const std::string orientation);
 
+    static std::vector<int> listType1 (const int size);
 
+    static std::vector<std::vector<int>> listType2(const int size);
+    static std::vector<std::vector<int>> algo(unsigned int n);
+public :
+    static std::list<Wall*> laby(unsigned int n);
 // STATICS
 public:
     static Maze MazeLevel1();
