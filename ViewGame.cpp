@@ -122,7 +122,8 @@ void ViewGame::showViewSFML()
     for (Enemy* enemy : *_modele->getEnemiesList())
     {
         _spritesList[name].SetPosition(enemy->getX(), enemy->getY());
-        _window->Draw(_spritesList [name]);
+        _window->Draw(_spr)
+        cout << enemy->getX() << " " << enemy->getY() << endl;
     }
 
     for (Wall* wall : *_modele->getWallsList())
