@@ -18,7 +18,14 @@ bool ViewGame::initSFML()
     if (!initSprite("background", VIEWGAME_MAZE_BACKGROUND, 1, VIEWGAME_MAZE_BACKGROUND_WIDTH, VIEWGAME_MAZE_BACKGROUND_HEIGHT))
         return false;
 
-    if (!initSprite("player", VIEWGAME_IMAGE_PLAYER, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
+    // player
+    if (!initSprite("playerup", VIEWGAME_IMAGE_PLAYER_UP, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
+        return false;
+    if (!initSprite("playerdown", VIEWGAME_IMAGE_PLAYER_DOWN, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
+        return false;
+    if (!initSprite("playerleft", VIEWGAME_IMAGE_PLAYER_LEFT, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
+        return false;
+    if (!initSprite("playerright", VIEWGAME_IMAGE_PLAYER_RIGHT, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
         return false;
 
     // ZOMBY
@@ -160,9 +167,14 @@ void ViewGame::displayPlayer()
         if (PLAYER_NB_SPRITES > 1)
         {
             if (!_modele->getPlayer()->getMoving())
-                name += to_string(0);
+            {
+                name += "down" + to_string(0);
+            }
+
             else
-                name += to_string(_cptSprites % PLAYER_NB_SPRITES);
+            {
+                name += _modele->getPlayer()->getDirection() + to_string(_cptSprites % PLAYER_NB_SPRITES);
+            }
         }
 
         _spritesList[name].SetPosition(_modele->getPlayer()->getX(), _modele->getPlayer()->getY());
@@ -174,7 +186,6 @@ void ViewGame::displayPlayer()
 
 void ViewGame::displayTrace()
 {
-    cout << _modele->getTracesList()->size() << endl;
     for (Trace* trace : *_modele->getTracesList())
     {
         _spritesList["trace"].SetPosition(trace->getX(), trace->getY());

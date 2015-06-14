@@ -24,11 +24,13 @@ public:
 
     Player();
 
+    void tryLeaveTrace(std::list<Trace *> * traceList);
+
 // ACCESSORS
     void setMoving(const bool moving);
 
     bool getMoving() const;
-    
+
     Trace * getTrace() ;
 
 };

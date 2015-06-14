@@ -14,9 +14,16 @@ Trace::Trace(const string direction, const unsigned int X, const unsigned int Y)
 {
     _X = X;
     _Y = Y;
+    _life = TRACE_LIFE;
 }
 
 string Trace::getDirection() const
 {
     return _direction;
+}
+
+void Trace::looseLife()
+{
+    if ( _life > 0)
+        _life--;
 }

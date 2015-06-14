@@ -72,21 +72,20 @@ void GameModel::nextStep()
 void GameModel::playerMove(std::string direction)
 {
     _player.setDirection(direction);
-    
+
     MovableElement element = _player;
     element.Move();
-    
+
     if (!Wall::wallsCollision(&element, _wallsList) ||
         element.getX() <= 0 || (element.getX() + element.getWidth()) >= WINDOW_WIDTH ||
         element.getY() <= 0 || (element.getY() + element.getHeight()) >= WINDOW_HEIGHT
         )
     {
         _player.Move();
-        _tracesList.push_back(_player.getTrace());
-        
+        _player.tryLeaveTrace(&_tracesList);
     }
-        
-    
+
+
 
 }
 

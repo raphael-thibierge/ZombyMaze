@@ -45,7 +45,7 @@ const std::string TRACE_IMAGE = "images/traces.png";
 const unsigned int TRACE_WIDTH = 20;
 const unsigned int TRACE_HEIGHT = 42;
 const unsigned int TRACE_NB_SPRITES = 1;
-
+const unsigned int TRACE_LIFE = 5;
 
 // =====================    GAMEVIEW   ===================
 
@@ -55,7 +55,11 @@ const std::string VIEWGAME_MAZE_BACKGROUND = "images/fond.png";
 const int VIEWGAME_MAZE_BACKGROUND_WIDTH = WINDOW_WIDTH;
 const int VIEWGAME_MAZE_BACKGROUND_HEIGHT = WINDOW_HEIGHT;
 
-const std::string VIEWGAME_IMAGE_PLAYER = "images/perso.png";
+const std::string VIEWGAME_IMAGE_PLAYER_UP = "images/PersoDos.png";
+const std::string VIEWGAME_IMAGE_PLAYER_DOWN = "images/perso.png";
+const std::string VIEWGAME_IMAGE_PLAYER_LEFT = "images/PersoGauche.png";
+const std::string VIEWGAME_IMAGE_PLAYER_RIGHT = "images/PersoDroite.png";
+
 const unsigned int PLAYER_WIDTH = 31;
 const unsigned int PLAYER_HEIGHT = 41;
 const unsigned int PLAYER_NB_SPRITES = 3;

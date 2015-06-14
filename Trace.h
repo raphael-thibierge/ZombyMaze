@@ -12,20 +12,22 @@
 #include <stdio.h>
 #include "GraphicsElement.h"
 
-
-
 class Trace : public GraphicElement
 {
 private:
+    unsigned int _life;
     std::string _direction;
 
 public:
     Trace(const std::string direction, const unsigned int X, const unsigned int Y);
 
+    void looseLife();
 
 // ACCESSORS
 public:
     std::string getDirection() const;
+
+
 
 };
 
