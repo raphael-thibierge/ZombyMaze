@@ -25,6 +25,7 @@ const unsigned int WINDOW_HEIGHT = 800;
 const unsigned int MAZE_SIZE = 15;
 const unsigned int MAZE_X = 0;
 const unsigned int MAZE_Y = 0 ;
+const std::string MAZE_MATRICE_FILE = "matrices/1.txt.";
 
 
 // MAZECASE
@@ -37,6 +38,7 @@ const unsigned int PLAYER_SPEED = 5;
 
 // ENEMIES
 const unsigned int ZOMBY_SPEED = 4 ;
+const unsigned int ZOMBY_ACCELERATION = 4;
 
 // =====================    GAMEVIEW   ===================
 

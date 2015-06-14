@@ -29,10 +29,12 @@ public:
     static Wall * Horizontal(const unsigned int X, const unsigned int Y);
 
     static Wall * Vertical(const unsigned int X, const unsigned int Y);
+    
+    static bool wallsCollision(GraphicElement* element, std::list<Wall *> * wallsList);
 
 
 
-// ACCESSORs
+// ACCESSORS
 public:
     char getOrientation() const;
 

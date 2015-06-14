@@ -24,6 +24,9 @@ private:
     std::list<Enemy*> _enemiesList;
     std::list<Trace*> _tracesList;
     std::list<Wall*> _wallsList;
+// stats
+    bool _playerLoose;
+    bool _playerWin;
 
 public:
     GameModel();
@@ -31,14 +34,21 @@ public:
     ~GameModel();
 
 // METHODS
-
+public:
     void nextStep();
 
-    bool wallsCollision(GraphicElement* element);
-
+private:
+    
+    
+    bool enemiesCollision();
+    
     void playerMove(std::string direction);
 
     void moveAllEnemies();
+    
+    void enemiesCheckTraces();
+    
+    
 
 
 private :

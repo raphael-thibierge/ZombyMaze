@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include "MazeCase.h"
 #include "Wall.h"
+#include <iostream>
+#include <fstream>
 
 class Maze : public GraphicElement
 {
@@ -30,9 +32,10 @@ private:
     void init();
 
     void construct();
-
-
-    void addWall(unsigned int line, unsigned int column, const std::string orientation);
+    
+    
+    
+    void addWall(unsigned int x, unsigned int y, const char orientation);
 
     //static std::vector<int> listType1 (const int size);
 
@@ -40,9 +43,8 @@ private:
     //static std::vector<std::vector<int>> algo(unsigned int n);
 public :
     //static std::list<Wall*> laby(unsigned int n);
+
 // STATICS
-public:
-    static Maze MazeLevel1();
 
 
 

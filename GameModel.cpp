@@ -54,25 +54,24 @@ GameModel::~GameModel()
 
 void GameModel::nextStep()
 {
+    enemiesCheckTraces();
+    
     moveAllEnemies();
-
-}
-
-bool GameModel::wallsCollision(GraphicElement* element)
-{
-    for (Wall* wall : _wallsList)
+    
+    if (enemiesCollision())
     {
-        if ( wall->ElementOnElement(element))
-            return true;
+        _playerLoose = true;
+        cout << "You loose" << endl;
+        
     }
-    return false;
+
 }
 
 
 void GameModel::playerMove(std::string direction)
 {
     _player.Move(direction);
-    if (wallsCollision(&_player) ||
+    if (Wall::wallsCollision(&_player, &_wallsList) ||
         _player.getX() <= 0 || (_player.getX() + _player.getWidth()) >= WINDOW_WIDTH ||
         _player.getY() <= 0 || (_player.getY() + _player.getHeight()) >= WINDOW_HEIGHT
         )
@@ -80,36 +79,42 @@ void GameModel::playerMove(std::string direction)
 
 }
 
+
 void GameModel::moveAllEnemies()
 {
     for (Enemy* enemy : _enemiesList)
     {
+        enemy->autoMove(&_wallsList);
+    }
+}
 
-        int random = rand()%4;
-        switch (random)
+bool GameModel::enemiesCollision()
+{
+    for (Enemy* enemy : _enemiesList)
+    {
+        if (_player.ElementOnElement(enemy))
         {
-            case 0 :
-                enemy->Move("up");
-                break;
-
-            case 1 :
-                enemy->Move("down");
-                break;
-            case 2 :
-                enemy->Move("left");
-                break;
-            case 3 :
-                enemy->Move("right");
-                break;
-
-            default:
-            break;
+            return true;
         }
+    }
+    return false;
+}
+
+
+void GameModel::enemiesCheckTraces()
+{
+    for (Enemy* enemy : _enemiesList)
+    {
+        enemy->findTrace(&_tracesList);
     }
 }
 
 void GameModel::init()
 {
+    // init states
+    _playerWin = false;
+    _playerLoose = false;
+    
     // init player position
     _player.setPosition(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
 
@@ -122,8 +127,6 @@ void GameModel::init()
 
     // add walls
     _wallsList = _maze.getWallsList();
-    //_wallsList.push_back(new Wall(rand()%WINDOW_WIDTH, rand()%WINDOW_HEIGHT));
-    //_wallsList.push_back(new Wall(rand()%WINDOW_WIDTH, rand()%WINDOW_HEIGHT));
 
 }
 

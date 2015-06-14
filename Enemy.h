@@ -11,21 +11,33 @@
 
 #include <stdio.h>
 #include "MovableElement.h"
+#include "Trace.h"
+#include "Wall.h"
 
 class Enemy : public MovableElement
 {
 private:
     unsigned int _life;
+    
+    // states
     bool _traceFound;
+    bool _playerFound;
 
 
 
 public:
     Enemy();
 
-    void autoMove();
+    void autoMove(std::list<Wall*> * wallList);
+    
+    void changeDirection();
+    
+    void findTrace(std::list<Trace*> * tracesList);
 
     void traceFound(std::string _direction);
+    
+    void traceLoose();
+    
 
 private:
     void init();

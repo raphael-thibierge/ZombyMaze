@@ -45,6 +45,20 @@ Wall * Wall::Vertical(const unsigned int X, const unsigned int Y)
     return new Wall(X, Y, WALL_WIDTH_V, WALL_HEIGHT_V);
 }
 
+
+bool Wall::wallsCollision(GraphicElement* element, list<Wall *> * wallsList)
+{
+    for (Wall* wall : *wallsList)
+    {
+        if ( wall->ElementOnElement(element))
+            return true;
+    }
+    return false;
+}
+
+
+// ACCESSORS
+
 char Wall::getOrientation() const
 {
     return _orientation;
