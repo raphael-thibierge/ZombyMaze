@@ -18,6 +18,7 @@ class Maze : public GraphicElement
 
 private:
     std::vector<std::vector<MazeCase*> > _grid;
+    std::list<Wall*> _wallList;
     unsigned int _size ;
 
 public:
@@ -27,6 +28,8 @@ public:
 private:
 
     void init();
+    
+    void construct();
 
 
     void addWall(unsigned int line, unsigned int column, const std::string orientation);

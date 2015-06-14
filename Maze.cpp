@@ -45,6 +45,25 @@ void Maze::init()
 
 }
 
+
+void Maze::construct()
+{
+    for (int x = 0 ; x < 10 ; x++)
+    {
+        for (int y = 0 ; y < 10 ; y++)
+        {
+            if ( x == 0 || x == 4 || x ==8 )
+            {
+                _wallList.push_back(new Wall(x*WALL_HEIGHT+MAZE_X, y*WALL_HEIGHT));
+            }
+        }
+    }
+}
+
+
+
+
+
 // STATICS
 
 Maze Maze::MazeLevel1()
@@ -59,6 +78,11 @@ MazeCase Maze::getCase(const int line, const int column) const
 {
     return *_grid[line][column];
 }
+
+
+
+
+
 
 
 
