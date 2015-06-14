@@ -31,6 +31,11 @@ bool ViewGame::initSFML()
     if (!initSprite("zombydown", VIEWGAME_IMAGE_ZOMBY_DOWN, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
         return false;
 
+    if (!initSprite("trace", TRACE_IMAGE, TRACE_NB_SPRITES, TRACE_WIDTH, TRACE_HEIGHT))
+        return false;
+
+
+
     if (!initSprite("horizontalWall", VIEWGAME_IMAGE_WALL_H, 1, WALL_WIDTH_H, WALL_HEIGHT_H))
         return false;
 
@@ -98,13 +103,12 @@ void ViewGame::showViewSFML()
 
     displayMaze();
 
-    displayPlayer();
-
     displayEnnemies();
 
+    displayTrace();
 
+    displayPlayer();
 
-    // draw
     _cptSprites++;
     _window->Display();
 }
@@ -155,14 +159,25 @@ void ViewGame::displayPlayer()
         string name = "player" ;
         if (PLAYER_NB_SPRITES > 1)
         {
-            name += to_string(_cptSprites % PLAYER_NB_SPRITES);
+            if (!_modele->getPlayer()->getMoving())
+                name += to_string(0);
+            else
+                name += to_string(_cptSprites % PLAYER_NB_SPRITES);
         }
+
         _spritesList[name].SetPosition(_modele->getPlayer()->getX(), _modele->getPlayer()->getY());
         _window->Draw(_spritesList[name]);
+
     }
 }
 
 
 void ViewGame::displayTrace()
 {
+    cout << _modele->getTracesList()->size() << endl;
+    for (Trace* trace : *_modele->getTracesList())
+    {
+        _spritesList["trace"].SetPosition(trace->getX(), trace->getY());
+        _window->Draw(_spritesList["trace"]);
+    }
 }

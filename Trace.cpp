@@ -10,9 +10,10 @@
 
 using namespace std;
 
-Trace::Trace(string direction) : GraphicElement(), _direction(direction)
+Trace::Trace(const string direction, const unsigned int X, const unsigned int Y) : GraphicElement(), _direction(direction)
 {
-    
+    _X = X;
+    _Y = Y;
 }
 
 string Trace::getDirection() const

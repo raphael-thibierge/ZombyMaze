@@ -20,13 +20,13 @@ private:
     std::string _direction;
 
 public:
-    Trace(std::string direction);
-    
-    
+    Trace(const std::string direction, const unsigned int X, const unsigned int Y);
+
+
 // ACCESSORS
 public:
     std::string getDirection() const;
-    
+
 };
 
 

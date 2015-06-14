@@ -14,10 +14,20 @@
 
 class Player : public MovableElement
 {
+private:
+    bool _isMoving;
+
 public:
-    
+
+    void Move(std::string direction);
+
     Player();
-    
+
+// ACCESSORS
+    void setMoving(const bool moving);
+
+    bool getMoving() const;
+
 };
 
 #endif /* defined(__Console__Player__) */

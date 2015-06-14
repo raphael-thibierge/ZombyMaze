@@ -54,6 +54,8 @@ GameModel::~GameModel()
 
 void GameModel::nextStep()
 {
+    _player.setMoving(false);
+
     enemiesCheckTraces();
 
     moveAllEnemies();
@@ -70,12 +72,14 @@ void GameModel::nextStep()
 
 void GameModel::playerMove(std::string direction)
 {
+    _player.setDirection(direction);
     _player.Move(direction);
     if (Wall::wallsCollision(&_player, _wallsList) ||
         _player.getX() <= 0 || (_player.getX() + _player.getWidth()) >= WINDOW_WIDTH ||
         _player.getY() <= 0 || (_player.getY() + _player.getHeight()) >= WINDOW_HEIGHT
         )
         _player.MoveOpposite(direction);
+    _tracesList.push_back(new Trace(_player.getDirection(), _player.getX(), _player.getY()));
 
 }
 
