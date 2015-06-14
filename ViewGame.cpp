@@ -21,7 +21,7 @@ bool ViewGame::initSFML()
     if (!initSprite("player", VIEWGAME_IMAGE_PLAYER, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
         return false;
 
-    if (!initSprite("zomby", VIEWGAME_IMAGE_ZOMBY, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_WIDTH))
+    if (!initSprite("zomby", VIEWGAME_IMAGE_ZOMBY, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
         return false;
 
     if (!initSprite("horizontalWall", VIEWGAME_IMAGE_WALL, 1, WALL_WIDTH, WALL_HEIGHT))
@@ -122,8 +122,7 @@ void ViewGame::showViewSFML()
     for (Enemy* enemy : *_modele->getEnemiesList())
     {
         _spritesList[name].SetPosition(enemy->getX(), enemy->getY());
-        _window->Draw(_spr)
-        cout << enemy->getX() << " " << enemy->getY() << endl;
+        _window->Draw(_spritesList[name]);
     }
 
     for (Wall* wall : *_modele->getWallsList())
