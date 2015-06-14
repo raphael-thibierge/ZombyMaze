@@ -28,26 +28,30 @@ public:
 private:
 
     void init();
-    
+
     void construct();
 
 
     void addWall(unsigned int line, unsigned int column, const std::string orientation);
 
-    static std::vector<int> listType1 (const int size);
+    //static std::vector<int> listType1 (const int size);
 
-    static std::vector<std::vector<int>> listType2(const int size);
-    static std::vector<std::vector<int>> algo(unsigned int n);
+    //static std::vector<std::vector<int>> listType2(const int size);
+    //static std::vector<std::vector<int>> algo(unsigned int n);
 public :
-    static std::list<Wall*> laby(unsigned int n);
+    //static std::list<Wall*> laby(unsigned int n);
 // STATICS
 public:
     static Maze MazeLevel1();
 
 
+
+
 // ACCESSORS
 public :
     MazeCase getCase(const int line, const int column) const;
+
+    std::list<Wall*> getWallsList() const;
 
 };
 

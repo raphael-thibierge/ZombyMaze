@@ -10,28 +10,39 @@
 
 using namespace std;
 
-Wall::Wall(const unsigned int positionX, const unsigned int positionY) : GraphicElement()
+Wall::Wall(const unsigned int positionX, const unsigned int positionY,  const unsigned int width, const unsigned int height) : GraphicElement()
 {
-    init();
     _X = positionX;
     _Y = positionY;
+    _width = width;
+    _height = height;
+
+
+    init();
 }
 
 void Wall::init()
 {
     // set size
-    if (WALL_WIDTH > WALL_HEIGHT)
+    if (_width > _height)
     {
-        _width = WALL_WIDTH;
-        _height = WALL_HEIGHT;
         _orientation = 'h';
     }
     else
     {
-        _width = WALL_HEIGHT;
-        _height = WALL_WIDTH;
         _orientation = 'v';
     }
+}
+
+// SATTIC
+Wall* Wall::Horizontal(const unsigned int X, const unsigned int Y)
+{
+    return new Wall(X, Y, WALL_WIDTH_H, WALL_HEIGHT_H);
+}
+
+Wall * Wall::Vertical(const unsigned int X, const unsigned int Y)
+{
+    return new Wall(X, Y, WALL_WIDTH_V, WALL_HEIGHT_V);
 }
 
 char Wall::getOrientation() const

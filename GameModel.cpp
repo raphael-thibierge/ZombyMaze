@@ -121,7 +121,7 @@ void GameModel::init()
     }
 
     // add walls
-    _wallsList = Maze::laby(15);
+    _wallsList = _maze.getWallsList();
     //_wallsList.push_back(new Wall(rand()%WINDOW_WIDTH, rand()%WINDOW_HEIGHT));
     //_wallsList.push_back(new Wall(rand()%WINDOW_WIDTH, rand()%WINDOW_HEIGHT));
 

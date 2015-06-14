@@ -17,16 +17,26 @@ private:
     char _orientation ;
 
 public:
-    Wall(const unsigned int positionX, const unsigned int positionY);
-    
+    Wall(const unsigned int positionX, const unsigned int positionY, const unsigned int width, const unsigned int height );
+
 
 
 private:
     void init();
 
-// ACCESSORS
+public:
+// SATICS
+    static Wall * Horizontal(const unsigned int X, const unsigned int Y);
+
+    static Wall * Vertical(const unsigned int X, const unsigned int Y);
+
+
+
+// ACCESSORs
 public:
     char getOrientation() const;
+
+
 
 };
 

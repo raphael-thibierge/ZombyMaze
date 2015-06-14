@@ -14,6 +14,8 @@ using namespace std;
 
 Maze::Maze() : GraphicElement(){
     init();
+    construct();
+
 }
 
 
@@ -48,13 +50,28 @@ void Maze::init()
 
 void Maze::construct()
 {
-    for (int x = 0 ; x < 10 ; x++)
+    for (int x = 0 ; x < 15 ; x++)
     {
-        for (int y = 0 ; y < 10 ; y++)
+        for (int y = 0 ; y < 15 ; y++)
         {
-            if ( x == 0 || x == 4 || x ==8 )
+            // vertical
+            if ( x == 0 || x == 14
+            || ( x == 2 && ( (y > 5 && y < 10)  ))
+            || ( x == 6 &&  y < 4)
+            || ( x == 8 && (( y > 1 && y < 6 )))
+            )
             {
-                _wallList.push_back(new Wall(x*WALL_HEIGHT+MAZE_X, y*WALL_HEIGHT));
+                _wallList.push_back(Wall::Vertical(x*MAZECASE_SIZE, y*MAZECASE_SIZE));
+            }
+
+            // horizontal
+            if ((y == 2 && x < 2 )
+                || ( y == 0 && x < 14 ) || ( y == 14 )
+                || ( y == 2 && ( x < 4 || (x > 9 && x < 12)))
+                || ( y == 4 && ((x > 2 && x < 6) || ( x == 0 )))
+                )
+            {
+                _wallList.push_back(Wall::Horizontal(x*MAZECASE_SIZE, y*MAZECASE_SIZE));
             }
         }
     }
@@ -79,14 +96,17 @@ MazeCase Maze::getCase(const int line, const int column) const
     return *_grid[line][column];
 }
 
+std::list<Wall*> Maze::getWallsList() const
+{
+    return _wallList;
+}
 
 
 
 
 
 
-
-// ===================================
+/* ===================================
 vector<int> Maze::listType1 (const int size)
 {
     vector<int> list;
@@ -201,5 +221,5 @@ list<Wall*> Maze::laby(unsigned int n)
 
 }
 
-
+*/
 

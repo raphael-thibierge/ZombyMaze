@@ -31,8 +31,8 @@ const unsigned int MAZE_Y = 0 ;
 const unsigned int MAZECASE_SIZE = 40;
 
 //PLAYER
-const unsigned int PLAYER_INITIAL_X = 100;
-const unsigned int PLAYER_INITIAL_Y = 100;
+const unsigned int PLAYER_INITIAL_X = 20;
+const unsigned int PLAYER_INITIAL_Y = 20;
 const unsigned int PLAYER_SPEED = 5;
 
 // =====================    GAMEVIEW   ===================
@@ -53,8 +53,11 @@ const unsigned int ZOMBY_WIDTH = 31;
 const unsigned int ZOMBY_HEIGHT = 41;
 const unsigned int ZOMBY_NB_SPRITES = 3;
 
-const std::string VIEWGAME_IMAGE_WALL = "images/mur.png";
-const unsigned int WALL_WIDTH = 12;
-const unsigned int WALL_HEIGHT = 53;
+const std::string VIEWGAME_IMAGE_WALL_H = "images/MurH.png";
+const std::string VIEWGAME_IMAGE_WALL_V = "images/MurV.png";
+const unsigned int WALL_WIDTH_H = 53;
+const unsigned int WALL_WIDTH_V = 12;
+const unsigned int WALL_HEIGHT_H = 12;
+const unsigned int WALL_HEIGHT_V = 53;
 
 #endif

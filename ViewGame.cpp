@@ -24,10 +24,10 @@ bool ViewGame::initSFML()
     if (!initSprite("zomby", VIEWGAME_IMAGE_ZOMBY, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
         return false;
 
-    if (!initSprite("horizontalWall", VIEWGAME_IMAGE_WALL, 1, WALL_WIDTH, WALL_HEIGHT))
+    if (!initSprite("horizontalWall", VIEWGAME_IMAGE_WALL_H, 1, WALL_WIDTH_H, WALL_HEIGHT_H))
         return false;
 
-    if (!initSprite("verticalWall", VIEWGAME_IMAGE_WALL, 1, WALL_WIDTH, WALL_HEIGHT))
+    if (!initSprite("verticalWall", VIEWGAME_IMAGE_WALL_V, 1, WALL_WIDTH_V, WALL_HEIGHT_V))
         return false;
 
     return true;
