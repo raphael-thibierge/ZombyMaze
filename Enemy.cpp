@@ -8,10 +8,9 @@
 
 #include "Enemy.h"
 
-
 Enemy::Enemy()
 {
-    _speed = 2;
+    _speed = ZOMBY_SPEED;
 }
 
 

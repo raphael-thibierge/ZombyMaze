@@ -22,18 +22,21 @@ const unsigned int WINDOW_HEIGHT = 800;
 // =====================    GAMEMODEL   ===================
 
 // MAZE
-const unsigned int MAZE_SIZE = 6;
+const unsigned int MAZE_SIZE = 15;
 const unsigned int MAZE_X = 0;
 const unsigned int MAZE_Y = 0 ;
 
 
 // MAZECASE
-const unsigned int MAZECASE_SIZE = 40;
+const unsigned int MAZECASE_SIZE = 50;
 
 //PLAYER
 const unsigned int PLAYER_INITIAL_X = 20;
 const unsigned int PLAYER_INITIAL_Y = 20;
 const unsigned int PLAYER_SPEED = 5;
+
+// ENEMIES
+const unsigned int ZOMBY_SPEED = 4 ;
 
 // =====================    GAMEVIEW   ===================
 

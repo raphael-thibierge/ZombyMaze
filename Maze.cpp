@@ -56,22 +56,17 @@ void Maze::construct()
         {
             // vertical
             if ( x == 0 || x == 14
-            || ( x == 2 && ( (y > 5 && y < 10)  ))
-            || ( x == 6 &&  y < 4)
-            || ( x == 8 && (( y > 1 && y < 6 )))
+            || ( x == 1 && ( (y > 0 && y < 10)  ))
             )
             {
-                _wallList.push_back(Wall::Vertical(x*MAZECASE_SIZE, y*MAZECASE_SIZE));
+                _wallList.push_back(Wall::Vertical(x*(MAZECASE_SIZE+WALL_WIDTH_V), y*(MAZECASE_SIZE)+(y+1)*WALL_HEIGHT_H));
             }
-
             // horizontal
-            if ((y == 2 && x < 2 )
-                || ( y == 0 && x < 14 ) || ( y == 14 )
-                || ( y == 2 && ( x < 4 || (x > 9 && x < 12)))
-                || ( y == 4 && ((x > 2 && x < 6) || ( x == 0 )))
+            if ((y == 0 || (y == 1 && x > 0 ))
+
                 )
             {
-                _wallList.push_back(Wall::Horizontal(x*MAZECASE_SIZE, y*MAZECASE_SIZE));
+                _wallList.push_back(Wall::Horizontal(x*MAZECASE_SIZE+(x+1)*WALL_WIDTH_V, y*(MAZECASE_SIZE+WALL_HEIGHT_H)));
             }
         }
     }
