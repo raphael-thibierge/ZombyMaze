@@ -66,6 +66,9 @@ public :
 
     bool initButtons();
 
+    bool initSprite(const std::string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteX, const unsigned int spriteY);
+
+
 };
 
 

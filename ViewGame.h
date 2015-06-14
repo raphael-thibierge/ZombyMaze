@@ -4,7 +4,11 @@
 
 class ViewGame : virtual public View {
 
+private:
+    unsigned int _cptSprites;
+
 public:
+
     ViewGame();
 
     virtual ~ViewGame();

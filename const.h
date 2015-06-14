@@ -33,10 +33,7 @@ const unsigned int MAZECASE_SIZE = 40;
 //PLAYER
 const unsigned int PLAYER_INITIAL_X = 100;
 const unsigned int PLAYER_INITIAL_Y = 100;
-
-
-
-
+const unsigned int PLAYER_SPEED = 5;
 
 // =====================    GAMEVIEW   ===================
 
@@ -46,12 +43,16 @@ const std::string VIEWGAME_MAZE_BACKGROUND = "images/background.png";
 const int VIEWGAME_MAZE_BACKGROUND_WIDTH = 800;
 const int VIEWGAME_MAZE_BACKGROUND_HEIGHT = 800;
 
-const std::string VIEWGAME_IMAGE_PLAYER = "images/persoface.png";
-const unsigned int PLAYER_WIDTH = 42;
-const unsigned int PLAYER_HEIGHT = 42;
-const std::string VIEWGAME_IMAGE_ZOMBY = "images/zombieface.png";
-const unsigned int ZOMBY_WIDTH = 30;
-const unsigned int ZOMBY_HEIGHT = 30;
+const std::string VIEWGAME_IMAGE_PLAYER = "images/perso.png";
+const unsigned int PLAYER_WIDTH = 31;
+const unsigned int PLAYER_HEIGHT = 41;
+const unsigned int PLAYER_NB_SPRITES = 3;
+
+const std::string VIEWGAME_IMAGE_ZOMBY = "images/zomby.png";
+const unsigned int ZOMBY_WIDTH = 31;
+const unsigned int ZOMBY_HEIGHT = 41;
+const unsigned int ZOMBY_NB_SPRITES = 3;
+
 const std::string VIEWGAME_IMAGE_WALL = "images/mur.png";
 const unsigned int WALL_WIDTH = 12;
 const unsigned int WALL_HEIGHT = 53;

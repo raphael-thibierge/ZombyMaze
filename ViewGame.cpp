@@ -5,7 +5,7 @@ using namespace sf;
 
 ViewGame::ViewGame() : View()
 {
-
+    _cptSprites = 0;
 }
 
 ViewGame::~ViewGame()
@@ -14,52 +14,21 @@ ViewGame::~ViewGame()
 
 bool ViewGame::initSFML()
 {
-    //background
-    _imagesList.insert(make_pair("background", sf::Image()));
-    if (!_imagesList["background"].LoadFromFile(VIEWGAME_MAZE_BACKGROUND))
+        //background
+    if (!initSprite("background", VIEWGAME_MAZE_BACKGROUND, 1, VIEWGAME_MAZE_BACKGROUND_WIDTH, VIEWGAME_MAZE_BACKGROUND_HEIGHT))
         return false;
 
-    _spritesList.insert(make_pair("background", sf::Sprite()));
-    _spritesList["background"].SetImage(_imagesList["background"]);
-    _spritesList["background"].SetSubRect(sf::IntRect(0,0, VIEWGAME_MAZE_BACKGROUND_WIDTH, VIEWGAME_MAZE_BACKGROUND_HEIGHT));
-
-    // player
-    _imagesList.insert(make_pair("player", sf::Image()));
-    if (!_imagesList["player"].LoadFromFile(VIEWGAME_IMAGE_PLAYER))
+    if (!initSprite("player", VIEWGAME_IMAGE_PLAYER, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
         return false;
 
-    _spritesList.insert(make_pair("player", sf::Sprite()));
-    _spritesList["player"].SetImage(_imagesList["player"]);
-    _spritesList["player"].SetSubRect(sf::IntRect(0,0, PLAYER_WIDTH, PLAYER_HEIGHT));
-
-    // zomby
-    _imagesList.insert(make_pair("zomby", sf::Image()));
-    if (!_imagesList["zomby"].LoadFromFile(VIEWGAME_IMAGE_ZOMBY))
+    if (!initSprite("zomby", VIEWGAME_IMAGE_ZOMBY, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_WIDTH))
         return false;
 
-    _spritesList.insert(make_pair("zomby", sf::Sprite()));
-    _spritesList["zomby"].SetImage(_imagesList["zomby"]);
-    _spritesList["zomby"].SetSubRect(sf::IntRect(0,0, ZOMBY_WIDTH, ZOMBY_HEIGHT));
-
-
-    // wall
-    _imagesList.insert(make_pair("horizontalWall", sf::Image()));
-    if (!_imagesList["horizontalWall"].LoadFromFile(VIEWGAME_IMAGE_WALL))
+    if (!initSprite("horizontalWall", VIEWGAME_IMAGE_WALL, 1, WALL_WIDTH, WALL_HEIGHT))
         return false;
 
-    _spritesList.insert(make_pair("wall_h", sf::Sprite()));
-    _spritesList["horizontalWall"].SetImage(_imagesList["horizontalWall"]);
-    _spritesList["horizontalWall"].SetSubRect(sf::IntRect(0,0, WALL_WIDTH, WALL_HEIGHT));
-
-    // wall
-    _imagesList.insert(make_pair("verticalWall", sf::Image()));
-    if (!_imagesList["verticalWall"].LoadFromFile(VIEWGAME_IMAGE_WALL))
+    if (!initSprite("verticalWall", VIEWGAME_IMAGE_WALL, 1, WALL_WIDTH, WALL_HEIGHT))
         return false;
-
-    _spritesList.insert(make_pair("verticalWall", sf::Sprite()));
-    _spritesList["verticalWall"].SetImage(_imagesList["verticalWall"]);
-    _spritesList["verticalWall"].SetSubRect(sf::IntRect(0,0, WALL_WIDTH, WALL_HEIGHT));
-
 
     return true;
 }
@@ -128,15 +97,32 @@ void ViewGame::showViewSFML()
     // draw background
     _window->Draw(_spritesList["background"]);
 
+    string name;
+
     // draw player
-    _spritesList["player"].SetPosition(_modele->getPlayer()->getX(), _modele->getPlayer()->getY());
-    _window->Draw(_spritesList["player"]);
+    if (_modele->getPlayer() != nullptr)
+    {
+        name = "player" ;
+        if (PLAYER_NB_SPRITES > 1)
+        {
+            name += to_string(_cptSprites % PLAYER_NB_SPRITES);
+        }
+        _spritesList[name].SetPosition(_modele->getPlayer()->getX(), _modele->getPlayer()->getY());
+        _window->Draw(_spritesList[name]);
+    }
+
 
     //draw zombies
+    name = "zomby" ;
+    if (ZOMBY_NB_SPRITES > 1)
+    {
+        name += to_string(_cptSprites % ZOMBY_NB_SPRITES);
+    }
+
     for (Enemy* enemy : *_modele->getEnemiesList())
     {
-        _spritesList["zomby"].SetPosition(enemy->getX(), enemy->getY());
-        _window->Draw(_spritesList["zomby"]);
+        _spritesList[name].SetPosition(enemy->getX(), enemy->getY());
+        _window->Draw(_spritesList [name]);
     }
 
     for (Wall* wall : *_modele->getWallsList())
@@ -162,6 +148,7 @@ void ViewGame::showViewSFML()
     }
 
     // draw
+    _cptSprites++;
     _window->Display();
 }
 
