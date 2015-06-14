@@ -20,10 +20,18 @@ Wall::Wall(const unsigned int positionX, const unsigned int positionY) : Graphic
 void Wall::init()
 {
     // set size
-    _width = WALL_WIDTH;
-    _height = WALL_HEIGHT;
-
-    _orientation = 'v';
+    if (WALL_WIDTH > WALL_HEIGHT)
+    {
+        _width = WALL_WIDTH;
+        _height = WALL_HEIGHT;
+        _orientation = 'h';
+    }
+    else
+    {
+        _width = WALL_HEIGHT;
+        _height = WALL_WIDTH;
+        _orientation = 'v';
+    }
 }
 
 char Wall::getOrientation() const

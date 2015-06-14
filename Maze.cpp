@@ -10,7 +10,7 @@
 
 using namespace std;
 #include <math.h>
-
+#include "Wall.h"
 
 Maze::Maze() : GraphicElement(){
     init();
@@ -62,7 +62,7 @@ MazeCase Maze::getCase(const int line, const int column) const
 
 
 
-/* ===================================
+// ===================================
 vector<int> listType1 (const int size)
 {
     vector<int> list;
@@ -101,17 +101,20 @@ vector<vector<int>> listType2(const int size)
     return list;
 }
 
-vector<vector<int>> Maze::algo(unsigned int n)
+vector<vector<int>> algo(unsigned int n)
 {
     vector<int> list1 = listType1(n);
     vector<vector<int>> list2 = listType2(n);
     
     vector<int> l;
     
-    int test;
+    int test = list1[0];
     
-    // a corriger
     vector<int> tmp;
+    for ( unsigned int i= 0 ; i < pow(n, 2); i++)
+    {
+        tmp.push_back(test);
+    }
     
     while (list1 != tmp )
     {
@@ -125,15 +128,54 @@ vector<vector<int>> Maze::algo(unsigned int n)
             l[0] = list1[l[0]];
             l[1] = list1[l[1]];
             
+            // manque une ligne
+            
+            for (int i = 0 ; i < pow(n, 2); i++)
+            {
+                if (list1[i] == l[0])
+                {
+                    list1[i] = l[0];
+                }
+            }
+            
 
         }
-        
-        
     }
-    
-
-    
     return list2;
 }
 
-*/
+
+list<Wall*> laby(unsigned int n)
+{
+    list<Wall*> wallList;
+    int wallWith = WALL_WIDTH + MAZE_X;
+    int wallHeight = WALL_HEIGHT + MAZE_Y;
+    vector<vector<int> > list2 = algo(n);
+    
+    vector<int> l ;
+    
+    unsigned int taille2 = list2.size();
+    
+    for (unsigned int i = 0 ; i < taille2 ; i++)
+    {
+        l = list2[i];
+        int v = l[1]/n ;
+        int w = l[0]%n ;
+        
+        if ( l[1] == l[0]+1 )
+        {
+            wallList.push_back(new Wall((w+1)*WALL_WIDTH + MAZE_X, v*WALL_HEIGHT));
+        }
+        else
+        {
+            wallList.push_back(new Wall(w*WALL_HEIGHT + MAZE_X, v*WALL_WIDTH+MAZE_Y));
+        }
+    }
+    
+    
+    return wallList;
+    
+}
+
+
+

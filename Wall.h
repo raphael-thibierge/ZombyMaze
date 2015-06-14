@@ -18,6 +18,7 @@ private:
 
 public:
     Wall(const unsigned int positionX, const unsigned int positionY);
+    
 
 
 private:
