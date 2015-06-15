@@ -94,6 +94,7 @@ void Maze::addWall(unsigned int x, unsigned int y, const char orientation)
 
 
 
+
 // STATICS
 
 
