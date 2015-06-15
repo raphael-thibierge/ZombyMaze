@@ -14,6 +14,7 @@
 #include "Trace.h"
 #include "Wall.h"
 
+
 class Enemy : public MovableElement
 {
 private:
