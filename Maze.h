@@ -33,8 +33,6 @@ private:
 
     void construct();
 
-
-
     void addWall(unsigned int x, unsigned int y, const char orientation);
 
     //static std::vector<int> listType1 (const int size);
