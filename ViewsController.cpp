@@ -7,6 +7,7 @@
 //
 
 #include "ViewsController.h"
+#include "ViewIntroduction.h"
 
 
 using namespace std;
@@ -18,6 +19,8 @@ ViewsController::ViewsController(sf::RenderWindow* window) : _mainWindow(window)
 {
 
     _allViews.insert(make_pair("Game", &_game));
+    _allViews.insert(make_pair("Introduction", new ViewIntroduction()));
+
     _quit = false;
 
     // music
@@ -55,13 +58,14 @@ bool ViewsController::treatEvent(){
             break;
 
         case 0: // quit active vie
-        forceQuit();
+            if (_view == _allViews["Introduction"])
+                _view = _allViews["Game"];
             break;
 
             // change of view
             //
         case -1:
-            // _view = _allViews["MainMenu"];
+             _view = _allViews["Introduction"];
             break;
 
         case -2:
@@ -122,7 +126,7 @@ bool ViewsController::init(GameModel *modele){
         }
     }
     // at beginning of the program, it's the introduction view
-    _view = _allViews["Game"];
+    _view = _allViews["Introduction"];
     return true;
 }
 void ViewsController::playMusic(bool loop)

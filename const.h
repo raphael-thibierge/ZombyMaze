@@ -47,6 +47,11 @@ const unsigned int TRACE_HEIGHT = 42;
 const unsigned int TRACE_NB_SPRITES = 1;
 const unsigned int TRACE_LIFE = 5;
 
+
+// =====================    INTRODUCTIONVIEW   ===================
+const std::string IMAGE_INTRO = "images/Intro.png";
+const float TIME_INTRODUCTION = 2.0f;
+
 // =====================    GAMEVIEW   ===================
 
 
