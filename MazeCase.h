@@ -16,7 +16,6 @@ class MazeCase : protected GraphicElement{
 private:
     std::vector<bool> _walls;
     
-    
 public:
     MazeCase(const unsigned int line, const unsigned int column);
     
