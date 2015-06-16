@@ -27,6 +27,7 @@ private:
 // stats
     bool _playerLoose;
     bool _playerWin;
+    bool _play;
 
 public:
     GameModel();
@@ -38,6 +39,8 @@ public:
     void nextStep();
 
     void playerMove(std::string direction);
+    
+    void reset();
 
 private:
 
@@ -49,9 +52,7 @@ private:
     
     void updateMazeCasePosition();
     
-    
-
-
+    bool successOutOfMaze();
 
 
 private :
@@ -59,16 +60,28 @@ private :
 
 // ACCESSORS
 public:
+    
+    bool getLoose() const;
+    
+    bool getWin() const;
+    
+    bool getPlayStop() const;
 
     std::list<Enemy*> * getEnemiesList();
 
     std::list<Trace *> * getTracesList();
 
     std::list<Wall *> * getWallsList();
-
+    
     Player* getPlayer();
     
     Maze * getMaze() ;
+    
+    void setPlayStop();
+    
+    
+    
+
 };
 
 #endif /* defined(__Console__GameModel__) */

@@ -42,11 +42,19 @@ bool ViewGame::initSFML()
         return false;
 
 
-
+    // walls
     if (!initSprite("horizontalWall", VIEWGAME_IMAGE_WALL_H, 1, WALL_WIDTH_H, WALL_HEIGHT_H))
         return false;
 
     if (!initSprite("verticalWall", VIEWGAME_IMAGE_WALL_V, 1, WALL_WIDTH_V, WALL_HEIGHT_V))
+        return false;
+    
+    // gameOver
+    if (!initSprite("gameOver", GAMEOVER_IMAGE, 1, GAMEOVER_IMAGE_WIDTH, GAMEOVER_IMAGE_HEIGHT))
+        return false;
+    
+    // win
+    if (!initSprite("win", WIN_IMAGE, 1, WIN_IMAGE_WIDTH, WIN_IMAGE_HEIGHT))
         return false;
     
     cout << "Sprites initialisés" << endl;
@@ -59,38 +67,41 @@ bool ViewGame::initSFML()
 int ViewGame::treatEventSFML()
 {
     int returnValue = 1;
+    if (_modele->getPlayStop())
+    {
+        if (Keyboard::isKeyPressed(Keyboard::Up))
+            _modele->playerMove("up");
+        
+        if (Keyboard::isKeyPressed(Keyboard::Down))
+            _modele->playerMove("down");
+        
+        if (Keyboard::isKeyPressed(Keyboard::Left))
+            _modele->playerMove("left");
+        
+        if (Keyboard::isKeyPressed(Keyboard::Right))
+            _modele->playerMove("right");
+    }
     
-    if (Keyboard::isKeyPressed(Keyboard::Up))
-        _modele->playerMove("up");
-    
-    if (Keyboard::isKeyPressed(Keyboard::Down))
-        _modele->playerMove("down");
-    
-    if (Keyboard::isKeyPressed(Keyboard::Left))
-        _modele->playerMove("left");
-    
-    if (Keyboard::isKeyPressed(Keyboard::Right))
-        _modele->playerMove("right");
-    
-    
-    
-    Event event;
+        Event event;
     while (_window->pollEvent(event))
     {
         
         switch (event.type)
-        {
-                
-                
-                
-                
-                
+        {   
             case sf::Event::KeyPressed :
                 switch (event.key.code)
             {
                     
                 case sf::Keyboard::Escape:
                     returnValue = 111;
+                    break;
+                    
+                case sf::Keyboard::Space:
+                    if (_modele->getWin() || _modele->getLoose())
+                    {
+                        _modele->reset();
+                    }
+                    _modele->setPlayStop();
                     break;
                     
                 default :
@@ -112,19 +123,31 @@ int ViewGame::treatEventSFML()
 
 void ViewGame::showViewSFML()
 {
-
-    // draw background
-     _window->draw(_spritesList["background"]);
-
-    displayMaze();
-
-    displayEnnemies();
-
-    displayTrace();
-
-    displayPlayer();
-
-    _cptSprites++;
+    
+    if (_modele->getLoose())
+    {
+        displayGameOver();
+    }
+    
+    else if (_modele->getWin())
+    {
+        displayWin();
+    }else
+    {
+        
+        // draw background
+        _window->draw(_spritesList["background"]);
+        
+        displayMaze();
+        
+        displayEnnemies();
+        
+        displayTrace();
+        
+        displayPlayer();
+        
+        _cptSprites++;
+    }
 }
 
 void ViewGame::displayEnnemies()
@@ -203,4 +226,16 @@ void ViewGame::displayTrace()
 
         }
     }
+}
+
+void ViewGame::displayGameOver()
+{
+    _spritesList["gameOver"].setPosition(GAMEOVER_IMAGE_X, GAMEOVER_IMAGE_Y);
+    _window->draw(_spritesList["gameOver"]);
+}
+
+void ViewGame::displayWin()
+{
+    _spritesList["win"].setPosition(GAMEOVER_IMAGE_X, GAMEOVER_IMAGE_Y);
+    _window->draw(_spritesList["win"]);
 }

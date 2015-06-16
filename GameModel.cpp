@@ -22,11 +22,13 @@ void GameModel::init()
     // init states
     _playerWin = false;
     _playerLoose = false;
+    _play = false;
     
     // init player position
     _player.setPosition(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
     
     // add an enemy
+    _enemiesList.clear();
     _enemiesList.push_back(new Enemy);
     for (Enemy* enemy : _enemiesList)
     {
@@ -82,21 +84,35 @@ GameModel::~GameModel()
 
 void GameModel::nextStep()
 {
-    
-    _player.setMoving(false);
-
-    updateMazeCasePosition();
-    
-    //enemiesCheckTraces();
-
-    moveAllEnemies();
-
-    if (enemiesCollision())
+    if (_play)
     {
-        _playerLoose = true;
-        cout << "You loose" << endl;
+        _player.setMoving(false);
+        
+        updateMazeCasePosition();
+        
+        //enemiesCheckTraces();
+        
+        moveAllEnemies();
+        
+        if (enemiesCollision())
+        {
+            _playerLoose = true;
+        }
+        _playerWin = successOutOfMaze();
+        
+        if (_playerLoose)
+        {
+            cout << "loose !" << endl;
+            setPlayStop();
+        }
+        else if (_playerWin)
+        {
+            cout << "win !" << endl;
+            setPlayStop();
+        }
+        
     }
-
+    
 }
 
 
@@ -117,6 +133,12 @@ void GameModel::playerMove(std::string direction)
 
 
 
+}
+
+void GameModel::reset()
+{
+    _enemiesList.clear();
+    init();
 }
 
 // PRIVATE
@@ -158,6 +180,7 @@ void GameModel::updateMazeCasePosition()
         {
             _player.setMazeCase(mazeCase);
         }
+        
         for (Enemy* enemy : _enemiesList)
         {
             if (mazeCase->contain(enemy))
@@ -167,6 +190,11 @@ void GameModel::updateMazeCasePosition()
             }
         }
     }
+}
+
+bool GameModel::successOutOfMaze()
+{
+    return !_maze.ElementOnElement(&_player);
 }
 
 
@@ -199,4 +227,24 @@ Player* GameModel::getPlayer()
 Maze* GameModel::getMaze()
 {
     return &_maze;
+}
+
+void GameModel::setPlayStop()
+{
+    _play = !_play;
+}
+
+bool GameModel::getPlayStop() const
+{
+    return _play;
+}
+
+bool GameModel::getWin() const
+{
+    return _playerWin;
+}
+
+bool GameModel::getLoose() const
+{
+    return _playerLoose;
 }

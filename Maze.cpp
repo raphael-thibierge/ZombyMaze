@@ -23,6 +23,8 @@ void Maze::init()
 {
     _X = MAZE_X;
     _Y = MAZE_Y;
+    _width = WINDOW_WIDTH;
+    _height = WINDOW_HEIGHT;
     _size = MAZE_SIZE;
     
     _grid.resize(_size);

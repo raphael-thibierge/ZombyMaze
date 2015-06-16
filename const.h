@@ -61,6 +61,21 @@ const std::string VIEWGAME_MAZE_BACKGROUND = "fond.png";
 const int VIEWGAME_MAZE_BACKGROUND_WIDTH = WINDOW_WIDTH;
 const int VIEWGAME_MAZE_BACKGROUND_HEIGHT = WINDOW_HEIGHT;
 
+const std::string GAMEOVER_IMAGE = "GameOver.png";
+const unsigned int GAMEOVER_IMAGE_X = 0;
+const unsigned int GAMEOVER_IMAGE_Y = 0;
+const unsigned int GAMEOVER_IMAGE_WIDTH = WINDOW_WIDTH;
+const unsigned int GAMEOVER_IMAGE_HEIGHT = WINDOW_HEIGHT;
+
+
+const std::string WIN_IMAGE = "Win.png";
+const unsigned int WIN_IMAGE_X = 0;
+const unsigned int WIN_IMAGE_Y = 0;
+const unsigned int WIN_IMAGE_WIDTH = WINDOW_WIDTH;
+const unsigned int WIN_IMAGE_HEIGHT = WINDOW_HEIGHT;
+
+
+
 const std::string VIEWGAME_IMAGE_PLAYER_UP = "PersoDos.png";
 const std::string VIEWGAME_IMAGE_PLAYER_DOWN = "perso.png";
 const std::string VIEWGAME_IMAGE_PLAYER_LEFT = "PersoGauche.png";

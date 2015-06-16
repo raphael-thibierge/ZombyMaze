@@ -27,6 +27,10 @@ public:
     void displayTrace();
 
     void displayMaze();
+    
+    void displayGameOver();
+    
+    void displayWin();
 
     bool initSFML();
 };

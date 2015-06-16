@@ -31,7 +31,6 @@ public:
 
     int treatEventSFML() override;
 
-
     void showViewSFML() override;
 
     bool initSFML() override;
