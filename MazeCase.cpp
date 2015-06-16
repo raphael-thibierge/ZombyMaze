@@ -14,9 +14,11 @@ MazeCase::MazeCase(const unsigned int line, const unsigned int column)
 {
     // init position
     _X = MAZE_X + ( column * MAZECASE_SIZE ) + (column+1)*WALL_WIDTH_V;
-    _Y = MAZE_Y + ( line + MAZECASE_SIZE ) + (line+1)*WALL_HEIGHT_H;
+    _Y = MAZE_Y + ( line * MAZECASE_SIZE ) + (line+1)*WALL_HEIGHT_H;
     _width = MAZECASE_SIZE;
     _height = MAZECASE_SIZE;
+    
+    cout << _X << " " << column << " " <<_Y << " " << line << endl;
     
     init();
 }

@@ -31,7 +31,6 @@ void Maze::init()
         _grid[i].resize(_size);
         for (int j = 0 ; j < _size ; j++)
         {
-            cout << i << " " << j << endl;
             _grid[i][j]= new MazeCase(j, i);
             _mazeCaseList.push_back(_grid[i][j]);
         }
