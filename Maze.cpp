@@ -19,6 +19,32 @@ Maze::Maze() : GraphicElement(){
 
 }
 
+void Maze::init()
+{
+    _X = MAZE_X;
+    _Y = MAZE_Y;
+    _size = MAZE_SIZE;
+    
+    _grid.resize(_size);
+    for (int i = 0 ; i < _size ; i ++)
+    {
+        _grid[i].resize(_size);
+        for (int j = 0 ; j < _size ; j++)
+        {
+            cout << i << " " << j << endl;
+            _grid[i][j]= new MazeCase(j, i);
+            _mazeCaseList.push_back(_grid[i][j]);
+        }
+    }
+    
+    //init tarceList
+    for (MazeCase* mazeCase : _mazeCaseList)
+    {
+        _traceList.push_back(mazeCase->getTracePointer());
+    }
+    
+}
+
 
 Maze::~Maze()
 {
@@ -64,32 +90,8 @@ Maze::~Maze()
 }
 
 
-void Maze::init()
-{
-    _X = MAZE_X;
-    _Y = MAZE_Y;
-    _size = MAZE_SIZE;
-
-    _grid.resize(_size);
-    for (int i = 0 ; i < _size ; i ++)
-    {
-        _grid[i].resize(_size);
-        for (int j = 0 ; j < _size ; j++)
-        {
-            _grid[i][j]= new MazeCase(j, i);
-            _mazeCaseList.push_back(_grid[i][j]);
-        }
-    }
-    
-    //init tarceList
-    for (MazeCase* mazeCase : _mazeCaseList)
-    {
-        _traceList.push_back(mazeCase->getTracePointer());
-    }
 
 
-
-}
 
 
 void Maze::construct()
