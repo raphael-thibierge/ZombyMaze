@@ -17,6 +17,7 @@ Player::Player() : Perso()
     _speed = 5;
     _width = PLAYER_WIDTH;
     _height = PLAYER_HEIGHT;
+    _name = "player";
 }
 
 void Player::Move(const std::string direction)
@@ -30,9 +31,6 @@ void Player::Move(const std::string direction)
 }
 
 
-
-
-
 void Player::setMoving(const bool moving)
 {
     _isMoving = moving;
@@ -41,17 +39,4 @@ void Player::setMoving(const bool moving)
 bool Player::getMoving() const
 {
     return _isMoving;
-}
-
-Trace * Player::getTrace()
-{
-    if (_direction == "up")
-        return new Trace( _direction,_X + (_width-TRACE_WIDTH)/2, _Y);
-    if (_direction == "down")
-        return  new Trace(_direction, _X + (_width-TRACE_WIDTH)/2, _Y);
-    if (_direction == "left")
-        return  new Trace(_direction, _X, _Y);
-    if (_direction == "right")
-        return  new Trace(_direction, _X, _Y);
-    return nullptr;
 }

@@ -15,8 +15,9 @@
 
 class Perso : public MovableElement
 {
-private:
+protected:
     MazeCase * _mazeCasePosition;
+    std::string _name;
 
 // CONSTRUCTORS AND DESTRUCTORS
 public:

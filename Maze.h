@@ -40,17 +40,6 @@ private:
 
     void addWall(unsigned int x, unsigned int y, const char orientation);
 
-    //static std::vector<int> listType1 (const int size);
-
-    //static std::vector<std::vector<int>> listType2(const int size);
-    //static std::vector<std::vector<int>> algo(unsigned int n);
-public :
-    //static std::list<Wall*> laby(unsigned int n);
-
-// STATICS
-
-
-
 
 // ACCESSORS
 public :

@@ -19,11 +19,12 @@ protected:
     std::string _direction;
     unsigned int _speed;
 
-
+//CONSTRUCTOR & DESTRUCTOR
 public:
-
     MovableElement();
-
+    
+// METHODS
+public:
     void Move();
 
     void Move(std::string direction);
@@ -31,6 +32,15 @@ public:
     void MoveOpposite();
     
     void MoveOpposite(std::string);
+    
+// STATICS
+public:
+    static bool isDirection(const std::string direcion);
+    
+    static unsigned int directionToInt(const std::string direction);
+    
+    static std::string intToDirection(const unsigned int direction);
+    
 
 // ACCESSORS
 public:

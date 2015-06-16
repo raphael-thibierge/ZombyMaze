@@ -30,7 +30,7 @@ void GameModel::init()
     _enemiesList.push_back(new Enemy);
     for (Enemy* enemy : _enemiesList)
     {
-        enemy->setPosition(220,200);
+        enemy->setPosition(210,200);
     }
     
     // add walls
@@ -125,7 +125,7 @@ void GameModel::moveAllEnemies()
 {
     for (Enemy* enemy : _enemiesList)
     {
-        enemy->autoMove(_wallsList);
+        enemy->autoMove();
     }
 }
 
@@ -163,6 +163,7 @@ void GameModel::updateMazeCasePosition()
             if (mazeCase->contain(enemy))
             {
                 enemy->setMazeCase(mazeCase);
+                cout << "ok"  << endl;
             }
         }
     }

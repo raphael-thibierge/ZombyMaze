@@ -18,14 +18,14 @@ MazeCase::MazeCase(const unsigned int line, const unsigned int column)
     _width = MAZECASE_SIZE;
     _height = MAZECASE_SIZE;
     
-    cout << _X << " " << column << " " <<_Y << " " << line << endl;
-    
     init();
 }
 
 MazeCase::~MazeCase()
 {
-    
+    if (_trace != nullptr)
+        delete _trace;
+    _trace = nullptr;
 }
 
 void MazeCase::init()
@@ -40,28 +40,44 @@ void MazeCase::init()
 }
 
 
-void MazeCase::newTrace(string direction)
+void MazeCase::newTrace(const string direction, const string owner)
 {
     if (_trace != nullptr)
     {
         delete _trace;
     }
-    _trace = new Trace( direction, _X + (MAZECASE_SIZE-TRACE_WIDTH)/2, _Y + (MAZECASE_SIZE-TRACE_HEIGHT)/2);
+    _trace = new Trace( direction, owner,_X + (MAZECASE_SIZE-TRACE_WIDTH)/2, _Y + (MAZECASE_SIZE-TRACE_HEIGHT)/2);
 }
 
 
-// ACCESSORS
-bool MazeCase::isWall(string direction) const
+void MazeCase::addWall(const unsigned int sideNumber)
 {
-    if ( direction == "up" )
-        return _walls[0];
-    if ( direction == "right" )
-        return _walls[1];
-    if ( direction == "down" )
-        return _walls[2];
-    if ( direction == "left" )
-        return _walls[3];
-    return false;
+    if (sideNumber < 4)
+    {
+        _walls[sideNumber] = true;
+    }
+}
+
+vector<string> MazeCase::getAvalaibleDirecton() const
+{
+    vector<string> result;
+    int cpt = 0;
+    for (int i = 0; i < 4 ; i++)
+    {
+        if (!_walls[i])
+        {
+            result.push_back(MovableElement::intToDirection(i));
+            cpt++;
+        }
+    }
+    result.resize(cpt);
+    return result;
+}
+
+// ACCESSORS
+bool MazeCase::isWall(const string direction) const
+{
+    return _walls[MovableElement::directionToInt(direction)];
 }
 
 Trace* MazeCase::getTrace() const

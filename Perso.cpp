@@ -11,6 +11,8 @@
 // CONSTRUCTOR AND DESTRUCTOR
 Perso::Perso() : MovableElement()
 {
+    _name = "";
+    _mazeCasePosition = nullptr;
     
 }
 
@@ -27,7 +29,14 @@ void Perso::leaveTrace()
 {
     if (_mazeCasePosition != nullptr)
     {
-        _mazeCasePosition->newTrace(_direction);
+        if (_mazeCasePosition->getTrace() != nullptr && _mazeCasePosition->getTrace()->getOwner() == _name)
+        {
+                _mazeCasePosition->getTrace()->setDirection(_direction);
+        }
+        else
+        {
+            _mazeCasePosition->newTrace(_direction, _name);
+        }
     }
 }
 

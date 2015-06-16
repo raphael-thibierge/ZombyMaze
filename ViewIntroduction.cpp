@@ -78,7 +78,8 @@ void ViewIntroduction::showViewSFML()
 
 bool ViewIntroduction::initSFML()
 {
-     
+    if (!initSprite("background", IMAGE_INTRO, 1, WINDOW_WIDTH, WINDOW_HEIGHT))
+        return false;
     return true;
 }
 

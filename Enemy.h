@@ -29,7 +29,7 @@ private:
 public:
     Enemy();
 
-    void autoMove(std::list<Wall*> * wallList);
+    void autoMove();
     
     void changeDirection();
     

@@ -28,8 +28,11 @@ public:
     
 // METHODS
 public:
-        void newTrace(std::string direction);
+    void newTrace(const std::string direction, const std::string owner);
+    
+    void addWall(const unsigned sideNumber);
 
+    std::vector<std::string> getAvalaibleDirecton() const;
     
 private:
     void init();
@@ -39,7 +42,7 @@ private:
     
 // ACCESSORS
 public:
-    bool isWall(std::string direction) const;
+    bool isWall(const std::string direction) const;
 
     Trace* getTrace() const;
     

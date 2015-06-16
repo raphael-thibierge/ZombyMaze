@@ -32,8 +32,6 @@ public:
 
     bool getMoving() const;
 
-    Trace * getTrace() ;
-
 };
 
 #endif /* defined(__Console__Player__) */

@@ -26,6 +26,25 @@ ViewsController::ViewsController(sf::RenderWindow* window) : _mainWindow(window)
 
 }
 
+bool ViewsController::init(GameModel *modele){
+    //initisilisation of the controller and views
+    _modele = modele;
+    _quit = false;
+    
+    for (auto view : _allViews)
+    {
+        if (!view.second->init(_modele, _mainWindow))
+        {
+            cout << view.first << endl;
+            return false;
+        }
+    }
+    // at beginning of the program, it's the introduction view
+    _view = _allViews["Introduction"];
+    return true;
+}
+
+
 ViewsController::~ViewsController(){
     _modele = nullptr;
     _view = nullptr;
@@ -108,24 +127,6 @@ void ViewsController::forceQuit()
 {
     _quit = true;
 
-}
-
-bool ViewsController::init(GameModel *modele){
-    //initisilisation of the controller and views
-    _modele = modele;
-    _quit = false;
-    
-    for (auto view : _allViews)
-    {
-        if (!view.second->init(_modele, _mainWindow))
-        {
-            cout << view.first << endl;
-            return false;
-        }
-    }
-    // at beginning of the program, it's the introduction view
-    _view = _allViews["Game"];
-    return true;
 }
 
 

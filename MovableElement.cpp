@@ -38,7 +38,7 @@ void MovableElement::MoveOpposite()
     MoveOpposite(_direction);
 }
 
-void MovableElement::MoveOpposite(std::string direction)
+void MovableElement::MoveOpposite(string direction)
 {
     if ( direction == "up")
         _Y += _speed;
@@ -53,9 +53,53 @@ void MovableElement::MoveOpposite(std::string direction)
 
 }
 
-// ACCESSORS
+// STATICS
+bool MovableElement::isDirection(const string direcion)
+{
+    return (direcion == "up" || direcion == "down" || direcion == "left" || direcion == "right" );
+}
 
-void MovableElement::setDirection(const std::string direction)
+unsigned int MovableElement::directionToInt(const string direction)
+{
+    if (direction == "up")
+        return 0;
+    if (direction == "right")
+        return 1;
+    if (direction == "down")
+        return 2;
+    if (direction == "left")
+        return 3;
+    return 0;
+}
+
+string MovableElement::intToDirection(const unsigned int direction)
+{
+    switch (direction) {
+        case 0:
+            return "up";
+            break;
+        case 1:
+            return "right";
+            break;
+        
+        case 2:
+            return "down";
+            break;
+        
+        case 3:
+            return "left";
+            
+        default:
+            return "up";
+            break;
+    }
+}
+
+
+//
+// ACCESSORS
+//
+void MovableElement::setDirection(const string direction)
 {
     if (direction == "up"
         || direction == "down"

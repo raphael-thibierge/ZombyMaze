@@ -16,60 +16,46 @@ Enemy::Enemy() : Perso()
     _width = ZOMBY_WIDTH;
     _height = ZOMBY_HEIGHT;
     _speed = ZOMBY_SPEED;
-    changeDirection();
+    _name = "zomby";
+    _direction = "right";
 }
 
 
 
 
 
-void Enemy::autoMove(list<Wall*> * wallList)
+void Enemy::autoMove()
 {
-
-    if (Wall::wallsCollision(this, wallList))
+    if (_mazeCasePosition != nullptr)
     {
+        cout << _mazeCasePosition->isWall(_direction) << endl;
+        if (_mazeCasePosition->isWall(_direction))
+        {
+            changeDirection();
+        }
         
-        MoveOpposite();
-        changeDirection();
         Move();
     }
-    else
-    {
-        Move();
-    }
+    
+    
+
 
 }
 
 void Enemy::changeDirection()
 {
-    std::string newDirection = "";
+    vector<string> directions = _mazeCasePosition->getAvalaibleDirecton();
 
+    int random;
     do
     {
-        int random = rand() % 4 ;
-        switch (random) {
-            case 0:
-                newDirection = "up";
-                break;
+        random = rand() % directions.size();
+    } while (directions[random] == _direction);
+    
+    _direction = directions[random];
+    cout << "direciton choisie " << _direction << endl;
+    
 
-            case 1:
-                newDirection = "down";
-                break;
-
-            case 2:
-                newDirection = "left";
-                break;
-
-            case 3:
-                newDirection = "right";
-                break;
-
-            default:
-                cout << __FUNCTION__ << "mauvaise direction" << endl;
-                break;
-        }
-    } while (_direction == newDirection );
-    _direction = newDirection;
 }
 
 void Enemy::findTrace(std::list<Trace *> *tracesList)
