@@ -17,6 +17,10 @@ bool ViewGame::initSFML()
         //background
     if (!initSprite("background", VIEWGAME_MAZE_BACKGROUND, 1, VIEWGAME_MAZE_BACKGROUND_WIDTH, VIEWGAME_MAZE_BACKGROUND_HEIGHT))
         return false;
+    
+        // exit
+    if (!initSprite("exitLabel", EXIT_IMAGE, 1, EXIT_IMAGE_WIDTH, EXIT_IMAGE_HEIGHT))
+        return false;
 
     // player
     if (!initSprite("playerup", VIEWGAME_IMAGE_PLAYER_UP, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
@@ -138,6 +142,7 @@ void ViewGame::showViewSFML()
         // draw background
         _window->draw(_spritesList["background"]);
         
+        displayBackGround();
         displayMaze();
         
         displayEnnemies();
@@ -238,4 +243,22 @@ void ViewGame::displayWin()
 {
     _spritesList["win"].setPosition(GAMEOVER_IMAGE_X, GAMEOVER_IMAGE_Y);
     _window->draw(_spritesList["win"]);
+}
+
+void ViewGame::displayInMazeCase(const unsigned int x, const unsigned int y, const std::string spriteName, const unsigned int width, const unsigned int height)
+{
+    unsigned int xSprite ;
+    unsigned int ySprite ;
+    
+    xSprite = x * (MAZECASE_SIZE)  ;
+    ySprite = y * (MAZECASE_SIZE) ;
+    cout << xSprite << " " << ySprite << endl;
+    _spritesList[spriteName].setPosition(xSprite, ySprite);
+    _window->draw(_spritesList[spriteName]);
+    
+}
+
+void ViewGame::displayBackGround()
+{
+    displayInMazeCase(MAZE_SIZE-1, MAZE_SIZE-1, "exitLabel", EXIT_IMAGE_WIDTH, EXIT_IMAGE_HEIGHT);
 }

@@ -33,6 +33,10 @@ public:
     void displayWin();
 
     bool initSFML();
+    
+    void displayBackGround();
+    
+    void displayInMazeCase(const unsigned int x, const unsigned int y, const std::string spriteName, const unsigned int width, const unsigned int height);
 };
 
 #endif // VIEWGAME_H_INCLUDED

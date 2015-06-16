@@ -68,6 +68,11 @@ const unsigned int GAMEOVER_IMAGE_WIDTH = WINDOW_WIDTH;
 const unsigned int GAMEOVER_IMAGE_HEIGHT = WINDOW_HEIGHT;
 
 
+const std::string EXIT_IMAGE = "PanneauSortie.png";
+const unsigned int EXIT_IMAGE_WIDTH = 40;
+const unsigned int EXIT_IMAGE_HEIGHT = 40;
+
+
 const std::string WIN_IMAGE = "Win.png";
 const unsigned int WIN_IMAGE_X = 0;
 const unsigned int WIN_IMAGE_Y = 0;

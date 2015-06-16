@@ -90,7 +90,7 @@ void GameModel::nextStep()
         
         updateMazeCasePosition();
         
-        //enemiesCheckTraces();
+        enemiesCheckTraces();
         
         moveAllEnemies();
         
