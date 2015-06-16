@@ -20,12 +20,10 @@ ViewsController::ViewsController(sf::RenderWindow* window) : _mainWindow(window)
 
     _allViews.insert(make_pair("Game", &_game));
     _allViews.insert(make_pair("Introduction", new ViewIntroduction()));
+    
+    _view = nullptr;
+    _mainWindow = window;
 
-    _quit = false;
-
-    // music
-    //_music.OpenFromFile(GAME_MUSIC);
-    //playMusic(true);
 }
 
 ViewsController::~ViewsController(){
@@ -86,14 +84,14 @@ bool ViewsController::treatEvent(){
 void ViewsController::showView(){
     //show active view
 
-    //_view->showViewTerminal();
-
-    if (_mainWindow != nullptr)
+    if (_mainWindow != nullptr && _modele != nullptr && _view != nullptr)
     {
-        _mainWindow->Clear();
+        //_mainWindow->clear();
         _view->showViewSFML();
-        _mainWindow->Display();
+        //_mainWindow->display();
     }
+    else
+        cout << __FUNCTION__ << " modele, fenfetre ou vue active inexistante" << endl;
 }
 
 void ViewsController::changeView(string view){
@@ -116,19 +114,21 @@ bool ViewsController::init(GameModel *modele){
     //initisilisation of the controller and views
     _modele = modele;
     _quit = false;
-    for (auto view : _allViews) {
-        view.second->init(_modele, _mainWindow);
-        if (!view.second->initButtons())
-            return false;
-        if (!view.second->initSFML()){
+    
+    for (auto view : _allViews)
+    {
+        if (!view.second->init(_modele, _mainWindow))
+        {
             cout << view.first << endl;
             return false;
         }
     }
     // at beginning of the program, it's the introduction view
-    _view = _allViews["Introduction"];
+    _view = _allViews["Game"];
     return true;
 }
+
+
 void ViewsController::playMusic(bool loop)
 {
 /*

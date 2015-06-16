@@ -114,24 +114,27 @@ bool View::initButtons()
 }
 
 
-bool View::initSprite(std:: string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteX, const unsigned int spriteY)
+bool View::initSprite(std:: string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteWitdh, const unsigned int spriteHeight)
 {
     // player
-    _imagesList.insert(make_pair(name, sf::Image()));
-    if (!_imagesList[name].LoadFromFile(image))
+    _imagesList.insert(make_pair(name, sf::Texture()));
+    if (!_imagesList[name].loadFromFile( resourcePath() + image))
         return false;
-
-    string nameSprite;
+    
+    string nameSprite = name;
+    
+    
+    
     for ( unsigned int spriteNumber = 0 ; spriteNumber < nbSprites ; spriteNumber++ )
     {
         if (nbSprites > 1)
-            nameSprite = name+to_string(spriteNumber);
+            nameSprite = name + to_string(spriteNumber);
         else
             nameSprite = name;
-
+        
         _spritesList.insert(make_pair(nameSprite, sf::Sprite()));
-        _spritesList[nameSprite].SetImage(_imagesList[name]);
-        _spritesList[nameSprite].SetSubRect(sf::IntRect(spriteNumber*spriteX,0, (spriteNumber+1)*spriteX, spriteY));
+        _spritesList[nameSprite].setTexture(_imagesList[name]);
+        _spritesList[nameSprite].setTextureRect(sf::IntRect(spriteNumber*spriteWitdh,0, spriteWitdh, spriteHeight));
 
     }
     return true;

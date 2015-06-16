@@ -10,9 +10,32 @@
 
 using namespace std;
 
+//
+// CONSTRUCTOR & DESTRUCTOR
 GameModel::GameModel()
 {
     init();
+}
+
+void GameModel::init()
+{
+    // init states
+    _playerWin = false;
+    _playerLoose = false;
+    
+    // init player position
+    _player.setPosition(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
+    
+    // add an enemy
+    _enemiesList.push_back(new Enemy);
+    for (Enemy* enemy : _enemiesList)
+    {
+        enemy->setPosition(220,200);
+    }
+    
+    // add walls
+    _wallsList = _maze.getWallsList();
+    
 }
 
 GameModel::~GameModel()
@@ -51,12 +74,20 @@ GameModel::~GameModel()
     }
 }
 
+//
+// METHODS
+//
+
+// PUBLIC
 
 void GameModel::nextStep()
 {
+    
     _player.setMoving(false);
 
-    enemiesCheckTraces();
+    updateMazeCasePosition();
+    
+    //enemiesCheckTraces();
 
     moveAllEnemies();
 
@@ -82,13 +113,13 @@ void GameModel::playerMove(std::string direction)
         )
     {
         _player.Move();
-        _player.tryLeaveTrace(&_tracesList);
     }
 
 
 
 }
 
+// PRIVATE
 
 void GameModel::moveAllEnemies()
 {
@@ -119,26 +150,30 @@ void GameModel::enemiesCheckTraces()
     }
 }
 
-void GameModel::init()
+void GameModel::updateMazeCasePosition()
 {
-    // init states
-    _playerWin = false;
-    _playerLoose = false;
-
-    // init player position
-    _player.setPosition(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
-
-    // add an enemy
-    _enemiesList.push_back(new Enemy);
-    for (Enemy* enemy : _enemiesList)
+    for (MazeCase* mazeCase : *_maze.getMazeCaseList())
     {
-        enemy->setPosition(220,200);
+        if (mazeCase->contain(&_player))
+        {
+            _player.setMazeCase(mazeCase);
+        }
+        for (Enemy* enemy : _enemiesList)
+        {
+            if (mazeCase->contain(enemy))
+            {
+                enemy->setMazeCase(mazeCase);
+            }
+        }
     }
-
-    // add walls
-    _wallsList = _maze.getWallsList();
-
 }
+
+
+
+
+//
+// ACCESSORS
+//
 
 list<Enemy*> * GameModel::getEnemiesList()
 {
@@ -158,4 +193,9 @@ list<Wall *> * GameModel::getWallsList()
 Player* GameModel::getPlayer()
 {
     return &_player;
+}
+
+Maze* GameModel::getMaze()
+{
+    return &_maze;
 }

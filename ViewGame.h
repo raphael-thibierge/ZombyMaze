@@ -18,7 +18,6 @@ public:
 
     int treatEventSFML() override;
 
-
     void showViewSFML() override;
 
     void displayPlayer();

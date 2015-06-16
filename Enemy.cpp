@@ -11,7 +11,7 @@
 using namespace std;
 
 
-Enemy::Enemy()
+Enemy::Enemy() : Perso()
 {
     _width = ZOMBY_WIDTH;
     _height = ZOMBY_HEIGHT;
@@ -28,7 +28,7 @@ void Enemy::autoMove(list<Wall*> * wallList)
 
     if (Wall::wallsCollision(this, wallList))
     {
-        cout << "collision" << endl;
+        
         MoveOpposite();
         changeDirection();
         Move();

@@ -19,6 +19,7 @@ private:
     std::string _direction;
 
 public:
+
     Trace(const std::string direction, const unsigned int X, const unsigned int Y);
 
     void looseLife();

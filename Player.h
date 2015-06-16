@@ -10,10 +10,11 @@
 #define __Console__Player__
 
 #include <stdio.h>
-#include "MovableElement.h"
+#include "Perso.h"
 #include "Trace.h"
+#include "Maze.h"
 
-class Player : public MovableElement
+class Player : public Perso
 {
 private:
     bool _isMoving;
@@ -24,7 +25,7 @@ public:
 
     Player();
 
-    void tryLeaveTrace(std::list<Trace *> * traceList);
+    
 
 // ACCESSORS
     void setMoving(const bool moving);

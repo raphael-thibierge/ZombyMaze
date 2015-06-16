@@ -48,6 +48,9 @@ bool ViewGame::initSFML()
 
     if (!initSprite("verticalWall", VIEWGAME_IMAGE_WALL_V, 1, WALL_WIDTH_V, WALL_HEIGHT_V))
         return false;
+    
+    cout << "Sprites initialisés" << endl;
+    
 
     return true;
 }
@@ -56,57 +59,62 @@ bool ViewGame::initSFML()
 int ViewGame::treatEventSFML()
 {
     int returnValue = 1;
+    
+    if (Keyboard::isKeyPressed(Keyboard::Up))
+        _modele->playerMove("up");
+    
+    if (Keyboard::isKeyPressed(Keyboard::Down))
+        _modele->playerMove("down");
+    
+    if (Keyboard::isKeyPressed(Keyboard::Left))
+        _modele->playerMove("left");
+    
+    if (Keyboard::isKeyPressed(Keyboard::Right))
+        _modele->playerMove("right");
+    
+    
+    
     Event event;
-        while (_window->GetEvent(event))
+    while (_window->pollEvent(event))
+    {
+        
+        switch (event.type)
         {
-            switch (event.Type)
+                
+                
+                
+                
+                
+            case sf::Event::KeyPressed :
+                switch (event.key.code)
             {
-                case Event::KeyPressed :
-                    switch (event.Key.Code)
-                    {
-
-                        default :
-                            break;
-                    }
-                break;
-
-                case sf::Event::Closed :
+                    
+                case sf::Keyboard::Escape:
                     returnValue = 111;
                     break;
-
-                default:
+                    
+                default :
                     break;
             }
+                break;
+                
+            case sf::Event::Closed :
+                returnValue = 111;
+                break;
+                
+            default:
+                break;
         }
+    }
 
-        const Input & input = _window->GetInput(); // input : const reference
-
-        // MOVEMENT
-        // UP
-        if (input.IsKeyDown(Key::Up)){
-            _modele->playerMove("up");
-        }
-        // DOWN
-        if (input.IsKeyDown(Key::Down)){
-            _modele->playerMove("down");
-        }
-        //LEFT
-        if (input.IsKeyDown(Key::Left)){
-            _modele->playerMove("left");
-        }
-        //RIGHT
-        if (input.IsKeyDown(Key::Right)){
-            _modele->playerMove("right");
-        }
-    return returnValue;
+        return returnValue;
 }
 
 void ViewGame::showViewSFML()
 {
-    // clear windows
-    _window->Clear();
+
     // draw background
-    _window->Draw(_spritesList["background"]);
+     _window->draw(_spritesList["background"]);
 
     displayMaze();
 
@@ -117,7 +125,6 @@ void ViewGame::showViewSFML()
     displayPlayer();
 
     _cptSprites++;
-    _window->Display();
 }
 
 void ViewGame::displayEnnemies()
@@ -131,8 +138,8 @@ void ViewGame::displayEnnemies()
         {
             name += to_string(_cptSprites % ZOMBY_NB_SPRITES);
         }
-        _spritesList[name].SetPosition(enemy->getX(), enemy->getY());
-        _window->Draw(_spritesList[name]);
+        _spritesList[name].setPosition(enemy->getX(), enemy->getY());
+        _window->draw(_spritesList[name]);
     }
 }
 
@@ -144,13 +151,13 @@ void ViewGame::displayMaze()
         switch (wall->getOrientation())
         {
             case 'v' :
-                _spritesList["verticalWall"].SetPosition(wall->getX(), wall->getY());
-                _window->Draw(_spritesList["verticalWall"]);
+                _spritesList["verticalWall"].setPosition(wall->getX(), wall->getY());
+                _window->draw(_spritesList["verticalWall"]);
                 break;
 
             case 'h' :
-                _spritesList["horizontalWall"].SetPosition(wall->getX(), wall->getY());
-                _window->Draw(_spritesList["horizontalWall"]);
+                _spritesList["horizontalWall"].setPosition(wall->getX(), wall->getY());
+                _window->draw(_spritesList["horizontalWall"]);
                 break;
 
             default:
@@ -176,9 +183,9 @@ void ViewGame::displayPlayer()
                 name += _modele->getPlayer()->getDirection() + to_string(_cptSprites % PLAYER_NB_SPRITES);
             }
         }
-
-        _spritesList[name].SetPosition(_modele->getPlayer()->getX(), _modele->getPlayer()->getY());
-        _window->Draw(_spritesList[name]);
+        
+        _spritesList[name].setPosition(_modele->getPlayer()->getX(), _modele->getPlayer()->getY());
+        _window->draw(_spritesList[name]);
 
     }
 }
@@ -186,9 +193,14 @@ void ViewGame::displayPlayer()
 
 void ViewGame::displayTrace()
 {
-    for (Trace* trace : *_modele->getTracesList())
+    for (MazeCase* mazeCase : *_modele->getMaze()->getMazeCaseList())
     {
-        _spritesList["trace"].SetPosition(trace->getX(), trace->getY());
-        _window->Draw(_spritesList["trace"]);
+        
+        if (mazeCase->getTrace() != nullptr)
+        {
+            _spritesList["trace"].setPosition(mazeCase->getTrace()->getX(), mazeCase->getTrace()->getY());
+            _window->draw(_spritesList["trace"]);
+
+        }
     }
 }

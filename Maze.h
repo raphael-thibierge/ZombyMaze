@@ -19,13 +19,18 @@ class Maze : public GraphicElement
 {
 
 private:
-    std::vector<std::vector<MazeCase*> > _grid;
+    std::vector<std::vector<MazeCase*>> _grid;
     std::list<Wall*> _wallList;
+    std::list<Trace**> _traceList;
+    std::list<MazeCase*> _mazeCaseList;
+    
     unsigned int _size ;
 
 public:
 
     Maze();
+    
+    ~Maze();
 
 private:
 
@@ -52,6 +57,10 @@ public :
     MazeCase getCase(const int line, const int column) const;
 
     std::list<Wall*> * getWallsList();
+    
+    std::list<Trace**> * getTraceList();
+    
+    std::list<MazeCase*> * getMazeCaseList();
 
 };
 

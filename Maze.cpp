@@ -20,7 +20,48 @@ Maze::Maze() : GraphicElement(){
 }
 
 
-
+Maze::~Maze()
+{
+    // delete traces
+    for (Trace** trace : _traceList)
+    {
+        if (trace != nullptr)
+        {
+            delete trace;
+            trace = nullptr;
+        }
+    }
+    
+    /* delete walls
+    // erreur maloc
+    for (Wall* wall : _wallList)
+    {
+        if (wall != nullptr)
+        {
+            delete wall;
+            wall = nullptr;
+        }
+    }*/
+    
+    // delete grid
+    for ( unsigned int line = 0 ; line < _size ; line++ )
+    {
+        for ( unsigned int column ; column < _size ; column++)
+        {
+            if (_grid[line][column] != nullptr)
+            {
+                delete _grid[line][column];
+                _grid[line][column] = nullptr;
+                
+            }
+        }
+    }
+    
+    
+    _wallList.clear();
+    _traceList.clear();
+    _mazeCaseList.clear();
+}
 
 
 void Maze::init()
@@ -29,21 +70,23 @@ void Maze::init()
     _Y = MAZE_Y;
     _size = MAZE_SIZE;
 
-
-    // initialistaion de la grille
-    for ( unsigned int line = 0 ; line < _size ; line++ )
-    {
-
-        vector<MazeCase*> tmp;
-        for ( unsigned int column ; column < _size ; column++)
-        {
-            tmp.push_back(new MazeCase(line, column));
-        }
-        tmp.resize(_size);
-        _grid.push_back(tmp);
-    }
     _grid.resize(_size);
-    // fin initialisation
+    for (int i = 0 ; i < _size ; i ++)
+    {
+        _grid[i].resize(_size);
+        for (int j = 0 ; j < _size ; j++)
+        {
+            _grid[i][j]= new MazeCase(j, i);
+            _mazeCaseList.push_back(_grid[i][j]);
+        }
+    }
+    
+    //init tarceList
+    for (MazeCase* mazeCase : _mazeCaseList)
+    {
+        _traceList.push_back(mazeCase->getTracePointer());
+    }
+
 
 
 }
@@ -90,7 +133,7 @@ void Maze::addWall(unsigned int x, unsigned int y, const char orientation)
         break;
     }
 }
-
+    
 
 
 
@@ -105,13 +148,31 @@ MazeCase Maze::getCase(const int line, const int column) const
     return *_grid[line][column];
 }
 
-std::list<Wall*> * Maze::getWallsList()
+list<Wall*> * Maze::getWallsList()
 {
     return &_wallList;
 }
 
 
+list<Trace**> * Maze::getTraceList()
+{
+    return &_traceList;
+}
+
+
+list<MazeCase*> * Maze::getMazeCaseList()
+{
+    return &_mazeCaseList;
+}
+
+
+
 /* ===================================
+
+ 
+ 
+ 
+ 
  vector<int> Maze::listType1 (const int size)
  {
  vector<int> list;

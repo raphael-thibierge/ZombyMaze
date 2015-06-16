@@ -29,6 +29,10 @@ public:
     
     bool ElementOnElement(GraphicElement* element) const;
     
+    bool contain(GraphicElement* element) const;
+    
+    std::string toString();
+    
 // ACCESSORS
     void setX(const unsigned int positionX);
     

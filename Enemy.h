@@ -10,12 +10,12 @@
 #define __Console__Enemy__
 
 #include <stdio.h>
-#include "MovableElement.h"
+#include "Perso.h"
 #include "Trace.h"
 #include "Wall.h"
 
 
-class Enemy : public MovableElement
+class Enemy : public Perso
 {
 private:
     unsigned int _life;

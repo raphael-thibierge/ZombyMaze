@@ -48,6 +48,27 @@ bool GraphicElement::ElementOnElement(GraphicElement *element) const
             element->pointOnElement(_X + _width, _Y + _height)));
 }
 
+bool GraphicElement::contain(GraphicElement *element) const
+{
+    unsigned int eX = element->getX();
+    unsigned int eY = element->getY();
+    unsigned int eWidth = element->getWidth();
+    unsigned int eHeight = element->getHeight();
+    return ((pointOnElement(eX, eY) &&
+             pointOnElement(eX, eY + eHeight) &&
+             pointOnElement(eX + eWidth, eY) &&
+             pointOnElement(eX + eWidth, eY + eHeight)));
+}
+
+string GraphicElement::toString()
+{
+    string text = "X=" + to_string(_X);
+    text += " Y=" + to_string(_Y);
+    text += " Width=" + to_string(_width);
+    text += " Height=" + to_string(_height) + " / ";
+    return text;
+}
+
 
 //
 // ACCESSORS

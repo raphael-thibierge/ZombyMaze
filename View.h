@@ -26,7 +26,7 @@ protected:
     sf::RenderWindow * _window;
 
     std::map<std::string, sf::Sprite> _spritesList;
-    std::map<std::string, sf::Image> _imagesList;
+    std::map<std::string, sf::Texture> _imagesList;
 
 
 // CONSTRUCTOR AND DESTRUCTOR
@@ -59,7 +59,7 @@ public :
 
     bool initButtons();
 
-    bool initSprite(const std::string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteX, const unsigned int spriteY);
+    bool initSprite(const std::string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteWitdh, const unsigned int spriteHeight);
 
 
 };

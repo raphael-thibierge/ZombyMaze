@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Player::Player() : MovableElement()
+Player::Player() : Perso()
 {
     _direction = "down";
     _isMoving = false;
@@ -26,35 +26,11 @@ void Player::Move(const std::string direction)
 
     _isMoving = true;
     MovableElement::Move(_direction);
+    leaveTrace();
 }
 
 
-void Player::tryLeaveTrace(std::list<Trace*> * traceList)
-{
-    bool test = true;
-    list<Trace*> traceDestroy;
 
-    for (Trace * trace : *traceList)
-    {
-        if (trace->ElementOnElement(this) && trace->getDirection() != _direction)
-        {
-            traceDestroy.push_back(trace);
-        }
-    }
-
-    for (Trace * trace : traceDestroy)
-    {
-        if (trace != nullptr)
-        {
-            traceList->remove(trace);
-            delete trace;
-            trace = nullptr;
-        }
-    }
-
-    traceList->push_back(getTrace());
-
-}
 
 
 void Player::setMoving(const bool moving)

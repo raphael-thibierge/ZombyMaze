@@ -47,6 +47,8 @@ private:
 
     void enemiesCheckTraces();
     
+    void updateMazeCasePosition();
+    
     
 
 
@@ -65,6 +67,8 @@ public:
     std::list<Wall *> * getWallsList();
 
     Player* getPlayer();
+    
+    Maze * getMaze() ;
 };
 
 #endif /* defined(__Console__GameModel__) */
