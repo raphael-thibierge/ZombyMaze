@@ -10,11 +10,11 @@
 
 using namespace std;
 
-MazeCase::MazeCase(const unsigned int line, const unsigned int column)
+MazeCase::MazeCase(const unsigned int x, const unsigned int y)
 {
     // init position
-    _X = MAZE_X + ( column * MAZECASE_SIZE ) + (column+1)*WALL_WIDTH_V;
-    _Y = MAZE_Y + ( line * MAZECASE_SIZE ) + (line+1)*WALL_HEIGHT_H;
+    _X = MAZE_X + ( x * MAZECASE_SIZE ) + (x+1)*WALL_WIDTH_V;
+    _Y = MAZE_Y + ( y * MAZECASE_SIZE ) + (y+1)*WALL_HEIGHT_H;
     _width = MAZECASE_SIZE;
     _height = MAZECASE_SIZE;
     
@@ -54,6 +54,7 @@ void MazeCase::addWall(const unsigned int sideNumber)
 {
     if (sideNumber < 4)
     {
+        cout << "<<<" << sideNumber << endl;
         _walls[sideNumber] = true;
     }
 }

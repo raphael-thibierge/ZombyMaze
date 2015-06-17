@@ -22,7 +22,7 @@ private:
     
 // CONSTRUCTOR & DESTRUCTOR
 public:
-    MazeCase(const unsigned int line, const unsigned int column);
+    MazeCase(const unsigned int x, const unsigned int y);
     
     ~MazeCase();
     

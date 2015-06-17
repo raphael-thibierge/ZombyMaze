@@ -37,6 +37,8 @@ private:
     void init();
 
     void construct();
+    
+    void construct2();
 
     void addWall(unsigned int x, unsigned int y, const char orientation);
 

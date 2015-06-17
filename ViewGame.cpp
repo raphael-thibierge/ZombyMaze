@@ -65,6 +65,10 @@ bool ViewGame::initSFML()
     if (!initSprite("bullet", BULLET_IMAGE, 1, BULLET_WIDTH, BULLET_HEIGHT))
         return false;
     
+    // temoin
+    if (!initSprite("temoin", TEMOIN_IMAGE, 1, MAZECASE_SIZE, MAZECASE_SIZE))
+        return false;
+    
     cout << "Sprites initialisés" << endl;
     
 
@@ -186,6 +190,22 @@ void ViewGame::displayEnnemies()
         }
         _spritesList[name].setPosition(enemy->getX(), enemy->getY());
         _window->draw(_spritesList[name]);
+        if (enemy->getMazeCase() != nullptr)
+        {
+            name = "temoin";
+            _spritesList[name].setPosition(enemy->getMazeCase()->getX(), enemy->getMazeCase()->getY());
+            _window->draw(_spritesList[name]);
+            _spritesList[name].setPosition(enemy->getMazeCase()->getY(), enemy->getMazeCase()->getX ());
+            _window->draw(_spritesList[name]);
+            int cpt = 0;
+            for (auto direction : enemy->getMazeCase()->getAvalaibleDirecton())
+            {
+                cout << "mazecase " << cpt << " " << direction << endl;
+                cpt++;
+  
+            }
+            
+        }
     }
 }
 
@@ -208,7 +228,7 @@ void ViewGame::displayMaze()
 
             default:
                 break;
-        }
+        } 
     }
 }
 

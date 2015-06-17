@@ -27,7 +27,7 @@ const unsigned int MAZE_SIZE = 14;
 const unsigned int MAZE_X = 0;
 const unsigned int MAZE_Y = 0 ;
 const std::string MAZE_MATRICE_FILE = resourcePath() + "1.txt";
-
+const std::string TEMOIN_IMAGE = "temoin.png";
 
 // MAZECASE
 const unsigned int MAZECASE_SIZE = 50;

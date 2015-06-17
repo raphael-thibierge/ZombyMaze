@@ -28,13 +28,13 @@ void Maze::init()
     _size = MAZE_SIZE;
     
     _grid.resize(_size);
-    for (int i = 0 ; i < _size ; i ++)
+    for (int y = 0 ; y < _size ; y ++)
     {
-        _grid[i].resize(_size);
-        for (int j = 0 ; j < _size ; j++)
+        _grid[y].resize(_size);
+        for (int x = 0 ; x < _size ; x++)
         {
-            _grid[i][j]= new MazeCase(j, i);
-            _mazeCaseList.push_back(_grid[i][j]);
+            _grid[y][x]= new MazeCase(x, y);
+            _mazeCaseList.push_back(_grid[y][x]);
         }
     }
     
@@ -103,6 +103,7 @@ void Maze::construct()
 
 }
 
+
 void Maze::addWall(unsigned int x, unsigned int y, const char orientation)
 {
     switch (orientation) {
@@ -111,21 +112,25 @@ void Maze::addWall(unsigned int x, unsigned int y, const char orientation)
             _wallList.push_back(Wall::Horizontal(x*MAZECASE_SIZE+(x+1)*WALL_WIDTH_V, y*(MAZECASE_SIZE+WALL_HEIGHT_H)));
             
             // add wall in MazeCase
-            _grid[y][x]->addWall(0);
+            _grid[y][x]->addWall(MovableElement::directionToInt("up"));
             if (y > 0)
-                _grid[y-1][x]->addWall(2);
+                _grid[y-1][x]->addWall(MovableElement::directionToInt("down"));
             break;
-
+            
         case 'v':
-            // add physical wall
+            // add vertical physical wall
             _wallList.push_back(Wall::Vertical(x*(MAZECASE_SIZE+WALL_WIDTH_V), y*MAZECASE_SIZE+(y+1)*WALL_HEIGHT_H));
             
             // add wall in MazeCase
-            _grid[y][x]->addWall(3);
+            _grid[y][x]->addWall(MovableElement::directionToInt("left"));
+            cout << " line " << y << " column " << x << "direction " << "left" << endl;
             if (x > 0)
-                _grid[y][x-1]->addWall(1);
+            {
+                _grid[y][x-1]->addWall(MovableElement::directionToInt("right"));
+                cout << ">> line " << y << " column " << x-1 << "direction " << "right" << endl;
+            }
             break;
-        
+            
         default:
             break;
     }
