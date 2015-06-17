@@ -35,45 +35,11 @@ void GameModel::init()
         enemy->setPosition(210,200);
     }
     
-    // add walls
-    _wallsList = _maze.getWallsList();
-    
 }
 
 GameModel::~GameModel()
 {
-    // LISTS DESTRUCTION
-    // enemies destruction
-    for (Enemy * enemy : _enemiesList)
-    {
-        if (enemy != nullptr)
-        {
-            delete enemy;
-            enemy = nullptr;
-        }
-    }
-    _enemiesList.clear();
-
-    // trace destruction
-    for (Trace* trace : _tracesList)
-    {
-        if  (trace != nullptr)
-        {
-            delete trace;
-            trace = nullptr;
-        }
-
-    }
-
-    // wall destruction
-    for (Wall* wall : *_wallsList)
-    {
-        if (wall != nullptr)
-        {
-            delete wall;
-            wall = nullptr;
-        }
-    }
+    clear();
 }
 
 //
@@ -122,12 +88,21 @@ void GameModel::nextStep()
 
 void GameModel::playerMove(const std::string direction)
 {
-    _player.setDirection(direction);
+    if (_player.getMazeCase() != nullptr && MovableElement::isDirection(direction) )
+    {
+        for (string value : _player.getMazeCase()->getAvalaibleDirecton())
+        {
+            if (direction == value)
+            {
+                _player.setDirection(direction);
+            }
+        }
+    }
 
     MovableElement element = _player;
     element.Move();
 
-    if (!Wall::wallsCollision(&element, _wallsList) ||
+    if (!Wall::wallsCollision(&element, getWallsList()) ||
         element.getX() <= 0 || (element.getX() + element.getWidth()) >= WINDOW_WIDTH ||
         element.getY() <= 0 || (element.getY() + element.getHeight()) >= WINDOW_HEIGHT
         )
@@ -141,7 +116,7 @@ void GameModel::playerMove(const std::string direction)
 
 void GameModel::reset()
 {
-    _enemiesList.clear();
+    clear();
     init();
 }
 
@@ -199,13 +174,15 @@ void GameModel::bulletCollision()
                 enemy->affectDamage(bullet->getDamage());
                 if (enemy->getDead())
                 {
+                    if (enemy->getMazeCase() != nullptr)
+                        enemy->getMazeCase()->addCoin();
                     _enemiesToDestroy.push_back(enemy);
                 }
                 _bulletToDestroy.push_back(bullet);
             }
         }
         
-        for (Wall* wall : *_wallsList)
+        for (Wall* wall : *getWallsList())
         {
             if (wall->ElementOnElement(bullet))
             {
@@ -242,32 +219,23 @@ void GameModel::bulletCollision()
     _bulletToDestroy.clear();
 }
 
-
 void GameModel::enemiesCheckTraces()
 {
     for (Enemy* enemy : _enemiesList)
     {
-        enemy->findTrace(&_tracesList);
+        enemy->findTrace(getTracesList());
     }
 }
 
 void GameModel::updateMazeCasePosition()
 {
-    for (MazeCase* mazeCase : *_maze.getMazeCaseList())
+    // player
+    _player.updateMazeCase(getMazeCaseList());
+    
+    // enemies
+    for (Enemy* enemy : _enemiesList)
     {
-        if (mazeCase->contain(&_player))
-        {
-            _player.setMazeCase(mazeCase);
-        }
-        
-        for (Enemy* enemy : _enemiesList)
-        {
-            if (mazeCase->contain(enemy))
-            {
-                enemy->setMazeCase(mazeCase);
-                cout << "ok"  << endl;
-            }
-        }
+        enemy->updateMazeCase(getMazeCaseList());
     }
 }
 
@@ -276,7 +244,34 @@ bool GameModel::successOutOfMaze()
     return !_maze.ElementOnElement(&_player);
 }
 
-
+void GameModel::clear()
+{
+    // LISTS DESTRUCTION
+    // enemies destruction
+    for (Enemy * enemy : _enemiesList)
+    {
+        if (enemy != nullptr)
+        {
+            delete enemy;
+            enemy = nullptr;
+        }
+    }
+    _enemiesList.clear();
+    
+    for (Bullet * bullet : _bulletsList)
+    {
+        if (bullet != nullptr)
+        {
+            delete bullet;
+            bullet = nullptr;
+        }
+    }
+    _bulletsList.clear();
+    
+    
+    // TRACE DESTRUCTION
+    
+}
 
 
 //
@@ -290,12 +285,17 @@ list<Enemy*> * GameModel::getEnemiesList()
 
 list <Trace*> * GameModel::getTracesList()
 {
-    return &_tracesList;
+    return _maze.getTraceList();
 }
 
 list<Wall *> * GameModel::getWallsList()
 {
-    return _wallsList;
+    return _maze.getWallsList();
+}
+
+list<MazeCase*> * GameModel::getMazeCaseList()
+{
+    return _maze.getMazeCaseList();
 }
 
 list<Bullet *> * GameModel::getBulletList()

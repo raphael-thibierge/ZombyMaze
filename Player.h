@@ -18,7 +18,8 @@ class Player : public Perso
 {
 private:
     bool _isMoving;
-
+    
+    
 public:
 
     void Move(std::string direction = "");
@@ -31,7 +32,8 @@ public:
     void setMoving(const bool moving);
 
     bool getMoving() const;
-
+    
+    
 };
 
 #endif /* defined(__Console__Player__) */

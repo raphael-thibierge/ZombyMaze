@@ -23,9 +23,8 @@ private:
     Maze _maze;
     Player _player;
     std::list<Enemy*> _enemiesList;
-    std::list<Trace*> _tracesList;
-    std::list<Wall*> * _wallsList;
     std::list<Bullet*> _bulletsList;
+    
     
 // stats
     bool _playerLoose;
@@ -62,6 +61,8 @@ private:
     void updateMazeCasePosition();
     
     bool successOutOfMaze();
+    
+    void clear();
 
     
     
@@ -84,6 +85,8 @@ public:
     std::list<Wall *> * getWallsList();
     
     std::list<Bullet*> * getBulletList();
+    
+    std::list<MazeCase*> * getMazeCaseList();
     
     Player* getPlayer();
     

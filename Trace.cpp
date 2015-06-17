@@ -1,4 +1,4 @@
-//
+	//
 //  Trace.cpp
 //  Console
 //
@@ -10,21 +10,42 @@
 
 using namespace std;
 
-Trace::Trace(const string direction, const string owner, const unsigned int X, const unsigned int Y) : GraphicElement(), _direction(direction)
+Trace::Trace() : GraphicElement()
 {
-    _X = X;
-    _Y = Y;
-    _life = TRACE_LIFE;
+    _owner = "";
+    _direction = "";
+    _width = TRACE_WIDTH;
+    _height = TRACE_HEIGHT;
+    _available = false;
+}
+
+
+
+bool Trace::available() const
+{
+    if (_available)
+    {
+        cout << "ok" << endl;
+    }
+    return  _available;
+}
+
+void Trace::newTrace(const std::string direction, const std::string owner)
+{
+    if (MovableElement::isDirection(direction))
+    {
+        _direction = direction;
+        _available = true;
+    }
     _owner = owner;
 }
 
-
-void Trace::looseLife()
+void Trace::deleteTrace()
 {
-    if ( _life > 0)
-        _life--;
+    _direction = "";
+    _owner = "";
+    _available = false;
 }
-
 
 //
 // ACCESSORS
@@ -41,6 +62,7 @@ string Trace::getOwner() const
 {
     return _owner;
 }
+
 
 void Trace::setDirection(std::string direction)
 {

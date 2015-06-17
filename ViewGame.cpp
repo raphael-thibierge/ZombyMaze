@@ -62,11 +62,24 @@ bool ViewGame::initSFML()
         return false;
     
     // BULLETS
-    if (!initSprite("bullet", BULLET_IMAGE, 1, BULLET_WIDTH, BULLET_HEIGHT))
+    if (!initSprite("bulletleft", BULLET_IMAGE_LEFT, 1, BULLET_WIDTH, BULLET_HEIGHT))
+        return false;
+    
+    if (!initSprite("bulletright", BULLET_IMAGE_RIGHT, 1, BULLET_WIDTH, BULLET_HEIGHT))
+        return false;
+    
+    if (!initSprite("bulletup", BULLET_IMAGE_UP, 1, BULLET_HEIGHT, BULLET_WIDTH))
+        return false;
+    
+    if (!initSprite("bulletdown", BULLET_IMAGE_DOWN, 1, BULLET_HEIGHT, BULLET_WIDTH))
         return false;
     
     // temoin
     if (!initSprite("temoin", TEMOIN_IMAGE, 1, MAZECASE_SIZE, MAZECASE_SIZE))
+        return false;
+    
+    // coin
+    if (!initSprite("coin", COIN_IMAGE, 1, COIN_WIDTH, COIN_HEIGHT))
         return false;
     
     cout << "Sprites initialisés" << endl;
@@ -163,15 +176,21 @@ void ViewGame::showViewSFML()
         _window->draw(_spritesList["background"]);
         
         displayBackGround();
+        
         displayMaze();
         
-        displayEnnemies();
+        displayMazeCase();
         
-        displayTrace();
+        displayEnnemies();
         
         displayPlayer();
         
         displayBullets();
+        
+        
+        //Others
+        if (_modele->getPlayer() != nullptr);
+            displayText(to_string(_modele->getPlayer()->getMoney()), 600, 100);
         
         _cptSprites++;
     }
@@ -195,15 +214,6 @@ void ViewGame::displayEnnemies()
             name = "temoin";
             _spritesList[name].setPosition(enemy->getMazeCase()->getX(), enemy->getMazeCase()->getY());
             _window->draw(_spritesList[name]);
-            _spritesList[name].setPosition(enemy->getMazeCase()->getY(), enemy->getMazeCase()->getX ());
-            _window->draw(_spritesList[name]);
-            int cpt = 0;
-            for (auto direction : enemy->getMazeCase()->getAvalaibleDirecton())
-            {
-                cout << "mazecase " << cpt << " " << direction << endl;
-                cpt++;
-  
-            }
             
         }
     }
@@ -236,6 +246,14 @@ void ViewGame::displayPlayer()
 {
     if (_modele->getPlayer() != nullptr)
     {
+        if(_modele->getPlayer()->getMazeCase() != nullptr)
+        {
+            _spritesList["temoin"].setPosition(_modele->getPlayer()->getMazeCase()->getX(), _modele->getPlayer()->getMazeCase()->getY());
+            _window->draw(_spritesList["temoin"]);
+        }
+        
+        
+        
         string name = "player" ;
         if (PLAYER_NB_SPRITES > 1)
         {
@@ -256,21 +274,6 @@ void ViewGame::displayPlayer()
     }
 }
 
-
-void ViewGame::displayTrace()
-{
-    for (MazeCase* mazeCase : *_modele->getMaze()->getMazeCaseList())
-    {
-        
-        if (mazeCase->getTrace() != nullptr)
-        {
-            _spritesList["trace"].setPosition(mazeCase->getTrace()->getX(), mazeCase->getTrace()->getY());
-            _window->draw(_spritesList["trace"]);
-
-        }
-    }
-}
-
 void ViewGame::displayGameOver()
 {
     _spritesList["gameOver"].setPosition(GAMEOVER_IMAGE_X, GAMEOVER_IMAGE_Y);
@@ -288,8 +291,9 @@ void ViewGame::displayBullets()
     
     for (Bullet* bullet : *_modele->getBulletList())
     {
-        _spritesList["bullet"].setPosition(bullet->getX(), bullet->getY());
-        _window->draw(_spritesList["bullet"]);
+        string name = "bullet" + bullet->getDirection();
+        _spritesList[name].setPosition(bullet->getX(), bullet->getY());
+        _window->draw(_spritesList[name]);
     }
 }
 
@@ -309,4 +313,27 @@ void ViewGame::displayInMazeCase(const unsigned int x, const unsigned int y, con
 void ViewGame::displayBackGround()
 {
     displayInMazeCase(MAZE_SIZE-1, MAZE_SIZE-1, "exitLabel", EXIT_IMAGE_WIDTH, EXIT_IMAGE_HEIGHT);
+}
+
+void ViewGame::displayMazeCase()
+{
+    for (MazeCase* mazeCase : *_modele->getMaze()->getMazeCaseList())
+    {
+        
+        if (mazeCase->getTrace()->available())
+        {
+            cout << mazeCase->getTrace()->getX() << " " << mazeCase->getTrace()->getY() << endl;
+            _spritesList["trace"].setPosition(mazeCase->getTrace()->getX(), mazeCase->getTrace()->getY());
+            _window->draw(_spritesList["trace"]);
+        }
+        for (Coin* coin : *mazeCase->getCoinList())
+        {
+            if (coin != nullptr)
+            {
+                _spritesList["coin"].setPosition(coin->getX(), coin->getY());
+                _window->draw(_spritesList["coin"]);
+            }
+        }
+    }
+
 }

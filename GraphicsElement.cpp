@@ -70,6 +70,7 @@ string GraphicElement::toString()
 }
 
 
+
 //
 // ACCESSORS
 //
@@ -107,4 +108,9 @@ unsigned int GraphicElement::getWidth() const
 unsigned int GraphicElement::getHeight() const
 {
     return _height;
+}
+
+unsigned int GraphicElement::getSurface() const
+{
+    return _width * _height;
 }

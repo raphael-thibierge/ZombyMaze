@@ -10,11 +10,10 @@
 
 using namespace std;
 
-MazeCase::MazeCase(const unsigned int x, const unsigned int y)
+MazeCase::MazeCase()
 {
     // init position
-    _X = MAZE_X + ( x * MAZECASE_SIZE ) + (x+1)*WALL_WIDTH_V;
-    _Y = MAZE_Y + ( y * MAZECASE_SIZE ) + (y+1)*WALL_HEIGHT_H;
+    
     _width = MAZECASE_SIZE;
     _height = MAZECASE_SIZE;
     
@@ -23,17 +22,13 @@ MazeCase::MazeCase(const unsigned int x, const unsigned int y)
 
 MazeCase::~MazeCase()
 {
-    if (_trace != nullptr)
-        delete _trace;
-    _trace = nullptr;
+    
 }
 
 void MazeCase::init()
 {
-    //init trace
-    _trace = nullptr;
-    
     // init walls
+    place(&_trace);
     for (unsigned int i = 0; i < 4 ; i++)
         _walls.push_back(false);
     _walls.resize(4);
@@ -42,21 +37,14 @@ void MazeCase::init()
 
 void MazeCase::newTrace(const string direction, const string owner)
 {
-    if (_trace != nullptr)
-    {
-        delete _trace;
-    }
-    _trace = new Trace( direction, owner,_X + (MAZECASE_SIZE-TRACE_WIDTH)/2, _Y + (MAZECASE_SIZE-TRACE_HEIGHT)/2);
+    _trace.newTrace(direction, owner);
 }
 
 
 void MazeCase::addWall(const unsigned int sideNumber)
 {
     if (sideNumber < 4)
-    {
-        cout << "<<<" << sideNumber << endl;
         _walls[sideNumber] = true;
-    }
 }
 
 vector<string> MazeCase::getAvalaibleDirecton() const
@@ -75,18 +63,53 @@ vector<string> MazeCase::getAvalaibleDirecton() const
     return result;
 }
 
+
+unsigned int MazeCase::takeCoins()
+{
+    unsigned int total = 0;
+    for(Coin* coin : _coinList)
+    {
+        total+= coin->getValue();
+        delete coin;
+        coin = nullptr;
+    }
+    _coinList.clear();
+    return total;
+}
+
+void MazeCase::addCoin()
+{
+    _coinList.push_back(new Coin(1, _X, _Y));
+}
+
+void MazeCase::SetPosition(const unsigned int x, const unsigned y)
+{
+    _X = MAZE_X + ( x * MAZECASE_SIZE ) + (x+1)*WALL_WIDTH_V;
+    _Y = MAZE_Y + ( y * MAZECASE_SIZE ) + (y+1)*WALL_HEIGHT_H;
+}
+
+
+void MazeCase::place(GraphicElement *element) const
+{
+    element->setX(_X + (_width - element->getWidth() ) / 2 );
+    element->setY(_Y + (_height - element->getHeight() ) / 2 );
+}
+
+
+
+
 // ACCESSORS
 bool MazeCase::isWall(const string direction) const
 {
     return _walls[MovableElement::directionToInt(direction)];
 }
 
-Trace* MazeCase::getTrace() const
-{
-    return _trace;
-}
-
-Trace** MazeCase::getTracePointer()
+Trace* MazeCase::getTrace()
 {
     return &_trace;
+}
+
+std::list<Coin*> * MazeCase::getCoinList()
+{
+    return &_coinList;
 }

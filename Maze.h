@@ -19,9 +19,9 @@ class Maze : public GraphicElement
 {
 
 private:
-    std::vector<std::vector<MazeCase*>> _grid;
+    std::vector<std::vector<MazeCase>> _grid;
     std::list<Wall*> _wallList;
-    std::list<Trace**> _traceList;
+    std::list<Trace*> _traceList;
     std::list<MazeCase*> _mazeCaseList;
     
     unsigned int _size ;
@@ -32,13 +32,15 @@ public:
     
     ~Maze();
 
+// METHODS
+public:
+    void clearTraceList();
+    
+    
 private:
-
     void init();
 
     void construct();
-    
-    void construct2();
 
     void addWall(unsigned int x, unsigned int y, const char orientation);
 
@@ -49,7 +51,7 @@ public :
 
     std::list<Wall*> * getWallsList();
     
-    std::list<Trace**> * getTraceList();
+    std::list<Trace*> * getTraceList();
     
     std::list<MazeCase*> * getMazeCaseList();
 

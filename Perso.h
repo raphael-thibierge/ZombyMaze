@@ -20,6 +20,10 @@ protected:
     MazeCase * _mazeCasePosition;
     std::string _name;
     unsigned int _life;
+    std::list<Trace*> _traceList;
+    unsigned int _traceNbMax;
+    unsigned int _money;
+    
     
     // states
     bool _dead;
@@ -36,6 +40,8 @@ public:
     
     void affectDamage(const unsigned int damage);
     
+    void updateMazeCase(std::list<MazeCase*> * mazeCaseList);
+    
     
 // ACCESSORS
 public:
@@ -48,6 +54,10 @@ public:
     void setMazeCase(MazeCase* mazeCase);
     
     Bullet* getShoot(const std::string direction) const;
+    
+    std::list<Trace*> * getTraceList();
+    
+    unsigned int getMoney() const;
     
 };
 

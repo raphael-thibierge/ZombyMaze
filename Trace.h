@@ -10,26 +10,35 @@
 #define __Console__Trace__
 
 #include <stdio.h>
-#include "GraphicsElement.h"
+#include "MovableElement.h"
 
 class Trace : public GraphicElement
 {
 private:
-    unsigned int _life;
     std::string _direction;
     std::string _owner;
+    
+// states
+    bool _available;
+    
 
 public:
 
-    Trace(const std::string direction, const std::string owner, const unsigned int X, const unsigned int Y);
-
-    void looseLife();
+    Trace();
+    
+    bool available() const;
+    
+    void newTrace(const std::string direction, const std::string owner);
+    
+    void deleteTrace();
 
 // ACCESSORS
 public:
     std::string getDirection() const;
     
     std::string getOwner() const;
+    
+    
     
     void setDirection(std::string direction);
 

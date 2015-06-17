@@ -12,17 +12,18 @@
 #include <stdio.h>
 #include "MovableElement.h"
 #include "Trace.h"
-
+#include "Coin.h"
 class MazeCase : public GraphicElement
 {
 // ATTRIBUTES
 private:
     std::vector<bool> _walls;
-    Trace* _trace;
+    std::list<Coin*> _coinList;
+    Trace _trace;
     
 // CONSTRUCTOR & DESTRUCTOR
 public:
-    MazeCase(const unsigned int x, const unsigned int y);
+    MazeCase();
     
     ~MazeCase();
     
@@ -34,6 +35,16 @@ public:
 
     std::vector<std::string> getAvalaibleDirecton() const;
     
+    void addCoin();
+    
+    unsigned int takeCoins();
+    
+    void clear();
+    
+    void SetPosition(const unsigned int x, const unsigned y);
+    
+    void place(GraphicElement* element) const;
+    
 private:
     void init();
     
@@ -44,9 +55,9 @@ private:
 public:
     bool isWall(const std::string direction) const;
 
-    Trace* getTrace() const;
+    Trace* getTrace();
     
-    Trace** getTracePointer();
+    std::list<Coin*> * getCoinList();
 };
 
 #endif /* defined(__Console__MazeCase__) */

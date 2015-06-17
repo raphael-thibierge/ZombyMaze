@@ -24,9 +24,9 @@ public:
 
     void displayEnnemies();
 
-    void displayTrace();
-
     void displayMaze();
+    
+    void displayMazeCase();
     
     void displayGameOver();
     

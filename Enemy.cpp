@@ -18,6 +18,7 @@ Enemy::Enemy() : Perso()
     _speed = ZOMBY_SPEED;
     _name = "zomby";
     _direction = "right";
+    _traceNbMax = ZOMBY_NB_TRACE_MAX;
 }
 
 
@@ -28,7 +29,7 @@ void Enemy::autoMove()
 {
     if (_mazeCasePosition != nullptr)
     {
-        cout << _mazeCasePosition->isWall(_direction) << endl;
+        
         if (_mazeCasePosition->isWall(_direction))
         {
             changeDirection();
@@ -53,7 +54,7 @@ void Enemy::changeDirection()
     } while (directions[random] == _direction);
     
     _direction = directions[random];
-    cout << "direciton choisie " << _direction << endl;
+   // cout << "direciton choisie " << _direction << endl;
     
 
 }

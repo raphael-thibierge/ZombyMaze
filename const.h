@@ -36,10 +36,12 @@ const unsigned int MAZECASE_SIZE = 50;
 const unsigned int PLAYER_INITIAL_X = 20;
 const unsigned int PLAYER_INITIAL_Y = 20;
 const unsigned int PLAYER_SPEED = 5;
+const unsigned int PLAYER_NB_TRACE_MAX = 5;
 
 // ENEMIES
 const unsigned int ZOMBY_SPEED = 2 ;
 const unsigned int ZOMBY_ACCELERATION = 0;
+const unsigned int ZOMBY_NB_TRACE_MAX = 0;
 
 // TRACE
 const std::string TRACE_IMAGE = "traces.png";
@@ -49,18 +51,27 @@ const unsigned int TRACE_NB_SPRITES = 1;
 const unsigned int TRACE_LIFE = 5;
 
 // BULLET
-const std::string BULLET_IMAGE = "Bullet2.png";
+const std::string BULLET_IMAGE_UP = "BulletUp.png";
+const std::string BULLET_IMAGE_DOWN = "BulletDown.png";
+const std::string BULLET_IMAGE_LEFT = "BulletLeft.png";
+const std::string BULLET_IMAGE_RIGHT = "BulletRight.png";
 const unsigned int BULLET_SPEED = 15;
 const unsigned int BULLET_WIDTH = 16;
 const unsigned int BULLET_HEIGHT = 6;
 const unsigned int BULLET_DAMAGE = 10;
+
+// COIN
+const std::string COIN_IMAGE = "coin.png";
+const unsigned int COIN_WIDTH = 41;
+const unsigned int COIN_HEIGHT = 41;
 
 // =====================    INTRODUCTIONVIEW   ===================
 const std::string IMAGE_INTRO = "Intro.png";
 const float TIME_INTRODUCTION = 2.0f;
 
 // =====================    GAMEVIEW   ===================
-
+// TEXTES
+const unsigned int TEXT_SIZE = 20;
 
 //GAMEVIEW
 const std::string VIEWGAME_MAZE_BACKGROUND = "fond.png";

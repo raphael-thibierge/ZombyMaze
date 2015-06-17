@@ -18,6 +18,7 @@ Player::Player() : Perso()
     _width = PLAYER_WIDTH;
     _height = PLAYER_HEIGHT;
     _name = "player";
+    _traceNbMax = PLAYER_NB_TRACE_MAX;
 }
 
 void Player::Move(const std::string direction)

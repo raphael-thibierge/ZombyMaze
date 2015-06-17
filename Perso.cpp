@@ -17,12 +17,15 @@ Perso::Perso() : MovableElement()
     _mazeCasePosition = nullptr;
     _life = 1;
     _dead = false;
+    _traceNbMax = 0;
+    _money = 0;
     
 }
 
 Perso::~Perso()
 {
     _mazeCasePosition = nullptr;
+    _traceList.clear();
 }
 
 
@@ -33,15 +36,18 @@ void Perso::leaveTrace()
 {
     if (_mazeCasePosition != nullptr)
     {
-        if (_mazeCasePosition->getTrace() != nullptr && _mazeCasePosition->getTrace()->getOwner() == _name)
+        int cpt = 0;
+        if (_traceList.size() > _traceNbMax)
         {
-                _mazeCasePosition->getTrace()->setDirection(_direction);
+            Trace * trace = _traceList.front();
+            _traceList.remove(trace);
+            _traceList.resize(_traceNbMax -1);
         }
-        else
-        {
-            _mazeCasePosition->newTrace(_direction, _name);
-        }
+        cout << "coucou" << endl;
+        _traceList.push_back(_mazeCasePosition->getTrace());
+        _mazeCasePosition->newTrace(_direction, _name);
     }
+    
 }
 
 void Perso::affectDamage(const unsigned int damage)
@@ -55,6 +61,18 @@ void Perso::affectDamage(const unsigned int damage)
     {
         _life -= damage;
     }
+}
+
+void Perso::updateMazeCase(std::list<MazeCase *> *mazeCaseList)
+{
+    for (MazeCase* mazeCase : *mazeCaseList)
+    {
+        if (mazeCase->contain(this))
+        {
+            setMazeCase(mazeCase);
+        }
+    }
+
 }
 
 //
@@ -80,6 +98,12 @@ bool Perso::getDead() const
 void Perso::setMazeCase(MazeCase * mazeCase)
 {
     _mazeCasePosition = mazeCase;
+    if (_name == "player")
+    {
+        _money += _mazeCasePosition->takeCoins();
+        leaveTrace();
+        
+    }
 }
 
 Bullet* Perso::getShoot(const std::string direction) const
@@ -88,4 +112,9 @@ Bullet* Perso::getShoot(const std::string direction) const
     unsigned int y = _Y + (_height - BULLET_WIDTH)/2;
     
     return new Bullet(direction, x, y);
+}
+
+unsigned int Perso::getMoney() const
+{
+    return _money;
 }

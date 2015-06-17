@@ -33,15 +33,15 @@ void Maze::init()
         _grid[y].resize(_size);
         for (int x = 0 ; x < _size ; x++)
         {
-            _grid[y][x]= new MazeCase(x, y);
-            _mazeCaseList.push_back(_grid[y][x]);
+            _grid[y][x].SetPosition(x, y);
+            _mazeCaseList.push_back(&_grid[y][x]);
         }
     }
     
     //init tarceList
     for (MazeCase* mazeCase : _mazeCaseList)
     {
-        _traceList.push_back(mazeCase->getTracePointer());
+        _traceList.push_back(mazeCase->getTrace());
     }
     
     
@@ -50,32 +50,20 @@ void Maze::init()
 
 Maze::~Maze()
 {
-    
-    // delete grid
-    for ( unsigned int line = 0 ; line < _size ; line++ )
-    {
-        for ( unsigned int column ; column < _size ; column++)
-        {
-            if (_grid[line][column] != nullptr)
-            {
-                delete _grid[line][column];
-                _grid[line][column] = nullptr;
-                
-            }
-        }
-    }
-    
-    
     _wallList.clear();
     _traceList.clear();
     _mazeCaseList.clear();
 }
 
 
+//
+// METHODS
+//
+
+// PUBLIC
 
 
-
-
+// PRIVATE
 void Maze::construct()
 {
     fstream file;
@@ -112,9 +100,9 @@ void Maze::addWall(unsigned int x, unsigned int y, const char orientation)
             _wallList.push_back(Wall::Horizontal(x*MAZECASE_SIZE+(x+1)*WALL_WIDTH_V, y*(MAZECASE_SIZE+WALL_HEIGHT_H)));
             
             // add wall in MazeCase
-            _grid[y][x]->addWall(MovableElement::directionToInt("up"));
+            _grid[y][x].addWall(MovableElement::directionToInt("up"));
             if (y > 0)
-                _grid[y-1][x]->addWall(MovableElement::directionToInt("down"));
+                _grid[y-1][x].addWall(MovableElement::directionToInt("down"));
             break;
             
         case 'v':
@@ -122,12 +110,11 @@ void Maze::addWall(unsigned int x, unsigned int y, const char orientation)
             _wallList.push_back(Wall::Vertical(x*(MAZECASE_SIZE+WALL_WIDTH_V), y*MAZECASE_SIZE+(y+1)*WALL_HEIGHT_H));
             
             // add wall in MazeCase
-            _grid[y][x]->addWall(MovableElement::directionToInt("left"));
-            cout << " line " << y << " column " << x << "direction " << "left" << endl;
+            _grid[y][x].addWall(MovableElement::directionToInt("left"));
+            
             if (x > 0)
             {
-                _grid[y][x-1]->addWall(MovableElement::directionToInt("right"));
-                cout << ">> line " << y << " column " << x-1 << "direction " << "right" << endl;
+                _grid[y][x-1].addWall(MovableElement::directionToInt("right"));
             }
             break;
             
@@ -141,7 +128,7 @@ void Maze::addWall(unsigned int x, unsigned int y, const char orientation)
 //
 MazeCase Maze::getCase(const int line, const int column) const
 {
-    return *_grid[line][column];
+    return _grid[line][column];
 }
 
 list<Wall*> * Maze::getWallsList()
@@ -150,7 +137,7 @@ list<Wall*> * Maze::getWallsList()
 }
 
 
-list<Trace**> * Maze::getTraceList()
+list<Trace*> * Maze::getTraceList()
 {
     return &_traceList;
 }

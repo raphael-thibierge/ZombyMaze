@@ -32,6 +32,7 @@ public:
     bool contain(GraphicElement* element) const;
     
     std::string toString();
+
     
 // ACCESSORS
     void setX(const unsigned int positionX);
@@ -47,6 +48,8 @@ public:
     unsigned int getWidth() const;
     
     unsigned int getHeight() const;
+    
+    unsigned int getSurface() const;
     
 };
 

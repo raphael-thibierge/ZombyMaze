@@ -90,9 +90,18 @@ string MovableElement::intToDirection(const unsigned int direction)
             return "left";
             
         default:
-            return "up";
+            return "null";
             break;
     }
+}
+
+string MovableElement::oppositeDirection(std::string direction)
+{
+    if (isDirection(direction))
+    {
+        return intToDirection((directionToInt(direction)+2)%4 );
+    }
+    return "null";
 }
 
 

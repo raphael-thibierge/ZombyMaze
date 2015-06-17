@@ -41,6 +41,8 @@ public:
     
     static std::string intToDirection(const unsigned int direction);
     
+    static std::string oppositeDirection(std::string direction);
+    
 
 // ACCESSORS
 public:

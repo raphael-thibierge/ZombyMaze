@@ -59,13 +59,17 @@ void View::displayStandartButton(const std::string text, const float positionX, 
 
 void View::displayText(const std::string text,const float positionX,const float positionY)
 {
-    /*
-    sf::String textDisplayed;
-    textDisplayed.SetText(text);
-    textDisplayed.SetSize(TEXT_SIZE);
-    textDisplayed.SetPosition(positionX, positionY);
-    _window->Draw(textDisplayed);
-    */
+    sf::Font font;
+    font.loadFromFile(resourcePath() + "sansation.ttf");
+    
+    
+    sf::Text textDisplayed(text, font);
+    textDisplayed.setCharacterSize(TEXT_SIZE);
+    textDisplayed.setPosition(positionX, positionY);
+    textDisplayed.setStyle(sf::Text::Bold);
+    textDisplayed.setColor(sf::Color::Red);
+    _window->draw(textDisplayed);
+    
 }
 
 void View::displayTitle( const std::string text, const float positionX, const float positionY)
