@@ -61,6 +61,10 @@ bool ViewGame::initSFML()
     if (!initSprite("win", WIN_IMAGE, 1, WIN_IMAGE_WIDTH, WIN_IMAGE_HEIGHT))
         return false;
     
+    // BULLETS
+    if (!initSprite("bullet", BULLET_IMAGE, 1, BULLET_WIDTH, BULLET_HEIGHT))
+        return false;
+    
     cout << "Sprites initialisés" << endl;
     
 
@@ -84,6 +88,18 @@ int ViewGame::treatEventSFML()
         
         if (Keyboard::isKeyPressed(Keyboard::Right))
             _modele->playerMove("right");
+        
+        if (Keyboard::isKeyPressed(Keyboard::Z))
+            _modele->playerShoot("up");
+        
+        if (Keyboard::isKeyPressed(Keyboard::S))
+            _modele->playerShoot("down");
+        
+        if (Keyboard::isKeyPressed(Keyboard::Q))
+            _modele->playerShoot("left");
+        
+        if (Keyboard::isKeyPressed(Keyboard::D))
+            _modele->playerShoot("right");
     }
     
         Event event;
@@ -150,6 +166,8 @@ void ViewGame::showViewSFML()
         displayTrace();
         
         displayPlayer();
+        
+        displayBullets();
         
         _cptSprites++;
     }
@@ -245,6 +263,16 @@ void ViewGame::displayWin()
     _window->draw(_spritesList["win"]);
 }
 
+void ViewGame::displayBullets()
+{
+    
+    for (Bullet* bullet : *_modele->getBulletList())
+    {
+        _spritesList["bullet"].setPosition(bullet->getX(), bullet->getY());
+        _window->draw(_spritesList["bullet"]);
+    }
+}
+
 void ViewGame::displayInMazeCase(const unsigned int x, const unsigned int y, const std::string spriteName, const unsigned int width, const unsigned int height)
 {
     unsigned int xSprite ;
@@ -252,7 +280,7 @@ void ViewGame::displayInMazeCase(const unsigned int x, const unsigned int y, con
     
     xSprite = x * (MAZECASE_SIZE)  ;
     ySprite = y * (MAZECASE_SIZE) ;
-    cout << xSprite << " " << ySprite << endl;
+    //cout << xSprite << " " << ySprite << endl;
     _spritesList[spriteName].setPosition(xSprite, ySprite);
     _window->draw(_spritesList[spriteName]);
     

@@ -25,7 +25,6 @@ private:
     bool _playerFound;
 
 
-
 public:
     Enemy();
 

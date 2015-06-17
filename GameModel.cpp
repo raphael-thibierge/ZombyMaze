@@ -94,6 +94,10 @@ void GameModel::nextStep()
         
         moveAllEnemies();
         
+        moveAllBullets();
+        
+        bulletCollision();
+        
         if (enemiesCollision())
         {
             _playerLoose = true;
@@ -116,7 +120,7 @@ void GameModel::nextStep()
 }
 
 
-void GameModel::playerMove(std::string direction)
+void GameModel::playerMove(const std::string direction)
 {
     _player.setDirection(direction);
 
@@ -141,6 +145,14 @@ void GameModel::reset()
     init();
 }
 
+void GameModel::playerShoot(const string direction)
+{
+    if (MovableElement::isDirection(direction))
+    {
+        _bulletsList.push_back(_player.getShoot(direction));
+    }
+}
+
 // PRIVATE
 
 void GameModel::moveAllEnemies()
@@ -148,6 +160,14 @@ void GameModel::moveAllEnemies()
     for (Enemy* enemy : _enemiesList)
     {
         enemy->autoMove();
+    }
+}
+
+void GameModel::moveAllBullets()
+{
+    for (Bullet* bullet : _bulletsList)
+    {
+        bullet->move();
     }
 }
 
@@ -161,6 +181,65 @@ bool GameModel::enemiesCollision()
         }
     }
     return false;
+}
+
+void GameModel::bulletCollision()
+{
+    list<Bullet*> _bulletToDestroy;
+    list<Enemy*> _enemiesToDestroy;
+    
+    for (Bullet * bullet : _bulletsList)
+    {
+        
+        for (Enemy* enemy : _enemiesList)
+        {
+            if (enemy->ElementOnElement(bullet))
+            {
+                // affect damage to the enemy
+                enemy->affectDamage(bullet->getDamage());
+                if (enemy->getDead())
+                {
+                    _enemiesToDestroy.push_back(enemy);
+                }
+                _bulletToDestroy.push_back(bullet);
+            }
+        }
+        
+        for (Wall* wall : *_wallsList)
+        {
+            if (wall->ElementOnElement(bullet))
+            {
+                _bulletToDestroy.push_back(bullet);
+            }
+        }
+         
+    }
+    
+    _bulletToDestroy.unique();
+    _enemiesToDestroy.unique();
+    
+    for (Enemy* enemy : _enemiesToDestroy)
+    {
+        _enemiesList.remove(enemy);
+        if (enemy != nullptr)
+        {
+            delete enemy;
+            enemy = nullptr;
+        }
+    }
+    
+    for (Bullet* bullet : _bulletToDestroy)
+    {
+        _bulletsList.remove(bullet);
+        if (bullet != nullptr)
+        {
+            delete bullet;
+            bullet = nullptr;
+        }
+    }
+    
+    _enemiesToDestroy.clear();
+    _bulletToDestroy.clear();
 }
 
 
@@ -217,6 +296,11 @@ list <Trace*> * GameModel::getTracesList()
 list<Wall *> * GameModel::getWallsList()
 {
     return _wallsList;
+}
+
+list<Bullet *> * GameModel::getBulletList()
+{
+    return &_bulletsList;
 }
 
 Player* GameModel::getPlayer()

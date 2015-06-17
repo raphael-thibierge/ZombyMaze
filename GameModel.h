@@ -15,6 +15,7 @@
 #include "Maze.h"
 #include "Trace.h"
 #include "Wall.h"
+#include "Bullet.h"
 
 class GameModel
 {
@@ -24,6 +25,8 @@ private:
     std::list<Enemy*> _enemiesList;
     std::list<Trace*> _tracesList;
     std::list<Wall*> * _wallsList;
+    std::list<Bullet*> _bulletsList;
+    
 // stats
     bool _playerLoose;
     bool _playerWin;
@@ -38,15 +41,21 @@ public:
 public:
     void nextStep();
 
-    void playerMove(std::string direction);
+    void playerMove(const std::string direction);
     
     void reset();
+    
+    void playerShoot(const std::string direction);
 
 private:
 
     bool enemiesCollision();
+    
+    void bulletCollision();
 
     void moveAllEnemies();
+    
+    void moveAllBullets();
 
     void enemiesCheckTraces();
     
@@ -54,7 +63,8 @@ private:
     
     bool successOutOfMaze();
 
-
+    
+    
 private :
     void init();
 
@@ -72,6 +82,8 @@ public:
     std::list<Trace *> * getTracesList();
 
     std::list<Wall *> * getWallsList();
+    
+    std::list<Bullet*> * getBulletList();
     
     Player* getPlayer();
     

@@ -31,6 +31,8 @@ public:
     void displayGameOver();
     
     void displayWin();
+    
+    void displayBullets();
 
     bool initSFML();
     

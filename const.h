@@ -38,7 +38,7 @@ const unsigned int PLAYER_INITIAL_Y = 20;
 const unsigned int PLAYER_SPEED = 5;
 
 // ENEMIES
-const unsigned int ZOMBY_SPEED = 4 ;
+const unsigned int ZOMBY_SPEED = 2 ;
 const unsigned int ZOMBY_ACCELERATION = 0;
 
 // TRACE
@@ -48,6 +48,12 @@ const unsigned int TRACE_HEIGHT = 42;
 const unsigned int TRACE_NB_SPRITES = 1;
 const unsigned int TRACE_LIFE = 5;
 
+// BULLET
+const std::string BULLET_IMAGE = "Bullet2.png";
+const unsigned int BULLET_SPEED = 15;
+const unsigned int BULLET_WIDTH = 16;
+const unsigned int BULLET_HEIGHT = 6;
+const unsigned int BULLET_DAMAGE = 10;
 
 // =====================    INTRODUCTIONVIEW   ===================
 const std::string IMAGE_INTRO = "Intro.png";

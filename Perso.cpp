@@ -8,11 +8,15 @@
 
 #include "Perso.h"
 
+using namespace std;
+
 // CONSTRUCTOR AND DESTRUCTOR
 Perso::Perso() : MovableElement()
 {
     _name = "";
     _mazeCasePosition = nullptr;
+    _life = 1;
+    _dead = false;
     
 }
 
@@ -40,6 +44,19 @@ void Perso::leaveTrace()
     }
 }
 
+void Perso::affectDamage(const unsigned int damage)
+{
+    if (damage >= _life)
+    {
+        _life = 0;
+        _dead = true;
+    }
+    else
+    {
+        _life -= damage;
+    }
+}
+
 //
 // ACCESSORS
 //
@@ -49,7 +66,26 @@ MazeCase* Perso::getMazeCase() const
     return _mazeCasePosition;
 }
 
+unsigned int Perso::getLife() const
+{
+    return _life;
+}
+
+bool Perso::getDead() const
+{
+    return _dead;
+}
+
+
 void Perso::setMazeCase(MazeCase * mazeCase)
 {
     _mazeCasePosition = mazeCase;
+}
+
+Bullet* Perso::getShoot(const std::string direction) const
+{
+    unsigned int x = _X + (_width - BULLET_WIDTH)/2;
+    unsigned int y = _Y + (_height - BULLET_WIDTH)/2;
+    
+    return new Bullet(direction, x, y);
 }

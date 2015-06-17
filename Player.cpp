@@ -22,9 +22,8 @@ Player::Player() : Perso()
 
 void Player::Move(const std::string direction)
 {
-    if (direction == "up" || direction == "down" || direction == "left" || direction == "right")
+    if (isDirection(direction))
         _direction = direction;
-
     _isMoving = true;
     MovableElement::Move(_direction);
     leaveTrace();

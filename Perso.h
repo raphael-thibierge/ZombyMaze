@@ -12,12 +12,17 @@
 #include <stdio.h>
 #include "MovableElement.h"
 #include "Maze.h"
+#include "Bullet.h"
 
 class Perso : public MovableElement
 {
 protected:
     MazeCase * _mazeCasePosition;
     std::string _name;
+    unsigned int _life;
+    
+    // states
+    bool _dead;
 
 // CONSTRUCTORS AND DESTRUCTORS
 public:
@@ -29,13 +34,20 @@ public:
 public:
     void leaveTrace();
     
+    void affectDamage(const unsigned int damage);
+    
+    
 // ACCESSORS
 public:
     MazeCase * getMazeCase() const;
     
+    unsigned int getLife() const;
+    
+    bool getDead() const;
+
     void setMazeCase(MazeCase* mazeCase);
     
-    
+    Bullet* getShoot(const std::string direction) const;
     
 };
 

@@ -54,9 +54,9 @@ void MovableElement::MoveOpposite(string direction)
 }
 
 // STATICS
-bool MovableElement::isDirection(const string direcion)
+bool MovableElement::isDirection(const string direction)
 {
-    return (direcion == "up" || direcion == "down" || direcion == "left" || direcion == "right" );
+    return (direction == "up" || direction == "down" || direction == "left" || direction == "right" );
 }
 
 unsigned int MovableElement::directionToInt(const string direction)

@@ -35,7 +35,7 @@ public:
     
 // STATICS
 public:
-    static bool isDirection(const std::string direcion);
+    static bool isDirection(const std::string direction);
     
     static unsigned int directionToInt(const std::string direction);
     
