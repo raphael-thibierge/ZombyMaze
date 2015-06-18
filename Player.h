@@ -21,10 +21,14 @@ private:
     
     
 public:
-
-    void Move(std::string direction = "");
-
+    
+    void autoMove();
+    
+    void chooseDirection(const std::string direction);
+    
     Player();
+    
+    void reset();
 
     
 

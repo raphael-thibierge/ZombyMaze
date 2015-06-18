@@ -59,14 +59,12 @@ void Enemy::autoMove()
             while (avalaibleDirection[random] == oppositeDirection(_direction));
         }
         
+        
         _direction = avalaibleDirection[random];
         _mazeCaseToGo = _mazeCasePosition->getNextMazeCase(_direction);
         _isMoving = true;
         
     }
-    
-
-
 }
 
 void Enemy::changeDirection()
@@ -80,9 +78,6 @@ void Enemy::changeDirection()
     } while (directions[random] == _direction);
     
     _direction = directions[random];
-   // cout << "direciton choisie " << _direction << endl;
-    
-
 }
 
 void Enemy::findTrace(std::list<Trace *> *tracesList)

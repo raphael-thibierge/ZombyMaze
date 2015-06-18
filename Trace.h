@@ -31,7 +31,8 @@ public:
     void newTrace(const std::string direction, const std::string owner);
     
     void deleteTrace();
-
+    
+   
 // ACCESSORS
 public:
     std::string getDirection() const;

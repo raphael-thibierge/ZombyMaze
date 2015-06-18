@@ -23,10 +23,6 @@ Trace::Trace() : GraphicElement()
 
 bool Trace::available() const
 {
-    if (_available)
-    {
-        cout << "ok" << endl;
-    }
     return  _available;
 }
 
@@ -35,9 +31,10 @@ void Trace::newTrace(const std::string direction, const std::string owner)
     if (MovableElement::isDirection(direction))
     {
         _direction = direction;
+        _owner = owner;
         _available = true;
     }
-    _owner = owner;
+    
 }
 
 void Trace::deleteTrace()

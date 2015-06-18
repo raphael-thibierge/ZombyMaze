@@ -43,11 +43,13 @@ public:
     void affectDamage(const unsigned int damage);
     
     void updateMazeCase(std::list<MazeCase*> * mazeCaseList);
-    
+
     
 // ACCESSORS
 public:
     MazeCase * getMazeCase() const;
+    
+    MazeCase * getMazeCasToGo() const;
     
     unsigned int getLife() const;
     

@@ -38,16 +38,6 @@ void Perso::leaveTrace()
 {
     if (_mazeCasePosition != nullptr)
     {
-        /*
-        int cpt = 0;
-        if (_traceList.size() > _traceNbMax)
-        {
-            Trace * trace = _traceList.front();
-            _traceList.remove(trace);
-            _traceList.resize(_traceNbMax -1);
-        }*/
-        cout << "coucou" << endl;
-        _traceList.push_back(_mazeCasePosition->getTrace());
         _mazeCasePosition->newTrace(_direction, _name);
     }
     
@@ -87,6 +77,11 @@ MazeCase* Perso::getMazeCase() const
     return _mazeCasePosition;
 }
 
+MazeCase* Perso::getMazeCasToGo() const
+{
+    return _mazeCaseToGo;
+}
+
 unsigned int Perso::getLife() const
 {
     return _life;
@@ -101,12 +96,6 @@ bool Perso::getDead() const
 void Perso::setMazeCase(MazeCase * mazeCase)
 {
     _mazeCasePosition = mazeCase;
-    if (_name == "player")
-    {
-        _money += _mazeCasePosition->takeCoins();
-        leaveTrace();
-        
-    }
 }
 
 Bullet* Perso::getShoot(const std::string direction) const

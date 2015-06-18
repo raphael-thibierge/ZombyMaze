@@ -43,8 +43,6 @@ void Maze::init()
     {
         _traceList.push_back(mazeCase->getTrace());
     }
-    
-    
 }
 
 

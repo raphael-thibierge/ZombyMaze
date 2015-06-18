@@ -47,11 +47,11 @@ void GameModel::nextStep()
 {
     if (_play)
     {
-        _player.setMoving(false);
+        _player.autoMove();
         
         updateMazeCasePosition();
         
-        enemiesCheckTraces();
+       // enemiesCheckTraces();
         
         moveAllEnemies();
         
@@ -67,12 +67,10 @@ void GameModel::nextStep()
         
         if (_playerLoose)
         {
-            cout << "loose !" << endl;
             setPlayStop();
         }
         else if (_playerWin)
         {
-            cout << "win !" << endl;
             setPlayStop();
         }
         
@@ -83,40 +81,7 @@ void GameModel::nextStep()
 
 void GameModel::playerMove(const std::string direction)
 {
-    if (_player.getMazeCase() != nullptr && MovableElement::isDirection(direction) )
-    {
-        
-        if (_player.getMazeCase()->contain(&_player))
-        {
-            for (string value : _player.getMazeCase()->getAvalaibleDirecton())
-            {
-                if (direction == value)
-                {
-                    _player.setDirection(direction);
-                }
-            }
-        }
-        else if (_player.getMazeCase()->ElementOnElement(&_player))
-        {
-            
-        }
-        
-            
-        
-        MovableElement element = _player;
-        element.Move();
-        
-        if (!Wall::wallsCollision(&element, getWallsList()) ||
-            element.getX() <= 0 || (element.getX() + element.getWidth()) >= WINDOW_WIDTH ||
-            element.getY() <= 0 || (element.getY() + element.getHeight()) >= WINDOW_HEIGHT
-            )
-        {
-            _player.Move();
-        }
-        
-    }
-
-
+    _player.chooseDirection(direction);
 
 }
 
@@ -273,6 +238,8 @@ void GameModel::clear()
         }
     }
     _bulletsList.clear();
+    _player.reset();
+    
 }
 
 void GameModel::spawnRandomEnemy()
@@ -299,10 +266,6 @@ void GameModel::generateEnemies()
     for (unsigned int i = 0 ; i < ENEMIES_MAX ; i++)
     {
         spawnRandomEnemy();
-    }
-    for (auto enemy : _enemiesList)
-    {
-        cout << enemy->toString() << endl;;
     }
 }
 

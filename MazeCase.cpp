@@ -98,6 +98,8 @@ void MazeCase::SetPosition(const unsigned int x, const unsigned y)
 {
     _X = MAZE_X + ( x * MAZECASE_SIZE ) + (x+1)*WALL_WIDTH_V;
     _Y = MAZE_Y + ( y * MAZECASE_SIZE ) + (y+1)*WALL_HEIGHT_H;
+    
+    place(&_trace);
 }
 
 
@@ -108,7 +110,10 @@ void MazeCase::place(GraphicElement *element) const
 }
 
 
-
+bool MazeCase::isAvailableDirection(std::string direction)
+{
+    return ( MovableElement::isDirection(direction) && !_walls[MovableElement::directionToInt(direction)]);
+}
 
 // ACCESSORS
 bool MazeCase::isWall(const string direction) const
@@ -135,10 +140,6 @@ MazeCase* MazeCase::getNextMazeCase(const std::string direction)
     }
     return  nullptr;
 }
-
-
-
-
 
 
 

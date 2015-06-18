@@ -12,6 +12,11 @@ using namespace std;
 
 Player::Player() : Perso()
 {
+    reset();
+}
+
+void Player::reset()
+{
     _direction = "down";
     _isMoving = false;
     _speed = 5;
@@ -21,13 +26,38 @@ Player::Player() : Perso()
     _traceNbMax = PLAYER_NB_TRACE_MAX;
 }
 
-void Player::Move(const std::string direction)
+void Player::autoMove()
 {
-    if (isDirection(direction))
-        _direction = direction;
-    _isMoving = true;
-    MovableElement::Move(_direction);
-    leaveTrace();
+    // if player has begun a movement
+    if (_isMoving)
+    {
+        MovableElement::Move();
+        // if he is in the destination mazeCase
+        {
+            if (_mazeCaseToGo != nullptr && _mazeCaseToGo->contain(this))
+            {
+                // end of the movement
+                leaveTrace();
+                _mazeCasePosition = _mazeCasePosition;
+                _mazeCaseToGo = nullptr;
+                _isMoving = false;
+            }
+        }
+    }
+}
+
+void Player::chooseDirection(const string direction)
+{
+    if (isDirection(direction) && !_isMoving)
+    {
+        if (_mazeCasePosition != nullptr && _mazeCasePosition->isAvailableDirection(direction) )
+
+        {
+            _direction = direction;
+            _mazeCaseToGo = _mazeCasePosition->getNextMazeCase(_direction);
+            _isMoving = true;
+        }
+    }
 }
 
 

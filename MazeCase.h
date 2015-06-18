@@ -48,6 +48,9 @@ public:
     
     void place(GraphicElement* element) const;
     
+    bool isAvailableDirection(std::string direction);
+    
+    
 private:
     void init();
     
@@ -63,6 +66,7 @@ public:
     std::list<Coin*> * getCoinList();
     
     MazeCase* getNextMazeCase(const std::string direction) ;
+
 };
 
 #endif /* defined(__Console__MazeCase__) */

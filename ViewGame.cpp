@@ -106,6 +106,8 @@ int ViewGame::treatEventSFML()
         if (Keyboard::isKeyPressed(Keyboard::Right))
             _modele->playerMove("right");
         
+        
+        
         if (Keyboard::isKeyPressed(Keyboard::Z))
             _modele->playerShoot("up");
         
@@ -122,7 +124,6 @@ int ViewGame::treatEventSFML()
         Event event;
     while (_window->pollEvent(event))
     {
-        
         switch (event.type)
         {   
             case sf::Event::KeyPressed :
@@ -132,7 +133,23 @@ int ViewGame::treatEventSFML()
                 case sf::Keyboard::Escape:
                     returnValue = 111;
                     break;
+                    /*
+                case sf::Keyboard::Up:
+                    _modele->playerMove("up");
+                    break;
+                
+                case sf::Keyboard::Down:
+                    _modele->playerMove("down");
+                    break;
+                
+                case sf::Keyboard::Left:
+                    _modele->playerMove("left");
+                    break;
                     
+                case sf::Keyboard::Right:
+                    _modele->playerMove("right");
+                    break;
+                    */
                 case sf::Keyboard::Space:
                     if (_modele->getWin() || _modele->getLoose())
                     {
@@ -171,9 +188,7 @@ void ViewGame::showViewSFML()
         displayWin();
     }else
     {
-        
-        // draw background
-        _window->draw(_spritesList["background"]);
+
         
         displayBackGround();
         
@@ -202,6 +217,20 @@ void ViewGame::displayEnnemies()
     //cout << " enemy list : " << _modele->getEnemiesList()->size() << endl;
     for (Enemy* enemy : *_modele->getEnemiesList())
     {
+        // temoin sur le zomby
+        /*
+        if (enemy->getMazeCase() != nullptr)
+        {
+            name = "temoin";
+            _spritesList[name].setPosition(enemy->getMazeCase()->getX(), enemy->getMazeCase()->getY());
+            _window->draw(_spritesList[name]);
+            if (enemy->getMazeCasToGo() != nullptr)
+            {
+            _spritesList[name].setPosition(enemy->getMazeCasToGo()->getX(), enemy->getMazeCasToGo()->getY());
+            _window->draw(_spritesList[name]);
+            }
+        }
+        */
         name = "zomby";
         name += enemy->getDirection();
         if (ZOMBY_NB_SPRITES > 1)
@@ -210,15 +239,7 @@ void ViewGame::displayEnnemies()
         }
         _spritesList[name].setPosition(enemy->getX(), enemy->getY());
         _window->draw(_spritesList[name]);
-        // temoin sur le zomby
-        /*
-        if (enemy->getMazeCase() != nullptr)
-        {
-            name = "temoin";
-            _spritesList[name].setPosition(enemy->getMazeCase()->getX(), enemy->getMazeCase()->getY());
-            _window->draw(_spritesList[name]);
-        }
-         */
+        
     }
 }
 
@@ -249,13 +270,18 @@ void ViewGame::displayPlayer()
 {
     if (_modele->getPlayer() != nullptr)
     {
+        /* === TEMOINS ==
         if(_modele->getPlayer()->getMazeCase() != nullptr)
         {
             _spritesList["temoin"].setPosition(_modele->getPlayer()->getMazeCase()->getX(), _modele->getPlayer()->getMazeCase()->getY());
             _window->draw(_spritesList["temoin"]);
         }
         
-        
+        if(_modele->getPlayer()->getMazeCasToGo() != nullptr)
+        {
+            _spritesList["temoin"].setPosition(_modele->getPlayer()->getMazeCasToGo()->getX(), _modele->getPlayer()->getMazeCasToGo()->getY());
+            _window->draw(_spritesList["temoin"]);
+        }*/
         
         string name = "player" ;
         if (PLAYER_NB_SPRITES > 1)
@@ -315,6 +341,9 @@ void ViewGame::displayInMazeCase(const unsigned int x, const unsigned int y, con
 
 void ViewGame::displayBackGround()
 {
+    // draw background
+    _window->draw(_spritesList["background"]);
+    
     displayInMazeCase(MAZE_SIZE-1, MAZE_SIZE-1, "exitLabel", EXIT_IMAGE_WIDTH, EXIT_IMAGE_HEIGHT);
 }
 
@@ -325,7 +354,6 @@ void ViewGame::displayMazeCase()
         
         if (mazeCase->getTrace()->available())
         {
-            //cout << mazeCase->getTrace()->getX() << " " << mazeCase->getTrace()->getY() << endl;
             _spritesList["trace"].setPosition(mazeCase->getTrace()->getX(), mazeCase->getTrace()->getY());
             _window->draw(_spritesList["trace"]);
         }

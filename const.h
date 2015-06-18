@@ -40,7 +40,7 @@ const unsigned int PLAYER_SPEED = 5;
 const unsigned int PLAYER_NB_TRACE_MAX = 5;
 
 // ENEMIES
-const unsigned int ZOMBY_SPEED = 2 ;
+const unsigned int ZOMBY_SPEED = 3 ;
 const unsigned int ZOMBY_ACCELERATION = 0;
 const unsigned int ZOMBY_NB_TRACE_MAX = 0;
 
