@@ -90,24 +90,35 @@ void GameModel::playerMove(const std::string direction)
 {
     if (_player.getMazeCase() != nullptr && MovableElement::isDirection(direction) )
     {
-        for (string value : _player.getMazeCase()->getAvalaibleDirecton())
+        
+        if (_player.getMazeCase()->contain(&_player))
         {
-            if (direction == value)
+            for (string value : _player.getMazeCase()->getAvalaibleDirecton())
             {
-                _player.setDirection(direction);
+                if (direction == value)
+                {
+                    _player.setDirection(direction);
+                }
             }
         }
-    }
-
-    MovableElement element = _player;
-    element.Move();
-
-    if (!Wall::wallsCollision(&element, getWallsList()) ||
-        element.getX() <= 0 || (element.getX() + element.getWidth()) >= WINDOW_WIDTH ||
-        element.getY() <= 0 || (element.getY() + element.getHeight()) >= WINDOW_HEIGHT
-        )
-    {
-        _player.Move();
+        else if (_player.getMazeCase()->ElementOnElement(&_player))
+        {
+            
+        }
+        
+            
+        
+        MovableElement element = _player;
+        element.Move();
+        
+        if (!Wall::wallsCollision(&element, getWallsList()) ||
+            element.getX() <= 0 || (element.getX() + element.getWidth()) >= WINDOW_WIDTH ||
+            element.getY() <= 0 || (element.getY() + element.getHeight()) >= WINDOW_HEIGHT
+            )
+        {
+            _player.Move();
+        }
+        
     }
 
 

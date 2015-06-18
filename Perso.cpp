@@ -15,10 +15,12 @@ Perso::Perso() : MovableElement()
 {
     _name = "";
     _mazeCasePosition = nullptr;
+    _mazeCaseToGo = nullptr;
     _life = 1;
     _dead = false;
     _traceNbMax = 0;
     _money = 0;
+    _isMoving = false;
     
 }
 
@@ -36,13 +38,14 @@ void Perso::leaveTrace()
 {
     if (_mazeCasePosition != nullptr)
     {
+        /*
         int cpt = 0;
         if (_traceList.size() > _traceNbMax)
         {
             Trace * trace = _traceList.front();
             _traceList.remove(trace);
             _traceList.resize(_traceNbMax -1);
-        }
+        }*/
         cout << "coucou" << endl;
         _traceList.push_back(_mazeCasePosition->getTrace());
         _mazeCasePosition->newTrace(_direction, _name);

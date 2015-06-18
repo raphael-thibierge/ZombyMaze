@@ -22,7 +22,6 @@ MazeCase::MazeCase()
 
 MazeCase::~MazeCase()
 {
-    
 }
 
 void MazeCase::init()
@@ -32,8 +31,13 @@ void MazeCase::init()
     for (unsigned int i = 0; i < 4 ; i++)
         _walls.push_back(false);
     _walls.resize(4);
+    
+    // init nex maze case
+    _nextMazeCase.insert(make_pair("up", nullptr));
+    _nextMazeCase.insert(make_pair("down", nullptr));
+    _nextMazeCase.insert(make_pair("left", nullptr));
+    _nextMazeCase.insert(make_pair("right", nullptr));
 }
-
 
 void MazeCase::newTrace(const string direction, const string owner)
 {
@@ -45,6 +49,14 @@ void MazeCase::addWall(const unsigned int sideNumber)
 {
     if (sideNumber < 4)
         _walls[sideNumber] = true;
+}
+
+void MazeCase::addNextMazeCase(MazeCase * mazeCase, const std::string direction)
+{
+    if (MovableElement::isDirection(direction))
+    {
+        _nextMazeCase[direction] = mazeCase;
+    }
 }
 
 vector<string> MazeCase::getAvalaibleDirecton() const
@@ -113,3 +125,20 @@ std::list<Coin*> * MazeCase::getCoinList()
 {
     return &_coinList;
 }
+
+MazeCase* MazeCase::getNextMazeCase(const std::string direction)
+{
+    MazeCase* mazeCase;
+    if (MovableElement::isDirection(direction))
+    {
+        return _nextMazeCase[direction] ;
+    }
+    return  nullptr;
+}
+
+
+
+
+
+
+

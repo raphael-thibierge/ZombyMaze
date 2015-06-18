@@ -43,6 +43,8 @@ private:
     void construct();
 
     void addWall(unsigned int x, unsigned int y, const char orientation);
+    
+    void updateNextMazeCases();
 
 
 // ACCESSORS

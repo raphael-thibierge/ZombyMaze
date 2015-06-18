@@ -18,6 +18,7 @@ class Perso : public MovableElement
 {
 protected:
     MazeCase * _mazeCasePosition;
+    MazeCase * _mazeCaseToGo;
     std::string _name;
     unsigned int _life;
     std::list<Trace*> _traceList;
@@ -27,6 +28,7 @@ protected:
     
     // states
     bool _dead;
+    bool _isMoving;
 
 // CONSTRUCTORS AND DESTRUCTORS
 public:

@@ -18,6 +18,7 @@ class MazeCase : public GraphicElement
 // ATTRIBUTES
 private:
     std::vector<bool> _walls;
+    std::map<std::string, MazeCase*> _nextMazeCase;
     std::list<Coin*> _coinList;
     Trace _trace;
     
@@ -32,6 +33,8 @@ public:
     void newTrace(const std::string direction, const std::string owner);
     
     void addWall(const unsigned sideNumber);
+    
+    void addNextMazeCase(MazeCase * mazeCase,const std::string direction);
 
     std::vector<std::string> getAvalaibleDirecton() const;
     
@@ -58,6 +61,8 @@ public:
     Trace* getTrace();
     
     std::list<Coin*> * getCoinList();
+    
+    MazeCase* getNextMazeCase(const std::string direction) ;
 };
 
 #endif /* defined(__Console__MazeCase__) */

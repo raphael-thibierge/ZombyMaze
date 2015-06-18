@@ -88,6 +88,7 @@ void Maze::construct()
             }
         }
     }
+    updateNextMazeCases();
 
 }
 
@@ -122,6 +123,38 @@ void Maze::addWall(unsigned int x, unsigned int y, const char orientation)
             break;
     }
 }
+
+void Maze::updateNextMazeCases()
+{
+    for (unsigned int line = 0 ; line < _size ; line ++)
+    {
+        for (unsigned int column = 0 ;  column < _size ; column++)
+        {
+            MazeCase* mazeCase = &_grid[line][column];
+            for (string direction : mazeCase->getAvalaibleDirecton())
+            {
+                if (direction == "up" && line > 0)
+                {
+                    mazeCase->addNextMazeCase(&_grid[line-1][column], direction);
+                }
+                if (direction == "down")
+                {
+                    mazeCase->addNextMazeCase(&_grid[line+1][column], direction);
+                }
+                if (direction == "left" && column > 0)
+                {
+                    mazeCase->addNextMazeCase(&_grid[line][column-1], direction);
+                }
+                if (direction == "right")
+                {
+                    mazeCase->addNextMazeCase(&_grid[line][column+1], direction);
+                }
+            }
+        }
+    }
+    
+}
+
 
 //
 // ACCESSORS

@@ -27,17 +27,43 @@ Enemy::Enemy() : Perso()
 
 void Enemy::autoMove()
 {
-    if (_mazeCasePosition != nullptr)
+    // if enemi has begun a movement
+    if (_isMoving)
     {
-        
-        if (_mazeCasePosition->isWall(_direction))
+        Move();
+        // if he is in the destination mazeCase
         {
-            changeDirection();
+            if (_mazeCaseToGo->contain(this))
+            {
+                // end of the movement
+                setMazeCase(_mazeCasePosition);
+                _mazeCaseToGo = nullptr;
+                _isMoving = false;
+            }
+        }
+    }
+    // else -> he is in a mainCase
+    else
+    {
+        // he has to choose a direction
+        vector<std::string> avalaibleDirection = _mazeCasePosition->getAvalaibleDirecton();
+        // random direction
+        int random = 0;
+        // if there is many possibilities
+        if (avalaibleDirection.size() > 1)
+        {
+            do
+            {
+                random = rand() % avalaibleDirection.size();
+            }
+            while (avalaibleDirection[random] == oppositeDirection(_direction));
         }
         
-        Move();
+        _direction = avalaibleDirection[random];
+        _mazeCaseToGo = _mazeCasePosition->getNextMazeCase(_direction);
+        _isMoving = true;
+        
     }
-    
     
 
 

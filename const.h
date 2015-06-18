@@ -11,6 +11,7 @@
 #include <string>
 #include <list>
 #include <vector>
+#include <map>
 #include "ResourcePath.hpp"
 
 #ifndef Console_const_h
