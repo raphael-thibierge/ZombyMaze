@@ -180,3 +180,17 @@ list<MazeCase*> * Maze::getMazeCaseList()
 {
     return &_mazeCaseList;
 }
+
+unsigned int Maze::getSize() const
+{
+    return _size;
+}
+
+MazeCase* Maze::getMazeCase(const unsigned int line, const unsigned int column)
+{
+    if (line < _size && column < _size )
+    {
+        return  &_grid[line][column];
+    }
+    return nullptr;
+}

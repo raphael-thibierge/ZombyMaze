@@ -28,12 +28,7 @@ void GameModel::init()
     _player.setPosition(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
     
     // add an enemy
-    _enemiesList.clear();
-    _enemiesList.push_back(new Enemy);
-    for (Enemy* enemy : _enemiesList)
-    {
-        enemy->setPosition(210,200);
-    }
+    generateEnemies();
     
 }
 
@@ -278,11 +273,39 @@ void GameModel::clear()
         }
     }
     _bulletsList.clear();
-    
-    
-    // TRACE DESTRUCTION
-    
 }
+
+void GameModel::spawnRandomEnemy()
+{
+    unsigned int randomLine;
+    unsigned int randomColumn;
+    do
+    {
+        randomLine = rand() % _maze.getSize();
+        randomColumn = rand() % _maze.getSize();
+    } while (randomLine < 2 && randomColumn < 2);
+    
+    
+    
+    Enemy * enemy = new Enemy();
+    enemy->setMazeCase(_maze.getMazeCase(randomLine, randomColumn));
+    enemy->getMazeCase()->place(enemy);
+    _enemiesList.push_back(enemy);
+    enemy = nullptr;
+}
+
+void GameModel::generateEnemies()
+{
+    for (unsigned int i = 0 ; i < ENEMIES_MAX ; i++)
+    {
+        spawnRandomEnemy();
+    }
+    for (auto enemy : _enemiesList)
+    {
+        cout << enemy->toString() << endl;;
+    }
+}
+
 
 
 //

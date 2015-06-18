@@ -66,6 +66,9 @@ const std::string COIN_IMAGE = "coin.png";
 const unsigned int COIN_WIDTH = 41;
 const unsigned int COIN_HEIGHT = 41;
 
+//
+const unsigned int ENEMIES_MAX = 10;
+
 // =====================    INTRODUCTIONVIEW   ===================
 const std::string IMAGE_INTRO = "Intro.png";
 const float TIME_INTRODUCTION = 2.0f;

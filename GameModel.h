@@ -45,6 +45,8 @@ public:
     void reset();
     
     void playerShoot(const std::string direction);
+    
+
 
 private:
 
@@ -63,6 +65,10 @@ private:
     bool successOutOfMaze();
     
     void clear();
+    
+    void spawnRandomEnemy();
+    
+    void generateEnemies();
 
     
     

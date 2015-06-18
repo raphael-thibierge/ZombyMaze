@@ -56,6 +56,10 @@ public :
     std::list<Trace*> * getTraceList();
     
     std::list<MazeCase*> * getMazeCaseList();
+    
+    unsigned int getSize() const;
+    
+    MazeCase* getMazeCase(const unsigned int line, const unsigned int column);
 
 };
 

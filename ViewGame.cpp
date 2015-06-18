@@ -198,10 +198,11 @@ void ViewGame::showViewSFML()
 
 void ViewGame::displayEnnemies()
 {
-    string name = "zomby" ;
-
+    string name ;
+    //cout << " enemy list : " << _modele->getEnemiesList()->size() << endl;
     for (Enemy* enemy : *_modele->getEnemiesList())
     {
+        name = "zomby";
         name += enemy->getDirection();
         if (ZOMBY_NB_SPRITES > 1)
         {
@@ -209,13 +210,15 @@ void ViewGame::displayEnnemies()
         }
         _spritesList[name].setPosition(enemy->getX(), enemy->getY());
         _window->draw(_spritesList[name]);
+        // temoin sur le zomby
+        /*
         if (enemy->getMazeCase() != nullptr)
         {
             name = "temoin";
             _spritesList[name].setPosition(enemy->getMazeCase()->getX(), enemy->getMazeCase()->getY());
             _window->draw(_spritesList[name]);
-            
         }
+         */
     }
 }
 
@@ -322,7 +325,7 @@ void ViewGame::displayMazeCase()
         
         if (mazeCase->getTrace()->available())
         {
-            cout << mazeCase->getTrace()->getX() << " " << mazeCase->getTrace()->getY() << endl;
+            //cout << mazeCase->getTrace()->getX() << " " << mazeCase->getTrace()->getY() << endl;
             _spritesList["trace"].setPosition(mazeCase->getTrace()->getX(), mazeCase->getTrace()->getY());
             _window->draw(_spritesList["trace"]);
         }
