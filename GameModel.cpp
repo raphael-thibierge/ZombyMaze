@@ -51,13 +51,16 @@ void GameModel::nextStep()
         
         updateMazeCasePosition();
         
-       // enemiesCheckTraces();
+       
         
         moveAllEnemies();
         
         moveAllBullets();
         
         bulletCollision();
+        
+        
+        enemiesCheckTraces();
         
         if (enemiesCollision())
         {

@@ -39,6 +39,21 @@ void Perso::leaveTrace()
     if (_mazeCasePosition != nullptr)
     {
         _mazeCasePosition->newTrace(_direction, _name);
+        _traceList.push_back(_mazeCasePosition->getTrace());
+        
+        if (_traceList.size() > PLAYER_NB_TRACE_MAX)
+        {
+            int cpt = 0;
+            int max = _traceList.size() - PLAYER_NB_TRACE_MAX;
+            for (auto trace : _traceList)
+            {
+                if (cpt < max)
+                {
+                    trace->deleteTrace();
+                }
+                cpt++;
+            }
+        }
     }
     
 }
@@ -95,6 +110,10 @@ bool Perso::getDead() const
 
 void Perso::setMazeCase(MazeCase * mazeCase)
 {
+    if (_name == "player" && _mazeCasePosition != nullptr)
+    {
+        _money += _mazeCasePosition->takeCoins();
+    }
     _mazeCasePosition = mazeCase;
 }
 
