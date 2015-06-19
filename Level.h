@@ -4,6 +4,7 @@
 
 #include "Enemy.h"
 #include "Player.h"
+#include "Maze.h"
 
 class Level
 {
@@ -17,10 +18,16 @@ private:
     std::list<Enemy*> _enemiesList ;
     std::list<Bullet*> _bulletsList;
     int _enemiesCpt;
+    Maze _maze;
+    
+    // states
+    bool _playerLoose;
+    bool _playerWin;
+    bool _play;
 
 public:
 
-    Level (unsigned int level, Player * player, unsigned int * difficultyPointer);
+    Level ();
 
 	virtual ~Level ();
 
@@ -30,11 +37,41 @@ public:
     // generation of enemies
     void generateEnemy();
 
+   
+    void runGame();
+    
+    void construct();
+    
+    void movementManager();
+    
     // verify collision between all level's objects
     void collisionManager();
 
-    void runGame();
+    void playerShoot(const std::string direction);
+    
+    bool enemiesCollision();
+    
+    void bulletCollision();
+    
+    void moveAllEnemies();
+    
+    void moveAllBullets();
+    
+    void enemiesCheckTraces();
+    
+    void updateMazeCasePosition();
+    
+    bool successOutOfMaze();
 
+    void spawnRandomEnemy();
+    
+    void generateEnemies();
+
+    void init();
+    
+    void reset();
+    
+    void clear();
 
 
 
@@ -43,11 +80,36 @@ public:
 
     std::list<Enemy*> * getEnemies();
 
-    std::list<Bullet*> * getBullet();
+    std::list<Bullet*> * getBullets();
 
     Player * getPlayer()const;
-
-
+    
+    bool getLoose() const;
+    
+    bool getWin() const;
+    
+    bool getPlayStop() const;
+    
+    std::list<Trace *> * getTraces();
+    
+    std::list<Wall *> * getWalls();
+    
+    std::list<MazeCase*> * getMazeCases();
+    
+    Player* getPlayer();
+    
+    Maze * getMaze() ;
+    
+    
+    
+    
+    void setPlayStop();
+    
+    void setPlayer(Player * player);
 };
+
+    
+
+
 
 #endif // LEVEL_H

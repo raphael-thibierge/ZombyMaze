@@ -16,20 +16,16 @@
 #include "Trace.h"
 #include "Wall.h"
 #include "Bullet.h"
+#include "Level.h"
 
 class GameModel
 {
 private:
-    Maze _maze;
     Player _player;
-    std::list<Enemy*> _enemiesList;
-    std::list<Bullet*> _bulletsList;
+    Level _level;
     
     
 // stats
-    bool _playerLoose;
-    bool _playerWin;
-    bool _play;
 
 public:
     GameModel();
@@ -50,29 +46,10 @@ public:
 
 private:
     
-    void movementManager();
-    
-    void collisionManager();
-
-    bool enemiesCollision();
-    
-    void bulletCollision();
-
-    void moveAllEnemies();
-    
-    void moveAllBullets();
-
-    void enemiesCheckTraces();
-    
-    void updateMazeCasePosition();
-    
-    bool successOutOfMaze();
     
     void clear();
     
-    void spawnRandomEnemy();
-    
-    void generateEnemies();
+
 
     
     
