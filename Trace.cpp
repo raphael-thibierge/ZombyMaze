@@ -12,11 +12,9 @@ using namespace std;
 
 Trace::Trace() : GraphicElement()
 {
-    _owner = "";
-    _direction = "";
     _width = TRACE_WIDTH;
     _height = TRACE_HEIGHT;
-    _available = false;
+    deleteTrace(); // init the trace
 }
 
 
@@ -28,13 +26,17 @@ bool Trace::available() const
 
 void Trace::newTrace(const std::string direction, const std::string owner)
 {
+    deleteTrace();
     if (MovableElement::isDirection(direction))
     {
         _direction = direction;
         _owner = owner;
         _available = true;
     }
-    
+    else
+    {
+        cout << __FUNCTION__ << " not a direction" << endl;
+    }
 }
 
 void Trace::deleteTrace()
@@ -66,5 +68,9 @@ void Trace::setDirection(std::string direction)
     if (direction == "up" || direction == "down" || direction == "left" || direction == "right")
     {
         _direction = direction;
+    }
+    else
+    {
+        _available = false;
     }
 }

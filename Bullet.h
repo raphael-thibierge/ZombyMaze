@@ -6,7 +6,7 @@
 #include <vector>
 
 
-class Bullet : virtual public MovableElement
+class Bullet : public MovableElement
 {
 
 private :
@@ -14,23 +14,20 @@ private :
     unsigned int _type;
     unsigned int _damage;
     std::string _shooter;
-    std::string _direction;
-    float _speed;
 
-public:
+
 
 // Constructeurs destructeurs
-
+public:
 	Bullet (const std::string direction, const unsigned int X, const unsigned int Y);
 
     
 	virtual ~Bullet ();
 
 
-// Methodes
-    
-    // move the bullet (depend of its direction and speed)
-    void move ();
+// Methods
+public:
+    void autoMove();
 
     void initBullet();
 

@@ -26,9 +26,9 @@ void GameModel::init()
     
     // init player position
     _player.setPosition(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
-    
     // add an enemy
     generateEnemies();
+    updateMazeCasePosition();
     
 }
 
@@ -47,20 +47,11 @@ void GameModel::nextStep()
 {
     if (_play)
     {
-        _player.autoMove();
+        movementManager();
         
-        updateMazeCasePosition();
+        collisionManager();
         
-       
-        
-        moveAllEnemies();
-        
-        moveAllBullets();
-        
-        bulletCollision();
-        
-        
-        enemiesCheckTraces();
+        // enemiesCheckTraces();
         
         if (enemiesCollision())
         {
@@ -103,6 +94,19 @@ void GameModel::playerShoot(const string direction)
 }
 
 // PRIVATE
+void GameModel::movementManager()
+{
+    _player.autoMove() ;
+    moveAllEnemies();
+    moveAllBullets();
+}
+
+void GameModel::collisionManager()
+{
+    bulletCollision();
+    
+}
+
 
 void GameModel::moveAllEnemies()
 {
@@ -116,20 +120,36 @@ void GameModel::moveAllBullets()
 {
     for (Bullet* bullet : _bulletsList)
     {
-        bullet->move();
+        bullet->autoMove();
     }
 }
 
 bool GameModel::enemiesCollision()
 {
+    list<Enemy*> enemiesToDestroy;
+    bool returnValue = false;
     for (Enemy* enemy : _enemiesList)
     {
         if (_player.ElementOnElement(enemy))
         {
-            return true;
+            returnValue = true;
+            enemiesToDestroy.push_back(enemy);
+        }
+        else if (!_maze.contain(enemy))
+        {
+            enemiesToDestroy.push_back(enemy);
         }
     }
-    return false;
+    
+    for (Enemy* enemy : enemiesToDestroy)
+    {
+        _enemiesList.remove(enemy);
+        if (enemy != nullptr)
+            delete enemy;
+        enemy = nullptr;
+    }
+    enemiesToDestroy.clear();
+    return returnValue;
 }
 
 void GameModel::bulletCollision()
@@ -221,6 +241,7 @@ bool GameModel::successOutOfMaze()
 void GameModel::clear()
 {
     // LISTS DESTRUCTION
+    
     // enemies destruction
     for (Enemy * enemy : _enemiesList)
     {
@@ -232,6 +253,7 @@ void GameModel::clear()
     }
     _enemiesList.clear();
     
+    // bullets destruction
     for (Bullet * bullet : _bulletsList)
     {
         if (bullet != nullptr)
@@ -242,6 +264,13 @@ void GameModel::clear()
     }
     _bulletsList.clear();
     _player.reset();
+    
+    
+    // traces destruction
+    for (Trace* trace : *getTracesList())
+    {
+        trace->deleteTrace();
+    }
     
 }
 

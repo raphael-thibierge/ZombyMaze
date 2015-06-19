@@ -7,14 +7,13 @@ using namespace std ;
 
 Bullet::Bullet(const string direction, const unsigned int X, const unsigned int Y) : MovableElement()
 {
+    _direction = direction;
     _X = X;
     _Y = Y;
     initBullet();
 }
 
-Bullet::~Bullet () {
-    cout << __FUNCTION__ << endl ;
-}
+Bullet::~Bullet () {}
 
 
 //
@@ -29,13 +28,10 @@ void Bullet::initBullet(){
     _width = BULLET_WIDTH;
     _height = BULLET_HEIGHT;
 
-/*
     if (_direction == "NORTH")
         _Y -= _height;
-    if (_direction == "SOUTH")
-        _Y += _height;
- */
 }
+
 
 string Bullet::toString()
 {
@@ -51,6 +47,10 @@ string Bullet::toString()
     return text;
 }
 
+void Bullet::autoMove()
+{
+    MovableElement::move(_direction);
+}
 // Accessor methods
 //
 

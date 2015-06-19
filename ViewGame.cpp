@@ -224,13 +224,14 @@ void ViewGame::displayEnnemies()
             name = "temoin";
             _spritesList[name].setPosition(enemy->getMazeCase()->getX(), enemy->getMazeCase()->getY());
             _window->draw(_spritesList[name]);
+            
             if (enemy->getMazeCasToGo() != nullptr)
             {
             _spritesList[name].setPosition(enemy->getMazeCasToGo()->getX(), enemy->getMazeCasToGo()->getY());
             _window->draw(_spritesList[name]);
             }
-        }
-        */
+        }*/
+        
         name = "zomby";
         name += enemy->getDirection();
         if (ZOMBY_NB_SPRITES > 1)
@@ -270,7 +271,8 @@ void ViewGame::displayPlayer()
 {
     if (_modele->getPlayer() != nullptr)
     {
-        /* === TEMOINS ==
+        // === TEMOINS ==
+        /*
         if(_modele->getPlayer()->getMazeCase() != nullptr)
         {
             _spritesList["temoin"].setPosition(_modele->getPlayer()->getMazeCase()->getX(), _modele->getPlayer()->getMazeCase()->getY());

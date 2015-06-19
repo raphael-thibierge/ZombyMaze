@@ -14,10 +14,10 @@ using namespace std;
 //
 GraphicElement::GraphicElement()
 {
-    _X = 0;
-    _Y = 0;
-    _width = 0;
-    _height = 0;
+    _X = 10;
+    _Y = 10;
+    _width = 10;
+    _height = 10;
 }
 
 //
@@ -54,10 +54,12 @@ bool GraphicElement::contain(GraphicElement *element) const
     unsigned int eY = element->getY();
     unsigned int eWidth = element->getWidth();
     unsigned int eHeight = element->getHeight();
+    //cout << &element << " " << eX << " " << eY  << " " << eWidth << " " << eHeight << endl;
+        
     return ((pointOnElement(eX, eY) &&
-             pointOnElement(eX, eY + eHeight) &&
-             pointOnElement(eX + eWidth, eY) &&
-             pointOnElement(eX + eWidth, eY + eHeight)));
+            pointOnElement(eX, eY + eHeight) &&
+            pointOnElement(eX + eWidth, eY) &&
+            pointOnElement(eX + eWidth, eY + eHeight)));
 }
 
 string GraphicElement::toString()
@@ -88,6 +90,12 @@ void GraphicElement::setX(const unsigned int positionX)
 void GraphicElement::setY(const unsigned int positionY)
 {
     _Y = positionY;
+}
+
+void GraphicElement::setSize(const unsigned int widht, const unsigned int height)
+{
+    _width = widht;
+    _height = height;
 }
 
 unsigned int GraphicElement::getX() const

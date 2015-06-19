@@ -16,13 +16,13 @@ MovableElement::MovableElement() : GraphicElement()
     _direction = "down";
 }
 
-void MovableElement::Move()
-{
-    Move(_direction);
-}
 
-void MovableElement::Move(string direction)
+
+void MovableElement::move(string direction)
 {
+    if (direction == "")
+        direction = _direction;
+    
     if ( direction == "up")
         _Y -= _speed;
     if (direction == "down")
@@ -33,13 +33,12 @@ void MovableElement::Move(string direction)
         _X += _speed;
 }
 
-void MovableElement::MoveOpposite()
-{
-    MoveOpposite(_direction);
-}
 
-void MovableElement::MoveOpposite(string direction)
+void MovableElement::moveOpposite(string direction)
 {
+    if (direction == "" )
+        direction = _direction;
+    
     if ( direction == "up")
         _Y += _speed;
     else if (direction == "down")

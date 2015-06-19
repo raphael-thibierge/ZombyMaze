@@ -13,20 +13,26 @@ using namespace std;
 // CONSTRUCTOR AND DESTRUCTOR
 Perso::Perso() : MovableElement()
 {
+    // details
     _name = "";
-    _mazeCasePosition = nullptr;
-    _mazeCaseToGo = nullptr;
     _life = 1;
-    _dead = false;
     _traceNbMax = 0;
     _money = 0;
-    _isMoving = false;
     
+    
+    // pointers
+    _mazeCasePosition = nullptr;
+    _mazeCaseToGo = nullptr;
+    
+    // _states
+    _dead = false;
+    _isMoving = false;
 }
 
 Perso::~Perso()
 {
     _mazeCasePosition = nullptr;
+    _mazeCaseToGo = nullptr;
     _traceList.clear();
 }
 
@@ -39,7 +45,8 @@ void Perso::leaveTrace()
     if (_mazeCasePosition != nullptr)
     {
         _mazeCasePosition->newTrace(_direction, _name);
-        _traceList.push_back(_mazeCasePosition->getTrace());
+        _traceList.push_front(_mazeCasePosition->getTrace());
+
         
         if (_traceList.size() > PLAYER_NB_TRACE_MAX)
         {
@@ -47,12 +54,13 @@ void Perso::leaveTrace()
             int max = _traceList.size() - PLAYER_NB_TRACE_MAX;
             for (auto trace : _traceList)
             {
-                if (cpt < max)
+                if (cpt > max)
                 {
                     trace->deleteTrace();
                 }
                 cpt++;
             }
+            _traceList.resize(_traceNbMax);
         }
     }
     

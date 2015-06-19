@@ -49,6 +49,10 @@ public:
 
 
 private:
+    
+    void movementManager();
+    
+    void collisionManager();
 
     bool enemiesCollision();
     

@@ -25,13 +25,10 @@ public:
     
 // METHODS
 public:
-    void Move();
 
-    void Move(std::string direction);
+    void move(std::string direction = "");
     
-    void MoveOpposite();
-    
-    void MoveOpposite(std::string);
+    void moveOpposite(std::string directon = "");
     
 // STATICS
 public:

@@ -49,7 +49,6 @@ const std::string TRACE_IMAGE = "traces.png";
 const unsigned int TRACE_WIDTH = 20;
 const unsigned int TRACE_HEIGHT = 42;
 const unsigned int TRACE_NB_SPRITES = 1;
-const unsigned int TRACE_LIFE = 5;
 
 // BULLET
 const std::string BULLET_IMAGE_UP = "BulletUp.png";
@@ -67,7 +66,7 @@ const unsigned int COIN_WIDTH = 41;
 const unsigned int COIN_HEIGHT = 41;
 
 //
-const unsigned int ENEMIES_MAX = 10;
+const unsigned int ENEMIES_MAX = 10 ;
 
 // =====================    INTRODUCTIONVIEW   ===================
 const std::string IMAGE_INTRO = "Intro.png";

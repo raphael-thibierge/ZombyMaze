@@ -41,6 +41,8 @@ public:
     
     void setPosition(const unsigned int positionX, const unsigned int positionY);
     
+    void setSize(const unsigned int widht, const unsigned int height);
+    
     unsigned int getX() const;
     
     unsigned int getY() const;

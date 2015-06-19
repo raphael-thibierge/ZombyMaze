@@ -31,14 +31,14 @@ void Player::autoMove()
     // if player has begun a movement
     if (_isMoving)
     {
-        MovableElement::Move();
+        move();
         // if he is in the destination mazeCase
         {
             if (_mazeCaseToGo != nullptr && _mazeCaseToGo->contain(this))
             {
                 // end of the movement
                 leaveTrace();
-                _mazeCasePosition = _mazeCasePosition;
+                setMazeCase(_mazeCaseToGo);
                 _mazeCaseToGo = nullptr;
                 _isMoving = false;
             }
