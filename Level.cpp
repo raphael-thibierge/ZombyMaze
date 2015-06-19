@@ -25,6 +25,8 @@ void Level::init()
     _enemiesCpt = 0;
     // init player position
     _player->setPosition(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
+    _player->setMazeCase(nullptr);
+    _player->setMoving(false);
     // add an enemy
     generateEnemies();
     updateMazeCasePosition();
@@ -37,14 +39,14 @@ Level::~Level ()
     for(auto enemy : _enemiesList)
         delete enemy;
     _enemiesList.clear();
-
+    
     for(auto bullet : _bulletsList)
         delete bullet;
     _bulletsList.clear();
-
+    
     _player = nullptr;
     _difficulty = nullptr;
-
+    
 }
 
 
@@ -54,27 +56,32 @@ Level::~Level ()
 
 void Level::runGame()
 {
-    movementManager();
     
-    collisionManager();
-    
-    // enemiesCheckTraces();
-    
-    if (enemiesCollision())
+    if (_play)
     {
-        _playerLoose = true;
+        
+        movementManager();
+        
+        collisionManager();
+        
+        // enemiesCheckTraces();
+        
+        if (enemiesCollision())
+        {
+            _playerLoose = true;
+        }
+        _playerWin = successOutOfMaze();
+        
+        if (_playerLoose)
+        {
+            setPlayStop();
+        }
+        else if (_playerWin)
+        {
+            setPlayStop();
+        }
     }
-    _playerWin = successOutOfMaze();
     
-    if (_playerLoose)
-    {
-        setPlayStop();
-    }
-    else if (_playerWin)
-    {
-        setPlayStop();
-    }
-
 }
 
 // PRIVATE
@@ -229,8 +236,8 @@ void Level::spawnRandomEnemy()
     unsigned int randomColumn;
     do
     {
-        randomLine = rand() % _maze.getSize();
-        randomColumn = rand() % _maze.getSize();
+        randomLine = rand() % (_maze.getSize()-1);
+        randomColumn = rand() % (_maze.getSize()-1);
     } while (randomLine < 2 && randomColumn < 2);
     
     
@@ -257,7 +264,7 @@ void Level::playerShoot(const std::string direction)
     {
         _bulletsList.push_back(_player->getShoot(direction));
     }
-
+    
 }
 
 void Level::reset()
@@ -268,7 +275,16 @@ void Level::reset()
 
 void Level::clear()
 {
+    for (Trace* trace : *getTraces())
+        trace->deleteTrace();
     
+    for (Enemy* enemy : *getEnemies())
+    {
+        if (enemy != nullptr)
+            delete enemy;
+        enemy = nullptr;
+    }
+    getEnemies()->clear();
 }
 
 //
@@ -305,6 +321,10 @@ bool Level::getPlayStop() const
     return _play;
 }
 
+bool Level::getLevelEnd() const
+{
+    return _levelEnd;
+}
 
 list <Trace*> * Level::getTraces()
 {

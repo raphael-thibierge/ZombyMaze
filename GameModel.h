@@ -42,6 +42,8 @@ public:
     
     void playerShoot(const std::string direction);
     
+    void newLevel();
+    
 
 
 private:

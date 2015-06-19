@@ -24,6 +24,7 @@ private:
     bool _playerLoose;
     bool _playerWin;
     bool _play;
+    bool _levelEnd;
 
 public:
 
@@ -89,6 +90,8 @@ public:
     bool getWin() const;
     
     bool getPlayStop() const;
+    
+    bool getLevelEnd() const;
     
     std::list<Trace *> * getTraces();
     

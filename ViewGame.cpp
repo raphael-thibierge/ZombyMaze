@@ -133,27 +133,15 @@ int ViewGame::treatEventSFML()
                 case sf::Keyboard::Escape:
                     returnValue = 111;
                     break;
-                    /*
-                case sf::Keyboard::Up:
-                    _modele->playerMove("up");
-                    break;
-                
-                case sf::Keyboard::Down:
-                    _modele->playerMove("down");
-                    break;
-                
-                case sf::Keyboard::Left:
-                    _modele->playerMove("left");
-                    break;
                     
-                case sf::Keyboard::Right:
-                    _modele->playerMove("right");
-                    break;
-                    */
+                case sf::Keyboard::R:
+                    _modele->newLevel();
+                    _modele->setPlayStop();
+        
                 case sf::Keyboard::Space:
                     if (_modele->getWin() || _modele->getLoose())
                     {
-                        _modele->reset();
+                        _modele->newLevel();
                     }
                     _modele->setPlayStop();
                     break;

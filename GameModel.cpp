@@ -37,7 +37,8 @@ GameModel::~GameModel()
 
 void GameModel::nextStep()
 {
-    _level.runGame();
+    if (!_level.getLevelEnd())
+        _level.runGame();
     
 }
 
@@ -64,6 +65,11 @@ void GameModel::clear()
 {
     // LISTS DESTRUCTION
     _level.clear();
+}
+
+void GameModel::newLevel()
+{
+    _level.reset();
 }
 
 
@@ -121,7 +127,7 @@ bool GameModel::getWin() const
 
 bool GameModel::getLoose() const
 {
-    return _level.getWin();
+    return _level.getLoose();
 }
 
 void GameModel::setPlayStop()
