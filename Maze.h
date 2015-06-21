@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include "MazeCase.h"
 #include "Wall.h"
+#include "PowerUp.h"
+#include "BackgroundElement.h"
 #include <iostream>
 #include <fstream>
 
@@ -23,6 +25,8 @@ private:
     std::list<Wall*> _wallList;
     std::list<Trace*> _traceList;
     std::list<MazeCase*> _mazeCaseList;
+    std::list<PowerUp> _powerUpList;
+    std::list<BackgroundElement> _backgroundElementList;
     
     unsigned int _size ;
 
@@ -57,9 +61,14 @@ public :
     
     std::list<MazeCase*> * getMazeCaseList();
     
+    std::list<PowerUp> *getPowerUpList();
+    
+    std::list<BackgroundElement> *getBackgroundElementlist();
+    
     unsigned int getSize() const;
     
     MazeCase* getMazeCase(const unsigned int line, const unsigned int column);
+    
 
 };
 

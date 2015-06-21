@@ -68,6 +68,12 @@ const unsigned int COIN_HEIGHT = 41;
 //
 const unsigned int ENEMIES_MAX = 10 ;
 
+// gun
+const std::string GUN_IMAGE = "gun.png";
+const unsigned int GUN_WIDTH = 10;
+const unsigned int GUN_HEIGHT = 10;
+
+
 // =====================    INTRODUCTIONVIEW   ===================
 const std::string IMAGE_INTRO = "Intro.png";
 const float TIME_INTRODUCTION = 2.0f;

@@ -87,6 +87,33 @@ void Maze::construct()
         }
     }
     updateNextMazeCases();
+    // entrée
+    getline(file, line);
+    
+    // sortie
+    getline(file, line);
+    
+    // power up number
+    getline(file, line);
+    int number = atoi(&line[0]);
+    
+    for (unsigned int i = 0; i < number; i++) {
+        
+        // name
+        getline(file, line);
+        PowerUp powerUp = PowerUp(line);
+        
+        // line
+        getline(file, line);
+        int y = atoi(&line[0]);
+        
+        // column
+        getline(file, line);
+        int x = atoi(&line[0]);
+        
+        _grid[y][x].place(&powerUp);
+        _powerUpList.push_back(powerUp);
+    }
 
 }
 
@@ -150,7 +177,6 @@ void Maze::updateNextMazeCases()
             }
         }
     }
-    
 }
 
 
@@ -191,4 +217,14 @@ MazeCase* Maze::getMazeCase(const unsigned int line, const unsigned int column)
         return  &_grid[line][column];
     }
     return nullptr;
+}
+
+std::list<PowerUp> * Maze::getPowerUpList()
+{
+    return &_powerUpList;
+}
+
+std::list<BackgroundElement> * Maze::getBackgroundElementlist()
+{
+    return &_backgroundElementList;
 }

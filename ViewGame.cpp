@@ -82,6 +82,10 @@ bool ViewGame::initSFML()
     if (!initSprite("coin", COIN_IMAGE, 1, COIN_WIDTH, COIN_HEIGHT))
         return false;
     
+    // gun
+    if (!initSprite("gun", GUN_IMAGE, 1, GUN_WIDTH, GUN_HEIGHT))
+        return false;
+    
     cout << "Sprites initialisés" << endl;
     
 
@@ -335,13 +339,23 @@ void ViewGame::displayBackGround()
     _window->draw(_spritesList["background"]);
     
     displayInMazeCase(MAZE_SIZE-1, MAZE_SIZE-1, "exitLabel", EXIT_IMAGE_WIDTH, EXIT_IMAGE_HEIGHT);
+    
+    
+    for (PowerUp powerUp : *_modele->getPowersUp())
+    {
+        if (powerUp.getName() == "gun")
+        {
+            _spritesList["gun"].setPosition(powerUp.getX(), powerUp.getY());
+            _window->draw(_spritesList["gun"]);
+        }
+    }
 }
+
 
 void ViewGame::displayMazeCase()
 {
     for (MazeCase* mazeCase : *_modele->getMaze()->getMazeCaseList())
     {
-        
         if (mazeCase->getTrace()->available())
         {
             _spritesList["trace"].setPosition(mazeCase->getTrace()->getX(), mazeCase->getTrace()->getY());

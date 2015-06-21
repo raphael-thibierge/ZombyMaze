@@ -43,8 +43,6 @@ public:
     void playerShoot(const std::string direction);
     
     void newLevel();
-    
-
 
 private:
     
@@ -76,6 +74,10 @@ public:
     std::list<Bullet*> * getBulletList();
     
     std::list<MazeCase*> * getMazeCaseList();
+    
+    std::list<PowerUp> * getPowersUp();
+    
+    std::list<BackgroundElement> * getBackgroundElements();
     
     Player* getPlayer();
     

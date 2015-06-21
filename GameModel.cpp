@@ -134,3 +134,13 @@ void GameModel::setPlayStop()
 {
     _level.setPlayStop();
 }
+
+std::list<PowerUp> * GameModel::getPowersUp()
+{
+    return _level.getMaze()->getPowerUpList();
+}
+
+std::list<BackgroundElement> * GameModel::getBackgroundElements()
+{
+    return _level.getMaze()->getBackgroundElementlist();
+}
