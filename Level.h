@@ -38,7 +38,6 @@ public:
     // generation of enemies
     void generateEnemy();
 
-   
     void runGame();
     
     void construct();

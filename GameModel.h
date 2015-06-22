@@ -45,19 +45,11 @@ public:
     
     void playerShoot(const std::string direction);
     
-
     void newLevel();
 
 private:
-    
-    
     void clear();
-    
 
-
-    
-    
-private :
     void init();
 
 // ACCESSORS
