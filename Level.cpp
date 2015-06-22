@@ -95,7 +95,7 @@ void Level::movementManager()
 void Level::collisionManager()
 {
     bulletCollision();
-    
+    powerUpCollision();
 }
 
 
@@ -204,6 +204,23 @@ void Level::bulletCollision()
     _bulletToDestroy.clear();
 }
 
+void Level::powerUpCollision()
+{
+    for (PowerUp* powerUp : *_maze.getPowerUpList())
+    {
+        
+        if (powerUp->getAvailable() && powerUp->ElementOnElement(_player))
+        {
+            if ( powerUp->getName() == "gun")
+            {
+                _player->setGun(true);
+                powerUp->setAvailable(false);
+            }
+        }
+    }
+
+}
+
 void Level::enemiesCheckTraces()
 {
     for (Enemy* enemy : _enemiesList)
@@ -228,7 +245,6 @@ bool Level::successOutOfMaze()
 {
     return !_maze.ElementOnElement(_player);
 }
-
 
 void Level::spawnRandomEnemy()
 {
@@ -260,7 +276,7 @@ void Level::generateEnemies()
 
 void Level::playerShoot(const std::string direction)
 {
-    if (MovableElement::isDirection(direction))
+    if (MovableElement::isDirection(direction) && _player->canShoot())
     {
         _bulletsList.push_back(_player->getShoot(direction));
     }
@@ -270,6 +286,7 @@ void Level::playerShoot(const std::string direction)
 void Level::reset()
 {
     clear();
+    _player->reset();
     init();
 }
 

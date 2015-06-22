@@ -13,7 +13,11 @@
 #include "GraphicsElement.h"
 
 class PowerUp : public GraphicElement {
+private:
     std::string _name;
+    
+    // states
+    bool _avalaible;
     
 public:
     
@@ -22,6 +26,10 @@ public:
     // ACCESSORS
 public:
     std::string getName() const;
+    
+    bool getAvailable() const;
+    
+    void setAvailable(const bool available);
 };
 
 

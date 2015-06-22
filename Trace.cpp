@@ -14,6 +14,8 @@ Trace::Trace() : GraphicElement()
 {
     _width = TRACE_WIDTH;
     _height = TRACE_HEIGHT;
+    _lifeTime = TRACE_LIFE;
+    
     deleteTrace(); // init the trace
 }
 
@@ -21,7 +23,7 @@ Trace::Trace() : GraphicElement()
 
 bool Trace::available() const
 {
-    return  _available;
+    return _available;
 }
 
 void Trace::newTrace(const std::string direction, const std::string owner)
@@ -31,6 +33,7 @@ void Trace::newTrace(const std::string direction, const std::string owner)
     {
         _direction = direction;
         _owner = owner;
+        _life.restart();
         _available = true;
     }
     else

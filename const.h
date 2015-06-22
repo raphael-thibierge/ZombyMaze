@@ -13,12 +13,13 @@
 #include <vector>
 #include <map>
 #include "ResourcePath.hpp"
+#include <SFML/Graphics.hpp>
 
 #ifndef Console_const_h
 #define Console_const_h
 
 //WINDOWS
-const unsigned int WINDOW_WIDTH = 820;
+const unsigned int WINDOW_WIDTH = 1175;
 const unsigned int WINDOW_HEIGHT = 820;
 
 // =====================    GAMEMODEL   ===================
@@ -49,6 +50,8 @@ const std::string TRACE_IMAGE = "traces.png";
 const unsigned int TRACE_WIDTH = 20;
 const unsigned int TRACE_HEIGHT = 42;
 const unsigned int TRACE_NB_SPRITES = 1;
+const sf::Time TRACE_LIFE = sf::seconds(0.5f);
+
 
 // BULLET
 const std::string BULLET_IMAGE_UP = "BulletUp.png";
@@ -70,8 +73,8 @@ const unsigned int ENEMIES_MAX = 10 ;
 
 // gun
 const std::string GUN_IMAGE = "gun.png";
-const unsigned int GUN_WIDTH = 10;
-const unsigned int GUN_HEIGHT = 10;
+const unsigned int GUN_WIDTH = 41;
+const unsigned int GUN_HEIGHT = 41;
 
 
 // =====================    INTRODUCTIONVIEW   ===================
@@ -80,7 +83,7 @@ const float TIME_INTRODUCTION = 2.0f;
 
 // =====================    GAMEVIEW   ===================
 // TEXTES
-const unsigned int TEXT_SIZE = 20;
+const unsigned int TEXT_SIZE = 40;
 
 //GAMEVIEW
 const std::string VIEWGAME_MAZE_BACKGROUND = "fond.png";
@@ -130,5 +133,7 @@ const unsigned int WALL_WIDTH_H = 53;
 const unsigned int WALL_WIDTH_V = 12;
 const unsigned int WALL_HEIGHT_H = 12;
 const unsigned int WALL_HEIGHT_V = 53;
+
+const sf::Time PLAYER_FIRE_RATE = sf::seconds(0.5f);
 
 #endif

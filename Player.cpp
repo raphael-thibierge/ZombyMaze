@@ -24,6 +24,9 @@ void Player::reset()
     _height = PLAYER_HEIGHT;
     _name = "player";
     _traceNbMax = PLAYER_NB_TRACE_MAX;
+    _gunAvalaible = true;
+    _fireRateTime = PLAYER_FIRE_RATE;
+    _fireRate.restart();
 }
 
 void Player::autoMove()
@@ -60,6 +63,15 @@ void Player::chooseDirection(const string direction)
     }
 }
 
+bool Player::canShoot()
+{
+    if(_gunAvalaible && _fireRate.getElapsedTime() > _fireRateTime)
+    {
+        _fireRate.restart();
+        return true;
+    }
+    return false;
+}
 
 void Player::setMoving(const bool moving)
 {
@@ -69,4 +81,14 @@ void Player::setMoving(const bool moving)
 bool Player::getMoving() const
 {
     return _isMoving;
+}
+
+bool Player::getGun()
+{
+    return _gunAvalaible;
+}
+
+void Player::setGun(bool available = true)
+{
+    _gunAvalaible = available;
 }

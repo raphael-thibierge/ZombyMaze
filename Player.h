@@ -18,6 +18,9 @@ class Player : public Perso
 {
 private:
     bool _isMoving;
+    bool _gunAvalaible;
+    sf::Time _fireRateTime;
+    sf::Clock _fireRate;
     
     
 public:
@@ -29,13 +32,18 @@ public:
     Player();
     
     void reset();
-
+    
+    bool canShoot();
     
 
 // ACCESSORS
     void setMoving(const bool moving);
 
     bool getMoving() const;
+    
+    bool getGun();
+    
+    void setGun(bool available);
     
     
 };

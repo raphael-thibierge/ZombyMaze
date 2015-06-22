@@ -54,6 +54,8 @@ public:
     
     void bulletCollision();
     
+    void powerUpCollision();
+    
     void moveAllEnemies();
     
     void moveAllBullets();

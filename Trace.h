@@ -17,6 +17,8 @@ class Trace : public GraphicElement
 private:
     std::string _direction;
     std::string _owner;
+    sf::Time _lifeTime;
+    sf::Clock _life;
     
 // states
     bool _available;

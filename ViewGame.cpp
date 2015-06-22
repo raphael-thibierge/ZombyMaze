@@ -178,10 +178,9 @@ void ViewGame::showViewSFML()
     else if (_modele->getWin())
     {
         displayWin();
-    }else
+    }
+    else
     {
-
-        
         displayBackGround();
         
         displayMaze();
@@ -194,10 +193,9 @@ void ViewGame::showViewSFML()
         
         displayBullets();
         
-        
         //Others
         if (_modele->getPlayer() != nullptr);
-            displayText(to_string(_modele->getPlayer()->getMoney()), 600, 100);
+            displayText(to_string(_modele->getPlayer()->getMoney()), 900, 100);
         
         _cptSprites++;
     }
@@ -327,7 +325,6 @@ void ViewGame::displayInMazeCase(const unsigned int x, const unsigned int y, con
     
     xSprite = x * (MAZECASE_SIZE)  ;
     ySprite = y * (MAZECASE_SIZE) ;
-    //cout << xSprite << " " << ySprite << endl;
     _spritesList[spriteName].setPosition(xSprite, ySprite);
     _window->draw(_spritesList[spriteName]);
     
@@ -337,16 +334,13 @@ void ViewGame::displayBackGround()
 {
     // draw background
     _window->draw(_spritesList["background"]);
-    
-    displayInMazeCase(MAZE_SIZE-1, MAZE_SIZE-1, "exitLabel", EXIT_IMAGE_WIDTH, EXIT_IMAGE_HEIGHT);
-    
-    
-    for (PowerUp powerUp : *_modele->getPowersUp())
+
+    for (BackgroundElement element : *_modele->getBackgroundElements())
     {
-        if (powerUp.getName() == "gun")
+        if (element.getName() == "out")
         {
-            _spritesList["gun"].setPosition(powerUp.getX(), powerUp.getY());
-            _window->draw(_spritesList["gun"]);
+            _spritesList["exitLabel"].setPosition(element.getX(), element.getY());
+            _window->draw(_spritesList["exitLabel"]);
         }
     }
 }
@@ -370,5 +364,15 @@ void ViewGame::displayMazeCase()
             }
         }
     }
+    
+    for (PowerUp* powerUp : *_modele->getPowersUp())
+    {
+        if (powerUp->getAvailable() && powerUp->getName() == "gun")
+        {
+            _spritesList["gun"].setPosition(powerUp->getX(), powerUp->getY());
+            _window->draw(_spritesList["gun"]);
+        }
+    }
+
 
 }

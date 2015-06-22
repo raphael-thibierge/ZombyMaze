@@ -24,6 +24,10 @@ private:
     Player _player;
     Level _level;
     
+    //
+    // states
+    bool _gameStart;
+    
     
 // stats
 
@@ -31,7 +35,6 @@ public:
     GameModel();
 
     ~GameModel();
-
 // METHODS
 public:
     void nextStep();
@@ -42,6 +45,7 @@ public:
     
     void playerShoot(const std::string direction);
     
+
     void newLevel();
 
 private:
@@ -64,6 +68,10 @@ public:
     bool getWin() const;
     
     bool getPlayStop() const;
+    
+    void nextLevel();
+    
+    void newGame();
 
     std::list<Enemy*> * getEnemiesList();
 
@@ -75,7 +83,8 @@ public:
     
     std::list<MazeCase*> * getMazeCaseList();
     
-    std::list<PowerUp> * getPowersUp();
+    std::list<PowerUp*
+    > * getPowersUp();
     
     std::list<BackgroundElement> * getBackgroundElements();
     

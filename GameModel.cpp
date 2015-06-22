@@ -15,6 +15,7 @@ using namespace std;
 GameModel::GameModel()
 {
     init();
+    _gameStart = false;
 }
 
 void GameModel::init()
@@ -28,6 +29,7 @@ GameModel::~GameModel()
 {
     clear();
 }
+
 
 //
 // METHODS
@@ -58,6 +60,8 @@ void GameModel::playerShoot(const string direction)
 {
     _level.playerShoot(direction);
 }
+
+
 
 // PRIVATE
 
@@ -135,7 +139,7 @@ void GameModel::setPlayStop()
     _level.setPlayStop();
 }
 
-std::list<PowerUp> * GameModel::getPowersUp()
+std::list<PowerUp*> * GameModel::getPowersUp()
 {
     return _level.getMaze()->getPowerUpList();
 }

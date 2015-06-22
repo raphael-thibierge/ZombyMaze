@@ -92,6 +92,19 @@ void Maze::construct()
     
     // sortie
     getline(file, line);
+    BackgroundElement element = BackgroundElement(line);
+    
+    // line
+    getline(file, line);
+    int x = atoi(&line[0]);
+    
+    // column
+    getline(file, line);
+    int y = atoi(&line[0]);
+    
+    _grid[y][y].place(&element);
+    _backgroundElementList.push_back(element);
+    
     
     // power up number
     getline(file, line);
@@ -105,14 +118,15 @@ void Maze::construct()
         
         // line
         getline(file, line);
-        int y = atoi(&line[0]);
+        int x = atoi(&line[0]);
         
         // column
         getline(file, line);
-        int x = atoi(&line[0]);
-        
+        int y = atoi(&line[0]);
+
         _grid[y][x].place(&powerUp);
-        _powerUpList.push_back(powerUp);
+        cout << powerUp.getX() << " " << powerUp.getY() << endl;
+        _powerUpList.push_back(new PowerUp(powerUp));
     }
 
 }
@@ -219,7 +233,7 @@ MazeCase* Maze::getMazeCase(const unsigned int line, const unsigned int column)
     return nullptr;
 }
 
-std::list<PowerUp> * Maze::getPowerUpList()
+std::list<PowerUp*> * Maze::getPowerUpList()
 {
     return &_powerUpList;
 }

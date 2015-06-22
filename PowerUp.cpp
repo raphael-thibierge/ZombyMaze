@@ -11,9 +11,22 @@
 PowerUp::PowerUp(std::string name) : GraphicElement()
 {
     _name = name;
+    _width = GUN_WIDTH;
+    _height = GUN_HEIGHT;
+    _avalaible = true;
 }
 
 std::string PowerUp::getName() const
 {
     return _name;
+}
+
+bool PowerUp::getAvailable() const
+{
+    return _avalaible;
+}
+
+void PowerUp::setAvailable(const bool available)
+{
+    _avalaible = available;
 }

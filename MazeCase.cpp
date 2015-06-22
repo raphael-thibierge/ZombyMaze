@@ -107,6 +107,10 @@ void MazeCase::place(GraphicElement *element) const
 {
     element->setX(_X + (_width - element->getWidth() ) / 2 );
     element->setY(_Y + (_height - element->getHeight() ) / 2 );
+    
+    //element->setX(_X );
+    //element->setY(_Y );
+    
 }
 
 
