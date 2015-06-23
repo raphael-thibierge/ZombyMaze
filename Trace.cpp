@@ -32,6 +32,17 @@ void Trace::newTrace(const std::string direction, const std::string owner)
     if (MovableElement::isDirection(direction))
     {
         _direction = direction;
+        if (direction == "up" || direction == "down")
+        {
+            _width = TRACE_WIDTH;
+            _height = TRACE_HEIGHT;
+        }
+        if (direction == "left" || direction == "right")
+        {
+            _width = TRACE_HEIGHT;
+            _height = TRACE_WIDTH;
+        }
+        
         _owner = owner;
         _life.restart();
         _available = true;

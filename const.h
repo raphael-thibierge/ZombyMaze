@@ -46,9 +46,12 @@ const unsigned int ZOMBY_ACCELERATION = 0;
 const unsigned int ZOMBY_NB_TRACE_MAX = 0;
 
 // TRACE
-const std::string TRACE_IMAGE = "traces.png";
+const std::string TRACE_IMAGE_UP = "tracehaut.png";
+const std::string TRACE_IMAGE_DOWN = "tracebas.png";
+const std::string TRACE_IMAGE_LEFT = "tracegauche.png";
+const std::string TRACE_IMAGE_RIGHT = "tracedroite.png";
 const unsigned int TRACE_WIDTH = 20;
-const unsigned int TRACE_HEIGHT = 42;
+const unsigned int TRACE_HEIGHT = 50;
 const unsigned int TRACE_NB_SPRITES = 1;
 const sf::Time TRACE_LIFE = sf::seconds(0.7f);
 
@@ -90,7 +93,7 @@ const unsigned int CHRONO_Y = 200;
 
 
 //GAMEVIEW
-const std::string VIEWGAME_MAZE_BACKGROUND = "fond.png";
+const std::string VIEWGAME_MAZE_BACKGROUND = "fond2.png";
 const int VIEWGAME_MAZE_BACKGROUND_WIDTH = WINDOW_WIDTH;
 const int VIEWGAME_MAZE_BACKGROUND_HEIGHT = WINDOW_HEIGHT;
 

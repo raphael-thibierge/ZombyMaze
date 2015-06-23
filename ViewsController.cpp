@@ -104,10 +104,7 @@ void ViewsController::showView(){
     //show active view
 
     if (_mainWindow != nullptr && _modele != nullptr && _view != nullptr)
-    {
-        //_mainWindow->clear();
-        _view->showViewSFML();
-        //_mainWindow->display();
+    {        _view->showViewSFML();
     }
     else
         cout << __FUNCTION__ << " modele, fenfetre ou vue active inexistante" << endl;

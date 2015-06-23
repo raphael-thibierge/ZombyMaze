@@ -42,8 +42,19 @@ bool ViewGame::initSFML()
     if (!initSprite("zombydown", VIEWGAME_IMAGE_ZOMBY_DOWN, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
         return false;
 
-    if (!initSprite("trace", TRACE_IMAGE, TRACE_NB_SPRITES, TRACE_WIDTH, TRACE_HEIGHT))
+    // TRACES
+    if (!initSprite("traceup", TRACE_IMAGE_UP, TRACE_NB_SPRITES, TRACE_WIDTH, TRACE_HEIGHT))
         return false;
+    
+    if (!initSprite("tracedown", TRACE_IMAGE_DOWN, TRACE_NB_SPRITES, TRACE_WIDTH, TRACE_HEIGHT))
+        return false;
+    
+    if (!initSprite("traceleft", TRACE_IMAGE_LEFT, TRACE_NB_SPRITES, TRACE_HEIGHT, TRACE_WIDTH))
+        return false;
+    
+    if (!initSprite("traceright", TRACE_IMAGE_RIGHT, TRACE_NB_SPRITES, TRACE_HEIGHT, TRACE_WIDTH))
+        return false;
+
 
 
     // walls
@@ -374,13 +385,16 @@ void ViewGame::displayMazeCase()
         }
     }
     
-    for (auto trace : *_modele->getTracesList())
+    for (MazeCase* mazeCase : *_modele->getMazeCaseList())
     {
+        Trace * trace = mazeCase->getTrace();
         if (trace->available())
         {
-            _spritesList["trace"].setPosition(trace->getX(), trace->getY());
-            _window->draw(_spritesList["trace"]);
+            mazeCase->place(trace);
+            string name = "trace" + trace->getDirection();
+            _spritesList[name].setPosition(trace->getX(), trace->getY());
+            _window->draw(_spritesList[name]);
         }
     }
-
+ 
 }
