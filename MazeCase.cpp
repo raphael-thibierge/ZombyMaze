@@ -75,25 +75,6 @@ vector<string> MazeCase::getAvalaibleDirecton() const
     return result;
 }
 
-
-unsigned int MazeCase::takeCoins()
-{
-    unsigned int total = 0;
-    for(Coin* coin : _coinList)
-    {
-        total+= coin->getValue();
-        delete coin;
-        coin = nullptr;
-    }
-    _coinList.clear();
-    return total;
-}
-
-void MazeCase::addCoin()
-{
-    _coinList.push_back(new Coin(1, _X, _Y));
-}
-
 void MazeCase::SetPosition(const unsigned int x, const unsigned y)
 {
     _X = MAZE_X + ( x * MAZECASE_SIZE ) + (x+1)*WALL_WIDTH_V;
@@ -130,10 +111,7 @@ Trace* MazeCase::getTrace()
     return &_trace;
 }
 
-std::list<Coin*> * MazeCase::getCoinList()
-{
-    return &_coinList;
-}
+
 
 MazeCase* MazeCase::getNextMazeCase(const std::string direction)
 {

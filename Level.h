@@ -17,8 +17,11 @@ private:
     Player * _player;
     std::list<Enemy*> _enemiesList ;
     std::list<Bullet*> _bulletsList;
+    std::list<Coin*> _coinList;
     int _enemiesCpt;
     Maze _maze;
+    
+    sf::Clock _chrono;
     
     // states
     bool _playerLoose;
@@ -35,19 +38,23 @@ public:
 
 // METHODS
 //
-    // generation of enemies
-    void generateEnemy();
 
+    // construct and run game
     void runGame();
-    
+
     void construct();
     
-    void movementManager();
+    void generateEnemies();
     
-    // verify collision between all level's objects
-    void collisionManager();
-
+    void spawnRandomEnemy();
+    
+    bool successOutOfMaze();
+    
     void playerShoot(const std::string direction);
+    
+    
+    // COLLISION
+    void collisionManager();
     
     bool enemiesCollision();
     
@@ -55,20 +62,25 @@ public:
     
     void powerUpCollision();
     
+    void coinCollision();
+
+    
+    
+    // MOVEMENT
+    void movementManager();
+    
     void moveAllEnemies();
     
     void moveAllBullets();
     
-    void enemiesCheckTraces();
-    
+    // UPDATE OBJETCS
     void updateMazeCasePosition();
     
-    bool successOutOfMaze();
-
-    void spawnRandomEnemy();
+    void updateTraces();
     
-    void generateEnemies();
+    
 
+    // OTHER
     void init();
     
     void reset();
@@ -100,11 +112,13 @@ public:
     
     std::list<MazeCase*> * getMazeCases();
     
+    std::list<Coin*> * getCoinList();
+    
     Player* getPlayer();
     
     Maze * getMaze() ;
     
-    
+    sf::Time getTime();
     
     
     void setPlayStop();

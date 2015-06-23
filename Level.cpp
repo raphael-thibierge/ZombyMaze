@@ -29,7 +29,12 @@ void Level::init()
     _player->setMoving(false);
     // add an enemy
     generateEnemies();
+    
     updateMazeCasePosition();
+    
+    updateTraces();
+    
+    _chrono.restart();
     
 }
 
@@ -53,16 +58,18 @@ Level::~Level ()
 //
 // METHODS
 //
+// construct and run game
 
 void Level::runGame()
 {
     
     if (_play)
     {
-        
         movementManager();
         
         collisionManager();
+        
+        updateTraces();
         
         // enemiesCheckTraces();
         
@@ -84,7 +91,8 @@ void Level::runGame()
     
 }
 
-// PRIVATE
+// ===========   MOVEMENTS
+//
 void Level::movementManager()
 {
     _player->autoMove() ;
@@ -96,6 +104,7 @@ void Level::collisionManager()
 {
     bulletCollision();
     powerUpCollision();
+    coinCollision();
 }
 
 
@@ -114,6 +123,9 @@ void Level::moveAllBullets()
         bullet->autoMove();
     }
 }
+
+
+// ==============  COLLISISION
 
 bool Level::enemiesCollision()
 {
@@ -150,7 +162,6 @@ void Level::bulletCollision()
     
     for (Bullet * bullet : _bulletsList)
     {
-        
         for (Enemy* enemy : _enemiesList)
         {
             if (enemy->ElementOnElement(bullet))
@@ -159,8 +170,7 @@ void Level::bulletCollision()
                 enemy->affectDamage(bullet->getDamage());
                 if (enemy->getDead())
                 {
-                    if (enemy->getMazeCase() != nullptr)
-                        enemy->getMazeCase()->addCoin();
+                    _coinList.push_back(new Coin(1, enemy->getX(), enemy->getY()));
                     _enemiesToDestroy.push_back(enemy);
                 }
                 _bulletToDestroy.push_back(bullet);
@@ -214,6 +224,7 @@ void Level::powerUpCollision()
             if ( powerUp->getName() == "gun")
             {
                 _player->setGun(true);
+                _player->addAmmo(GUB_AMMO);
                 powerUp->setAvailable(false);
             }
         }
@@ -221,14 +232,31 @@ void Level::powerUpCollision()
 
 }
 
-void Level::enemiesCheckTraces()
+void Level::coinCollision()
 {
-    for (Enemy* enemy : _enemiesList)
+    list<Coin*> toDestroy;
+    for (Coin* coin : _coinList)
     {
-        enemy->findTrace(getTraces());
+        if (coin->ElementOnElement(_player))
+        {
+            _player->addMoney(coin->getValue());
+            toDestroy.push_back(coin);
+        }
     }
+    for (auto coin : toDestroy)
+    {
+        _coinList.remove(coin);
+        if (coin != nullptr)
+        {
+            delete coin;
+            coin = nullptr;
+        }
+    }
+    toDestroy.clear();
 }
 
+
+// UPDATE OBJETCS
 void Level::updateMazeCasePosition()
 {
     // player
@@ -240,6 +268,15 @@ void Level::updateMazeCasePosition()
         enemy->updateMazeCase(getMazeCases());
     }
 }
+
+void Level::updateTraces()
+{
+    for (auto trace : *getTraces())
+    {
+        trace->update();
+    }
+}
+
 
 bool Level::successOutOfMaze()
 {
@@ -278,6 +315,7 @@ void Level::playerShoot(const std::string direction)
 {
     if (MovableElement::isDirection(direction) && _player->canShoot())
     {
+        _player->useAmmo();
         _bulletsList.push_back(_player->getShoot(direction));
     }
     
@@ -287,6 +325,7 @@ void Level::reset()
 {
     clear();
     _player->reset();
+    _maze.reset();
     init();
 }
 
@@ -304,9 +343,9 @@ void Level::clear()
     getEnemies()->clear();
 }
 
-//
-// ACCESSOR METHODS
-//
+// ============================================
+// ============  ACCESSOR METHODS  ============
+// ============================================
 
 list<Enemy*> * Level::getEnemies()
 {
@@ -358,6 +397,11 @@ list<MazeCase*> * Level::getMazeCases()
     return _maze.getMazeCaseList();
 }
 
+std::list<Coin*> * Level::getCoinList()
+{
+    return &_coinList;
+}
+
 
 Maze* Level::getMaze()
 {
@@ -373,4 +417,9 @@ void Level::setPlayer(Player *player)
 void Level::setPlayStop()
 {
     _play = !_play;
+}
+
+sf::Time Level::getTime()
+{
+    return _chrono.getElapsedTime();
 }

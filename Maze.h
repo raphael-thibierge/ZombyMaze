@@ -40,6 +40,9 @@ public:
 public:
     void clearTraceList();
     
+    void clear();
+    
+    void reset();
     
 private:
     void init();

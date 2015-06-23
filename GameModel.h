@@ -84,6 +84,8 @@ public:
     
     Maze * getMaze() ;
     
+    Level * getLevel();
+    
     void setPlayStop();
     
     

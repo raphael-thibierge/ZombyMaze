@@ -9,7 +9,7 @@
 class Bullet : public MovableElement
 {
 
-private :
+private  :
 
     unsigned int _type;
     unsigned int _damage;

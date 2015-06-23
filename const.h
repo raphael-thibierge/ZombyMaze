@@ -50,7 +50,7 @@ const std::string TRACE_IMAGE = "traces.png";
 const unsigned int TRACE_WIDTH = 20;
 const unsigned int TRACE_HEIGHT = 42;
 const unsigned int TRACE_NB_SPRITES = 1;
-const sf::Time TRACE_LIFE = sf::seconds(0.5f);
+const sf::Time TRACE_LIFE = sf::seconds(0.7f);
 
 
 // BULLET
@@ -75,15 +75,19 @@ const unsigned int ENEMIES_MAX = 10 ;
 const std::string GUN_IMAGE = "gun.png";
 const unsigned int GUN_WIDTH = 41;
 const unsigned int GUN_HEIGHT = 41;
+const unsigned int GUB_AMMO = 5;
 
 
 // =====================    INTRODUCTIONVIEW   ===================
 const std::string IMAGE_INTRO = "Intro.png";
-const float TIME_INTRODUCTION = 2.0f;
+const float TIME_INTRODUCTION = 0.5f;
 
 // =====================    GAMEVIEW   ===================
 // TEXTES
 const unsigned int TEXT_SIZE = 40;
+const unsigned int CHRONO_X = 950;
+const unsigned int CHRONO_Y = 200;
+
 
 //GAMEVIEW
 const std::string VIEWGAME_MAZE_BACKGROUND = "fond.png";
@@ -136,4 +140,7 @@ const unsigned int WALL_HEIGHT_V = 53;
 
 const sf::Time PLAYER_FIRE_RATE = sf::seconds(0.5f);
 
+
+
+enum Direction { Up, Down, Left, Right };
 #endif

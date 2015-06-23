@@ -43,6 +43,8 @@ public:
     void affectDamage(const unsigned int damage);
     
     void updateMazeCase(std::list<MazeCase*> * mazeCaseList);
+    
+    void addMoney(const unsigned int value);
 
     
 // ACCESSORS

@@ -21,6 +21,7 @@ private:
     bool _gunAvalaible;
     sf::Time _fireRateTime;
     sf::Clock _fireRate;
+    unsigned int _nbAmmo;
     
     
 public:
@@ -35,6 +36,8 @@ public:
     
     bool canShoot();
     
+    void useAmmo();
+    
 
 // ACCESSORS
     void setMoving(const bool moving);
@@ -44,6 +47,10 @@ public:
     bool getGun();
     
     void setGun(bool available);
+    
+    unsigned int getAmmo() const;
+    
+    void addAmmo(const unsigned int number);
     
     
 };

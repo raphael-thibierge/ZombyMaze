@@ -196,8 +196,14 @@ void ViewGame::showViewSFML()
         //Others
         if (_modele->getPlayer() != nullptr);
             displayText(to_string(_modele->getPlayer()->getMoney()), 900, 100);
+        if (_modele->getPlayStop())
+            _cptSprites++;
         
-        _cptSprites++;
+        if (_modele->getLevel() != nullptr)
+            displayText(to_string(_modele->getLevel()->getTime().asSeconds()), CHRONO_X, CHRONO_Y);
+        
+        if (_modele->getPlayer() != nullptr)
+            displayText(to_string(_modele->getPlayer()->getAmmo()), 900, 500);
     }
 }
 
@@ -348,22 +354,16 @@ void ViewGame::displayBackGround()
 
 void ViewGame::displayMazeCase()
 {
-    for (MazeCase* mazeCase : *_modele->getMaze()->getMazeCaseList())
+   
+    for (Coin* coin : *_modele->getLevel()->getCoinList())
     {
-        if (mazeCase->getTrace()->available())
+        if (coin != nullptr)
         {
-            _spritesList["trace"].setPosition(mazeCase->getTrace()->getX(), mazeCase->getTrace()->getY());
-            _window->draw(_spritesList["trace"]);
-        }
-        for (Coin* coin : *mazeCase->getCoinList())
-        {
-            if (coin != nullptr)
-            {
-                _spritesList["coin"].setPosition(coin->getX(), coin->getY());
-                _window->draw(_spritesList["coin"]);
-            }
+            _spritesList["coin"].setPosition(coin->getX(), coin->getY());
+            _window->draw(_spritesList["coin"]);
         }
     }
+    
     
     for (PowerUp* powerUp : *_modele->getPowersUp())
     {
@@ -373,6 +373,14 @@ void ViewGame::displayMazeCase()
             _window->draw(_spritesList["gun"]);
         }
     }
-
+    
+    for (auto trace : *_modele->getTracesList())
+    {
+        if (trace->available())
+        {
+            _spritesList["trace"].setPosition(trace->getX(), trace->getY());
+            _window->draw(_spritesList["trace"]);
+        }
+    }
 
 }

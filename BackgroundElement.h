@@ -12,7 +12,8 @@
 #include <stdio.h>
 #include "GraphicsElement.h"
 
-class BackgroundElement : public GraphicElement {
+class BackgroundElement : public GraphicElement
+{
     std::string _name;
     
 public:

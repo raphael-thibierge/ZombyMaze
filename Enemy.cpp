@@ -39,7 +39,6 @@ void Enemy::autoMove()
                 GraphicElement e;
                 e.setPosition(_X, _Y);
                 e.setSize(_width, _height);
-                cout << _X << " " << _Y << " " << " " << _width << " " << _height << endl;
                 if (_mazeCaseToGo != nullptr &&  _mazeCaseToGo->contain(&e))
                 {
                     // end of the movement
@@ -49,66 +48,46 @@ void Enemy::autoMove()
                 }
             }
         }
-        // else -> he is in a mainCase
+        // else -> he is in a mazeCase
         else
         {
-            vector<std::string> avalaibleDirection ;
-            // he has to choose a direction
-            avalaibleDirection = _mazeCasePosition->getAvalaibleDirecton();
-            
-            if (_traceFound && _mazeCasePosition != nullptr && _mazeCasePosition->getTrace()->available())
-            {
-                _direction = _mazeCasePosition->getTrace()->getDirection();
-            }
-            else
-            {
-                // random direction
-                int random = 0;
-                // if there is many possibilities
-                if (avalaibleDirection.size() > 1)
-                {
-                    do
-                    {
-                        random = rand() % avalaibleDirection.size();
-                    }
-                    while (avalaibleDirection[random] == oppositeDirection(_direction));
-                }
-                
-                
-                _direction = avalaibleDirection[random];
-                _mazeCaseToGo = _mazeCasePosition->getNextMazeCase(_direction);
-                _isMoving = true;
-            }
+            changeDirection();
         }
     }
 }
 
 void Enemy::changeDirection()
 {
-    vector<string> directions = _mazeCasePosition->getAvalaibleDirecton();
+    vector<std::string> avalaibleDirections ;
+    // he has to choose a direction
+    avalaibleDirections = _mazeCasePosition->getAvalaibleDirecton();
     
-    int random;
-    do
+    if (_mazeCasePosition != nullptr && _mazeCasePosition->getTrace()->available())
     {
-        random = rand() % directions.size();
-    } while (directions[random] == _direction);
-    
-    _direction = directions[random];
-}
-
-void Enemy::findTrace(std::list<Trace *> *tracesList)
-{
-    for (Trace* trace : *tracesList)
-    {
-        if (trace->available() && trace->getOwner() == "player")
-        {
-            traceFound(trace->getDirection());
-            return;
-        }
+        traceFound(_mazeCasePosition->getTrace()->getDirection());
     }
-    traceLoose();
+    else
+    
+    {
+        traceLoose();
+        // random direction
+        int random = 0;
+        // if there is many possibilities
+        if (avalaibleDirections.size() > 1)
+        {
+            do
+            {
+                random = rand() % avalaibleDirections.size();
+            }
+            while (avalaibleDirections[random] == oppositeDirection(_direction));
+        }
+        
+        
+        _direction = avalaibleDirections[random];
+    }
+    _mazeCaseToGo = _mazeCasePosition->getNextMazeCase(_direction);
+    _isMoving = true;
 }
-
 
 
 void Enemy::traceFound(std::string direction)

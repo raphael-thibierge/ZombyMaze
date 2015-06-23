@@ -31,12 +31,12 @@ public:
     void autoMove();
     
     void changeDirection();
-    
-    void findTrace(std::list<Trace*> * tracesList);
 
     void traceFound(std::string _direction);
     
     void traceLoose();
+    
+    bool findPlayer();
     
 
 private:

@@ -78,9 +78,9 @@ void GameModel::newLevel()
 
 
 
-//
-// ACCESSORS
-//
+// ============================================
+// ============  ACCESSOR METHODS  ============
+// ============================================
 
 list<Enemy*> * GameModel::getEnemiesList()
 {
@@ -147,4 +147,9 @@ std::list<PowerUp*> * GameModel::getPowersUp()
 std::list<BackgroundElement> * GameModel::getBackgroundElements()
 {
     return _level.getMaze()->getBackgroundElementlist();
+}
+
+Level* GameModel::getLevel()
+{
+    return &_level;
 }

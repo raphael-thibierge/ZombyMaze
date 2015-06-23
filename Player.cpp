@@ -26,6 +26,7 @@ void Player::reset()
     _traceNbMax = PLAYER_NB_TRACE_MAX;
     _gunAvalaible = false;
     _fireRateTime = PLAYER_FIRE_RATE;
+    _nbAmmo = 0;
     _fireRate.restart();
 }
 
@@ -49,6 +50,12 @@ void Player::autoMove()
     }
 }
 
+void Player::useAmmo()
+{
+    if (_nbAmmo > 0)
+        _nbAmmo--;
+}
+
 void Player::chooseDirection(const string direction)
 {
     if (isDirection(direction) && !_isMoving)
@@ -65,7 +72,7 @@ void Player::chooseDirection(const string direction)
 
 bool Player::canShoot()
 {
-    if(_gunAvalaible && _fireRate.getElapsedTime() > _fireRateTime)
+    if(_gunAvalaible && _nbAmmo > 0 && _fireRate.getElapsedTime() > _fireRateTime)
     {
         _fireRate.restart();
         return true;
@@ -88,7 +95,17 @@ bool Player::getGun()
     return _gunAvalaible;
 }
 
+unsigned int Player::getAmmo() const
+{
+    return _nbAmmo;
+}
+
 void Player::setGun(bool available = true)
 {
     _gunAvalaible = available;
+}
+
+void Player::addAmmo(const unsigned int number)
+{
+    _nbAmmo += number;
 }

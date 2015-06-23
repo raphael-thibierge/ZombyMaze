@@ -44,24 +44,8 @@ void Perso::leaveTrace()
 {
     if (_mazeCasePosition != nullptr)
     {
-        _mazeCasePosition->newTrace(_direction, _name);
-        _traceList.push_front(_mazeCasePosition->getTrace());
+        _mazeCasePosition->newTrace(_direction, _name); 
 
-        
-        if (_traceList.size() > PLAYER_NB_TRACE_MAX)
-        {
-            int cpt = 0;
-            int max = _traceList.size() - PLAYER_NB_TRACE_MAX;
-            for (auto trace : _traceList)
-            {
-                if (cpt > max)
-                {
-                    trace->deleteTrace();
-                }
-                cpt++;
-            }
-            _traceList.resize(_traceNbMax);
-        }
     }
     
 }
@@ -88,12 +72,16 @@ void Perso::updateMazeCase(std::list<MazeCase *> *mazeCaseList)
             setMazeCase(mazeCase);
         }
     }
-
 }
 
-//
-// ACCESSORS
-//
+void Perso::addMoney(const unsigned int value)
+{
+    _money += value;
+}
+
+// ============================================
+// ============  ACCESSOR METHODS  ============
+// ============================================
 
 MazeCase* Perso::getMazeCase() const
 {
@@ -118,10 +106,6 @@ bool Perso::getDead() const
 
 void Perso::setMazeCase(MazeCase * mazeCase)
 {
-    if (_name == "player" && _mazeCasePosition != nullptr)
-    {
-        _money += _mazeCasePosition->takeCoins();
-    }
     _mazeCasePosition = mazeCase;
 }
 

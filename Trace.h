@@ -41,7 +41,7 @@ public:
     
     std::string getOwner() const;
     
-    
+    void update();
     
     void setDirection(std::string direction);
 

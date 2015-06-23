@@ -15,7 +15,7 @@ using namespace std;
 
 Maze::Maze() : GraphicElement(){
     init();
-    construct();
+    
 
 }
 
@@ -43,6 +43,7 @@ void Maze::init()
     {
         _traceList.push_back(mazeCase->getTrace());
     }
+    construct();
 }
 
 
@@ -59,7 +60,34 @@ Maze::~Maze()
 //
 
 // PUBLIC
+void Maze::clear()
+{
+    for (Trace* trace : _traceList)
+    {
+        trace = nullptr;
+    }
+    _traceList.clear();
+    
+    for (Wall * wall : _wallList)
+    {
+        delete wall;
+        wall = nullptr;
+    }
+    _wallList.clear();
 
+    for (PowerUp* powerUp : _powerUpList)
+    {
+        delete powerUp;
+        powerUp = nullptr;
+    }
+    _powerUpList.clear();
+    
+}
+void Maze::reset()
+{
+    clear();
+    init();
+}
 
 // PRIVATE
 void Maze::construct()
@@ -194,9 +222,9 @@ void Maze::updateNextMazeCases()
 }
 
 
-//
-// ACCESSORS
-//
+// ============================================
+// ============  ACCESSOR METHODS  ============
+// ============================================
 MazeCase Maze::getCase(const int line, const int column) const
 {
     return _grid[line][column];

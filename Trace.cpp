@@ -40,6 +40,7 @@ void Trace::newTrace(const std::string direction, const std::string owner)
     {
         cout << __FUNCTION__ << " not a direction" << endl;
     }
+    _life.restart();
 }
 
 void Trace::deleteTrace()
@@ -47,6 +48,14 @@ void Trace::deleteTrace()
     _direction = "";
     _owner = "";
     _available = false;
+}
+
+void Trace::update()
+{
+    if (_life.getElapsedTime() > _lifeTime)
+    {
+        deleteTrace();
+    }
 }
 
 //
