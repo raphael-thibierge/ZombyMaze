@@ -14,6 +14,8 @@
 
 #include "GameModel.h"
 #include "ViewGame.h"
+#include "ViewIntroduction.h"
+#include "ViewMainMenu.h"
 
 
 

@@ -18,10 +18,10 @@ using namespace std;
 ViewsController::ViewsController(sf::RenderWindow* window) : _mainWindow(window)
 {
 
+    
     _allViews.insert(make_pair("Game", &_game));
     _allViews.insert(make_pair("Introduction", new ViewIntroduction()));
-    
-    _view = nullptr;
+    _allViews.insert(make_pair("MainMenu", new ViewMainMenu()));
     _mainWindow = window;
 
 }
@@ -49,14 +49,7 @@ ViewsController::~ViewsController(){
     _modele = nullptr;
     _view = nullptr;
     _mainWindow = nullptr;
-
-
-    for (auto view : _allViews) {
-        //the gameview is not in the queue
-        if (view.first != "Game")
-            delete view.second;
-        view.second=nullptr;
-    }
+    _allViews.clear();
 }
 
 
@@ -75,8 +68,9 @@ bool ViewsController::treatEvent(){
             break;
 
         case 0: // quit active vie
-            if (_view == _allViews["Introduction"])
-                _view = _allViews["Game"];
+            if (_view != _allViews["MainMenu"])
+                _view = _allViews["MainMenu"];
+            else forceQuit();
             break;
 
             // change of view
@@ -87,6 +81,10 @@ bool ViewsController::treatEvent(){
 
         case -2:
             _view = _allViews["Game"];
+            break;
+            
+        case -3 :
+            _view = _allViews["MainMenu"];
             break;
 
         case 111:
@@ -104,7 +102,8 @@ void ViewsController::showView(){
     //show active view
 
     if (_mainWindow != nullptr && _modele != nullptr && _view != nullptr)
-    {        _view->showViewSFML();
+    {
+        _view->showViewSFML();
     }
     else
         cout << __FUNCTION__ << " modele, fenfetre ou vue active inexistante" << endl;

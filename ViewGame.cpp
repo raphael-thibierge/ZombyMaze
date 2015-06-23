@@ -398,3 +398,8 @@ void ViewGame::displayMazeCase()
     }
  
 }
+
+bool ViewGame::initButtons()
+{
+    return true;
+}

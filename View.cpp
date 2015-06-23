@@ -37,24 +37,21 @@ bool View::init(GameModel* modele, sf::RenderWindow * window)
     return true;
 }
 
-void View::displayStandartButton(const std::string text, const float positionX, const float positionY, bool active)
+void View::displayStandartButton(const std::string name, const float positionX, const float positionY, bool active)
 {
-    /*
+    
+    string buttonName = "button_" + name;
+    
     if (active)
     {
-        _spritesList["standartButton_active"].SetPosition(positionX, positionY);
-        _window->Draw(_spritesList["standartButton_active"]);
+        buttonName += "1";
     }
-
     else
     {
-        _spritesList["standartButton"].SetPosition(positionX, positionY);
-        _window->Draw(_spritesList["standartButton"]);
+        buttonName += "0";
     }
-    //_window->Draw(_spritesList["standartButton"]);
-
-     displayText(text, positionX + 40, positionY+(BUTTON_HEIGHT - TEXT_SIZE)/2 - 5);
-    */
+    _spritesList[buttonName].setPosition(positionX, positionY);
+    _window->draw(_spritesList[buttonName]);
 }
 
 void View::displayText(const std::string text,const float positionX,const float positionY)
@@ -88,33 +85,8 @@ bool View::mouseOnButton
         mouseY >= buttonY &&
         mouseY <= buttonY + buttonHeight )
         return true;
+    cout << buttonX << " " <<  buttonY << " " << buttonWidth << " " << buttonHeight << endl;
     return false;
-}
-
-bool View::initButtons()
-{
-/*
-    // STANDART BUTTON
-        //buttons's image
-    _imagesList.insert(make_pair("standartButtons", sf::Image()));
-    if (!_imagesList["standartButtons"].LoadFromFile(IMAGE_BUTTONS))
-        return false;
-
-    _imagesList.insert(make_pair("standartButtonsActive", sf::Image()));
-    if (!_imagesList["standartButtonsActive"].LoadFromFile(IMAGE_BUTTONS_ACTIVE))
-        return false;
-
-    // standart button
-    _spritesList.insert(make_pair("standartButton", sf::Sprite()));
-    _spritesList["standartButton"].SetImage(_imagesList["standartButtons"]);
-    _spritesList["standartButton"].SetSubRect(sf::IntRect(0, 0, BUTTON_WIDTH + BUTTON_SPRITE_X , BUTTON_HEIGHT + BUTTON_SPRITE_Y));
-
-    // standart active button
-    _spritesList.insert(make_pair("standartButton_active", sf::Sprite()));
-    _spritesList["standartButton_active"].SetImage(_imagesList["standartButtonsActive"]);
-    _spritesList["standartButton_active"].SetSubRect(sf::IntRect(0, 0, BUTTON_WIDTH + BUTTON_SPRITE_ACTIVE_X , BUTTON_HEIGHT + BUTTON_SPRITE_ACTIVE_Y));
-*/
-    return true;
 }
 
 
@@ -142,6 +114,28 @@ bool View::initSprite(std:: string name, const std::string image, const unsigned
 
     }
     return true;
+}
+
+
+
+int View::treatEventSFML()
+{
+    return 1;
+}
+
+void View::showViewSFML()
+{
+    
+}
+
+bool View::initSFML()
+{
+    return true ;
+}
+
+bool View::initButtons()
+{
+    return false;
 }
 
 

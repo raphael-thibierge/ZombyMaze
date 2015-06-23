@@ -85,3 +85,8 @@ bool ViewIntroduction::initSFML()
     return true;
 }
 
+bool ViewIntroduction::initButtons()
+{
+    return true;
+}
+

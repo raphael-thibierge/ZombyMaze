@@ -91,7 +91,22 @@ const unsigned int TEXT_SIZE = 40;
 const unsigned int CHRONO_X = 950;
 const unsigned int CHRONO_Y = 200;
 
+// BUTTONS
+const unsigned int BUTTON_WIDTH = 300;
+const unsigned int BUTTON_HEIGHT = 120;
+const std::string BUTTON_TEXT_FONT = "";
 
+const std::string BUTTON_PLAY = "buttonPlay.png";
+const std::string BUTTON_QUIT = "buttonQuit.png";
+const std::string BUTTON_THEME = "buttonTheme.png";
+
+
+const std::string BACKGROUND_MAINMENU = "backgroundMainMenu.png";
+
+const unsigned int MENU_COLUMN_1 = 850;
+const unsigned int MENU_LINE_1 = 200;
+const unsigned int MENU_LINE_2 = 400;
+const unsigned int MENU_LINE_3 = 600;
 //GAMEVIEW
 const std::string VIEWGAME_MAZE_BACKGROUND = "fond2.png";
 const int VIEWGAME_MAZE_BACKGROUND_WIDTH = WINDOW_WIDTH;

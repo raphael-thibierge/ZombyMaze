@@ -35,6 +35,8 @@ public:
 
     bool initSFML() override;
 
+    bool initButtons() override;
+    
 };
 
 

@@ -26,7 +26,7 @@ protected:
 
     std::map<std::string, sf::Sprite> _spritesList;
     std::map<std::string, sf::Texture> _imagesList;
-
+    
 
 // CONSTRUCTOR AND DESTRUCTOR
 //
@@ -40,11 +40,15 @@ public :
 //
     // SFML VERSION
 
-    virtual int treatEventSFML() =0;
+    virtual int treatEventSFML();
 
-    virtual void showViewSFML() =0;
+    virtual void showViewSFML();
+    
+    virtual bool initSFML();
+    
+    virtual bool initButtons();
 
-    void displayStandartButton( const std::string text, const float positionX, const float positionY, const bool active = false);
+    void displayStandartButton( const std::string name, const float positionX, const float positionY, const bool active = false);
 
     void displayText( const std::string text, const float positionX, const float positionY);
 
@@ -54,9 +58,7 @@ public :
 
     bool init(GameModel* modele, sf::RenderWindow * window);
 
-    virtual bool initSFML() =0;
 
-    bool initButtons();
 
     bool initSprite(const std::string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteWitdh, const unsigned int spriteHeight);
 

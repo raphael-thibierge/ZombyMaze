@@ -34,11 +34,13 @@ public:
     
     void displayBullets();
 
-    bool initSFML();
+    bool initSFML() override;
     
     void displayBackGround();
     
     void displayInMazeCase(const unsigned int x, const unsigned int y, const std::string spriteName, const unsigned int width, const unsigned int height);
+    
+    bool initButtons() override;
 };
 
 #endif // VIEWGAME_H_INCLUDED
