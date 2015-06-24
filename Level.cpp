@@ -10,6 +10,7 @@ Level::Level ()
 {
     
     _nbEnnemies = ENEMIES_MAX;
+    _nbRetry = 0;
 }
 
 
@@ -71,8 +72,6 @@ void Level::runGame()
         
         updateTraces();
         
-        // enemiesCheckTraces();
-        
         if (enemiesCollision())
         {
             _playerLoose = true;
@@ -86,6 +85,7 @@ void Level::runGame()
         else if (_playerWin)
         {
             setPlayStop();
+            _nbRetry = 0;
         }
     }
     
@@ -326,6 +326,7 @@ void Level::reset()
     clear();
     _player->reset();
     _maze.reset();
+    _nbRetry++;
     init();
 }
 
@@ -406,6 +407,11 @@ std::list<Coin*> * Level::getCoinList()
 Maze* Level::getMaze()
 {
     return &_maze;
+}
+
+const unsigned int Level::getRetry() const
+{
+    return _nbRetry;
 }
 
 void Level::setPlayer(Player *player)

@@ -97,6 +97,10 @@ bool ViewGame::initSFML()
     if (!initSprite("gun", GUN_IMAGE, 1, GUN_WIDTH, GUN_HEIGHT))
         return false;
     
+    // column info
+    if (!initSprite("columnInfo", COLUMN_INFO_IMAGE, 1, COLUMN_INFO_WIDTH, COLUMN_INFO_HEIGHT))
+        return false;
+    
     cout << "Sprites initialisés" << endl;
     
 
@@ -194,6 +198,8 @@ void ViewGame::showViewSFML()
     {
         displayBackGround();
         
+        displayColumn();
+        
         displayMaze();
         
         displayMazeCase();
@@ -204,17 +210,6 @@ void ViewGame::showViewSFML()
         
         displayBullets();
         
-        //Others
-        if (_modele->getPlayer() != nullptr);
-            displayText(to_string(_modele->getPlayer()->getMoney()), 900, 100);
-        if (_modele->getPlayStop())
-            _cptSprites++;
-        
-        if (_modele->getLevel() != nullptr)
-            displayText(to_string(_modele->getLevel()->getTime().asSeconds()), CHRONO_X, CHRONO_Y);
-        
-        if (_modele->getPlayer() != nullptr)
-            displayText(to_string(_modele->getPlayer()->getAmmo()), 900, 500);
     }
 }
 
@@ -255,7 +250,6 @@ void ViewGame::displayMaze()
 {
     for (Wall* wall : *_modele->getWallsList())
     {
-
         switch (wall->getOrientation())
         {
             case 'v' :
@@ -402,4 +396,26 @@ void ViewGame::displayMazeCase()
 bool ViewGame::initButtons()
 {
     return true;
+}
+
+void ViewGame::displayColumn()
+{
+    _spritesList["columnInfo"].setPosition(COLUMN_INFO_X, COLUMN_INFO_Y);
+    _window->draw(_spritesList["columnInfo"]);
+    
+    //Others
+    if (_modele->getPlayer() != nullptr);
+    displayText(to_string(_modele->getPlayer()->getMoney()), COLUMN_INFO_TEXT_X, INFO_MONEY_Y);
+    if (_modele->getPlayStop())
+        _cptSprites++;
+    
+    if (_modele->getLevel() != nullptr)
+        displayText(to_string(_modele->getLevel()->getTime().asSeconds()), COLUMN_INFO_TEXT_X, INFO_CRONO_Y);
+    
+    if (_modele->getPlayer() != nullptr)
+        displayText(to_string(_modele->getPlayer()->getAmmo()), COLUMN_INFO_TEXT_X, INFO_AMMO_Y);
+    
+    if (_modele->getLevel() != nullptr)
+        displayText(to_string(_modele->getLevel()->getRetry()), COLUMN_INFO_TEXT_X, INFO_NB_RESTART);
+
 }

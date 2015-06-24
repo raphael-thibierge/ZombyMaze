@@ -28,6 +28,8 @@ private:
     bool _playerWin;
     bool _play;
     bool _levelEnd;
+    
+    unsigned int _nbRetry;
 
 public:
 
@@ -120,6 +122,7 @@ public:
     
     sf::Time getTime();
     
+    const unsigned int getRetry() const;
     
     void setPlayStop();
     

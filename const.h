@@ -19,7 +19,7 @@
 #define Console_const_h
 
 //WINDOWS
-const unsigned int WINDOW_WIDTH = 1175;
+const unsigned int WINDOW_WIDTH = 1200;
 const unsigned int WINDOW_HEIGHT = 820;
 
 // =====================    GAMEMODEL   ===================
@@ -88,8 +88,6 @@ const float TIME_INTRODUCTION = 0.5f;
 // =====================    GAMEVIEW   ===================
 // TEXTES
 const unsigned int TEXT_SIZE = 40;
-const unsigned int CHRONO_X = 950;
-const unsigned int CHRONO_Y = 200;
 
 // BUTTONS
 const unsigned int BUTTON_WIDTH = 300;
@@ -103,10 +101,11 @@ const std::string BUTTON_THEME = "buttonTheme.png";
 
 const std::string BACKGROUND_MAINMENU = "backgroundMainMenu.png";
 
-const unsigned int MENU_COLUMN_1 = 850;
-const unsigned int MENU_LINE_1 = 200;
-const unsigned int MENU_LINE_2 = 400;
-const unsigned int MENU_LINE_3 = 600;
+const unsigned int MENU_COLUMN_1 = 750;
+const unsigned int MENU_LINE_1 = 150;
+const unsigned int MENU_LINE_2 = 350;
+const unsigned int MENU_LINE_3 = 550;
+
 //GAMEVIEW
 const std::string VIEWGAME_MAZE_BACKGROUND = "fond2.png";
 const int VIEWGAME_MAZE_BACKGROUND_WIDTH = WINDOW_WIDTH;
@@ -158,6 +157,17 @@ const unsigned int WALL_HEIGHT_V = 53;
 
 const sf::Time PLAYER_FIRE_RATE = sf::seconds(0.5f);
 
+const std::string COLUMN_INFO_IMAGE = "colonneInfo.png";
+const unsigned int COLUMN_INFO_WIDTH = 400;
+const unsigned int COLUMN_INFO_HEIGHT = 820;
+const unsigned int COLUMN_INFO_X = 820;
+const unsigned int COLUMN_INFO_Y = 0;
+const unsigned int COLUMN_INFO_TEXT_X = 1000;
+
+const unsigned int INFO_AMMO_Y = 80;
+const unsigned int INFO_CRONO_Y = 400;
+const unsigned int INFO_MONEY_Y = 290;
+const unsigned int INFO_NB_RESTART = 180;
 
 
 enum Direction { Up, Down, Left, Right };

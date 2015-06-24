@@ -34,6 +34,8 @@ public:
     
     void displayBullets();
 
+    void displayColumn();
+    
     bool initSFML() override;
     
     void displayBackGround();

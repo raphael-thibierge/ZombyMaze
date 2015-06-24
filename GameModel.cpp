@@ -21,6 +21,7 @@ GameModel::GameModel()
 void GameModel::init()
 {
     _level.setPlayer(&_player);
+    
     _level.init();
     
 }
@@ -153,3 +154,4 @@ Level* GameModel::getLevel()
 {
     return &_level;
 }
+

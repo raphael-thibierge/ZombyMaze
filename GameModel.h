@@ -24,6 +24,8 @@ private:
     Player _player;
     Level _level;
     
+    
+    
     //
     // states
     bool _gameStart;
@@ -88,6 +90,7 @@ public:
     
     void setPlayStop();
     
+
     
     
 
