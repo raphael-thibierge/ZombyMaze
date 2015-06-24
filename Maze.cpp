@@ -181,9 +181,7 @@ void Maze::addWall(unsigned int x, unsigned int y, const char orientation)
             _grid[y][x].addWall(MovableElement::directionToInt("left"));
             
             if (x > 0)
-            {
                 _grid[y][x-1].addWall(MovableElement::directionToInt("right"));
-            }
             break;
             
         default:

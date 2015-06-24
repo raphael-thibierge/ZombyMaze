@@ -28,7 +28,6 @@ int ViewMainMenu::treatEventSFML()
         if (event.type == Event::MouseMoved)
         {
             updateButtons(event.mouseMove.x, event.mouseMove.y);
-            cout << event.mouseMove.x << " " << event.mouseMove.y << endl;
         }
         
         if (event.type == Event::MouseButtonPressed)

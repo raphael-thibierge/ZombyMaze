@@ -21,15 +21,10 @@ Enemy::Enemy() : Perso()
     _traceNbMax = ZOMBY_NB_TRACE_MAX;
 }
 
-
-
-
-
 void Enemy::autoMove()
 {
     if (_mazeCasePosition != nullptr)
     {
-        
         // if enemi has begun a movement
         if (_isMoving)
         {
@@ -67,7 +62,6 @@ void Enemy::changeDirection()
         traceFound(_mazeCasePosition->getTrace()->getDirection());
     }
     else
-    
     {
         traceLoose();
         // random direction
@@ -81,8 +75,6 @@ void Enemy::changeDirection()
             }
             while (avalaibleDirections[random] == oppositeDirection(_direction));
         }
-        
-        
         _direction = avalaibleDirections[random];
     }
     _mazeCaseToGo = _mazeCasePosition->getNextMazeCase(_direction);
@@ -94,13 +86,13 @@ void Enemy::traceFound(std::string direction)
 {
     _traceFound = true;
     _direction = direction;
-    _speed += ZOMBY_ACCELERATION;
+    _speed = ZOMBY_SPEED +   ZOMBY_ACCELERATION;
 }
 
 void Enemy::traceLoose()
 {
     _traceFound = false;
-    _speed -= ZOMBY_ACCELERATION;
+    _speed = ZOMBY_SPEED;
 }
 
 void Enemy::init()

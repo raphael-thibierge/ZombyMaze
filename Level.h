@@ -22,6 +22,7 @@ private:
     Maze _maze;
     
     sf::Clock _chrono;
+    sf::Time _time;
     
     // states
     bool _playerLoose;

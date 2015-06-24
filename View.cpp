@@ -17,15 +17,11 @@ View::View(){}
 View::~View(){
     _modele = nullptr;
     _window = nullptr;
-
 }
-
 
 //
 // METHODS
 //
-
-
 bool View::init(GameModel* modele, sf::RenderWindow * window)
 {
     _modele = modele;
@@ -39,9 +35,7 @@ bool View::init(GameModel* modele, sf::RenderWindow * window)
 
 void View::displayStandartButton(const std::string name, const float positionX, const float positionY, bool active)
 {
-    
     string buttonName = "button_" + name;
-    
     if (active)
     {
         buttonName += "1";
@@ -58,23 +52,18 @@ void View::displayText(const std::string text,const float positionX,const float 
 {
     sf::Font font;
     font.loadFromFile(resourcePath() + "sansation.ttf");
-    
-    
     sf::Text textDisplayed(text, font);
     textDisplayed.setCharacterSize(TEXT_SIZE);
     textDisplayed.setPosition(positionX, positionY);
     textDisplayed.setStyle(sf::Text::Bold);
     textDisplayed.setColor(sf::Color::Red);
     _window->draw(textDisplayed);
-    
 }
 
 void View::displayTitle( const std::string text, const float positionX, const float positionY)
 {
     displayText(text, positionX, positionY);
 }
-
-
 
 bool View::mouseOnButton
 (const int mouseX, const int mouseY, const int buttonX, const int buttonY, const int buttonWidth, const int buttonHeight)
@@ -85,10 +74,8 @@ bool View::mouseOnButton
         mouseY >= buttonY &&
         mouseY <= buttonY + buttonHeight )
         return true;
-    cout << buttonX << " " <<  buttonY << " " << buttonWidth << " " << buttonHeight << endl;
     return false;
 }
-
 
 bool View::initSprite(std:: string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteWitdh, const unsigned int spriteHeight)
 {
@@ -98,9 +85,6 @@ bool View::initSprite(std:: string name, const std::string image, const unsigned
         return false;
     
     string nameSprite = name;
-    
-    
-    
     for ( unsigned int spriteNumber = 0 ; spriteNumber < nbSprites ; spriteNumber++ )
     {
         if (nbSprites > 1)
@@ -111,22 +95,16 @@ bool View::initSprite(std:: string name, const std::string image, const unsigned
         _spritesList.insert(make_pair(nameSprite, sf::Sprite()));
         _spritesList[nameSprite].setTexture(_imagesList[name]);
         _spritesList[nameSprite].setTextureRect(sf::IntRect(spriteNumber*spriteWitdh,0, spriteWitdh, spriteHeight));
-
     }
     return true;
 }
-
-
 
 int View::treatEventSFML()
 {
     return 1;
 }
 
-void View::showViewSFML()
-{
-    
-}
+void View::showViewSFML(){}
 
 bool View::initSFML()
 {
@@ -137,5 +115,3 @@ bool View::initButtons()
 {
     return false;
 }
-
-

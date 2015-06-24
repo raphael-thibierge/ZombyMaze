@@ -21,8 +21,6 @@ void Level::init()
     _playerWin = false;
     _playerLoose = false;
     
-    //_level = level;
-    
     _enemiesCpt = 0;
     // init player position
     _player->setPosition(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
@@ -36,6 +34,7 @@ void Level::init()
     updateTraces();
     
     _chrono.restart();
+    _time = _chrono.getElapsedTime();
     
 }
 
@@ -87,6 +86,8 @@ void Level::runGame()
             setPlayStop();
             _nbRetry = 0;
         }
+        _time += _chrono.getElapsedTime();
+        _chrono.restart();
     }
     
 }
@@ -423,9 +424,10 @@ void Level::setPlayer(Player *player)
 void Level::setPlayStop()
 {
     _play = !_play;
+    _chrono.restart();
 }
 
 sf::Time Level::getTime()
 {
-    return _chrono.getElapsedTime();
+    return _time;
 }

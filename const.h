@@ -42,7 +42,7 @@ const unsigned int PLAYER_NB_TRACE_MAX = 5;
 
 // ENEMIES
 const unsigned int ZOMBY_SPEED = 3 ;
-const unsigned int ZOMBY_ACCELERATION = 0;
+const unsigned int ZOMBY_ACCELERATION = 2;
 const unsigned int ZOMBY_NB_TRACE_MAX = 0;
 
 // TRACE
@@ -107,7 +107,7 @@ const unsigned int MENU_LINE_2 = 350;
 const unsigned int MENU_LINE_3 = 550;
 
 //GAMEVIEW
-const std::string VIEWGAME_MAZE_BACKGROUND = "fond2.png";
+const std::string VIEWGAME_MAZE_BACKGROUND = "caca.png";
 const int VIEWGAME_MAZE_BACKGROUND_WIDTH = WINDOW_WIDTH;
 const int VIEWGAME_MAZE_BACKGROUND_HEIGHT = WINDOW_HEIGHT;
 
@@ -157,7 +157,7 @@ const unsigned int WALL_HEIGHT_V = 53;
 
 const sf::Time PLAYER_FIRE_RATE = sf::seconds(0.5f);
 
-const std::string COLUMN_INFO_IMAGE = "colonneInfo.png";
+const std::string COLUMN_INFO_IMAGE = "colonneInfo2.png";
 const unsigned int COLUMN_INFO_WIDTH = 400;
 const unsigned int COLUMN_INFO_HEIGHT = 820;
 const unsigned int COLUMN_INFO_X = 820;

@@ -17,8 +17,7 @@
 
 class View
 {
-protected:
-
+protected: 
     GameModel* _modele;
 
     // SFML Window
@@ -58,12 +57,8 @@ public :
 
     bool init(GameModel* modele, sf::RenderWindow * window);
 
-
-
+    
     bool initSprite(const std::string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteWitdh, const unsigned int spriteHeight);
 
-
 };
-
-
 #endif /* defined(__ShmupTerminal__View__) */

@@ -19,6 +19,7 @@ private:
     std::string _owner;
     sf::Time _lifeTime;
     sf::Clock _life;
+    //sf::time;
     
 // states
     bool _available;
@@ -44,7 +45,8 @@ public:
     void update();
     
     void setDirection(std::string direction);
-
+    
+    void setPlayPause();
 
 
 };

@@ -102,7 +102,6 @@ bool ViewGame::initSFML()
         return false;
     
     cout << "Sprites initialisés" << endl;
-    
 
     return true;
 }
@@ -124,9 +123,7 @@ int ViewGame::treatEventSFML()
         
         if (Keyboard::isKeyPressed(Keyboard::Right))
             _modele->playerMove("right");
-        
-        
-        
+
         if (Keyboard::isKeyPressed(Keyboard::Z))
             _modele->playerShoot("up");
         
@@ -140,7 +137,7 @@ int ViewGame::treatEventSFML()
             _modele->playerShoot("right");
     }
     
-        Event event;
+    Event event;
     while (_window->pollEvent(event))
     {
         switch (event.type)
@@ -216,24 +213,8 @@ void ViewGame::showViewSFML()
 void ViewGame::displayEnnemies()
 {
     string name ;
-    //cout << " enemy list : " << _modele->getEnemiesList()->size() << endl;
     for (Enemy* enemy : *_modele->getEnemiesList())
     {
-        // temoin sur le zomby
-        /*
-        if (enemy->getMazeCase() != nullptr)
-        {
-            name = "temoin";
-            _spritesList[name].setPosition(enemy->getMazeCase()->getX(), enemy->getMazeCase()->getY());
-            _window->draw(_spritesList[name]);
-            
-            if (enemy->getMazeCasToGo() != nullptr)
-            {
-            _spritesList[name].setPosition(enemy->getMazeCasToGo()->getX(), enemy->getMazeCasToGo()->getY());
-            _window->draw(_spritesList[name]);
-            }
-        }*/
-        
         name = "zomby";
         name += enemy->getDirection();
         if (ZOMBY_NB_SPRITES > 1)
@@ -242,7 +223,6 @@ void ViewGame::displayEnnemies()
         }
         _spritesList[name].setPosition(enemy->getX(), enemy->getY());
         _window->draw(_spritesList[name]);
-        
     }
 }
 
@@ -272,20 +252,6 @@ void ViewGame::displayPlayer()
 {
     if (_modele->getPlayer() != nullptr)
     {
-        // === TEMOINS ==
-        /*
-        if(_modele->getPlayer()->getMazeCase() != nullptr)
-        {
-            _spritesList["temoin"].setPosition(_modele->getPlayer()->getMazeCase()->getX(), _modele->getPlayer()->getMazeCase()->getY());
-            _window->draw(_spritesList["temoin"]);
-        }
-        
-        if(_modele->getPlayer()->getMazeCasToGo() != nullptr)
-        {
-            _spritesList["temoin"].setPosition(_modele->getPlayer()->getMazeCasToGo()->getX(), _modele->getPlayer()->getMazeCasToGo()->getY());
-            _window->draw(_spritesList["temoin"]);
-        }*/
-        
         string name = "player" ;
         if (PLAYER_NB_SPRITES > 1)
         {
@@ -293,7 +259,6 @@ void ViewGame::displayPlayer()
             {
                 name += "down" + to_string(0);
             }
-
             else
             {
                 name += _modele->getPlayer()->getDirection() + to_string(_cptSprites % PLAYER_NB_SPRITES);
@@ -302,7 +267,6 @@ void ViewGame::displayPlayer()
         
         _spritesList[name].setPosition(_modele->getPlayer()->getX(), _modele->getPlayer()->getY());
         _window->draw(_spritesList[name]);
-
     }
 }
 
@@ -390,7 +354,6 @@ void ViewGame::displayMazeCase()
             _window->draw(_spritesList[name]);
         }
     }
- 
 }
 
 bool ViewGame::initButtons()
@@ -409,8 +372,25 @@ void ViewGame::displayColumn()
     if (_modele->getPlayStop())
         _cptSprites++;
     
+    
+    // time
+    string time = to_string(_modele->getLevel()->getTime().asSeconds());
+    string newTime;
+    
+    unsigned int cpt = 0;
+    do
+    {
+        newTime += time[cpt];
+        cpt++;
+        
+    } while (time[cpt] != '.' && cpt < time.length());
+    for (unsigned int i = 0 ; i <= 1 ; i++)
+    {
+        newTime+= time[cpt+i];
+    }
+    
     if (_modele->getLevel() != nullptr)
-        displayText(to_string(_modele->getLevel()->getTime().asSeconds()), COLUMN_INFO_TEXT_X, INFO_CRONO_Y);
+        displayText(newTime, COLUMN_INFO_TEXT_X, INFO_CRONO_Y);
     
     if (_modele->getPlayer() != nullptr)
         displayText(to_string(_modele->getPlayer()->getAmmo()), COLUMN_INFO_TEXT_X, INFO_AMMO_Y);
