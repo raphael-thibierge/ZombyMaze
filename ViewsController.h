@@ -17,6 +17,7 @@
 #include "ViewIntroduction.h"
 #include "ViewMainMenu.h"
 #include "ViewLevel.h"
+#include "ViewTheme.h"
 
 
 class ViewsController {

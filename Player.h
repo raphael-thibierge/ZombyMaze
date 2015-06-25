@@ -23,6 +23,8 @@ private:
     sf::Clock _fireRate;
     unsigned int _nbAmmo;
     unsigned int _level;
+    unsigned int _theme;
+    
     
     
 public:
@@ -49,7 +51,13 @@ public:
     
     bool getGun();
     
+    unsigned int getTheme() const;
+    
     void setGun(bool available);
+    
+    void setTheme(const unsigned int theme);
+    
+    
     
     unsigned int getAmmo() const;
     

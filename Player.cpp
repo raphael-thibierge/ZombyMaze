@@ -13,6 +13,7 @@ using namespace std;
 Player::Player() : Perso()
 {
     _level = 1;
+    _theme = 1;
     reset();
 }
 
@@ -108,9 +109,19 @@ unsigned int Player::getAmmo() const
     return _nbAmmo;
 }
 
+unsigned int Player::getTheme() const
+{
+    return _theme;
+}
+
 void Player::setGun(bool available = true)
 {
     _gunAvalaible = available;
+}
+
+void Player::setTheme(const unsigned int theme)
+{
+    _theme = theme;
 }
 
 unsigned int Player::getLevel() const

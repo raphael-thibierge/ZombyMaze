@@ -47,10 +47,10 @@ const unsigned int ZOMBY_ACCELERATION = 2;
 const unsigned int ZOMBY_NB_TRACE_MAX = 0;
 
 // TRACE
-const std::string TRACE_IMAGE_UP = "tracehaut.png";
-const std::string TRACE_IMAGE_DOWN = "tracebas.png";
-const std::string TRACE_IMAGE_LEFT = "tracegauche.png";
-const std::string TRACE_IMAGE_RIGHT = "tracedroite.png";
+const std::string TRACE_IMAGE_UP[2] = {"tracehaut.png", "tracebas.png"};
+const std::string TRACE_IMAGE_DOWN[2] = {"tracebas.png", "tracehaut.png"};
+const std::string TRACE_IMAGE_LEFT[2] = {"tracegauche.png", "tracedroite.png" };
+const std::string TRACE_IMAGE_RIGHT[2] = {"tracedroite.png", "tracegauche.png"};
 const unsigned int TRACE_WIDTH = 20;
 const unsigned int TRACE_HEIGHT = 50;
 const unsigned int TRACE_NB_SPRITES = 1;
@@ -58,10 +58,10 @@ const sf::Time TRACE_LIFE = sf::seconds(0.7f);
 
 
 // BULLET
-const std::string BULLET_IMAGE_UP = "BulletUp.png";
-const std::string BULLET_IMAGE_DOWN = "BulletDown.png";
-const std::string BULLET_IMAGE_LEFT = "BulletLeft.png";
-const std::string BULLET_IMAGE_RIGHT = "BulletRight.png";
+const std::string BULLET_IMAGE_UP[2] = {"BulletUp.png", "BulletUp.png"};
+const std::string BULLET_IMAGE_DOWN[2] = {"BulletDown.png", "BulletUp.png"};
+const std::string BULLET_IMAGE_LEFT[2] = {"BulletLeft.png", "BulletUp.png"};
+const std::string BULLET_IMAGE_RIGHT[2] = {"BulletRight.png", "BulletUp.png"};
 const unsigned int BULLET_SPEED = 15;
 const unsigned int BULLET_WIDTH = 16;
 const unsigned int BULLET_HEIGHT = 6;
@@ -107,7 +107,8 @@ const unsigned int MENU_COLUMN[1] = {750};
 const unsigned int MENU_LINE[4] = {50, 250, 450, 650};
 
 //GAMEVIEW
-const std::string VIEWGAME_MAZE_BACKGROUND = "caca.png";
+const std::string VIEWGAME_MAZE_BACKGROUND[2] = {"caca.png", "caca.png"};
+
 const int VIEWGAME_MAZE_BACKGROUND_WIDTH = WINDOW_WIDTH;
 const int VIEWGAME_MAZE_BACKGROUND_HEIGHT = WINDOW_HEIGHT;
 
@@ -131,25 +132,26 @@ const unsigned int WIN_IMAGE_HEIGHT = WINDOW_HEIGHT;
 
 
 
-const std::string VIEWGAME_IMAGE_PLAYER_UP = "PersoDos.png";
-const std::string VIEWGAME_IMAGE_PLAYER_DOWN = "perso.png";
-const std::string VIEWGAME_IMAGE_PLAYER_LEFT = "PersoGauche.png";
-const std::string VIEWGAME_IMAGE_PLAYER_RIGHT = "PersoDroite.png";
+const std::string VIEWGAME_IMAGE_PLAYER_UP[2] = {"PersoDos.png", "ZombieDos.png"};
+const std::string VIEWGAME_IMAGE_PLAYER_DOWN[2] = {"perso.png", "ZombieFace.png"};
+const std::string VIEWGAME_IMAGE_PLAYER_LEFT[2] = {"PersoGauche.png", "ZombieGauche.png"};
+const std::string VIEWGAME_IMAGE_PLAYER_RIGHT[2] = {"PersoDroite.png", "ZombieDroite.png"};
 
 const unsigned int PLAYER_WIDTH = 31;
 const unsigned int PLAYER_HEIGHT = 41;
 const unsigned int PLAYER_NB_SPRITES = 3;
 
-const std::string VIEWGAME_IMAGE_ZOMBY_UP = "ZombieDos.png";
-const std::string VIEWGAME_IMAGE_ZOMBY_DOWN = "ZombieFace.png";
-const std::string VIEWGAME_IMAGE_ZOMBY_LEFT = "ZombieGauche.png";
-const std::string VIEWGAME_IMAGE_ZOMBY_RIGHT = "ZombieDroite.png";
+const std::string VIEWGAME_IMAGE_ZOMBY_UP[2] = {"ZombieDos.png", "PersoDos.png"};
+const std::string VIEWGAME_IMAGE_ZOMBY_DOWN[2] = { "ZombieFace.png", "perso.png"};
+const std::string VIEWGAME_IMAGE_ZOMBY_LEFT[2] =  {"ZombieGauche.png", "PersoGauche.png" };
+const std::string VIEWGAME_IMAGE_ZOMBY_RIGHT[2] = {"ZombieDroite.png", "PersoDroite.png"};
+
 const unsigned int ZOMBY_WIDTH = 31;
 const unsigned int ZOMBY_HEIGHT = 41;
 const unsigned int ZOMBY_NB_SPRITES = 3;
  
-const std::string VIEWGAME_IMAGE_WALL_H = "MurH.png";
-const std::string VIEWGAME_IMAGE_WALL_V = "MurV.png";
+const std::string VIEWGAME_IMAGE_WALL_H[2] = {"MurH.png", "MurH.png"};
+const std::string VIEWGAME_IMAGE_WALL_V[2] = {"MurV.png", "MurV.png"};
 const unsigned int WALL_WIDTH_H = 53;
 const unsigned int WALL_WIDTH_V = 12;
 const unsigned int WALL_HEIGHT_H = 12;
@@ -157,7 +159,7 @@ const unsigned int WALL_HEIGHT_V = 53;
 
 const sf::Time PLAYER_FIRE_RATE = sf::seconds(0.5f);
 
-const std::string COLUMN_INFO_IMAGE = "colonneInfo2.png";
+const std::string COLUMN_INFO_IMAGE[2] = {"colonneInfo2.png", "colonneInfo.png"};
 const unsigned int COLUMN_INFO_WIDTH = 400;
 const unsigned int COLUMN_INFO_HEIGHT = 820;
 const unsigned int COLUMN_INFO_X = 820;

@@ -6,6 +6,7 @@ using namespace sf;
 ViewGame::ViewGame() : View()
 {
     _cptSprites = 0;
+    
 }
 
 ViewGame::~ViewGame()
@@ -14,8 +15,13 @@ ViewGame::~ViewGame()
 
 bool ViewGame::initSFML()
 {
+    _imagesList.clear();
+    _spritesList.clear();
+    
+    unsigned int number = _modele->getPlayer()->getTheme() - 1;
+    
         //background
-    if (!initSprite("background", VIEWGAME_MAZE_BACKGROUND, 1, VIEWGAME_MAZE_BACKGROUND_WIDTH, VIEWGAME_MAZE_BACKGROUND_HEIGHT))
+    if (!initSprite("background", VIEWGAME_MAZE_BACKGROUND[number], 1, VIEWGAME_MAZE_BACKGROUND_WIDTH, VIEWGAME_MAZE_BACKGROUND_HEIGHT))
         return false;
     
         // exit
@@ -23,45 +29,45 @@ bool ViewGame::initSFML()
         return false;
 
     // player
-    if (!initSprite("playerup", VIEWGAME_IMAGE_PLAYER_UP, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
+    if (!initSprite("playerup", VIEWGAME_IMAGE_PLAYER_UP[number], PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
         return false;
-    if (!initSprite("playerdown", VIEWGAME_IMAGE_PLAYER_DOWN, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
+    if (!initSprite("playerdown", VIEWGAME_IMAGE_PLAYER_DOWN[number], PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
         return false;
-    if (!initSprite("playerleft", VIEWGAME_IMAGE_PLAYER_LEFT, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
+    if (!initSprite("playerleft", VIEWGAME_IMAGE_PLAYER_LEFT[number], PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
         return false;
-    if (!initSprite("playerright", VIEWGAME_IMAGE_PLAYER_RIGHT, PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
+    if (!initSprite("playerright", VIEWGAME_IMAGE_PLAYER_RIGHT[number], PLAYER_NB_SPRITES, PLAYER_WIDTH, PLAYER_HEIGHT))
         return false;
 
     // ZOMBY
-    if (!initSprite("zombyleft", VIEWGAME_IMAGE_ZOMBY_LEFT, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
+    if (!initSprite("zombyleft", VIEWGAME_IMAGE_ZOMBY_LEFT[number], ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
         return false;
-    if (!initSprite("zombyright", VIEWGAME_IMAGE_ZOMBY_RIGHT, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
+    if (!initSprite("zombyright", VIEWGAME_IMAGE_ZOMBY_RIGHT[number], ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
         return false;
-    if (!initSprite("zombyup", VIEWGAME_IMAGE_ZOMBY_UP, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
+    if (!initSprite("zombyup", VIEWGAME_IMAGE_ZOMBY_UP[number], ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
         return false;
-    if (!initSprite("zombydown", VIEWGAME_IMAGE_ZOMBY_DOWN, ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
+    if (!initSprite("zombydown", VIEWGAME_IMAGE_ZOMBY_DOWN[number], ZOMBY_NB_SPRITES, ZOMBY_WIDTH, ZOMBY_HEIGHT))
         return false;
 
     // TRACES
-    if (!initSprite("traceup", TRACE_IMAGE_UP, TRACE_NB_SPRITES, TRACE_WIDTH, TRACE_HEIGHT))
+    if (!initSprite("traceup", TRACE_IMAGE_UP[number], TRACE_NB_SPRITES, TRACE_WIDTH, TRACE_HEIGHT))
         return false;
     
-    if (!initSprite("tracedown", TRACE_IMAGE_DOWN, TRACE_NB_SPRITES, TRACE_WIDTH, TRACE_HEIGHT))
+    if (!initSprite("tracedown", TRACE_IMAGE_DOWN[number], TRACE_NB_SPRITES, TRACE_WIDTH, TRACE_HEIGHT))
         return false;
     
-    if (!initSprite("traceleft", TRACE_IMAGE_LEFT, TRACE_NB_SPRITES, TRACE_HEIGHT, TRACE_WIDTH))
+    if (!initSprite("traceleft", TRACE_IMAGE_LEFT[number], TRACE_NB_SPRITES, TRACE_HEIGHT, TRACE_WIDTH))
         return false;
     
-    if (!initSprite("traceright", TRACE_IMAGE_RIGHT, TRACE_NB_SPRITES, TRACE_HEIGHT, TRACE_WIDTH))
+    if (!initSprite("traceright", TRACE_IMAGE_RIGHT[number], TRACE_NB_SPRITES, TRACE_HEIGHT, TRACE_WIDTH))
         return false;
 
 
 
     // walls
-    if (!initSprite("horizontalWall", VIEWGAME_IMAGE_WALL_H, 1, WALL_WIDTH_H, WALL_HEIGHT_H))
+    if (!initSprite("horizontalWall", VIEWGAME_IMAGE_WALL_H[number], 1, WALL_WIDTH_H, WALL_HEIGHT_H))
         return false;
 
-    if (!initSprite("verticalWall", VIEWGAME_IMAGE_WALL_V, 1, WALL_WIDTH_V, WALL_HEIGHT_V))
+    if (!initSprite("verticalWall", VIEWGAME_IMAGE_WALL_V[number], 1, WALL_WIDTH_V, WALL_HEIGHT_V))
         return false;
     
     // gameOver
@@ -73,16 +79,16 @@ bool ViewGame::initSFML()
         return false;
     
     // BULLETS
-    if (!initSprite("bulletleft", BULLET_IMAGE_LEFT, 1, BULLET_WIDTH, BULLET_HEIGHT))
+    if (!initSprite("bulletleft", BULLET_IMAGE_LEFT[number], 1, BULLET_WIDTH, BULLET_HEIGHT))
         return false;
     
-    if (!initSprite("bulletright", BULLET_IMAGE_RIGHT, 1, BULLET_WIDTH, BULLET_HEIGHT))
+    if (!initSprite("bulletright", BULLET_IMAGE_RIGHT[number], 1, BULLET_WIDTH, BULLET_HEIGHT))
         return false;
     
-    if (!initSprite("bulletup", BULLET_IMAGE_UP, 1, BULLET_HEIGHT, BULLET_WIDTH))
+    if (!initSprite("bulletup", BULLET_IMAGE_UP[number], 1, BULLET_HEIGHT, BULLET_WIDTH))
         return false;
     
-    if (!initSprite("bulletdown", BULLET_IMAGE_DOWN, 1, BULLET_HEIGHT, BULLET_WIDTH))
+    if (!initSprite("bulletdown", BULLET_IMAGE_DOWN[number], 1, BULLET_HEIGHT, BULLET_WIDTH))
         return false;
     
     // temoin
@@ -98,7 +104,7 @@ bool ViewGame::initSFML()
         return false;
     
     // column info
-    if (!initSprite("columnInfo", COLUMN_INFO_IMAGE, 1, COLUMN_INFO_WIDTH, COLUMN_INFO_HEIGHT))
+    if (!initSprite("columnInfo", COLUMN_INFO_IMAGE[number], 1, COLUMN_INFO_WIDTH, COLUMN_INFO_HEIGHT))
         return false;
     
     cout << "Sprites initialisés" << endl;

@@ -49,6 +49,10 @@ int ViewMainMenu::treatEventSFML()
             {
                 returnValue = -4;
             }
+            if (_buttonTheme)
+            {
+                returnValue = -5;
+            }
             
         }
     }
