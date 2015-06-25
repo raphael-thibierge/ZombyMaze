@@ -15,20 +15,22 @@ using namespace std;
 GameModel::GameModel()
 {
     init();
+    _level = nullptr;
     _gameStart = false;
 }
 
 void GameModel::init()
 {
-    _level.setPlayer(&_player);
-    
-    _level.init();
-    
+
+ 
 }
 
 GameModel::~GameModel()
 {
     clear();
+    if (_level != nullptr)
+        delete _level;
+    _level = nullptr;
 }
 
 
@@ -40,8 +42,8 @@ GameModel::~GameModel()
 
 void GameModel::nextStep()
 {
-    if (!_level.getLevelEnd())
-        _level.runGame();
+    if (_level != nullptr && !_level->getLevelEnd())
+        _level->runGame();
     
 }
 
@@ -52,31 +54,34 @@ void GameModel::playerMove(const std::string direction)
 
 }
 
-void GameModel::reset()
-{
-    _level.reset();
-}
-
 void GameModel::playerShoot(const string direction)
 {
-    _level.playerShoot(direction);
+    _level->playerShoot(direction);
 }
+
+void GameModel::newGame()
+{
+    _level = new Level(_player.getLevel(), &_player);
+}
+
+void GameModel::nextLevel()
+{
+    if ( _player.getLevel() < LEVEL_MAX )
+        _player.nextLevel();
+    _level = new Level(_player.getLevel(), &_player);
+}
+
 
 
 
 // PRIVATE
-
 void GameModel::clear()
 {
     // LISTS DESTRUCTION
-    _level.clear();
+    if (_level != nullptr)
+        delete _level;
+    _level = nullptr;
 }
-
-void GameModel::newLevel()
-{
-    _level.reset();
-}
-
 
 
 // ============================================
@@ -85,27 +90,27 @@ void GameModel::newLevel()
 
 list<Enemy*> * GameModel::getEnemiesList()
 {
-    return _level.getEnemies();
+    return _level->getEnemies();
 }
 
 list <Trace*> * GameModel::getTracesList()
 {
-    return _level.getTraces();
+    return _level->getTraces();
 }
 
 list<Wall *> * GameModel::getWallsList()
 {
-    return _level.getWalls();
+    return _level->getWalls();
 }
 
 list<MazeCase*> * GameModel::getMazeCaseList()
 {
-    return _level.getMazeCases();
+    return _level->getMazeCases();
 }
 
 list<Bullet *> * GameModel::getBulletList()
 {
-    return _level.getBullets();
+    return _level->getBullets();
 }
 
 Player* GameModel::getPlayer()
@@ -115,43 +120,41 @@ Player* GameModel::getPlayer()
 
 Maze* GameModel::getMaze()
 {
-    return _level.getMaze();
+    return _level->getMaze();
 }
-
-
 
 bool GameModel::getPlayStop() const
 {
-    return _level.getPlayStop();
+    return _level->getPlayStop();
 }
 
 bool GameModel::getWin() const
 {
-    return _level.getWin();
+    return _level->getWin();
 }
 
 bool GameModel::getLoose() const
 {
-    return _level.getLoose();
+    return _level->getLoose();
 }
 
 void GameModel::setPlayStop()
 {
-    _level.setPlayStop();
+    _level->setPlayStop();
 }
 
 std::list<PowerUp*> * GameModel::getPowersUp()
 {
-    return _level.getMaze()->getPowerUpList();
+    return _level->getMaze()->getPowerUpList();
 }
 
 std::list<BackgroundElement> * GameModel::getBackgroundElements()
 {
-    return _level.getMaze()->getBackgroundElementlist();
+    return _level->getMaze()->getBackgroundElementlist();
 }
 
 Level* GameModel::getLevel()
 {
-    return &_level;
+    return _level;
 }
 

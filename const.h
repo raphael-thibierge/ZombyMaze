@@ -30,6 +30,7 @@ const unsigned int MAZE_X = 0;
 const unsigned int MAZE_Y = 0 ;
 const std::string MAZE_MATRICE_FILE = resourcePath() + "1.txt";
 const std::string TEMOIN_IMAGE = "temoin.png";
+const unsigned LEVEL_MAX = 2;
 
 // MAZECASE
 const unsigned int MAZECASE_SIZE = 50;
@@ -147,7 +148,7 @@ const std::string VIEWGAME_IMAGE_ZOMBY_RIGHT = "ZombieDroite.png";
 const unsigned int ZOMBY_WIDTH = 31;
 const unsigned int ZOMBY_HEIGHT = 41;
 const unsigned int ZOMBY_NB_SPRITES = 3;
-
+ 
 const std::string VIEWGAME_IMAGE_WALL_H = "MurH.png";
 const std::string VIEWGAME_IMAGE_WALL_V = "MurV.png";
 const unsigned int WALL_WIDTH_H = 53;

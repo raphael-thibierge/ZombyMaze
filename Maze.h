@@ -29,10 +29,11 @@ private:
     std::list<BackgroundElement> _backgroundElementList;
     
     unsigned int _size ;
+    std::string _fileName;
 
 public:
 
-    Maze();
+    Maze(const unsigned int number);
     
     ~Maze();
 

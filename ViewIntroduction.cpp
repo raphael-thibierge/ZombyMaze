@@ -49,11 +49,8 @@ int ViewIntroduction::treatEventSFML()
         case sf::Event::KeyPressed :
             switch (event.key.code)
             {
-
                 case sf::Keyboard::Space:
                     returnValue = 0;
-                    // at this point play/stop states is always stop !
-                    _modele->setPlayStop();
                     break;
 
                 case sf::Keyboard::Escape :

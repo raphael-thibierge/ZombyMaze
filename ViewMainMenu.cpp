@@ -35,6 +35,8 @@ int ViewMainMenu::treatEventSFML()
             if (_buttonPlay)
             {
                 returnValue = -2;
+                // at this point play/stop states is always stop !
+                _modele->newGame();
             }
             
             if (_buttonQuit)

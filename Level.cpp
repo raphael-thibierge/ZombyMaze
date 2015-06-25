@@ -5,12 +5,14 @@
 //
 
 using namespace std;
+ 
 
-Level::Level ()
+Level::Level(const unsigned int level, Player* player) : _level(level), _maze(Maze(level))
 {
-    
+    _player = player;
     _nbEnnemies = ENEMIES_MAX;
     _nbRetry = 0;
+    init();
 }
 
 
@@ -20,6 +22,9 @@ void Level::init()
     // init states
     _playerWin = false;
     _playerLoose = false;
+    _play = true;
+    
+    
     
     _enemiesCpt = 0;
     // init player position
@@ -35,7 +40,6 @@ void Level::init()
     
     _chrono.restart();
     _time = _chrono.getElapsedTime();
-    
 }
 
 

@@ -151,15 +151,26 @@ int ViewGame::treatEventSFML()
                     break;
                     
                 case sf::Keyboard::R:
-                    _modele->newLevel();
-                    _modele->setPlayStop();
+                    _modele->getLevel()->reset();
+                    break;
         
                 case sf::Keyboard::Space:
-                    if (_modele->getWin() || _modele->getLoose())
+                    if (_modele->getLoose())
                     {
-                        _modele->newLevel();
+                        _modele->getLevel()->reset();
+                        //_modele->setPlayStop();
                     }
-                    _modele->setPlayStop();
+                    else if (_modele->getWin() )
+                    {
+                        if (_modele->getPlayer()->getLevel() == LEVEL_MAX)
+                            returnValue = -3;
+                        else
+                            _modele->nextLevel();
+                    }
+                    else
+                    {
+                        _modele->setPlayStop();
+                    }
                     break;
                     
                 default :
@@ -345,6 +356,9 @@ void ViewGame::displayMazeCase()
     
     for (MazeCase* mazeCase : *_modele->getMazeCaseList())
     {
+     //   cout << mazeCase->toString() << endl;
+        
+        
         Trace * trace = mazeCase->getTrace();
         if (trace->available())
         {

@@ -34,7 +34,7 @@ private:
 
 public:
 
-    Level ();
+    Level(const unsigned int level, Player* player);
 
 	virtual ~Level ();
 

@@ -22,6 +22,7 @@ private:
     sf::Time _fireRateTime;
     sf::Clock _fireRate;
     unsigned int _nbAmmo;
+    unsigned int _level;
     
     
 public:
@@ -38,6 +39,8 @@ public:
     
     void useAmmo();
     
+    void nextLevel();
+    
 
 // ACCESSORS
     void setMoving(const bool moving);
@@ -49,6 +52,8 @@ public:
     void setGun(bool available);
     
     unsigned int getAmmo() const;
+    
+    unsigned int getLevel() const;
     
     void addAmmo(const unsigned int number);
     

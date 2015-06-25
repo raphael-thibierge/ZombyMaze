@@ -22,9 +22,7 @@ class GameModel
 {
 private:
     Player _player;
-    Level _level;
-    
-    
+    Level*   _level;
     
     //
     // states
@@ -43,11 +41,12 @@ public:
 
     void playerMove(const std::string direction);
     
-    void reset();
-    
     void playerShoot(const std::string direction);
     
-    void newLevel();
+    void nextLevel();
+    
+    void newGame();
+    
 
 private:
     void clear();
@@ -62,10 +61,6 @@ public:
     bool getWin() const;
     
     bool getPlayStop() const;
-    
-    void nextLevel();
-    
-    void newGame();
 
     std::list<Enemy*> * getEnemiesList();
 

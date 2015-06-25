@@ -13,8 +13,11 @@ using namespace std;
 #include <math.h>
 
 
-Maze::Maze() : GraphicElement(){
+Maze::Maze(const unsigned int number) : GraphicElement(){
+    cout << number << endl;
+    _fileName = resourcePath() + to_string(number) + ".txt";
     init();
+    
     
 
 }
@@ -95,7 +98,7 @@ void Maze::construct()
     fstream file;
     string line;
 
-    file.open(MAZE_MATRICE_FILE, ios::in);
+    file.open(_fileName, ios::in);
     for (unsigned int i = 0 ; i < MAZE_SIZE*2 ; i++ )
     {
         getline(file, line);
@@ -153,7 +156,6 @@ void Maze::construct()
         int y = atoi(&line[0]);
 
         _grid[y][x].place(&powerUp);
-        cout << powerUp.getX() << " " << powerUp.getY() << endl;
         _powerUpList.push_back(new PowerUp(powerUp));
     }
 

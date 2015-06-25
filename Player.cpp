@@ -12,6 +12,7 @@ using namespace std;
 
 Player::Player() : Perso()
 {
+    _level = 1;
     reset();
 }
 
@@ -70,6 +71,12 @@ void Player::chooseDirection(const string direction)
     }
 }
 
+void Player::nextLevel()
+{
+    _level++;
+}
+
+
 bool Player::canShoot()
 {
     if(_gunAvalaible && _nbAmmo > 0 && _fireRate.getElapsedTime() > _fireRateTime)
@@ -103,6 +110,11 @@ unsigned int Player::getAmmo() const
 void Player::setGun(bool available = true)
 {
     _gunAvalaible = available;
+}
+
+unsigned int Player::getLevel() const
+{
+    return _level;
 }
 
 void Player::addAmmo(const unsigned int number)
