@@ -45,7 +45,7 @@ public:
     
     void nextLevel();
     
-    void newGame();
+    void newGame(const unsigned int level = 0);
     
 
 private:

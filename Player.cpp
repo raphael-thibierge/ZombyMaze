@@ -25,7 +25,8 @@ void Player::reset()
     _height = PLAYER_HEIGHT;
     _name = "player";
     _traceNbMax = PLAYER_NB_TRACE_MAX;
-    _gunAvalaible = false;
+    _gunAvalaible = false
+    ;
     _fireRateTime = PLAYER_FIRE_RATE;
     _nbAmmo = 0;
     _fireRate.restart();

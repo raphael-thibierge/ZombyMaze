@@ -59,9 +59,17 @@ void GameModel::playerShoot(const string direction)
     _level->playerShoot(direction);
 }
 
-void GameModel::newGame()
+void GameModel::newGame(const unsigned int level)
 {
-    _level = new Level(_player.getLevel(), &_player);
+    if (level == 0)
+    {
+        _level = new Level(_player.getLevel(), &_player);
+    }
+    else
+    {
+        _level = new Level(level, &_player);
+        
+    }
 }
 
 void GameModel::nextLevel()

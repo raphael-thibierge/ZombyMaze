@@ -22,6 +22,7 @@ ViewsController::ViewsController(sf::RenderWindow* window) : _mainWindow(window)
     _allViews.insert(make_pair("Game", &_game));
     _allViews.insert(make_pair("Introduction", new ViewIntroduction()));
     _allViews.insert(make_pair("MainMenu", new ViewMainMenu()));
+    _allViews.insert(make_pair("Level", new ViewLevel()));
     _mainWindow = window;
 
 }
@@ -85,6 +86,10 @@ bool ViewsController::treatEvent(){
             
         case -3 :
             _view = _allViews["MainMenu"];
+            break;
+        
+        case -4 :
+            _view = _allViews["Level"];
             break;
 
         case 111:

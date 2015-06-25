@@ -18,6 +18,7 @@ private:
     bool _buttonPlay;
     bool _buttonQuit;
     bool _buttonTheme;
+    bool _buttonLevel;
 public:
     
     // CONSTRUCTOR
@@ -32,9 +33,11 @@ public:
     
     virtual bool initSFML() override;
     
+    bool initButtons() override;
+    
     void displayButtons();
     
-    bool initButtons() override;
+    
     
    void updateButtons(const unsigned int mouseX, const unsigned int mouseY);
     

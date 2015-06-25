@@ -13,13 +13,10 @@ using namespace std;
 #include <math.h>
 
 
-Maze::Maze(const unsigned int number) : GraphicElement(){
-    cout << number << endl;
+Maze::Maze(const unsigned int number) : GraphicElement()
+{
     _fileName = resourcePath() + to_string(number) + ".txt";
     init();
-    
-    
-
 }
 
 void Maze::init()

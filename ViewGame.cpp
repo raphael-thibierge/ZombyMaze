@@ -147,7 +147,7 @@ int ViewGame::treatEventSFML()
             {
                     
                 case sf::Keyboard::Escape:
-                    returnValue = 111;
+                    returnValue = 0;
                     break;
                     
                 case sf::Keyboard::R:

@@ -16,6 +16,7 @@ ViewMainMenu::ViewMainMenu() : View()
     _buttonPlay = false;
     _buttonQuit = false;
     _buttonTheme = false;
+    _buttonLevel = false;
 
 }
 
@@ -43,6 +44,12 @@ int ViewMainMenu::treatEventSFML()
             {
                 returnValue = 0;
             }
+            
+            if (_buttonLevel)
+            {
+                returnValue = -4;
+            }
+            
         }
     }
     return returnValue;
@@ -52,9 +59,10 @@ void ViewMainMenu::showViewSFML()
 {
     _window->draw(_spritesList["background"]);
     
-    displayStandartButton("play", MENU_COLUMN_1, MENU_LINE_1, _buttonPlay);
-    displayStandartButton("theme", MENU_COLUMN_1, MENU_LINE_2, _buttonTheme );
-    displayStandartButton("quit", MENU_COLUMN_1, MENU_LINE_3, _buttonQuit);
+    displayStandartButton("play", MENU_COLUMN[0], MENU_LINE[0], _buttonPlay);
+    displayStandartButton("level", MENU_COLUMN[0], MENU_LINE[1], _buttonLevel);
+    displayStandartButton("theme", MENU_COLUMN[0], MENU_LINE[2], _buttonTheme );
+    displayStandartButton("quit", MENU_COLUMN[0], MENU_LINE[3], _buttonQuit);
 }
 
 
@@ -76,15 +84,19 @@ bool ViewMainMenu::initButtons()
         return false;
     if (!initSprite(name+"theme", BUTTON_THEME, 2, BUTTON_WIDTH, BUTTON_HEIGHT))
         return false;
+    if (!initSprite(name+"level", BUTTON_LEVEL, 2, BUTTON_WIDTH, BUTTON_HEIGHT))
+        return false;
     
     return true;
 }
 
 void ViewMainMenu::updateButtons(const unsigned int mouseX, const unsigned int mouseY)
 {
-    _buttonPlay = mouseOnButton(mouseX, mouseY, MENU_COLUMN_1, MENU_LINE_1, BUTTON_WIDTH, BUTTON_HEIGHT);
-    _buttonQuit = mouseOnButton(mouseX, mouseY, MENU_COLUMN_1, MENU_LINE_3, BUTTON_WIDTH, BUTTON_HEIGHT);
-    _buttonTheme = mouseOnButton(mouseX, mouseY, MENU_COLUMN_1, MENU_LINE_2, BUTTON_WIDTH, BUTTON_HEIGHT);
+    _buttonPlay = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[0], BUTTON_WIDTH, BUTTON_HEIGHT);
+    _buttonLevel = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[1], BUTTON_WIDTH, BUTTON_HEIGHT);
+    _buttonTheme = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[2], BUTTON_WIDTH, BUTTON_HEIGHT);
+    _buttonQuit = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[3], BUTTON_WIDTH, BUTTON_HEIGHT);
+    
 }
 
 

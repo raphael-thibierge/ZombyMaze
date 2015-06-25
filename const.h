@@ -98,14 +98,13 @@ const std::string BUTTON_TEXT_FONT = "";
 const std::string BUTTON_PLAY = "buttonPlay.png";
 const std::string BUTTON_QUIT = "buttonQuit.png";
 const std::string BUTTON_THEME = "buttonTheme.png";
+const std::string BUTTON_LEVEL = "buttonTheme.png";
 
 
 const std::string BACKGROUND_MAINMENU = "backgroundMainMenu.png";
 
-const unsigned int MENU_COLUMN_1 = 750;
-const unsigned int MENU_LINE_1 = 150;
-const unsigned int MENU_LINE_2 = 350;
-const unsigned int MENU_LINE_3 = 550;
+const unsigned int MENU_COLUMN[1] = {750};
+const unsigned int MENU_LINE[4] = {50, 250, 450, 650};
 
 //GAMEVIEW
 const std::string VIEWGAME_MAZE_BACKGROUND = "caca.png";

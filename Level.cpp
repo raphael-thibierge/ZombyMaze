@@ -25,7 +25,6 @@ void Level::init()
     _play = true;
     
     
-    
     _enemiesCpt = 0;
     // init player position
     _player->setPosition(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
