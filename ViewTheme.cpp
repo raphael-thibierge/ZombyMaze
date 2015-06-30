@@ -57,6 +57,7 @@ int ViewTheme::treatEventSFML()
 
 void ViewTheme::showViewSFML()
 {
+    displayTitle("Choose yout theme", 100, 100);
     displayButtons();
 }
 

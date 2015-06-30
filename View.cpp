@@ -56,13 +56,20 @@ void View::displayText(const std::string text,const float positionX,const float 
     textDisplayed.setCharacterSize(TEXT_SIZE);
     textDisplayed.setPosition(positionX, positionY);
     textDisplayed.setStyle(sf::Text::Bold);
-    textDisplayed.setColor(sf::Color::Red);
+    textDisplayed.setColor(sf::Color::White);
     _window->draw(textDisplayed);
 }
 
 void View::displayTitle( const std::string text, const float positionX, const float positionY)
 {
-    displayText(text, positionX, positionY);
+    sf::Font font;
+    font.loadFromFile(resourcePath() + "sansation.ttf");
+    sf::Text textDisplayed(text, font);
+    textDisplayed.setCharacterSize(TEXT_TITLE_SIZE);
+    textDisplayed.setPosition(positionX, positionY);
+    textDisplayed.setStyle(sf::Text::Bold);
+    textDisplayed.setColor(sf::Color::White);
+    _window->draw(textDisplayed);
 }
 
 bool View::mouseOnButton

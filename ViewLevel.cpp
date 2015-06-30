@@ -59,6 +59,7 @@ int ViewLevel::treatEventSFML()
 
 void ViewLevel::showViewSFML()
 {
+    displayTitle("Choose your Level", 100, 100);
     displayButtons();
 }
 

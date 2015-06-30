@@ -79,9 +79,6 @@ void GameModel::nextLevel()
     _level = new Level(_player.getLevel(), &_player);
 }
 
-
-
-
 // PRIVATE
 void GameModel::clear()
 {

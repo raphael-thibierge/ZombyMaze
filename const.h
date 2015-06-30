@@ -43,7 +43,7 @@ const unsigned int PLAYER_NB_TRACE_MAX = 5;
 
 // ENEMIES
 const unsigned int ZOMBY_SPEED = 3 ;
-const unsigned int ZOMBY_ACCELERATION = 2;
+const unsigned int ZOMBY_ACCELERATION = 1;
 const unsigned int ZOMBY_NB_TRACE_MAX = 0;
 
 // TRACE
@@ -81,6 +81,9 @@ const unsigned int GUN_WIDTH = 41;
 const unsigned int GUN_HEIGHT = 41;
 const unsigned int GUB_AMMO = 5;
 
+// BEST SCORS
+const unsigned int BEST_SCORE_NB = 5;
+const std::string BEST_SCORE_FILE = resourcePath() + "bestscores.txt";
 
 // =====================    INTRODUCTIONVIEW   ===================
 const std::string IMAGE_INTRO = "Intro.png";
@@ -89,6 +92,7 @@ const float TIME_INTRODUCTION = 0.5f;
 // =====================    GAMEVIEW   ===================
 // TEXTES
 const unsigned int TEXT_SIZE = 40;
+const unsigned int TEXT_TITLE_SIZE = 60;
 
 // BUTTONS
 const unsigned int BUTTON_WIDTH = 300;

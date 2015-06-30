@@ -47,7 +47,8 @@ public:
     
     void newGame(const unsigned int level = 0);
     
-
+// best scores
+    
 private:
     void clear();
 
