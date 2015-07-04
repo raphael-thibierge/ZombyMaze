@@ -60,6 +60,12 @@ int ViewIntroduction::treatEventSFML()
                 case sf::Keyboard::Escape :
                     returnValue = 0;
                     break;
+                    
+                case sf::Keyboard::R:
+                    _playerX = - PLAYER_WIDTH;
+                    _zombyX = - PLAYER_WIDTH - ZOMBY_WIDTH - 100;
+                    break;
+                
                 default :
                     break;
         }
