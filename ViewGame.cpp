@@ -340,17 +340,6 @@ void ViewGame::displayBackGround()
 
 void ViewGame::displayMazeCase()
 {
-   
-    for (Coin* coin : *_modele->getLevel()->getCoinList())
-    {
-        if (coin != nullptr)
-        {
-            _spritesList["coin"].setPosition(coin->getX(), coin->getY());
-            _window->draw(_spritesList["coin"]);
-        }
-    }
-    
-    
     for (PowerUp* powerUp : *_modele->getPowersUp())
     {
         if (powerUp->getAvailable() && powerUp->getName() == "gun")
@@ -362,9 +351,7 @@ void ViewGame::displayMazeCase()
     
     for (MazeCase* mazeCase : *_modele->getMazeCaseList())
     {
-     //   cout << mazeCase->toString() << endl;
-        
-        
+
         Trace * trace = mazeCase->getTrace();
         if (trace->available())
         {
@@ -374,6 +361,16 @@ void ViewGame::displayMazeCase()
             _window->draw(_spritesList[name]);
         }
     }
+    
+    for (Coin* coin : *_modele->getLevel()->getCoinList())
+    {
+        if (coin != nullptr)
+        {
+            _spritesList["coin"].setPosition(coin->getX(), coin->getY());
+            _window->draw(_spritesList["coin"]);
+        }
+    }
+    
 }
 
 bool ViewGame::initButtons()

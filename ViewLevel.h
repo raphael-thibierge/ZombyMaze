@@ -30,7 +30,7 @@ public:
     
     bool initButtons() override;
     
-     void updateButtons(const unsigned int mouseX, const unsigned int mouseY);
+    void updateButtons(const unsigned int mouseX, const unsigned int mouseY);
     
     void displayButtons();
     

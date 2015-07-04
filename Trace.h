@@ -18,7 +18,8 @@ private:
     std::string _direction;
     std::string _owner;
     sf::Time _lifeTime;
-    sf::Clock _life;
+    sf::Time _life;
+    sf::Clock _time;
     //sf::time;
     
 // states

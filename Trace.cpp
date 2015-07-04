@@ -44,14 +44,15 @@ void Trace::newTrace(const std::string direction, const std::string owner)
         }
         
         _owner = owner;
-        _life.restart();
+        _time.restart();
         _available = true;
     }
     else
     {
         cout << __FUNCTION__ << " not a direction" << endl;
     }
-    _life.restart();
+    _time.restart();
+    _life = _time.getElapsedTime();
 }
 
 void Trace::deleteTrace()
@@ -63,7 +64,9 @@ void Trace::deleteTrace()
 
 void Trace::update()
 {
-    if (_life.getElapsedTime() > _lifeTime)
+    _life += _time.getElapsedTime();
+    _time.restart();
+    if (_life > _lifeTime)
     {
         deleteTrace();
     }
@@ -96,4 +99,9 @@ void Trace::setDirection(std::string direction)
     {
         _available = false;
     }
+}
+
+void Trace::setPlayPause()
+{
+    _time.restart();
 }

@@ -68,7 +68,6 @@ public:
     void coinCollision();
 
     
-    
     // MOVEMENT
     void movementManager();
     

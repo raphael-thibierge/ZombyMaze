@@ -428,6 +428,8 @@ void Level::setPlayStop()
 {
     _play = !_play;
     _chrono.restart();
+    for (auto trace : *getTraces())
+        trace->setPlayPause();
 }
 
 sf::Time Level::getTime()
