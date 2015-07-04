@@ -115,10 +115,10 @@ void Maze::construct()
         }
     }
     updateNextMazeCases();
-    // entrée
+    // enter
     getline(file, line);
     
-    // sortie
+    // exit
     getline(file, line);
     BackgroundElement element = BackgroundElement(line);
     
@@ -130,7 +130,8 @@ void Maze::construct()
     getline(file, line);
     int y = atoi(&line[0]);
     
-    _grid[y][y].place(&element);
+    _grid[y][x].setExit(true);
+    _grid[y][x].place(&element);
     _backgroundElementList.push_back(element);
     
     

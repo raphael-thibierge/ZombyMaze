@@ -75,7 +75,10 @@ void Enemy::changeDirection()
             }
             while (avalaibleDirections[random] == oppositeDirection(_direction));
         }
-        _direction = avalaibleDirections[random];
+        if (_mazeCasePosition->getExit())
+            _direction = oppositeDirection(_direction);
+        else
+            _direction = avalaibleDirections[random];
     }
     _mazeCaseToGo = _mazeCasePosition->getNextMazeCase(_direction);
     _isMoving = true;

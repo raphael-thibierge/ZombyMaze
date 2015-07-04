@@ -16,6 +16,7 @@ MazeCase::MazeCase()
     
     _width = MAZECASE_SIZE;
     _height = MAZECASE_SIZE;
+    _exit = false;
     
     init();
 }
@@ -123,5 +124,14 @@ MazeCase* MazeCase::getNextMazeCase(const std::string direction)
     return  nullptr;
 }
 
+bool MazeCase::getExit() const
+{
+    return _exit;
+}
+
+void MazeCase::setExit(const bool exit)
+{
+    _exit = exit;
+}
 
 

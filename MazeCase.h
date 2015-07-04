@@ -22,6 +22,10 @@ private:
     
     Trace _trace;
     
+    // states
+    bool _exit;
+    
+    
 // CONSTRUCTOR & DESTRUCTOR
 public:
     MazeCase();
@@ -59,10 +63,11 @@ public:
 
     Trace* getTrace();
     
-    
-    
     MazeCase* getNextMazeCase(const std::string direction) ;
+    
+    bool getExit() const;
 
+    void setExit(const bool exit);
 };
 
 #endif /* defined(__Console__MazeCase__) */
