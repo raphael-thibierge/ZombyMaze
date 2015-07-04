@@ -61,7 +61,7 @@ void View::displayText(const std::string text,const float positionX,const float 
 }
 
 void View::displayTitle( const std::string text, const float positionX, const float positionY)
-{
+{ 
     sf::Font font;
     font.loadFromFile(resourcePath() + "sansation.ttf");
     sf::Text textDisplayed(text, font);

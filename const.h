@@ -111,7 +111,7 @@ const unsigned int MENU_COLUMN[1] = {750};
 const unsigned int MENU_LINE[4] = {50, 250, 450, 650};
 
 //GAMEVIEW
-const std::string VIEWGAME_MAZE_BACKGROUND[2] = {"caca.png", "caca.png"};
+const std::string VIEWGAME_MAZE_BACKGROUND[2] = {"caca.png", "fond2.png"};
 
 const int VIEWGAME_MAZE_BACKGROUND_WIDTH = WINDOW_WIDTH;
 const int VIEWGAME_MAZE_BACKGROUND_HEIGHT = WINDOW_HEIGHT;

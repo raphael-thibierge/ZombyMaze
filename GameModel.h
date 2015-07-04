@@ -45,7 +45,7 @@ public:
     
     void nextLevel();
     
-    void newGame(const unsigned int level = 0);
+    bool newGame(const unsigned int level = 0);
     
 // best scores
     

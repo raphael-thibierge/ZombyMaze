@@ -32,16 +32,14 @@ int ViewLevel::treatEventSFML()
         {
             if (_buttonLevel1)
             {
-                returnValue = -2;
-                // at this point play/stop states is always stop !
-                _modele->newGame(1);
+                if (_modele->newGame(1))
+                    returnValue = -2;
             }
             
             else if (_buttonLevel2)
             {
-                returnValue = -2;
-                // at this point play/stop states is always stop !
-                _modele->newGame(2);
+                if (_modele->newGame(2))
+                    returnValue = -2;
             }
             
             else if (_buttonQuit)
