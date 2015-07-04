@@ -86,7 +86,7 @@ const unsigned int BEST_SCORE_NB = 5;
 const std::string BEST_SCORE_FILE = resourcePath() + "bestscores.txt";
 
 // =====================    INTRODUCTIONVIEW   ===================
-const std::string IMAGE_INTRO = "Intro.png";
+const std::string IMAGE_INTRO = "backgroundMainMenu.png";
 const float TIME_INTRODUCTION = 0.5f;
 
 // =====================    GAMEVIEW   ===================

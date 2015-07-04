@@ -16,6 +16,15 @@ class ViewIntroduction : public virtual View
 {
 private:
     sf::Clock _time;
+    
+    bool _end;
+    
+    int _zombyX;
+    int _zombyY;
+    int _playerX;
+    int _playerY;
+    int _cptSprite;
+    
 
 // CONSTRUCTOR AND DESTRUCTOR
 //
