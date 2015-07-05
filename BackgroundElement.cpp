@@ -15,7 +15,7 @@ BackgroundElement::BackgroundElement(std::string name) : GraphicElement()
     _name = name;
 }
 
-std::string BackgroundElement::getName() const
+const std::string BackgroundElement::getName() const
 {
     return _name;
 }

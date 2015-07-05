@@ -10,41 +10,43 @@
 
 using namespace std;
 
+// CONSTRUCTOR AND DESTRUCTOR
 MazeCase::MazeCase()
 {
     // init position
-    
     _width = MAZECASE_SIZE;
     _height = MAZECASE_SIZE;
     _exit = false;
-    
     init();
 }
 
 MazeCase::~MazeCase()
 {
+    for (auto pair : _nextMazeCase)
+        pair.second = nullptr;
 }
 
 void MazeCase::init()
 {
     // init walls
-    place(&_trace);
     for (unsigned int i = 0; i < 4 ; i++)
         _walls.push_back(false);
     _walls.resize(4);
     
-    // init nex maze case
+    // init next maze case
     _nextMazeCase.insert(make_pair("up", nullptr));
     _nextMazeCase.insert(make_pair("down", nullptr));
     _nextMazeCase.insert(make_pair("left", nullptr));
     _nextMazeCase.insert(make_pair("right", nullptr));
 }
 
+//
+// PUBLIC METHODS
+//
 void MazeCase::newTrace(const string direction, const string owner)
 {
     _trace.newTrace(direction, owner);
 }
-
 
 void MazeCase::addWall(const unsigned int sideNumber)
 {
@@ -55,12 +57,10 @@ void MazeCase::addWall(const unsigned int sideNumber)
 void MazeCase::addNextMazeCase(MazeCase * mazeCase, const std::string direction)
 {
     if (MovableElement::isDirection(direction))
-    {
         _nextMazeCase[direction] = mazeCase;
-    }
 }
 
-vector<string> MazeCase::getAvalaibleDirecton() const
+vector<string> MazeCase::getAvalaibleDirection() const
 {
     vector<string> result;
     int cpt = 0;
@@ -76,62 +76,55 @@ vector<string> MazeCase::getAvalaibleDirecton() const
     return result;
 }
 
-void MazeCase::SetPosition(const unsigned int x, const unsigned y)
-{
-    _X = MAZE_X + ( x * MAZECASE_SIZE ) + (x+1)*WALL_WIDTH_V;
-    _Y = MAZE_Y + ( y * MAZECASE_SIZE ) + (y+1)*WALL_HEIGHT_H;
-    
-    place(&_trace);
-}
-
-
 void MazeCase::place(GraphicElement *element) const
 {
     element->setX(_X + (_width - element->getWidth() ) / 2 );
     element->setY(_Y + (_height - element->getHeight() ) / 2 );
-    
-    //element->setX(_X );
-    //element->setY(_Y );
-    
 }
 
-
-bool MazeCase::isAvailableDirection(std::string direction)
+const bool MazeCase::isAvailableDirection(std::string direction)
 {
     return ( MovableElement::isDirection(direction) && !_walls[MovableElement::directionToInt(direction)]);
 }
 
-// ACCESSORS
-bool MazeCase::isWall(const string direction) const
+const bool MazeCase::isWall(const string direction) const
 {
     return _walls[MovableElement::directionToInt(direction)];
 }
 
+
+//
+// ACCESSORS
+//
+
+// GETTERS
 Trace* MazeCase::getTrace()
 {
     return &_trace;
 }
 
-
-
 MazeCase* MazeCase::getNextMazeCase(const std::string direction)
 {
     MazeCase* mazeCase;
     if (MovableElement::isDirection(direction))
-    {
         return _nextMazeCase[direction] ;
-    }
     return  nullptr;
 }
 
-bool MazeCase::getExit() const
+const bool MazeCase::getExit() const
 {
     return _exit;
 }
 
+// SETTERS
 void MazeCase::setExit(const bool exit)
 {
     _exit = exit;
 }
 
-
+void MazeCase::SetPosition(const unsigned int x, const unsigned y)
+{
+    _X = MAZE_X + ( x * MAZECASE_SIZE ) + (x+1)*WALL_WIDTH_V;
+    _Y = MAZE_Y + ( y * MAZECASE_SIZE ) + (y+1)*WALL_HEIGHT_H;
+    place(&_trace);
+}

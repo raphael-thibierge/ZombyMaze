@@ -22,6 +22,6 @@ public:
     
 // ACCESSORS
 public:
-    std::string getName() const;
+    const std::string getName() const;
 };
 #endif /* defined(__ZombyMaze2__BackgroundElement__) */

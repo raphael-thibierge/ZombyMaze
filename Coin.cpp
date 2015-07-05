@@ -24,7 +24,7 @@ Coin::Coin(const unsigned int value, const unsigned int x, const unsigned int y)
 // ACCESSORS
 //
 
-unsigned int Coin::getValue() const
+const unsigned int Coin::getValue() const
 {
     return _value;
 }

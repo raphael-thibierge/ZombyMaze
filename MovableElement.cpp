@@ -53,12 +53,12 @@ void MovableElement::moveOpposite(string direction)
 }
 
 // STATICS
-bool MovableElement::isDirection(const string direction)
+const bool MovableElement::isDirection(const string direction)
 {
     return (direction == "up" || direction == "down" || direction == "left" || direction == "right" );
 }
 
-unsigned int MovableElement::directionToInt(const string direction)
+const unsigned int MovableElement::directionToInt(const string direction)
 {
     if (direction == "up")
         return 0;
@@ -71,7 +71,7 @@ unsigned int MovableElement::directionToInt(const string direction)
     return 0;
 }
 
-string MovableElement::intToDirection(const unsigned int direction)
+const string MovableElement::intToDirection(const unsigned int direction)
 {
     switch (direction) {
         case 0:
@@ -94,7 +94,7 @@ string MovableElement::intToDirection(const unsigned int direction)
     }
 }
 
-string MovableElement::oppositeDirection(std::string direction)
+const string MovableElement::oppositeDirection(std::string direction)
 {
     if (isDirection(direction))
     {
@@ -122,12 +122,12 @@ void MovableElement::setSpeed(const unsigned int speed)
     _speed = speed;
 }
 
-string MovableElement::getDirection() const
+const string MovableElement::getDirection() const
 {
     return _direction;
 }
 
-unsigned int MovableElement::getSpeed() const
+const unsigned int MovableElement::getSpeed() const
 {
     return _speed;
 }

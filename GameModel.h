@@ -47,6 +47,8 @@ public:
     
     bool newGame(const unsigned int level = 0);
     
+    void reset();
+    
 // best scores
     
 private:
@@ -57,11 +59,11 @@ private:
 // ACCESSORS
 public:
     
-    bool getLoose() const;
+    const bool getLoose() const;
     
-    bool getWin() const;
+    const bool getWin() const;
     
-    bool getPlayStop() const;
+    const bool getPlayStop() const;
 
     std::list<Enemy*> * getEnemiesList();
 

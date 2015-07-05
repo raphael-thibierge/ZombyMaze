@@ -7,10 +7,9 @@
 using namespace std;
  
 
-Level::Level(const unsigned int level, Player* player) : _level(level), _maze(Maze(level))
+Level::Level(const unsigned int level, Player* player) : _level(level), _maze(Maze(level)), _player(player)
 {
-    _player = player;
-    _nbEnnemies = ENEMIES_MAX;
+    _nbEnnemies = _maze.getNbEnnemies();
     _nbRetry = 0;
     init();
 }
@@ -23,18 +22,20 @@ void Level::init()
     _playerWin = false;
     _playerLoose = false;
     _play = true;
-    
+    _levelEnd = false;
     
     _enemiesCpt = 0;
+    
     // init player position
     _player->setPosition(PLAYER_INITIAL_X, PLAYER_INITIAL_Y);
-    _player->setMazeCase(nullptr);
     _player->setMoving(false);
-    // add an enemy
+    _player->updateMazeCase(getMazeCases());
+    
+    cout << getEnemies()->size() << endl;
+    // add enenies
     generateEnemies();
     
-    updateMazeCasePosition();
-    
+    cout << getEnemies()->size() << endl;
     updateTraces();
     
     _chrono.restart();
@@ -53,8 +54,6 @@ Level::~Level ()
     _bulletsList.clear();
     
     _player = nullptr;
-    _difficulty = nullptr;
-    
 }
 
 
@@ -68,6 +67,8 @@ void Level::runGame()
     
     if (_play)
     {
+        _player->update();
+        
         movementManager();
         
         collisionManager();
@@ -83,23 +84,23 @@ void Level::runGame()
         if (_playerLoose)
         {
             setPlayStop();
+            _player->save();
         }
         else if (_playerWin)
         {
             setPlayStop();
             _nbRetry = 0;
+            _player->save();
         }
         _time += _chrono.getElapsedTime();
         _chrono.restart();
     }
-    
 }
 
 // ===========   MOVEMENTS
 //
 void Level::movementManager()
 {
-    _player->autoMove() ;
     moveAllEnemies();
     moveAllBullets();
 }
@@ -111,12 +112,12 @@ void Level::collisionManager()
     coinCollision();
 }
 
-
 void Level::moveAllEnemies()
 {
     for (Enemy* enemy : _enemiesList)
     {
-        enemy->autoMove();
+        if (enemy != nullptr)
+            enemy->autoMove();
     }
 }
 
@@ -128,9 +129,8 @@ void Level::moveAllBullets()
     }
 }
 
-
 // ==============  COLLISISION
-
+//
 bool Level::enemiesCollision()
 {
     list<Enemy*> enemiesToDestroy;
@@ -139,7 +139,7 @@ bool Level::enemiesCollision()
     {
         if (_player->ElementOnElement(enemy))
         {
-            returnValue = true;
+            returnValue = !_player->getShieldActivated();
             enemiesToDestroy.push_back(enemy);
         }
         else if (!_maze.contain(enemy))
@@ -229,8 +229,18 @@ void Level::powerUpCollision()
             {
                 _player->setGun(true);
                 _player->addAmmo(GUB_AMMO);
-                powerUp->setAvailable(false);
+                
             }
+            else if ( powerUp->getName() == "boost")
+            {
+                _player->setBoost(true);
+            }
+            else if ( powerUp->getName() == "shield")
+            {
+                _player->setShield(true);
+            }
+            
+            powerUp->setAvailable(false);
         }
     }
 
@@ -261,17 +271,6 @@ void Level::coinCollision()
 
 
 // UPDATE OBJETCS
-void Level::updateMazeCasePosition()
-{
-    // player
-    _player->updateMazeCase(getMazeCases());
-    
-    // enemies
-    for (Enemy* enemy : _enemiesList)
-    {
-        enemy->updateMazeCase(getMazeCases());
-    }
-}
 
 void Level::updateTraces()
 {
@@ -280,7 +279,6 @@ void Level::updateTraces()
         trace->update();
     }
 }
-
 
 bool Level::successOutOfMaze()
 {
@@ -297,8 +295,6 @@ void Level::spawnRandomEnemy()
         randomColumn = rand() % (_maze.getSize()-1);
     } while (randomLine < 2 && randomColumn < 2);
     
-    
-    
     Enemy * enemy = new Enemy();
     enemy->setMazeCase(_maze.getMazeCase(randomLine, randomColumn));
     enemy->getMazeCase()->place(enemy);
@@ -308,7 +304,7 @@ void Level::spawnRandomEnemy()
 
 void Level::generateEnemies()
 {
-    for (unsigned int i = 0 ; i < ENEMIES_MAX ; i++)
+    for (unsigned int i = 0 ; i < _nbEnnemies ; i++)
     {
         spawnRandomEnemy();
     }
@@ -336,9 +332,11 @@ void Level::reset()
 
 void Level::clear()
 {
+    // reset trace
     for (Trace* trace : *getTraces())
         trace->deleteTrace();
     
+    // gelete enemies
     for (Enemy* enemy : *getEnemies())
     {
         if (enemy != nullptr)
@@ -346,6 +344,15 @@ void Level::clear()
         enemy = nullptr;
     }
     getEnemies()->clear();
+    
+    // delete coins
+    for (Coin* coin : *getCoinList())
+    {
+        if (coin != nullptr)
+            delete coin;
+        coin = nullptr;
+    }
+    getCoinList()->clear();
 }
 
 // ============================================

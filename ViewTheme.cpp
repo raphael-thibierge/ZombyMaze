@@ -18,7 +18,7 @@ ViewTheme::ViewTheme() : View()
 }
 
 
-int ViewTheme::treatEventSFML()
+const int ViewTheme::treatEventSFML()
 {
     int returnValue = 1;
     Event event;
@@ -61,12 +61,12 @@ void ViewTheme::showViewSFML()
     displayButtons();
 }
 
-bool ViewTheme::initSFML()
+const bool ViewTheme::initSFML()
 {
     return true;
 }
 
-bool ViewTheme::initButtons()
+const bool ViewTheme::initButtons()
 {
     string name = "button_";
     if (!initSprite(name+"theme1", BUTTON_PLAY, 2, BUTTON_WIDTH, BUTTON_HEIGHT))

@@ -21,7 +21,7 @@ ViewMainMenu::ViewMainMenu() : View()
 }
 
 
-int ViewMainMenu::treatEventSFML()
+const int ViewMainMenu::treatEventSFML()
 {
     int returnValue = 1;
     Event event;
@@ -71,7 +71,7 @@ void ViewMainMenu::showViewSFML()
 
 
 
-bool ViewMainMenu::initSFML()
+const bool ViewMainMenu::initSFML()
 {
     if (!initSprite("background", BACKGROUND_MAINMENU, 1, WINDOW_WIDTH, WINDOW_HEIGHT))
         return false;
@@ -79,7 +79,7 @@ bool ViewMainMenu::initSFML()
     return true;
 }
 
-bool ViewMainMenu::initButtons()
+const bool ViewMainMenu::initButtons()
 {
     string name = "button_";
     if (!initSprite(name+"play", BUTTON_PLAY, 2, BUTTON_WIDTH, BUTTON_HEIGHT))

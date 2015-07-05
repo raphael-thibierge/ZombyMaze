@@ -88,17 +88,17 @@ MazeCase* Perso::getMazeCase() const
     return _mazeCasePosition;
 }
 
-MazeCase* Perso::getMazeCasToGo() const
+MazeCase* Perso::getMazeCaseToGo() const
 {
     return _mazeCaseToGo;
 }
 
-unsigned int Perso::getLife() const
+const unsigned int Perso::getLife() const
 {
     return _life;
 }
 
-bool Perso::getDead() const
+const bool Perso::getDead() const
 {
     return _dead;
 }
@@ -117,7 +117,7 @@ Bullet* Perso::getShoot(const std::string direction) const
     return new Bullet(direction, x, y);
 }
 
-unsigned int Perso::getMoney() const
+const unsigned int Perso::getMoney() const
 {
     return _money;
 }

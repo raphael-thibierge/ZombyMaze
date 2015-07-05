@@ -13,7 +13,7 @@ ViewGame::~ViewGame()
 {
 }
 
-bool ViewGame::initSFML()
+const bool ViewGame::initSFML()
 {
     _imagesList.clear();
     _spritesList.clear();
@@ -102,6 +102,20 @@ bool ViewGame::initSFML()
     // gun
     if (!initSprite("gun", GUN_IMAGE, 1, GUN_WIDTH, GUN_HEIGHT))
         return false;
+    if (!initSprite("gun_unavailable", GUN_IMAGE_UNAVAILABLE, 1, GUN_WIDTH, GUN_HEIGHT))
+        return false;
+    
+    // boost
+    if (!initSprite("boost", BOOST_IMAGE, 1, BOOST_WIDTH, BOOST_HEIGHT))
+        return false;
+    if (!initSprite("boost_unavailable", BOOST_IMAGE_UNAVAILABLE, 1, BOOST_WIDTH, BOOST_HEIGHT))
+        return false;
+    
+    // shield
+    if (!initSprite("shield", SHIELD_IMAGE, 1, SHIELD_WIDTH, SHIELD_HEIGHT))
+        return false;
+    if (!initSprite("shield_unavailable", SHIELD_IMAGE_UNAVAILABLE, 1, SHIELD_WIDTH, SHIELD_HEIGHT))
+        return false;
     
     // column info
     if (!initSprite("columnInfo", COLUMN_INFO_IMAGE[number], 1, COLUMN_INFO_WIDTH, COLUMN_INFO_HEIGHT))
@@ -113,7 +127,7 @@ bool ViewGame::initSFML()
 }
 
 
-int ViewGame::treatEventSFML()
+const int ViewGame::treatEventSFML()
 {
     int returnValue = 1;
     if (_modele->getPlayStop())
@@ -157,8 +171,18 @@ int ViewGame::treatEventSFML()
                     break;
                     
                 case sf::Keyboard::R:
-                    _modele->getLevel()->reset();
+                    _modele->reset();
                     break;
+                    
+                case sf::Keyboard::A:
+                    _modele->getPlayer()->useBoost();
+                    break;
+                
+                case sf::Keyboard::E:
+                    _modele->getPlayer()->useShield();
+                    break;
+                
+                    
         
                 case sf::Keyboard::Space:
                     if (_modele->getLoose())
@@ -342,10 +366,11 @@ void ViewGame::displayMazeCase()
 {
     for (PowerUp* powerUp : *_modele->getPowersUp())
     {
-        if (powerUp->getAvailable() && powerUp->getName() == "gun")
+        if (powerUp->getAvailable())
         {
-            _spritesList["gun"].setPosition(powerUp->getX(), powerUp->getY());
-            _window->draw(_spritesList["gun"]);
+            string name = powerUp->getName();
+            _spritesList[name].setPosition(powerUp->getX(), powerUp->getY());
+            _window->draw(_spritesList[name]);
         }
     }
     
@@ -373,7 +398,7 @@ void ViewGame::displayMazeCase()
     
 }
 
-bool ViewGame::initButtons()
+const bool ViewGame::initButtons()
 {
     return true;
 }
@@ -414,5 +439,78 @@ void ViewGame::displayColumn()
     
     if (_modele->getLevel() != nullptr)
         displayText(to_string(_modele->getLevel()->getRetry()), COLUMN_INFO_TEXT_X, INFO_NB_RESTART);
+    
+    // BONNUS BOOST
+    if (_modele->getPlayer()->getBoost())
+    {
+        _spritesList["boost"].setPosition(900, 700);
+        _window->draw(_spritesList["boost"]);
+        
+        //  boost life
+        if (_modele->getPlayer()->getBoostActivated())
+        {
+            sf::Time time = PLAYER_BOOST_LIFE -_modele->getPlayer()->getBoostTime();
+            int timeF = time.asSeconds()+1;
+            if (timeF >  PLAYER_BOOST_LIFE.asSeconds())
+            {
+                timeF--;
+            }
+            
+            string text = to_string(timeF);
+            text = text[0];
+            displayText(text, 911, 750);
+        }
+        else
+            displayText("A", 910, 750);
+    }
+    else
+    {
+        _spritesList["boost_unavailable"].setPosition(900, 700);
+        _window->draw(_spritesList["boost_unavailable"]);
+    }
+    
+
+    
+    // BONNUS GUN
+    if (_modele->getPlayer()->getGun())
+    {
+        _spritesList["gun"].setPosition(1000, 700);
+        _window->draw(_spritesList["gun"]);
+    }
+    else
+    {
+        _spritesList["gun_unavailable"].setPosition(1000, 700);
+        _window->draw(_spritesList["gun_unavailable"]);
+    }
+
+    
+        // BONNUS SHIELD
+    if (_modele->getPlayer()->getShield())
+    {
+        _spritesList["shield"].setPosition(1100, 700);
+        _window->draw(_spritesList["shield"]);
+        
+        // shield life
+        if (_modele->getPlayer()->getShieldActivated())
+        {
+            sf::Time time = PLAYER_SHIELD_LIFE -_modele->getPlayer()->getShieldTime();
+            int timeF = time.asSeconds()+1;
+            if (timeF >  PLAYER_SHIELD_LIFE.asSeconds())
+            {
+                timeF--;
+            }
+            string text = to_string(timeF);
+            text = text[0];
+            displayText(text, 1111, 750);
+        }
+        else
+            displayText("E", 1110, 750);
+    }
+    else
+    {
+        _spritesList["shield_unavailable"].setPosition(1110, 700);
+        _window->draw(_spritesList["shield_unavailable"]);
+    }
+
 
 }

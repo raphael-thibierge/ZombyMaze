@@ -12,7 +12,6 @@ class Level
 private:
 
     unsigned int _level;
-	unsigned int * _difficulty;
 	unsigned int _nbEnnemies;
     Player * _player;
     std::list<Enemy*> _enemiesList ;
@@ -76,11 +75,7 @@ public:
     void moveAllBullets();
     
     // UPDATE OBJETCS
-    void updateMazeCasePosition();
-    
-    void updateTraces();
-    
-    
+    void updateTraces();    
 
     // OTHER
     void init();
@@ -124,9 +119,20 @@ public:
     
     const unsigned int getRetry() const;
     
+    const unsigned int getLevel() const
+    {
+        return _level;
+    }
+    
+    
     void setPlayStop();
     
     void setPlayer(Player * player);
+    
+    void setRetry(const unsigned int number)
+    {
+        _nbRetry = number;
+    }
 };
 
     

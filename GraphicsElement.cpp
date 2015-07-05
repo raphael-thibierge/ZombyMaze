@@ -14,23 +14,23 @@ using namespace std;
 //
 GraphicElement::GraphicElement()
 {
-    _X = 10;
-    _Y = 10;
-    _width = 10;
-    _height = 10;
+    _X = 1;
+    _Y = 1;
+    _width = 1;
+    _height = 1;
 }
 
 //
 // METHODS
 //
 
-bool GraphicElement::pointOnElement(const unsigned int positionX, const unsigned int positionY) const
+const bool GraphicElement::pointOnElement(const unsigned int positionX, const unsigned int positionY) const
 {
     return ( positionX >= _X && positionX <= _X + _width
             && positionY >= _Y && positionY <= _Y + _height);
 }
 
-bool GraphicElement::ElementOnElement(GraphicElement *element) const
+const bool GraphicElement::ElementOnElement(GraphicElement *element) const
 {
     unsigned int eX = element->getX();
     unsigned int eY = element->getY();
@@ -48,7 +48,7 @@ bool GraphicElement::ElementOnElement(GraphicElement *element) const
             element->pointOnElement(_X + _width, _Y + _height)));
 }
 
-bool GraphicElement::contain(GraphicElement *element) const
+const bool GraphicElement::contain(GraphicElement *element) const
 {
     unsigned int eX = element->getX();
     unsigned int eY = element->getY();
@@ -62,7 +62,7 @@ bool GraphicElement::contain(GraphicElement *element) const
             pointOnElement(eX + eWidth, eY + eHeight)));
 }
 
-string GraphicElement::toString()
+const string GraphicElement::toString()
 {
     string text = "X=" + to_string(_X);
     text += " Y=" + to_string(_Y);
@@ -98,27 +98,27 @@ void GraphicElement::setSize(const unsigned int widht, const unsigned int height
     _height = height;
 }
 
-unsigned int GraphicElement::getX() const
+const unsigned int GraphicElement::getX() const
 {
     return _X;
 }
 
-unsigned int GraphicElement::getY() const
+const unsigned int GraphicElement::getY() const
 {
     return _Y;
 }
 
-unsigned int GraphicElement::getWidth() const
+const unsigned int GraphicElement::getWidth() const
 {
     return _width;
 }
 
-unsigned int GraphicElement::getHeight() const
+const unsigned int GraphicElement::getHeight() const
 {
     return _height;
 }
 
-unsigned int GraphicElement::getSurface() const
+const unsigned int GraphicElement::getSurface() const
 {
     return _width * _height;
 }

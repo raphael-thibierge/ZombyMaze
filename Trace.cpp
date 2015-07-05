@@ -21,7 +21,7 @@ Trace::Trace() : GraphicElement()
 
 
 
-bool Trace::available() const
+const bool Trace::available() const
 {
     return _available;
 }
@@ -77,13 +77,13 @@ void Trace::update()
 //
 
 
-string Trace::getDirection() const
+const string Trace::getDirection() const
 {
     return _direction;
 }
 
 
-string Trace::getOwner() const
+const string Trace::getOwner() const
 {
     return _owner;
 }

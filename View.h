@@ -39,13 +39,13 @@ public :
 //
     // SFML VERSION
 
-    virtual int treatEventSFML();
+    virtual const int treatEventSFML();
 
     virtual void showViewSFML();
     
-    virtual bool initSFML();
+    virtual const bool initSFML();
     
-    virtual bool initButtons();
+    virtual const bool initButtons();
 
     void displayStandartButton( const std::string name, const float positionX, const float positionY, const bool active = false);
 
@@ -53,12 +53,12 @@ public :
 
     void displayTitle( const std::string text, const float positionX, const float positionY);
 
-    bool mouseOnButton(const int mouseX, const int mouseY, const int buttonX, const int buttonY, const int buttonWidth, const int buttonHeight);
+    const bool mouseOnButton(const int mouseX, const int mouseY, const int buttonX, const int buttonY, const int buttonWidth, const int buttonHeight);
 
-    bool init(GameModel* modele, sf::RenderWindow * window);
+    const bool init(GameModel* modele, sf::RenderWindow * window);
 
     
-    bool initSprite(const std::string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteWitdh, const unsigned int spriteHeight);
+    const bool initSprite(const std::string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteWitdh, const unsigned int spriteHeight);
 
 };
 #endif /* defined(__ShmupTerminal__View__) */

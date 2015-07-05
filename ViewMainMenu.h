@@ -27,13 +27,13 @@ public:
     
     // METHODS
     
-    virtual int treatEventSFML() override;
+    const int treatEventSFML() override;
     
-    virtual void showViewSFML() override;
+    void showViewSFML() override;
     
-    virtual bool initSFML() override;
+    const bool initSFML() override;
     
-    bool initButtons() override;
+    const bool initButtons() override;
     
     void displayButtons();
     

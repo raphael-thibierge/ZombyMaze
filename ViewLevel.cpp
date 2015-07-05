@@ -18,7 +18,7 @@ ViewLevel::ViewLevel() : View()
 }
 
 
-int ViewLevel::treatEventSFML()
+const int ViewLevel::treatEventSFML()
 {
     int returnValue = 1;
     Event event;
@@ -61,12 +61,12 @@ void ViewLevel::showViewSFML()
     displayButtons();
 }
 
-bool ViewLevel::initSFML()
+const bool ViewLevel::initSFML()
 {
     return true;
 }
 
-bool ViewLevel::initButtons()
+const bool ViewLevel::initButtons()
 {
     string name = "button_";
     if (!initSprite(name+"level1", BUTTON_PLAY, 2, BUTTON_WIDTH, BUTTON_HEIGHT))

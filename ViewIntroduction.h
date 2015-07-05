@@ -38,13 +38,13 @@ public:
 // METHODS
 //
 
-    int treatEventSFML() override;
+    const int treatEventSFML() override;
 
     void showViewSFML() override;
 
-    bool initSFML() override;
+    const bool initSFML() override;
 
-    bool initButtons() override;
+    const bool initButtons() override;
     
 };
 

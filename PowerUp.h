@@ -25,9 +25,9 @@ public:
     
     // ACCESSORS
 public:
-    std::string getName() const;
+    const std::string getName() const;
     
-    bool getAvailable() const;
+    const bool getAvailable() const;
     
     void setAvailable(const bool available);
 };

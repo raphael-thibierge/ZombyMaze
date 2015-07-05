@@ -53,11 +53,10 @@ void Enemy::autoMove()
 
 void Enemy::changeDirection()
 {
-    vector<std::string> avalaibleDirections ;
-    // he has to choose a direction
-    avalaibleDirections = _mazeCasePosition->getAvalaibleDirecton();
+    vector<std::string> avalaibleDirections = _mazeCasePosition->getAvalaibleDirection();;
     
-    if (_mazeCasePosition != nullptr && _mazeCasePosition->getTrace()->available())
+    // enemy has to choose a direction
+    if (_mazeCasePosition != nullptr && _mazeCasePosition->getTrace()->available() && !_mazeCasePosition->getExit())
     {
         traceFound(_mazeCasePosition->getTrace()->getDirection());
     }

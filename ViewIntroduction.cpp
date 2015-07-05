@@ -30,7 +30,7 @@ ViewIntroduction::~ViewIntroduction(){}
 //
 // METHODS
 //
-int ViewIntroduction::treatEventSFML()
+const int ViewIntroduction::treatEventSFML()
  {
     showViewSFML();
 
@@ -115,7 +115,7 @@ void ViewIntroduction::showViewSFML()
     }
 }
 
-bool ViewIntroduction::initSFML()
+const bool ViewIntroduction::initSFML()
 {
     if (!initSprite("background", IMAGE_INTRO, 1, WINDOW_WIDTH, WINDOW_HEIGHT))
         return false;
@@ -137,7 +137,7 @@ bool ViewIntroduction::initSFML()
     return true;
 }
 
-bool ViewIntroduction::initButtons()
+const bool ViewIntroduction::initButtons()
 {
     return true;
 }

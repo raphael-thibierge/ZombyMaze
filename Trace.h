@@ -30,7 +30,7 @@ public:
 
     Trace();
     
-    bool available() const;
+    const bool available() const;
     
     void newTrace(const std::string direction, const std::string owner);
     
@@ -39,9 +39,9 @@ public:
    
 // ACCESSORS
 public:
-    std::string getDirection() const;
+    const std::string getDirection() const;
     
-    std::string getOwner() const;
+    const std::string getOwner() const;
     
     void update();
     

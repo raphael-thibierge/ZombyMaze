@@ -34,10 +34,7 @@ public:
 
     void traceFound(std::string _direction);
     
-    void traceLoose();
-    
-    bool findPlayer();
-    
+    void traceLoose();    
 
 private:
     void init();

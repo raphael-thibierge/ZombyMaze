@@ -51,11 +51,11 @@ public:
 public:
     MazeCase * getMazeCase() const;
     
-    MazeCase * getMazeCasToGo() const;
+    MazeCase * getMazeCaseToGo() const;
     
-    unsigned int getLife() const;
+    const unsigned int getLife() const;
     
-    bool getDead() const;
+    const bool getDead() const;
 
     void setMazeCase(MazeCase* mazeCase);
     
@@ -63,7 +63,7 @@ public:
     
     std::list<Trace*> * getTraceList();
     
-    unsigned int getMoney() const;
+    const unsigned int getMoney() const;
     
 };
 

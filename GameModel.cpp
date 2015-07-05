@@ -15,7 +15,6 @@ using namespace std;
 GameModel::GameModel()
 {
     init();
-    _level = nullptr;
     _gameStart = false;
 }
 
@@ -27,6 +26,7 @@ void GameModel::init()
 
 GameModel::~GameModel()
 {
+    _player.save();
     clear();
     if (_level != nullptr)
         delete _level;
@@ -43,8 +43,7 @@ GameModel::~GameModel()
 void GameModel::nextStep()
 {
     if (_level != nullptr && !_level->getLevelEnd())
-        _level->runGame();
-    
+        _level->runGame();    
 }
 
 
@@ -80,6 +79,21 @@ void GameModel::nextLevel()
         _player.nextLevel();
     _level = new Level(_player.getLevel(), &_player);
 }
+
+void GameModel::reset()
+{
+    if (_level != nullptr)
+    {
+        unsigned int retry = _level->getRetry();
+        unsigned int level =  _level->getLevel();
+    
+        delete _level;
+        _level = new Level(level, &_player);
+        _level->setRetry(retry);
+        
+    }
+}
+
 
 // PRIVATE
 void GameModel::clear()
@@ -130,17 +144,17 @@ Maze* GameModel::getMaze()
     return _level->getMaze();
 }
 
-bool GameModel::getPlayStop() const
+const bool GameModel::getPlayStop() const
 {
     return _level->getPlayStop();
 }
 
-bool GameModel::getWin() const
+const bool GameModel::getWin() const
 {
     return _level->getWin();
 }
 
-bool GameModel::getLoose() const
+const bool GameModel::getLoose() const
 {
     return _level->getLoose();
 }

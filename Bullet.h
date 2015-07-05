@@ -35,12 +35,12 @@ public:
 
 
 // ACCESSORS METHODS
-
-    unsigned int getDamage() const;
+public:
+    const unsigned int getDamage() const;
     
-    std::string getShooter() const;
+    const std::string getShooter() const;
     
-    unsigned int getType() const;
+    const unsigned int getType() const;
 
 };
 

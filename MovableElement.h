@@ -32,13 +32,13 @@ public:
     
 // STATICS
 public:
-    static bool isDirection(const std::string direction);
+    static const bool isDirection(const std::string direction);
     
-    static unsigned int directionToInt(const std::string direction);
+    static const unsigned int directionToInt(const std::string direction);
     
-    static std::string intToDirection(const unsigned int direction);
+    static const std::string intToDirection(const unsigned int direction);
     
-    static std::string oppositeDirection(std::string direction);
+    static const std::string oppositeDirection(std::string direction);
     
 
 // ACCESSORS
@@ -48,9 +48,9 @@ public:
 
     void setSpeed(const unsigned int speed);
 
-    std::string getDirection() const;
+    const std::string getDirection() const;
 
-    unsigned int getSpeed() const;
+    const unsigned int getSpeed() const;
 
 };
 

@@ -16,7 +16,7 @@ public:
 // METHODS
 //
 
-    int treatEventSFML() override;
+    const int treatEventSFML() override;
 
     void showViewSFML() override;
 
@@ -36,13 +36,13 @@ public:
 
     void displayColumn();
     
-    bool initSFML() override;
+    const bool initSFML() override;
     
     void displayBackGround();
     
     void displayInMazeCase(const unsigned int x, const unsigned int y, const std::string spriteName, const unsigned int width, const unsigned int height);
     
-    bool initButtons() override;
+    const bool initButtons() override;
 };
 
 #endif // VIEWGAME_H_INCLUDED

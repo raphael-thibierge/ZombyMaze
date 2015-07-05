@@ -16,6 +16,7 @@ using namespace std;
 Maze::Maze(const unsigned int number) : GraphicElement()
 {
     _fileName = resourcePath() + to_string(number) + ".txt";
+    _nbEnnemies = 0;
     init();
 }
 
@@ -58,7 +59,7 @@ Maze::~Maze()
 //
 // METHODS
 //
-
+ 
 // PUBLIC
 void Maze::clear()
 {
@@ -135,6 +136,10 @@ void Maze::construct()
     _backgroundElementList.push_back(element);
     
     
+    // nb enemies
+    getline(file, line);
+    _nbEnnemies = atoi(&line[0]);
+    
     // power up number
     getline(file, line);
     int number = atoi(&line[0]);
@@ -196,7 +201,7 @@ void Maze::updateNextMazeCases()
         for (unsigned int column = 0 ;  column < _size ; column++)
         {
             MazeCase* mazeCase = &_grid[line][column];
-            for (string direction : mazeCase->getAvalaibleDirecton())
+            for (string direction : mazeCase->getAvalaibleDirection())
             {
                 if (direction == "up" && line > 0)
                 {

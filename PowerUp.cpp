@@ -16,12 +16,12 @@ PowerUp::PowerUp(std::string name) : GraphicElement()
     _avalaible = true;
 }
 
-std::string PowerUp::getName() const
+const std::string PowerUp::getName() const
 {
     return _name;
 }
 
-bool PowerUp::getAvailable() const
+const bool PowerUp::getAvailable() const
 {
     return _avalaible;
 }

@@ -19,7 +19,7 @@
 
 class Maze : public GraphicElement
 {
-
+// ATTRIBUTES
 private:
     std::vector<std::vector<MazeCase>> _grid;
     std::list<Wall*> _wallList;
@@ -27,12 +27,12 @@ private:
     std::list<MazeCase*> _mazeCaseList;
     std::list<PowerUp*> _powerUpList;
     std::list<BackgroundElement> _backgroundElementList;
-    
+    unsigned int _nbEnnemies;
     unsigned int _size ;
     std::string _fileName;
 
+// CONTRUCTOR AND DESTRUCTOR
 public:
-
     Maze(const unsigned int number);
     
     ~Maze();
@@ -73,6 +73,10 @@ public :
     
     MazeCase* getMazeCase(const unsigned int line, const unsigned int column);
     
+    unsigned int getNbEnnemies() const
+    {
+        return _nbEnnemies;
+    }
 
 };
 

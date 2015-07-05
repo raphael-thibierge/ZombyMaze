@@ -25,16 +25,17 @@ public:
 
 // METHODS
 public:
-    bool pointOnElement(const unsigned int positionX, const unsigned int positionY) const;
+    const bool pointOnElement(const unsigned int positionX, const unsigned int positionY) const;
     
-    bool ElementOnElement(GraphicElement* element) const;
+    const bool ElementOnElement(GraphicElement* element) const;
     
-    bool contain(GraphicElement* element) const;
+    const bool contain(GraphicElement* element) const;
     
-    std::string toString();
+    const std::string toString();
 
     
 // ACCESSORS
+    // SETTERS
     void setX(const unsigned int positionX);
     
     void setY(const unsigned int positionY);
@@ -43,15 +44,16 @@ public:
     
     void setSize(const unsigned int widht, const unsigned int height);
     
-    unsigned int getX() const;
+    // GETTERS
+    const unsigned int getX() const;
     
-    unsigned int getY() const;
+    const unsigned int getY() const;
     
-    unsigned int getWidth() const;
+    const unsigned int getWidth() const;
     
-    unsigned int getHeight() const;
+    const unsigned int getHeight() const;
     
-    unsigned int getSurface() const;
+    const unsigned int getSurface() const;
     
 };
 

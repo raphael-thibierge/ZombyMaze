@@ -21,16 +21,54 @@ void Player::reset()
 {
     _direction = "down";
     _isMoving = false;
-    _speed = 5;
+    _speed = PLAYER_SPEED;
     _width = PLAYER_WIDTH;
     _height = PLAYER_HEIGHT;
     _name = "player";
-    _traceNbMax = PLAYER_NB_TRACE_MAX;
-    _gunAvalaible = false
-    ;
+    
+    load();
+    
+    // speed bonnus
+    _boostAvalaible = false;
+    _boostActivated = false;
+    
+    // shield bonnus
+    _shieldAvalaible = false;
+    _shieldActivated = false;
+    
+    // gun bonus
+    _gunAvalaible = false;
     _fireRateTime = PLAYER_FIRE_RATE;
     _nbAmmo = 0;
+    
     _fireRate.restart();
+    _time.restart();
+    _boostTime = _time.getElapsedTime();
+    _shieldTime = _time.getElapsedTime();
+}
+
+void Player::update()
+{
+    _boostTime += _time.getElapsedTime();
+    _shieldTime += _time.getElapsedTime();
+    _time.restart();
+    
+    if (_boostTime > PLAYER_BOOST_LIFE)
+    {
+        if (_boostActivated)
+            _boostAvalaible = false;
+        _boostActivated = false;
+        
+    }
+    
+    if (_shieldTime > PLAYER_SHIELD_LIFE)
+    {
+        if (_shieldActivated)
+            _shieldAvalaible = false;
+        _shieldActivated = false;
+    }
+    
+    autoMove();
 }
 
 void Player::autoMove()
@@ -38,6 +76,11 @@ void Player::autoMove()
     // if player has begun a movement
     if (_isMoving)
     {
+        if (_boostActivated)
+            _speed = PLAYER_SPEED + PLAYER_ACCELERATION;
+        else
+            _speed = PLAYER_SPEED;
+        
         move();
         // if he is in the destination mazeCase
         {
@@ -57,6 +100,24 @@ void Player::useAmmo()
 {
     if (_nbAmmo > 0)
         _nbAmmo--;
+}
+
+void Player::useBoost()
+{
+    if (_boostAvalaible)
+    {
+        _boostActivated = true;
+        _boostTime = sf::seconds(0.0);
+    }
+}
+
+void Player::useShield()
+{
+    if (_shieldAvalaible)
+    {
+        _shieldActivated = true;
+        _shieldTime = sf::seconds(0.0f);
+    }
 }
 
 void Player::chooseDirection(const string direction)
@@ -79,7 +140,7 @@ void Player::nextLevel()
 }
 
 
-bool Player::canShoot()
+const bool Player::canShoot()
 {
     if(_gunAvalaible && _nbAmmo > 0 && _fireRate.getElapsedTime() > _fireRateTime)
     {
@@ -89,27 +150,71 @@ bool Player::canShoot()
     return false;
 }
 
+
+void Player::save()
+{
+    fstream saveFile ;
+    // open or create a save file
+    saveFile.open(PLAYER_FILE, ios::out);
+    saveFile << _money << "\n";
+    saveFile << _level << "\n";
+    saveFile.close();
+}
+
+void Player::load()
+{
+    fstream saveFile ;
+    string line;
+    // load a save file
+    saveFile.open(PLAYER_FILE, ios::in);
+    
+    getline(saveFile, line);
+    _money = atoi(&line[0]);
+    cout << "monez" << _money << endl;
+    getline(saveFile, line);
+    _level = atoi(&line[0]);
+    cout << "lvl" << _level << endl;
+}
+
+
+// ACCESSORS
+
 void Player::setMoving(const bool moving)
 {
     _isMoving = moving;
 }
 
-bool Player::getMoving() const
+const bool Player::getMoving() const
 {
     return _isMoving;
 }
 
-bool Player::getGun()
+const bool Player::getGun()
 {
     return _gunAvalaible;
 }
 
-unsigned int Player::getAmmo() const
+const bool Player::getShield() const
+{
+    return _shieldAvalaible;
+}
+
+const bool Player::getBoost() const
+{
+    return _boostAvalaible;
+}
+
+const bool Player::getShieldActivated() const
+{
+    return _shieldActivated;
+}
+
+const unsigned int Player::getAmmo() const
 {
     return _nbAmmo;
 }
 
-unsigned int Player::getTheme() const
+const unsigned int Player::getTheme() const
 {
     return _theme;
 }
@@ -124,7 +229,7 @@ void Player::setTheme(const unsigned int theme)
     _theme = theme;
 }
 
-unsigned int Player::getLevel() const
+const unsigned int Player::getLevel() const
 {
     return _level;
 }
@@ -132,4 +237,14 @@ unsigned int Player::getLevel() const
 void Player::addAmmo(const unsigned int number)
 {
     _nbAmmo += number;
+}
+
+void Player::setBoost(const bool boost = true)
+{
+    _boostAvalaible = boost;
+}
+
+void Player::setShield(const bool shield)
+{
+    _shieldAvalaible = shield;
 }

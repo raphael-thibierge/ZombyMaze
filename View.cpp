@@ -22,7 +22,7 @@ View::~View(){
 //
 // METHODS
 //
-bool View::init(GameModel* modele, sf::RenderWindow * window)
+const bool View::init(GameModel* modele, sf::RenderWindow * window)
 {
     _modele = modele;
     _window = window ;
@@ -72,7 +72,7 @@ void View::displayTitle( const std::string text, const float positionX, const fl
     _window->draw(textDisplayed);
 }
 
-bool View::mouseOnButton
+const bool View::mouseOnButton
 (const int mouseX, const int mouseY, const int buttonX, const int buttonY, const int buttonWidth, const int buttonHeight)
 { // return true if the mouse is on the button
 
@@ -84,7 +84,7 @@ bool View::mouseOnButton
     return false;
 }
 
-bool View::initSprite(std:: string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteWitdh, const unsigned int spriteHeight)
+const bool View::initSprite(std:: string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteWitdh, const unsigned int spriteHeight)
 {
     // player
     _imagesList.insert(make_pair(name, sf::Texture()));
@@ -106,19 +106,19 @@ bool View::initSprite(std:: string name, const std::string image, const unsigned
     return true;
 }
 
-int View::treatEventSFML()
+const int View::treatEventSFML()
 {
     return 1;
 }
 
 void View::showViewSFML(){}
 
-bool View::initSFML()
+const bool View::initSFML()
 {
     return true ;
 }
 
-bool View::initButtons()
+const bool View::initButtons()
 {
     return false;
 }

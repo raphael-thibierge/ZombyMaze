@@ -54,17 +54,17 @@ void Bullet::autoMove()
 // Accessor methods
 //
 
-unsigned int Bullet::getDamage() const
+const unsigned int Bullet::getDamage() const
 {
     return _damage;
 }
 
-string Bullet::getShooter() const
+const string Bullet::getShooter() const
 {
     return _shooter;
 }
 
-unsigned int Bullet::getType() const
+const unsigned int Bullet::getType() const
 {
     return _type;
 }

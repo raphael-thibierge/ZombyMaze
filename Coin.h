@@ -21,7 +21,7 @@ public:
     Coin(const unsigned int value, const unsigned int x, const unsigned int y);
 
 // ACCESSORS
-    unsigned int getValue() const;
+    const unsigned int getValue() const;
     
     void setValue(const unsigned int value);
 
