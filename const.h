@@ -119,7 +119,7 @@ const std::string BUTTON_TEXT_FONT = "";
 const std::string BUTTON_PLAY = "buttonPlay.png";
 const std::string BUTTON_QUIT = "buttonQuit.png";
 const std::string BUTTON_THEME = "buttonTheme.png";
-const std::string BUTTON_LEVEL = "buttonTheme.png";
+const std::string BUTTON_LEVEL = "bouonlevel1.png";
 
 
 const std::string BACKGROUND_MAINMENU = "backgroundMainMenu.png";
@@ -155,17 +155,17 @@ const unsigned int WIN_IMAGE_HEIGHT = WINDOW_HEIGHT;
 
 const std::string VIEWGAME_IMAGE_PLAYER_UP[2] = {"PersoDos.png", "rastados.png"};
 const std::string VIEWGAME_IMAGE_PLAYER_DOWN[2] = {"perso.png", "RastaFace2.png"};
-const std::string VIEWGAME_IMAGE_PLAYER_LEFT[2] = {"PersoGauche.png", "ZombieGauche.png"};
-const std::string VIEWGAME_IMAGE_PLAYER_RIGHT[2] = {"PersoDroite.png", "ZombieDroite.png"};
+const std::string VIEWGAME_IMAGE_PLAYER_LEFT[2] = {"PersoGauche.png", "rastagauche.png"};
+const std::string VIEWGAME_IMAGE_PLAYER_RIGHT[2] = {"PersoDroite.png", "rastadroite.png"};
 
 const unsigned int PLAYER_WIDTH = 31;
 const unsigned int PLAYER_HEIGHT = 41;
 const unsigned int PLAYER_NB_SPRITES = 3;
 
-const std::string VIEWGAME_IMAGE_ZOMBY_UP[2] = {"ZombieDos.png", "PersoDos.png"};
-const std::string VIEWGAME_IMAGE_ZOMBY_DOWN[2] = { "ZombieFace.png", "perso.png"};
-const std::string VIEWGAME_IMAGE_ZOMBY_LEFT[2] =  {"ZombieGauche.png", "PersoGauche.png" };
-const std::string VIEWGAME_IMAGE_ZOMBY_RIGHT[2] = {"ZombieDroite.png", "PersoDroite.png"};
+const std::string VIEWGAME_IMAGE_ZOMBY_UP[2] = {"ZombieDos.png", "ZombieDos.png"};
+const std::string VIEWGAME_IMAGE_ZOMBY_DOWN[2] = { "ZombieFace.png", "ZombieFace.png"};
+const std::string VIEWGAME_IMAGE_ZOMBY_LEFT[2] =  {"ZombieGauche.png", "ZombieGauche.png" };
+const std::string VIEWGAME_IMAGE_ZOMBY_RIGHT[2] = {"ZombieDroite.png", "ZombieDroite.png"};
 
 const unsigned int ZOMBY_WIDTH = 31;
 const unsigned int ZOMBY_HEIGHT = 41;
