@@ -62,7 +62,7 @@ const bool GraphicElement::contain(GraphicElement *element) const
             pointOnElement(eX + eWidth, eY + eHeight)));
 }
 
-const string GraphicElement::toString()
+const string GraphicElement::toString() const
 {
     string text = "X=" + to_string(_X);
     text += " Y=" + to_string(_Y);

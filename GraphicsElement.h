@@ -31,7 +31,7 @@ public:
     
     const bool contain(GraphicElement* element) const;
     
-    const std::string toString();
+    const std::string toString() const;
 
     
 // ACCESSORS

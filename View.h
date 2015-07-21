@@ -12,17 +12,17 @@
 #include <stdio.h>
 #include "GameModel.h"
 #include "const.h"
-
+#include "Button.h"
 
 
 class View
 {
-protected: 
+
+protected:
     GameModel* _modele;
 
     // SFML Window
     sf::RenderWindow * _window;
-
     std::map<std::string, sf::Sprite> _spritesList;
     std::map<std::string, sf::Texture> _imagesList;
     
