@@ -15,9 +15,32 @@ Menu::Menu(const unsigned int width, const unsigned int height) : sf::RenderText
     _width = width;
     _height = height;
     
+    _isMosaic = false;
+    _nbColumn = 0;
+    
     if (!create(_width, _height))
         cout << "error at creating menu" << endl;
 }
+
+
+Menu::Menu(Menu const &menu) : sf::RenderTexture(), GraphicElement()
+{
+    _width = menu.getWidth();
+    _height = menu.getHeight();
+    _isMosaic = menu._isMosaic;
+    _nbColumn = menu._nbColumn;
+    
+    if (!create(_width, _height))
+        cout << "error at creating menu" << endl;
+    
+    if (_isMosaic)
+    {
+        _buttonList.clear();
+        unsigned int numberOfButtons = menu._buttonList.size();
+       // createMosaic(numberOfButtons, menu._nbColumn);
+    }
+}
+
 
 // PUBLIC METHODS
 
@@ -39,7 +62,7 @@ void Menu::update(unsigned int mouseX, unsigned int mouseY)
 {
     mouseX -= _X;
     mouseY -= _Y;
-    clear();
+    clear(sf::Color::Transparent);
     
     for (auto button : _buttonList)
     {
@@ -51,8 +74,6 @@ void Menu::update(unsigned int mouseX, unsigned int mouseY)
         int bH =  button.second->getHeight();
         
         int size = 60;
-        
-        
         
         
         draw(*button.second);
@@ -108,6 +129,10 @@ void Menu::createMosaic(const unsigned int nbButton, const unsigned int nbColumn
         }
         line++;
     }
+    
+    _isMosaic = true;
+    _nbColumn = nbColumn;
+    
 }
 
 

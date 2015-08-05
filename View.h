@@ -12,8 +12,7 @@
 #include <stdio.h>
 #include "GameModel.h"
 #include "const.h"
-#include "Button.h"
-
+#include "Menu.h"
 
 class View
 {

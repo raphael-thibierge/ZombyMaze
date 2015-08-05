@@ -13,8 +13,7 @@
 #include <stdio.h>
 class ViewTheme : public virtual View
 {
-    bool _buttonTheme1;
-    bool _buttonTheme2;
+    Menu _themeMenu;
     bool _buttonQuit;
     
     
@@ -28,10 +27,6 @@ public:
     const bool initSFML() override;
     
     const bool initButtons() override;
-    
-    void updateButtons(const unsigned int mouseX, const unsigned int mouseY);
-    
-    void displayButtons();
     
 };
 

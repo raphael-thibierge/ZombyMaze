@@ -135,6 +135,7 @@ bool Level::enemiesCollision()
 {
     list<Enemy*> enemiesToDestroy;
     bool returnValue = false;
+    // in enemy list
     for (Enemy* enemy : _enemiesList)
     {
         if (_player->ElementOnElement(enemy))

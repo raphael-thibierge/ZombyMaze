@@ -29,7 +29,7 @@ void Enemy::autoMove()
         if (_isMoving)
         {
             move();
-            // if he is in the destination mazeCase
+            // if he is in the destination mazeCase	
             {
                 GraphicElement e;
                 e.setPosition(_X, _Y);
@@ -46,6 +46,9 @@ void Enemy::autoMove()
         // else -> he is in a mazeCase
         else
         {
+            // center enemy in mazeCase
+            _mazeCasePosition->place(this);
+            
             changeDirection();
         }
     }
@@ -53,7 +56,8 @@ void Enemy::autoMove()
 
 void Enemy::changeDirection()
 {
-    vector<std::string> avalaibleDirections = _mazeCasePosition->getAvalaibleDirection();;
+    
+    vector<std::string> avalaibleDirections = _mazeCasePosition->getAvalaibleDirection();
     
     // enemy has to choose a direction
     if (_mazeCasePosition != nullptr && _mazeCasePosition->getTrace()->available() && !_mazeCasePosition->getExit())

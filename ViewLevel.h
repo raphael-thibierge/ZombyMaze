@@ -14,10 +14,8 @@
 
 class ViewLevel : public virtual View
 {
-    bool _buttonLevel1;
-    bool _buttonLevel2;
     bool _buttonQuit;
-    
+    Menu _levelMenu;
     
 public:
     ViewLevel();
@@ -29,8 +27,6 @@ public:
     const bool initSFML() override;
     
     const bool initButtons() override;
-    
-    void updateButtons(const unsigned int mouseX, const unsigned int mouseY);
     
     void displayButtons();
     

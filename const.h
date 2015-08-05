@@ -163,7 +163,7 @@ const unsigned int PLAYER_HEIGHT = 41;
 const unsigned int PLAYER_NB_SPRITES = 3;
 
 const std::string VIEWGAME_IMAGE_ZOMBY_UP[2] = {"ZombieDos.png", "ZombieDos.png"};
-const std::string VIEWGAME_IMAGE_ZOMBY_DOWN[2] = { "ZombieFace.png", "ZombieFace.png"};
+const std::string VIEWGAME_IMAGE_ZOMBY_DOWN[2] = { "ZombieFace.png", "copsface.png"};
 const std::string VIEWGAME_IMAGE_ZOMBY_LEFT[2] =  {"ZombieGauche.png", "ZombieGauche.png" };
 const std::string VIEWGAME_IMAGE_ZOMBY_RIGHT[2] = {"ZombieDroite.png", "ZombieDroite.png"};
 

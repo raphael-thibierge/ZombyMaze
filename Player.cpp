@@ -89,6 +89,7 @@ void Player::autoMove()
                 // end of the movement
                 leaveTrace();
                 setMazeCase(_mazeCaseToGo);
+                _mazeCasePosition->place(this);
                 _mazeCaseToGo = nullptr;
                 _isMoving = false;
             }

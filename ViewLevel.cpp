@@ -10,10 +10,12 @@
 using namespace std;
 using namespace sf;
 
-ViewLevel::ViewLevel() : View()
+ViewLevel::ViewLevel() : View(), _levelMenu(Menu(800, 500))
 {
-    _buttonLevel1 = false;
-    _buttonLevel2 = false;
+    _levelMenu.createMosaic(LEVEL_MAX, 4);
+    _levelMenu.setPosition(200, 200);
+    _levelMenu.update(0, 0);
+
     _buttonQuit = false;
 }
 
@@ -25,24 +27,24 @@ const int ViewLevel::treatEventSFML()
     while (_window->pollEvent(event)) {
         if (event.type == Event::MouseMoved)
         {
-            updateButtons(event.mouseMove.x, event.mouseMove.y);
+            _levelMenu.update(event.mouseMove.x, event.mouseMove.y);
+            _buttonQuit = mouseOnButton(event.mouseMove.x, event.mouseMove.y, 440, 600, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
         
         if (event.type == Event::MouseButtonPressed)
         {
-            if (_buttonLevel1)
+            
+            Button * button = _levelMenu.getButtonClicked();
+            
+            if (button != nullptr)
             {
-                if (_modele->newGame(1))
+                string level = button->getText();
+                unsigned int number = atoi(&level[0]);
+                if (number <= LEVEL_MAX && _modele->newGame(number))
                     returnValue = -2;
             }
             
-            else if (_buttonLevel2)
-            {
-                if (_modele->newGame(2))
-                    returnValue = -2;
-            }
-            
-            else if (_buttonQuit)
+            if (_buttonQuit)
             {
                 return 0;
             }
@@ -57,8 +59,9 @@ const int ViewLevel::treatEventSFML()
 
 void ViewLevel::showViewSFML()
 {
-    displayTitle("Choose your Level", 100, 100);
-    displayButtons();
+    displayTitle("Choose your Level", 340, 100);
+    _window->draw(_levelMenu.getSprite());
+    displayStandartButton("quit", 440, 600, _buttonQuit);
 }
 
 const bool ViewLevel::initSFML()
@@ -69,27 +72,7 @@ const bool ViewLevel::initSFML()
 const bool ViewLevel::initButtons()
 {
     string name = "button_";
-    if (!initSprite(name+"level1", BUTTON_PLAY, 2, BUTTON_WIDTH, BUTTON_HEIGHT))
-        return false;
-    if (!initSprite(name+"level2", BUTTON_PLAY, 2, BUTTON_WIDTH, BUTTON_HEIGHT))
-        return false;
     if (!initSprite(name+"quit", BUTTON_QUIT, 2, BUTTON_WIDTH, BUTTON_HEIGHT))
         return false;
     return true;
-}
-
-void ViewLevel::updateButtons(const unsigned int mouseX, const unsigned int mouseY)
-{
-    _buttonLevel1 = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[0], BUTTON_WIDTH, BUTTON_HEIGHT);
-    _buttonLevel2 = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[1], BUTTON_WIDTH, BUTTON_HEIGHT);
-    _buttonQuit = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[2], BUTTON_WIDTH, BUTTON_HEIGHT);
-    
-
-}
-
-void ViewLevel::displayButtons()
-{
-    displayStandartButton("level1", MENU_COLUMN[0], MENU_LINE[0], _buttonLevel1);
-    displayStandartButton("level2", MENU_COLUMN[0], MENU_LINE[1], _buttonLevel2 );
-    displayStandartButton("quit", MENU_COLUMN[0], MENU_LINE[2], _buttonQuit);
 }

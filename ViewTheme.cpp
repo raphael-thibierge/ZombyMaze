@@ -10,11 +10,12 @@
 using namespace std;
 using namespace sf;
 
-ViewTheme::ViewTheme() : View()
+ViewTheme::ViewTheme() : View(), _themeMenu(Menu(400, 300))
 {
-    _buttonTheme1 = false;
-    _buttonTheme2 = false;
     _buttonQuit = false;
+    _themeMenu.createMosaic(2, 2);
+    _themeMenu.setPosition(400, 200);
+    _themeMenu.update(0, 0);
 }
 
 
@@ -25,24 +26,26 @@ const int ViewTheme::treatEventSFML()
     while (_window->pollEvent(event)) {
         if (event.type == Event::MouseMoved)
         {
-            updateButtons(event.mouseMove.x, event.mouseMove.y);
+            _themeMenu.update(event.mouseMove.x, event.mouseMove.y);
+            _buttonQuit = mouseOnButton(event.mouseMove.x, event.mouseMove.y, 450, 600, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
         
         if (event.type == Event::MouseButtonPressed)
         {
-            if (_buttonTheme1)
+            Button * button = _themeMenu.getButtonClicked();
+            
+            if (button != nullptr)
             {
-                returnValue = 0;
-                _modele->getPlayer()->setTheme(1);
+                string level = button->getText();
+                unsigned int number = atoi(&level[0]);
+                if (number <= 2 )
+                {
+                    returnValue = 0;
+                    _modele->getPlayer()->setTheme(number);
+                }
             }
             
-            else if (_buttonTheme2)
-            {
-                returnValue = 0;
-                _modele->getPlayer()->setTheme(2);
-            }
-            
-            else if (_buttonQuit)
+            if (_buttonQuit)
             {
                 return 0;
             }
@@ -57,8 +60,9 @@ const int ViewTheme::treatEventSFML()
 
 void ViewTheme::showViewSFML()
 {
-    displayTitle("Choose yout theme", 100, 100);
-    displayButtons();
+    _window->draw(_themeMenu.getSprite());
+    displayTitle("Choose yout theme", 340, 100);
+    displayStandartButton("quit", 450, 600, _buttonQuit);
 }
 
 const bool ViewTheme::initSFML()
@@ -76,20 +80,4 @@ const bool ViewTheme::initButtons()
     if (!initSprite(name+"quit", BUTTON_QUIT, 2, BUTTON_WIDTH, BUTTON_HEIGHT))
         return false;
     return true;
-}
-
-void ViewTheme::updateButtons(const unsigned int mouseX, const unsigned int mouseY)
-{
-    _buttonTheme1 = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[0], BUTTON_WIDTH, BUTTON_HEIGHT);
-    _buttonTheme2 = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[1], BUTTON_WIDTH, BUTTON_HEIGHT);
-    _buttonQuit = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[2], BUTTON_WIDTH, BUTTON_HEIGHT);
-    
-    
-}
-
-void ViewTheme::displayButtons()
-{
-    displayStandartButton("theme1", MENU_COLUMN[0], MENU_LINE[0], _buttonTheme1);
-    displayStandartButton("theme2", MENU_COLUMN[0], MENU_LINE[1], _buttonTheme2 );
-    displayStandartButton("quit", MENU_COLUMN[0], MENU_LINE[2], _buttonQuit);
 }

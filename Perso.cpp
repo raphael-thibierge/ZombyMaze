@@ -70,6 +70,7 @@ void Perso::updateMazeCase(std::list<MazeCase *> *mazeCaseList)
         if (mazeCase->contain(this))
         {
             setMazeCase(mazeCase);
+            mazeCase->place(this);
         }
     }
 }

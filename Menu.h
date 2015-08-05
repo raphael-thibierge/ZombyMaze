@@ -21,9 +21,15 @@ class Menu : public sf::RenderTexture, public GraphicElement
 private:
     std::map<std::string, Button*> _buttonList ;
     sf::Sprite _sprite;
+    bool _isMosaic;
+    unsigned int _nbColumn ;
     
 public:
     Menu(const unsigned int width, const unsigned int height);
+    
+    Menu(Menu const &menu);
+    
+    
     
 // PUBLIC METHODS
 public:
