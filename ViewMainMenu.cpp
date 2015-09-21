@@ -28,7 +28,12 @@ const int ViewMainMenu::treatEventSFML()
     while (_window->pollEvent(event)) {
         if (event.type == Event::MouseMoved)
         {
-            updateButtons(event.mouseMove.x, event.mouseMove.y);
+            unsigned int mouseX = event.mouseMove.x;
+            unsigned int mouseY = event.mouseMove.y;
+            
+            transformMousePosition(mouseX, mouseY);
+            
+            updateButtons(mouseX, mouseY);
         }
         
         if (event.type == Event::MouseButtonPressed)
@@ -55,6 +60,15 @@ const int ViewMainMenu::treatEventSFML()
             }
             
         }
+        
+        if (event.type == Event::KeyPressed && Event::KeyPressed == Keyboard::Escape)
+        {
+            returnValue = 0;
+        }
+    
+        if (event.type == Event::Closed)
+            returnValue = 0;
+    
     }
     return returnValue;
 }
@@ -100,7 +114,6 @@ void ViewMainMenu::updateButtons(const unsigned int mouseX, const unsigned int m
     _buttonLevel = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[1], BUTTON_WIDTH, BUTTON_HEIGHT);
     _buttonTheme = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[2], BUTTON_WIDTH, BUTTON_HEIGHT);
     _buttonQuit = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[3], BUTTON_WIDTH, BUTTON_HEIGHT);
-    
 }
 
 

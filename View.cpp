@@ -35,6 +35,7 @@ const bool View::init(GameModel* modele, sf::RenderWindow * window)
 
 void View::displayStandartButton(const std::string name, const float positionX, const float positionY, bool active)
 {
+    
     string buttonName = "button_" + name;
     if (active)
     {
@@ -104,6 +105,18 @@ const bool View::initSprite(std:: string name, const std::string image, const un
         _spritesList[nameSprite].setTextureRect(sf::IntRect(spriteNumber*spriteWitdh,0, spriteWitdh, spriteHeight));
     }
     return true;
+}
+
+const void View::transformMousePosition(unsigned int &mouseX, unsigned int &mouseY)
+{
+    sf::Vector2u windowSize = _window->getSize();
+    // if windows has been resized, we adapte mouse position
+    if (windowSize.x != WINDOW_WIDTH || windowSize.y != WINDOW_HEIGHT)
+    {
+        mouseX = ( mouseX * WINDOW_WIDTH  ) / windowSize.x;
+        mouseY = ( mouseY * WINDOW_HEIGHT ) / windowSize.y ;
+    }
+
 }
 
 const int View::treatEventSFML()

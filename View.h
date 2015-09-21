@@ -59,5 +59,6 @@ public :
     
     const bool initSprite(const std::string name, const std::string image, const unsigned int nbSprites, const unsigned int spriteWitdh, const unsigned int spriteHeight);
 
+    const void transformMousePosition(unsigned int & mouseX, unsigned int & mouseY);
 };
 #endif /* defined(__ShmupTerminal__View__) */

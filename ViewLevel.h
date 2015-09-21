@@ -13,7 +13,8 @@
 #include "View.h"
 
 class ViewLevel : public virtual View
-{
+{   
+    
     bool _buttonQuit;
     Menu _levelMenu;
     

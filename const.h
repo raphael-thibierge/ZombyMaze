@@ -25,7 +25,6 @@ const unsigned int WINDOW_HEIGHT = 820;
 // =====================    GAMEMODEL   ===================
 
 // MAZE
-const unsigned int MAZE_SIZE = 14;
 const unsigned int MAZE_X = 0;
 const unsigned int MAZE_Y = 0 ;
 const std::string TEMOIN_IMAGE = "temoin.png";
@@ -151,6 +150,8 @@ const unsigned int WIN_IMAGE_Y = 0;
 const unsigned int WIN_IMAGE_WIDTH = WINDOW_WIDTH;
 const unsigned int WIN_IMAGE_HEIGHT = WINDOW_HEIGHT;
 
+
+const std::string VIEW_BACKGROUND_IMAGE = "background.png";
 
 
 const std::string VIEWGAME_IMAGE_PLAYER_UP[2] = {"PersoDos.png", "rastados.png"};

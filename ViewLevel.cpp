@@ -27,8 +27,13 @@ const int ViewLevel::treatEventSFML()
     while (_window->pollEvent(event)) {
         if (event.type == Event::MouseMoved)
         {
-            _levelMenu.update(event.mouseMove.x, event.mouseMove.y);
-            _buttonQuit = mouseOnButton(event.mouseMove.x, event.mouseMove.y, 440, 600, BUTTON_WIDTH, BUTTON_HEIGHT);
+            unsigned int mouseX = event.mouseMove.x;
+            unsigned int mouseY = event.mouseMove.y;
+            
+            transformMousePosition(mouseX, mouseY);
+            
+            _levelMenu.update(mouseX, mouseY);
+            _buttonQuit = mouseOnButton(mouseX, mouseY, 440, 600, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
         
         if (event.type == Event::MouseButtonPressed)
@@ -53,12 +58,15 @@ const int ViewLevel::treatEventSFML()
         {
             returnValue = 0;
         }
+        if (event.type == event.Closed )
+            return 111;
     }
     return returnValue;
 }
 
 void ViewLevel::showViewSFML()
 {
+    _window->draw(_spritesList["background"]);
     displayTitle("Choose your Level", 340, 100);
     _window->draw(_levelMenu.getSprite());
     displayStandartButton("quit", 440, 600, _buttonQuit);
@@ -66,6 +74,8 @@ void ViewLevel::showViewSFML()
 
 const bool ViewLevel::initSFML()
 {
+    if (!initSprite("background", VIEW_BACKGROUND_IMAGE, 1, WINDOW_WIDTH, WINDOW_HEIGHT))
+        return false;
     return true;
 }
 
@@ -74,5 +84,6 @@ const bool ViewLevel::initButtons()
     string name = "button_";
     if (!initSprite(name+"quit", BUTTON_QUIT, 2, BUTTON_WIDTH, BUTTON_HEIGHT))
         return false;
+    
     return true;
 }

@@ -23,6 +23,7 @@ private:
     
     Trace _trace;
     
+    
     // states
     bool _exit;
     

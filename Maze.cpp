@@ -273,3 +273,23 @@ std::list<BackgroundElement> * Maze::getBackgroundElementlist()
 {
     return &_backgroundElementList;
 }
+
+
+// to finish
+void Maze::randomGenerate()
+{
+    // clear maze
+    clear();
+    
+    // set wall in all mazeCase
+    for (unsigned int y = 0 ; y < _size ; y++)
+        for (unsigned int x = 0 ; x < _size; x++)
+            for (unsigned int i = 0 ; i < 4 ; i++)
+                _grid[y][x].addWall(i);
+    
+    //
+    
+    
+}
+
+

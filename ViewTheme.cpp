@@ -26,8 +26,13 @@ const int ViewTheme::treatEventSFML()
     while (_window->pollEvent(event)) {
         if (event.type == Event::MouseMoved)
         {
-            _themeMenu.update(event.mouseMove.x, event.mouseMove.y);
-            _buttonQuit = mouseOnButton(event.mouseMove.x, event.mouseMove.y, 450, 600, BUTTON_WIDTH, BUTTON_HEIGHT);
+            unsigned int mouseX = event.mouseMove.x;
+            unsigned int mouseY = event.mouseMove.y;
+            
+            transformMousePosition(mouseX, mouseY);
+            
+            _themeMenu.update(mouseX, mouseY);
+            _buttonQuit = mouseOnButton(mouseX, mouseY, 450, 600, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
         
         if (event.type == Event::MouseButtonPressed)
@@ -54,12 +59,15 @@ const int ViewTheme::treatEventSFML()
         {
             returnValue = 0;
         }
+        if (event.type == event.Closed )
+            return 111;
     }
     return returnValue;
 }
 
 void ViewTheme::showViewSFML()
 {
+    _window->draw(_spritesList["background"]);
     _window->draw(_themeMenu.getSprite());
     displayTitle("Choose yout theme", 340, 100);
     displayStandartButton("quit", 450, 600, _buttonQuit);
@@ -67,6 +75,8 @@ void ViewTheme::showViewSFML()
 
 const bool ViewTheme::initSFML()
 {
+    if (!initSprite("background", VIEW_BACKGROUND_IMAGE, 1, WINDOW_WIDTH, WINDOW_HEIGHT))
+        return false;
     return true;
 }
 

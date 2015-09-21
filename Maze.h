@@ -19,6 +19,10 @@
 
 class Maze : public GraphicElement
 {
+// CONST
+    const static unsigned int MAZE_SIZE = 14;
+
+    
 // ATTRIBUTES
 private:
     std::vector<std::vector<MazeCase>> _grid;
@@ -44,6 +48,8 @@ public:
     void clear();
     
     void reset();
+    
+    void randomGenerate();
     
 private:
     void init();
