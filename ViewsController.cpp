@@ -72,7 +72,7 @@ bool ViewsController::treatEvent(){
         case 0: // quit active vie
             if (_view != _allViews["MainMenu"])
                 _view = _allViews["MainMenu"];
-            else forceQuit();
+            else quit();
             break;
 
             // change of view
@@ -99,13 +99,14 @@ bool ViewsController::treatEvent(){
             break;
 
         case 111:
-            forceQuit();
+            quit();
             break;
 
         default:
             break;
     }
-
+    
+    // if we want to quit ( quit = true ) , we have to return false to break the while
     return !_quit;
 }
 

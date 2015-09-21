@@ -71,14 +71,22 @@ void Level::runGame()
         
         movementManager();
         
+        // execpt enemy collision
         collisionManager();
         
         updateTraces();
         
+        // case where payer can loose
         if (enemiesCollision())
         {
-            _playerLoose = true;
+            if (!_player->getShieldActivated())
+                _playerLoose = true;
+            
+            // player win a coin if he tuch a zomby
+            else _player->addMoney(1);
         }
+        
+        // player win the level if he go out of the maze
         _playerWin = successOutOfMaze();
         
         if (_playerLoose)
@@ -138,9 +146,10 @@ bool Level::enemiesCollision()
     // in enemy list
     for (Enemy* enemy : _enemiesList)
     {
+        // if collision with enemy
         if (_player->ElementOnElement(enemy))
         {
-            returnValue = !_player->getShieldActivated();
+            returnValue = true;
             enemiesToDestroy.push_back(enemy);
         }
         else if (!_maze.contain(enemy))

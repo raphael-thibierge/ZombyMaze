@@ -128,7 +128,7 @@ const unsigned int MENU_COLUMN[1] = {750};
 const unsigned int MENU_LINE[4] = {50, 250, 450, 650};
 
 //GAMEVIEW
-const std::string VIEWGAME_MAZE_BACKGROUND[2] = {"caca.png", "fond.png"};
+const std::string VIEWGAME_MAZE_BACKGROUND[2] = {"caca.png", "fond_rasta.png"};
 
 const int VIEWGAME_MAZE_BACKGROUND_WIDTH = WINDOW_WIDTH;
 const int VIEWGAME_MAZE_BACKGROUND_HEIGHT = WINDOW_HEIGHT;
@@ -162,10 +162,10 @@ const unsigned int PLAYER_WIDTH = 31;
 const unsigned int PLAYER_HEIGHT = 41;
 const unsigned int PLAYER_NB_SPRITES = 3;
 
-const std::string VIEWGAME_IMAGE_ZOMBY_UP[2] = {"ZombieDos.png", "ZombieDos.png"};
+const std::string VIEWGAME_IMAGE_ZOMBY_UP[2] = {"ZombieDos.png", "copsback.png"};
 const std::string VIEWGAME_IMAGE_ZOMBY_DOWN[2] = { "ZombieFace.png", "copsface.png"};
-const std::string VIEWGAME_IMAGE_ZOMBY_LEFT[2] =  {"ZombieGauche.png", "ZombieGauche.png" };
-const std::string VIEWGAME_IMAGE_ZOMBY_RIGHT[2] = {"ZombieDroite.png", "ZombieDroite.png"};
+const std::string VIEWGAME_IMAGE_ZOMBY_LEFT[2] =  {"ZombieGauche.png", "copsgauche.png" };
+const std::string VIEWGAME_IMAGE_ZOMBY_RIGHT[2] = {"ZombieDroite.png", "copsdroite.png"};
 
 const unsigned int ZOMBY_WIDTH = 31;
 const unsigned int ZOMBY_HEIGHT = 41;
@@ -178,7 +178,7 @@ const unsigned int WALL_WIDTH_V = 12;
 const unsigned int WALL_HEIGHT_H = 12;
 const unsigned int WALL_HEIGHT_V = 53;
 
-const std::string COLUMN_INFO_IMAGE[2] = {"colonneInfo2.png", "colonneInfo2.png"};
+const std::string COLUMN_INFO_IMAGE[2] = {"colonneInfo2.png", "colonne_rasta.png"};
 const unsigned int COLUMN_INFO_WIDTH = 400;
 const unsigned int COLUMN_INFO_HEIGHT = 820;
 const unsigned int COLUMN_INFO_X = 820;
@@ -190,6 +190,4 @@ const unsigned int INFO_CRONO_Y = 400;
 const unsigned int INFO_MONEY_Y = 290;
 const unsigned int INFO_NB_RESTART = 180;
 
-
-enum Direction { Up, Down, Left, Right };
 #endif
