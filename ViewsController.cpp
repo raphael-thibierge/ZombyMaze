@@ -83,6 +83,7 @@ bool ViewsController::treatEvent(){
 
         case -2:
             _view = _allViews["Game"];
+            _view->update();
             break;
             
         case -3 :
@@ -91,10 +92,12 @@ bool ViewsController::treatEvent(){
         
         case -4 :
             _view = _allViews["Level"];
+            _view->update();
             break;
             
         case -5:
             _view = _allViews["Theme"];
+            _view->update();
             break;
 
         case 111:
@@ -105,7 +108,6 @@ bool ViewsController::treatEvent(){
             break;
     }
     
-    _view->update();
     
     // if we want to quit ( quit = true ) , we have to return false to break the while
     return !_quit;
@@ -115,7 +117,7 @@ void ViewsController::showView(){
     //show active view
 
     if (_mainWindow != nullptr && _modele != nullptr && _view != nullptr)
-    {
+    { 
         _view->showViewSFML();
     }
     else

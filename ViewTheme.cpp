@@ -32,6 +32,7 @@ const int ViewTheme::treatEventSFML()
             transformMousePosition(mouseX, mouseY);
             
             _themeMenu.update(mouseX, mouseY);
+            
             _buttonQuit = mouseOnButton(mouseX, mouseY, 450, 600, BUTTON_WIDTH, BUTTON_HEIGHT);
         }
         
@@ -43,12 +44,20 @@ const int ViewTheme::treatEventSFML()
             {
                 string level = button->getText();
                 unsigned int number = atoi(&level[0]);
-                if (number <= 2 )
+                if (number <= 2)
                 {
-                    returnValue = 0;
                     _modele->getPlayer()->setTheme(number);
+                    returnValue = 0;
                 }
             }
+            
+            /* to buy a level
+            button = _themeMenu.forceGetButtonClicked();
+            if (button !=nullptr && !button->getAvailable())
+            {
+
+                _modele->getPlayer()->setTheme(2);
+            }*/
             
             if (_buttonQuit)
             {
@@ -94,13 +103,12 @@ const bool ViewTheme::initButtons()
 
 void ViewTheme::update()
 {
-    cout << "aaa" << endl;
+    /*
     if (_modele->getPlayer() != nullptr)
     {
         int number = 1;
         for (auto button : *_themeMenu.getButtonsList())
         {
-            cout << ">>" << number << " " << _modele->getPlayer()->getTheme() << endl;
             if ( number <= _modele->getPlayer()->getTheme() && button.second != nullptr)
                 
                 button.second->setAvailable(true);
@@ -108,6 +116,7 @@ void ViewTheme::update()
                 button.second->setAvailable(false);
             number++;
         }
-        _themeMenu.standartUpdate();
-    }
+     */
+      //   _themeMenu.standartUpdate();
+    //}
 }

@@ -517,5 +517,5 @@ void ViewGame::displayColumn()
 
 void ViewGame::update()
 {
-    
+    initSFML();
 }

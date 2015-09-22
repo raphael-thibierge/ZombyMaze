@@ -65,7 +65,7 @@ public:
     
     std::string getName() const { return _name;}
     
-    bool getActive() const { return _active && _available; }
+    bool getActive() const { return _active; }
     
     const unsigned int getWidth() const { return _width;};
     

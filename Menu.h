@@ -56,6 +56,8 @@ public:
     
     Button * getButtonClicked();
     
+    Button * forceGetButtonClicked();
+    
     std::map<std::string, Button*> * getButtonsList() { return &_buttonList ; }
 
 };

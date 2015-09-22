@@ -95,7 +95,6 @@ void Menu::update(unsigned int mouseX, unsigned int mouseY)
             draw(textDisplayed);
         }
     }
-
     
     display();
 }
@@ -207,6 +206,19 @@ Button * Menu::getButtonClicked()
 {
     for (auto button : _buttonList)
     {
+        if (button.second->getActive() && button.second->getAvailable())
+        {
+            return button.second;
+        }
+    }
+    return nullptr;
+}
+
+
+Button * Menu::forceGetButtonClicked()
+{
+    for (auto button : _buttonList)
+    {
         if (button.second->getActive())
         {
             return button.second;
@@ -214,4 +226,5 @@ Button * Menu::getButtonClicked()
     }
     return nullptr;
 }
+
 
