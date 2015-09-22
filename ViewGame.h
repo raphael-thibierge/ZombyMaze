@@ -43,6 +43,8 @@ public:
     void displayInMazeCase(const unsigned int x, const unsigned int y, const std::string spriteName, const unsigned int width, const unsigned int height);
     
     const bool initButtons() override;
+    
+    void update() override;
 };
 
 #endif // VIEWGAME_H_INCLUDED

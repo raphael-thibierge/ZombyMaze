@@ -14,13 +14,14 @@ Button::Button(const std::string name, const std::string text, const unsigned in
 {
     // init states
     _active = false;
+    _available = true;
     
     // provisional
     _width = 100;
     _height = 100;
     
     //loading button picture
-    setPicture(resourcePath() + "boutonlevel.png" , _width, _height);
+    setPicture(resourcePath() + "ButtonNew.png" , _width, _height);
     setPosition(x, y);
 
 }
@@ -42,15 +43,37 @@ void Button::update(const unsigned int mouseX, const unsigned int mouseY)
 
     _active = mouseOnButton(mouseX, mouseY);
     
-    if (_active)
+    if (_active && _available )
     {
         setTextureRect(sf::IntRect(_width, 0, _width, _height));
     }
-    else
+    else if (_available)
     {
         setTextureRect(sf::IntRect(0, 0, _width, _height));
     }
+    else
+    {
+        setTextureRect(sf::IntRect(_width*2, 0, _width, _height));
+    }
 }
+
+void Button::standartUpdate()
+{
+    if (_active && _available )
+    {
+        setTextureRect(sf::IntRect(_width, 0, _width, _height));
+    }
+    else if (_available)
+    {
+        setTextureRect(sf::IntRect(0, 0, _width, _height));
+    }
+    else
+    {
+        setTextureRect(sf::IntRect(_width*2, 0, _width, _height));
+    }
+
+}
+
 
 bool Button::mouseOnButton(const unsigned int mouseX, const unsigned int mouseY) const
 {

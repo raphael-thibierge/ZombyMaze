@@ -135,3 +135,9 @@ const bool View::initButtons()
 {
     return false;
 }
+
+
+void View::update()
+{
+    
+}

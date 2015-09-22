@@ -108,6 +108,13 @@ const bool ViewMainMenu::initButtons()
     return true;
 }
 
+
+void ViewMainMenu::update()
+{
+    
+}
+
+
 void ViewMainMenu::updateButtons(const unsigned int mouseX, const unsigned int mouseY)
 {
     _buttonPlay = mouseOnButton(mouseX, mouseY, MENU_COLUMN[0], MENU_LINE[0], BUTTON_WIDTH, BUTTON_HEIGHT);

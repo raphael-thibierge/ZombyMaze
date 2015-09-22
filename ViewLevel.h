@@ -31,6 +31,8 @@ public:
     
     void displayButtons();
     
+    void update() override;
+    
 };
 
 

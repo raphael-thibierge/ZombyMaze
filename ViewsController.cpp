@@ -39,7 +39,7 @@ bool ViewsController::init(GameModel *modele){
         {
             cout << view.first << endl;
             return false;
-        }
+        }        
     }
     // at beginning of the program, it's the introduction view
     _view = _allViews["Introduction"];
@@ -83,7 +83,6 @@ bool ViewsController::treatEvent(){
 
         case -2:
             _view = _allViews["Game"];
-            _view->initSFML();
             break;
             
         case -3 :
@@ -105,6 +104,8 @@ bool ViewsController::treatEvent(){
         default:
             break;
     }
+    
+    _view->update();
     
     // if we want to quit ( quit = true ) , we have to return false to break the while
     return !_quit;

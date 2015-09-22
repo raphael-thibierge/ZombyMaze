@@ -91,3 +91,23 @@ const bool ViewTheme::initButtons()
         return false;
     return true;
 }
+
+void ViewTheme::update()
+{
+    cout << "aaa" << endl;
+    if (_modele->getPlayer() != nullptr)
+    {
+        int number = 1;
+        for (auto button : *_themeMenu.getButtonsList())
+        {
+            cout << ">>" << number << " " << _modele->getPlayer()->getTheme() << endl;
+            if ( number <= _modele->getPlayer()->getTheme() && button.second != nullptr)
+                
+                button.second->setAvailable(true);
+            else if (button.second != nullptr)
+                button.second->setAvailable(false);
+            number++;
+        }
+        _themeMenu.standartUpdate();
+    }
+}

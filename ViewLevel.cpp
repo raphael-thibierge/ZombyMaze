@@ -16,7 +16,13 @@ ViewLevel::ViewLevel() : View(), _levelMenu(Menu(800, 500))
     _levelMenu.setPosition(200, 200);
     _levelMenu.update(0, 0);
 
-    _buttonQuit = false;
+    for (auto button : *_levelMenu.getButtonsList())
+    {
+        if (button.second != nullptr)
+            button.second->setAvailable(false);
+    }
+
+    
 }
 
 
@@ -86,4 +92,19 @@ const bool ViewLevel::initButtons()
         return false;
     
     return true;
+}
+
+void ViewLevel::update()
+{
+    if (_modele->getPlayer() != nullptr)
+    {
+        int number = 1;
+        for (auto button : *_levelMenu.getButtonsList())
+        {
+            if (number <= LEVEL_MAX && number <= _modele->getPlayer()->getLevel()&& button.second != nullptr)
+                button.second->setAvailable(true);
+            number++;
+        }
+        _levelMenu.standartUpdate();
+    }
 }

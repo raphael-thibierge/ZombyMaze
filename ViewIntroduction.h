@@ -46,6 +46,8 @@ public:
 
     const bool initButtons() override;
     
+    void update() override;
+    
 };
 
 

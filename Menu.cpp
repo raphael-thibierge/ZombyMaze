@@ -78,23 +78,69 @@ void Menu::update(unsigned int mouseX, unsigned int mouseY)
         
         draw(*button.second);
         sf::Font font;
-        font.loadFromFile(resourcePath() + "sansation.ttf");
-        sf::Text textDisplayed(button.second->getText(), font);
-        textDisplayed.setCharacterSize(size);
         
-        textDisplayed.setStyle(sf::Text::Bold);
-        textDisplayed.setColor(sf::Color::White);
-        
-        int x = bX + 20;
-        int y = bY + (bH - size)/2 ;
-        textDisplayed.setPosition(x, y);
-        
-        draw(textDisplayed);
+        if (button.second->getAvailable())
+        {
+            font.loadFromFile(resourcePath() + "sansation.ttf");
+            sf::Text textDisplayed(button.second->getText(), font);
+            textDisplayed.setCharacterSize(size);
+            
+            textDisplayed.setStyle(sf::Text::Bold);
+            textDisplayed.setColor(sf::Color::White);
+            
+            int x = bX + 20;
+            int y = bY + (bH - size)/2 ;
+            textDisplayed.setPosition(x, y);
+            
+            draw(textDisplayed);
+        }
     }
 
     
     display();
 }
+
+
+void Menu::standartUpdate()
+{
+    clear(sf::Color::Transparent);
+    
+    for (auto button : _buttonList)
+    {
+        button.second->standartUpdate();
+        
+        int bX = button.second->getPosition().x;
+        int bY = button.second->getPosition().y;
+        int bW = button.second->getWidth();
+        int bH =  button.second->getHeight();
+        
+        int size = 60;
+        
+        
+        draw(*button.second);
+        sf::Font font;
+        
+        if (button.second->getAvailable())
+        {
+            font.loadFromFile(resourcePath() + "sansation.ttf");
+            sf::Text textDisplayed(button.second->getText(), font);
+            textDisplayed.setCharacterSize(size);
+            
+            textDisplayed.setStyle(sf::Text::Bold);
+            textDisplayed.setColor(sf::Color::White);
+            
+            int x = bX + 20;
+            int y = bY + (bH - size)/2 ;
+            textDisplayed.setPosition(x, y);
+            
+            draw(textDisplayed);
+        }
+    }
+
+    
+    display();
+}
+
 
 
 void Menu::addStandartButton(std::string name, std::string text, const unsigned int x, const unsigned int y)
@@ -112,7 +158,6 @@ void Menu::createMosaic(const unsigned int nbButton, const unsigned int nbColumn
     string name = "mosaic";
     unsigned int cpt = 0;
     unsigned int between = ( getWidth() - ( nbColumn * 100) ) / ( nbColumn + 1);
-    cout << between << endl;
     
     unsigned int line = 0;
     while (line <= nbButton/nbColumn )
@@ -123,7 +168,6 @@ void Menu::createMosaic(const unsigned int nbButton, const unsigned int nbColumn
             cpt++;
             int x = between * ( column + 1 ) + column * 100 ;
             int y = between * ( line + 1 ) + line * 100;
-            cout << cpt << " " << x << " " << y << endl;
             addStandartButton(name + to_string(cpt), to_string(cpt), x, y);
             column++;
         }

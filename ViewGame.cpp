@@ -512,5 +512,10 @@ void ViewGame::displayColumn()
         _window->draw(_spritesList["shield_unavailable"]);
     }
 
+}
 
+
+void ViewGame::update()
+{
+    
 }

@@ -28,6 +28,7 @@ private:
     
     // states
     bool _active;
+    bool _available;
     
 public:
     Button(const std::string name, const std::string text, const unsigned int x, const unsigned int y);
@@ -37,6 +38,8 @@ public:
     
     
     void update(const unsigned int mouseX, const unsigned int mouseY);
+    
+    void standartUpdate();
     
     // METHODS
     
@@ -54,15 +57,21 @@ public:
     
     void setHeight(const unsigned int height){ _height = height;}
     
+    void setAvailable(const unsigned int available){ _available = available; }
+
+    
+    
     std::string getText() const { return _text;}
     
     std::string getName() const { return _name;}
     
-    bool getActive() const { return _active; }
+    bool getActive() const { return _active && _available; }
     
     const unsigned int getWidth() const { return _width;};
     
     const unsigned int getHeight() const { return _height;};
+    
+    const bool getAvailable() const { return _available;}
     
     
     // STATIC METHODS

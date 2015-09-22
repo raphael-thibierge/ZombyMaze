@@ -35,6 +35,8 @@ public:
 public:
     void update(unsigned int mouseX, unsigned int mouseY);
     
+    void standartUpdate();
+    
     void addStandartButton(std::string name, std::string text, const unsigned int x, const unsigned int y);
     
     void addPictureButton(std::string name, std::string filename, const unsigned int x, const unsigned int y, const unsigned int width, const unsigned int height);
@@ -53,6 +55,8 @@ public:
     const bool getButtonActive(const std::string name) const;
     
     Button * getButtonClicked();
+    
+    std::map<std::string, Button*> * getButtonsList() { return &_buttonList ; }
 
 };
 

@@ -142,3 +142,8 @@ const bool ViewIntroduction::initButtons()
     return true;
 }
 
+void ViewIntroduction::update()
+{
+    
+}
+

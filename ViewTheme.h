@@ -28,6 +28,8 @@ public:
     
     const bool initButtons() override;
     
+    void update() override;
+    
 };
 
 #endif /* defined(__ZombyMaze2__ViewTheme__) */
